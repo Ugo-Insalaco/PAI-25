@@ -1,0 +1,22 @@
+{
+  "name": "pai-25",
+  "version": "1.0.0",
+  "description": "application Vinci Energies PAI-25 2020",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ugo-Insalaco/PAI-25.git"
+  },
+  "author": "Saban Suresh, Ilies Zouaoui, Syrine Mhedhbi, Jasmine Truchot, Chloé Porion, Mylène Le Rodallec, Ugo Insalaco",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ugo-Insalaco/PAI-25/issues"
+  },
+  "homepage": "https://github.com/Ugo-Insalaco/PAI-25#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
