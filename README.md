@@ -5,5 +5,6 @@ Installation et lancement du projet :
   - npm install (cela installe toutes les librairies nécessaires)
   - npm install -g @angular/cli (cela installe l'invite de commande angular)
   - cd VinciApp (pour se déplacer dans le dossier VinciApp)
+  - npm install (à nouveau)
   - ng serve (lancer l'application en local)
 - Une fois les commandes entrées, lancer un navigateur web et entrer l'adresse localhost:4200, la page par défaut de l'application apparaît
