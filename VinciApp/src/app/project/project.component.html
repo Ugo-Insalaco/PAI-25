@@ -1,0 +1,76 @@
+<br>
+<br>
+<mat-card id="outil">
+    <mat-card-header>
+        <mat-card-title id="outil_title">
+            Outil dimensionnement de Projet
+        </mat-card-title>
+    </mat-card-header>
+    <hr>
+    <mat-card-content>
+        <mat-horizontal-stepper linear="true" selectedIndex = 0 labelPosition="bottom" (selectionChange)="changeHandler($event)">
+            <mat-step completed= {{complete}}>
+                <mat-grid-list cols="2">
+                    <mat-grid-tile [style.border-right]="'1px double lightgrey'">
+                        Questionnaire de gauche (page {{selectedTab}})
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                        Questionnaire de droite
+                    </mat-grid-tile>
+                </mat-grid-list>
+                <button mat-raised-button matStepperPrevious>Page précédente</button>
+                <button mat-raised-button style="float:right;" matStepperNext>Page suivante</button>
+            </mat-step>
+            <mat-step>
+                <mat-grid-list cols="2">
+                    <mat-grid-tile [style.border-right]="'1px double lightgrey'">
+                        Questionnaire de gauche (page {{selectedTab}})
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                        Questionnaire de droite
+                    </mat-grid-tile>
+                </mat-grid-list>
+                <button mat-raised-button matStepperPrevious>Page précédente</button>
+                <button mat-raised-button style="float:right;" matStepperNext>Page suivante</button>
+            </mat-step>
+            <mat-step>
+                <mat-grid-list cols="2">
+                    <mat-grid-tile [style.border-right]="'1px double lightgrey'">
+                        Questionnaire de gauche (page {{selectedTab}})
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                        Questionnaire de droite
+                    </mat-grid-tile>
+                </mat-grid-list>
+                <button mat-raised-button matStepperPrevious>Page précédente</button>
+                <button mat-raised-button style="float:right;" matStepperNext>Page suivante</button>
+            </mat-step>
+            <mat-step>
+                <mat-grid-list cols="2">
+                    <mat-grid-tile [style.border-right]="'1px double lightgrey'">
+                        Questionnaire de gauche (page {{selectedTab}})
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                        Questionnaire de droite
+                    </mat-grid-tile>
+                </mat-grid-list>
+                <button mat-raised-button matStepperPrevious>Page précédente</button>
+                <button mat-raised-button style="float:right;" matStepperNext>Page suivante</button>
+            </mat-step>
+            <mat-step>
+                <mat-grid-list cols="2">
+                    <mat-grid-tile [style.border-right]="'1px double lightgrey'">
+                        Questionnaire de gauche (page {{selectedTab}})
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                        Questionnaire de droite
+                    </mat-grid-tile>
+                </mat-grid-list>
+                <button mat-raised-button matStepperPrevious>Page précédente</button>
+                <button mat-raised-button style="float:right;" matStepperNext>Page suivante</button>
+            </mat-step>
+        </mat-horizontal-stepper>
+
+    </mat-card-content>
+</mat-card>
+
