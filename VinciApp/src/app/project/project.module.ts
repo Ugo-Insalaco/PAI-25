@@ -6,7 +6,7 @@ import { ProjectComponent } from './project.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { BackendService } from '../backend.service';
+import { BackendService } from '../services/backend.service';
 
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatCardModule } from '@angular/material/card';

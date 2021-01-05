@@ -7,7 +7,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ProjectModule } from './project/project.module';
 
-import { BackendService } from './backend.service'
+import { ConfigService } from './services/config.service'
+import { HttpClientModule } from '@angular/common/http';
+import { BackendService } from './services/backend.service'
 
 @NgModule({
   declarations: [
@@ -15,11 +17,13 @@ import { BackendService } from './backend.service'
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ProjectModule
   ],
   providers: [
+    ConfigService,
     BackendService
   ],
   bootstrap: [AppComponent]

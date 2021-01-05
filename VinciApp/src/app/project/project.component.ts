@@ -2,7 +2,8 @@ import { componentFactoryName } from '@angular/compiler';
 import { OnInit } from '@angular/core';
 
 import { Component } from '@angular/core';
-import { BackendService } from '../backend.service';
+import { ConfigService } from '../services/config.service'
+import { BackendService } from '../services/backend.service';
 
 
 @Component({
@@ -15,13 +16,21 @@ import { BackendService } from '../backend.service';
 export class ProjectComponent implements OnInit{
     complete: boolean
     selectedTab: any
-    constructor(private backend: BackendService){
-
+    backendMessage: String
+    constructor(private backend: BackendService, private config: ConfigService){
+        this.config = config
     }
 
     ngOnInit(){
         this.complete=true
         this.selectedTab=0
+        // let body={
+        //     text: 'Salutations'
+        // }
+        // this.backend.POST('/api/text',body, e=>{
+        //     this.backendMessage = JSON.stringify(e)
+        // })
+        //this.backendMessage =this.config.langage
     }
 
     changeHandler(e){
