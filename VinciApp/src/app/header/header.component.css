@@ -1,0 +1,58 @@
+.example-spacer{
+    size: 15mm;
+    width: 7mm;
+}
+.mat-form-field{
+    width: 60px;
+    font-size: 0.6em;
+    float: left;
+}
+.at-icon{
+    width : 20 px;
+}
+.header-align-right{
+    display: flex;
+    padding: 21px ;
+    justify-content: flex-end;
+  }
+.fill-space {
+    flex: 1 1 auto; 
+  }
+.space{
+    margin-right: 100 px;
+}
+
+.transparant{
+    opacity: 0;
+}
+.opaque{
+    opacity: 1;
+}
+.exemple-icon{
+   /* cursor: pointer;*/
+    position: center;
+}
+mat-select{
+    color:black;
+    
+}
+mat-form-field{
+    background-color: white;
+}
+button{
+    color: blue;
+}
+::ng-deep .mat-icon{
+    height:35px !important;
+    width:35px !important;
+    font-size:35px !important;
+}
+ img {
+    height: 100px;
+    width: auto;
+}
+
+
+mat-toolbar{
+    background-color: white;
+}

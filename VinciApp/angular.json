@@ -25,7 +25,8 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
-              "src/styles.css"
+              "src/styles.css",
+              "/home/sirine/Desktop/PAI-25/VinciApp/node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": []
           },
@@ -89,7 +90,8 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
-              "src/styles.css"
+              "src/styles.css",
+              "/home/sirine/Desktop/PAI-25/VinciApp/node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": []
           }
@@ -122,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "VinciApp"
+  "defaultProject": "VinciApp",
+  "cli": {
+    "analytics": "b12fa565-3082-4e04-be64-bfd863a70ef9"
+  }
 }
