@@ -1,0 +1,42 @@
+.card2{
+  background: rgb(30, 44, 126);
+}
+
+.row {
+background:#c3edf6;
+
+}
+.container{
+background: rgb(255, 255, 255);
+width: 100%;
+
+
+}
+.container-fluid{
+
+background: rgb(255, 255, 255);
+width: 100%;
+
+
+}
+.black-background {background-color:#FF1493;}
+.white {color:#ffffff;}
+
+button{
+align-self: center;
+text-align:center;
+margin-top: 1em;
+}
+h2{
+color: blue;
+}
+h3{
+color:gray;
+}
+img {
+  height: 100px;
+  width: auto;
+  margin-left: 20px;
+ 
+ 
+}

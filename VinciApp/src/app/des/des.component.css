@@ -1,0 +1,21 @@
+mat-card {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+  }
+  h2{
+  
+      color:#56c7ec;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+  }
+  h3{
+      position: center;
+      color:#838889;
+      text-align: center;
+
+  }
