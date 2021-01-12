@@ -6,12 +6,10 @@ import { ProjectComponent } from './project.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { BackendService } from '../services/backend.service';
-
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatCardModule } from '@angular/material/card';
-import {MatButtonModule} from '@angular/material/button';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatButtonModule } from '@angular/material/button';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
     declarations: [
@@ -27,7 +25,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
        MatGridListModule
     ],
     providers: [
-      BackendService
+      
     ],
     exports: [ProjectComponent]
   })

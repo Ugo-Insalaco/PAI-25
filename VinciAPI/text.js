@@ -8,16 +8,18 @@ const languageParser = function(req,res,next){
     next()
 }
 const text = function(app){
-
     app.get('/api/text/:id', languageParser, function(req,res){
         const id = parseInt(xss(req.params.id))
+        const lang = xss(req.get('langage'))
+        console.log(`le langage envoyé est ${lang}`)
         pool
         .then(pool=>{
             pool
             .query('SELECT* FROM ?? WHERE id_content_ENG=?', [req.table, id])
             .then(rows =>{
                 if(rows.length!=1){
-                    res.sendStatus(404)
+                    res.send(200).send("text temporaire")
+                    //res.sendStatus(404)
                 }
                 else{
                     res.status(200).send(rows[0])

@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProjectModule } from './project/project.module';
 
 import { ConfigService } from './services/config.service'
+import { GlobalStorageService } from './services/globalStorage.service' 
 import { HttpClientModule } from '@angular/common/http';
 import { BackendService } from './services/backend.service'
 
@@ -24,6 +25,7 @@ import { BackendService } from './services/backend.service'
   ],
   providers: [
     ConfigService,
+    GlobalStorageService,
     BackendService
   ],
   bootstrap: [AppComponent]

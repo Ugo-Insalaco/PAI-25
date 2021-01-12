@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
-import defaultconfig from './config.json';
+import config from './config.json';
 
 @Injectable()
 export class ConfigService{
     // config: Object
     // public backend: Object
-    config = defaultconfig;
+    config = config;
     backend = this.config.backend;
-    langage = this.config.langage;
     constructor(){
+        // localStorage.setItem('Test', 'test')
+        // console.log(localStorage.getItem('Bonjour')==undefined)
     }
 }
