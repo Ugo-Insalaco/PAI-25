@@ -14,7 +14,7 @@ import { GlobalStorageService } from './services/globalStorage.service'
 import { HttpClientModule } from '@angular/common/http';
 import { BackendService } from './services/backend.service'
 
-import { BackendService } from './backend.service';
+//import { BackendService } from './backend.service';
 import { HeaderComponent } from './header/header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
