@@ -1,8 +1,8 @@
 <!--<project></project> -->
-<!--<app-header  *ngIf="router.url !='/login'"></app-header> -->
+<app-header  *ngIf="router.url !='/login' && router.url !='/contact'"></app-header>
 <app-video *ngIf="router.url == '/'" > </app-video>
 <app-des *ngIf="router.url == '/'"></app-des>
 <app-images *ngIf="router.url == '/'" ></app-images>
 <router-outlet></router-outlet>
-<!--<app-footer  *ngIf="router.url !='/login'" ></app-footer>-->
-<project></project>
+<app-footer  *ngIf="router.url !='/login'" ></app-footer>
+<!--<project></project>-->

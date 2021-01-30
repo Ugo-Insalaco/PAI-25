@@ -1,0 +1,33 @@
+#cercles{
+  position: absolute;
+  right: 0;
+  bottom:0;
+  height: 70%;
+}
+
+#logoCadran{
+  position: absolute;
+  right: 30%;
+  top: 10%;
+  height: 12%;
+}
+
+#left{
+  position: absolute;
+  left: 8%;
+  bottom: 40%;
+  color: white;
+}
+
+#photo{
+  height: 60vh;
+  width:100vw;
+  background-size: 100% 100%;
+}
+
+#filtre{
+    width:100%;
+    height:100%;
+    opacity: 0.75;
+    position: relative;
+}

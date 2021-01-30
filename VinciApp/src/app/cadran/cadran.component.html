@@ -1,0 +1,40 @@
+<app-banner [admin]="admin"
+            [photo]="urlphotofond"
+            [logo]="urllogo"
+            [cercles]="urlcercles"
+            [couleur]="couleur"
+            [problematique]="problematiquecadran"
+            [nom]="nomcadran">
+</app-banner>
+<app-offer [admin]="admin"
+           [photooffre]="urlphotooffre1"
+           [couleur]="couleur"
+           [nomoffre]="nomoffre1"
+           [texteoffre]="texteoffre1"
+           [offresolutions]="offre1solutions"
+           [configgauche]=false>
+</app-offer>
+<app-offer [admin]="admin"
+           [photooffre]="urlphotooffre2"
+           [couleur]="couleur"
+           [nomoffre]="nomoffre2"
+           [texteoffre]="texteoffre2"
+           [offresolutions]="offre2solutions"
+           [configgauche]=true
+           *ngIf="nomoffre2!==''">
+</app-offer>
+<app-offer [admin]="admin"
+           [photooffre]="urlphotooffre3"
+           [couleur]="couleur"
+           [nomoffre]="nomoffre3"
+           [texteoffre]="texteoffre3"
+           [offresolutions]="offre3solutions"
+           [configgauche]=false
+           *ngIf="nomoffre3!==''">
+</app-offer>
+<div id="buttonLinkCadran">
+  <button routerLink="/cadran/actifs-techniques" style="background-color: #062c6b;color: #FFFFFF;">Actifs Techniques</button>
+  <button routerLink="/cadran/confort-energie-environnement" style="background-color: #03b0b4; color: #FFFFFF;">Confort Energie Environnement</button>
+  <button routerLink="/cadran/bien-etre" style="background-color: #cc2871; color: #FFFFFF;">Bien Etre</button>
+  <button routerLink="/cadran/espaces" style="background-color: #0caaeb; color: #FFFFFF;">Espaces</button>
+</div>

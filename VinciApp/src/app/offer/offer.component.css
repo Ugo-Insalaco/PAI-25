@@ -1,0 +1,32 @@
+#divtext{
+  width: 50%;
+  height: 60vh;
+  padding: 1%;
+  padding-left: 5%;
+  padding-top: 2%;
+  position: absolute;
+  text-align: center;
+}
+
+#commimg{
+  height: fit-content;
+  min-width: 40%;
+  position: absolute;
+  bottom: 20%;
+  padding: 1%;
+  color: white;
+}
+
+#divimage{
+  width: 50%;
+  height: 60vh;
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  overflow: auto;
+}
+
+#choixsolution{
+  margin-top: 5vh;
+}
