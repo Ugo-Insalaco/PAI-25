@@ -1,8 +1,9 @@
 <div id="photo" [style.background-image]="photo"> <!--#134384-->
   <div id="filtre" [style.background-color]="couleur">
     <div id="left">
-      <h4 style="text-transform:uppercase;"> {{nom}} </h4>
+      <h4 style="text-transform:uppercase;"> {{nomcadran}} </h4>
       <h2> {{problematique}}</h2>
+      <h2 *ngIf="nomsolution!==''"> {{nomsolution}} </h2>
     </div>
     <div id="right">
       <img id="logoCadran" [src]="logo">

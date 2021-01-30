@@ -1,0 +1,27 @@
+#argumentscommerciaux{
+  width: 99vw;
+  height: auto;
+  padding: 5vh;
+}
+
+#divtext{
+  width: 50%;
+  height: 60vh;
+  padding: 1%;
+  left: 0;
+  padding-left: 5%;
+  padding-top: 2%;
+  position: absolute;
+  text-align: center;
+}
+
+#divimage{
+  width: 50%;
+  height: 60vh;
+  position: absolute;
+  right: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  overflow: auto;
+}

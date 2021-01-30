@@ -12,7 +12,7 @@ export class CadranComponent implements OnInit {
   // A récupérer dans variables globales
   admin: boolean = false;
 
-  // Paramètres pour cadran Actifs techniques
+  // Paramètres pour cadran
     nomcadran: string = "";
     couleur: string = "";
 

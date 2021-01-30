@@ -5,9 +5,13 @@
     </p>
     <div id="choixsolution">
       Solutions associées à cette offre :
-      <select id="listesolutions" #listesolutions>
+      <select id="listesolutions" #listesolutions [(ngModel)]="selectedOption">
         <option disabled selected> Solutions </option>
       </select>
+      <button #buttonvalidersolution style="margin-left: 10px;"
+              (click)="onValiderSolution()">
+              Valider
+      </button>
     </div>
     <button style="position: absolute; right:0; bottom:0;"
             (click)="onModifier()"

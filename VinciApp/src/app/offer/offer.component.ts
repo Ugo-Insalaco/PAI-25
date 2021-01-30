@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
-
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-offer',
@@ -22,8 +22,12 @@ export class OfferComponent implements OnInit, AfterViewInit{
     @ViewChild('divtext') textView: ElementRef;
     @ViewChild('divimage') imageView: ElementRef;
     @ViewChild('commimg') commimageView: ElementRef;
+    @ViewChild('buttonvalidersolution') buttonvalidersolutionView: ElementRef;
 
-    constructor() {
+    // To get the selected option in the select
+    selectedOption: string = "";
+
+    constructor(private router: Router) {
       this.admin = false;
     }
 
@@ -35,7 +39,8 @@ export class OfferComponent implements OnInit, AfterViewInit{
       var select = this.selectView.nativeElement;
       for(var solution of this.offresolutions){
         var opt = document.createElement("option");
-        opt.value = solution;
+        opt.value = solution.replace(/ /gi, "-");
+        opt.value = opt.value.replace(/'/gi, "").toLowerCase();
         opt.innerHTML = solution;
         select.appendChild(opt);
         index++;
@@ -53,6 +58,15 @@ export class OfferComponent implements OnInit, AfterViewInit{
         text.style.left=0;
         var img = this.imageView.nativeElement;
         img.style.right=0;
+      }
+    }
+
+    onValiderSolution(){
+      // Get selected solution and redirect to solution's page
+      var solution = this.selectedOption;
+      var button = this.buttonvalidersolutionView.nativeElement;
+      if(solution!=""){
+        this.router.navigate([this.router.url,solution]);
       }
     }
 

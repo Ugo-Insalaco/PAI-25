@@ -12,8 +12,9 @@ export class BannerComponent implements OnInit {
   @Input() logo: string = "";
   @Input() cercles: string = "";
   @Input() couleur: string = "";
-  @Input() nom: string = "";
+  @Input() nomcadran: string = "";
   @Input() problematique: string = "";
+  @Input() nomsolution: string = "";
 
   constructor() { }
 

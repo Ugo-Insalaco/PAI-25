@@ -4,7 +4,7 @@
             [cercles]="urlcercles"
             [couleur]="couleur"
             [problematique]="problematiquecadran"
-            [nom]="nomcadran">
+            [nomcadran]="nomcadran">
 </app-banner>
 <app-offer [admin]="admin"
            [photooffre]="urlphotooffre1"
@@ -32,9 +32,4 @@
            [configgauche]=false
            *ngIf="nomoffre3!==''">
 </app-offer>
-<div id="buttonLinkCadran">
-  <button routerLink="/cadran/actifs-techniques" style="background-color: #062c6b;color: #FFFFFF;">Actifs Techniques</button>
-  <button routerLink="/cadran/confort-energie-environnement" style="background-color: #03b0b4; color: #FFFFFF;">Confort Energie Environnement</button>
-  <button routerLink="/cadran/bien-etre" style="background-color: #cc2871; color: #FFFFFF;">Bien Etre</button>
-  <button routerLink="/cadran/espaces" style="background-color: #0caaeb; color: #FFFFFF;">Espaces</button>
-</div>
+<app-btnlinkcadrans></app-btnlinkcadrans>

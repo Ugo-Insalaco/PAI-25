@@ -40,7 +40,9 @@ import { SearchComponent } from './search/search.component';
 import { FieldErrorDisplayComponent } from './field-error-display/field-error-display.component';
 import { BannerComponent } from './banner/banner.component';
 import { OfferComponent } from './offer/offer.component';
-import { CadranComponent } from './cadran/cadran.component'; 
+import { CadranComponent } from './cadran/cadran.component';
+import { SolutionComponent } from './solution/solution.component';
+import { BtnlinkcadransComponent } from './btnlinkcadrans/btnlinkcadrans.component'; 
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,6 +58,8 @@ import { CadranComponent } from './cadran/cadran.component';
     BannerComponent,
     OfferComponent,
     CadranComponent,
+    SolutionComponent,
+    BtnlinkcadransComponent,
   ],
   imports: [
     BrowserModule,
