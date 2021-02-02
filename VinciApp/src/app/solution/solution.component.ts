@@ -54,7 +54,9 @@ export class SolutionComponent implements OnInit {
   getNomSolution(){
     var nom = this.router.url.split('/').pop();
     nom = nom.replace(/-/gi, " "); // Remplace - par espace
+    nom = nom.replace(/_/gi, "'"); // Remplace _ par '
     nom = nom.charAt(0).toUpperCase() + nom.slice(1); // Majuscule pour 1er mot
+    nom = nom.replace(/%C3%A9/gi, "é");
     return nom;
   }
 

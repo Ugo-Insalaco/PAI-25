@@ -86,13 +86,13 @@ export class CadranComponent implements OnInit {
       this.urlphotooffre2 = "url(/assets/images/bienetre/exImageFond.jpg)";
       this.nomoffre2 = "Offre 2 : Sécurité";
       this.texteoffre2 = "Ceci est un texte pour la solution Sécurité du cadran actifs techniques.";
-      this.offre2solutions = ["Detection incendie","Inondation"];
+      this.offre2solutions = ["Détection incendie","Inondation"];
 
       // Offer 3
       this.urlphotooffre3 = "url(/assets/images/bienetre/exImageFond.jpg)";
       this.nomoffre3 = "Offre 3 : Hygiène";
       this.texteoffre3 = "Ceci est un texte pour la solution Hygiène du cadran actifs techniques.";
-      this.offre3solutions = ["Legionelle ECS","Nettoyage à l'usage"];
+      this.offre3solutions = ["Légionelle ECS","Nettoyage à l'usage"];
     }
     else if(this.nomcadran == "Confort Energie Environnement"){
       this.couleur = "#03B0B4";

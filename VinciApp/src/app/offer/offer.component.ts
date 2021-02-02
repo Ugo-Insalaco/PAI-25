@@ -40,7 +40,7 @@ export class OfferComponent implements OnInit, AfterViewInit{
       for(var solution of this.offresolutions){
         var opt = document.createElement("option");
         opt.value = solution.replace(/ /gi, "-");
-        opt.value = opt.value.replace(/'/gi, "").toLowerCase();
+        opt.value = opt.value.replace(/'/gi, "_").toLowerCase();
         opt.innerHTML = solution;
         select.appendChild(opt);
         index++;
