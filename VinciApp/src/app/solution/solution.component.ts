@@ -36,7 +36,7 @@ export class SolutionComponent implements OnInit {
     this.titleService.setTitle(`${this.nomsolution} - Vinci Facilities`);
 
     // Paramètes pour tests à récup dans la BSS plus tard
-      this.couleur = "#5F8A64";
+      this.couleur = "#9b9b9b";
 
       // Banner
       this.urlphotofond = "url(/assets/images/bienetre/exImageFond.jpg)";

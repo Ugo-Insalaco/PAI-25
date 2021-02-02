@@ -2,14 +2,14 @@
   position: absolute;
   right: 0;
   bottom:0;
-  height: 70%;
+  height: 65%;
 }
 
 #logoCadran{
   position: absolute;
   right: 30%;
   top: 10%;
-  height: 12%;
+  height: 11%;
 }
 
 #left{
@@ -20,7 +20,7 @@
 }
 
 #photo{
-  height: 60vh;
+  height: 65vh;
   width:100vw;
   background-size: 100% 100%;
 }
