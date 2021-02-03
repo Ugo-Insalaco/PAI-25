@@ -1,8 +1,8 @@
--- MariaDB dump 10.18  Distrib 10.5.8-MariaDB, for osx10.12 (x86_64)
+-- MariaDB dump 10.18  Distrib 10.5.7-MariaDB, for Win64 (AMD64)
 --
--- Host: localhost    Database: nouvelle
+-- Host: localhost    Database: iotdb
 -- ------------------------------------------------------
--- Server version	10.5.8-MariaDB
+-- Server version	10.5.7-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,6 +16,87 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `cont_cadran`
+--
+
+DROP TABLE IF EXISTS `cont_cadran`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cont_cadran` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name_FR` text DEFAULT NULL,
+  `name_en` text DEFAULT NULL,
+  `color` text DEFAULT NULL,
+  `picture_back` text DEFAULT NULL,
+  `logo` text DEFAULT NULL,
+  `circles` text DEFAULT NULL,
+  `problem_fr` text DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cont_cadran`
+--
+
+LOCK TABLES `cont_cadran` WRITE;
+/*!40000 ALTER TABLE `cont_cadran` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cont_cadran` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `cont_offre_fra`
+--
+
+DROP TABLE IF EXISTS `cont_offre_fra`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cont_offre_fra` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` text DEFAULT NULL,
+  `text` text DEFAULT NULL,
+  `picture` text DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cont_offre_fra`
+--
+
+LOCK TABLES `cont_offre_fra` WRITE;
+/*!40000 ALTER TABLE `cont_offre_fra` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cont_offre_fra` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `cont_solution_fra`
+--
+
+DROP TABLE IF EXISTS `cont_solution_fra`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cont_solution_fra` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` text DEFAULT NULL,
+  `text_db` text DEFAULT NULL,
+  `picture_db` text DEFAULT NULL,
+  `problem` text DEFAULT NULL,
+  `arg` text DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cont_solution_fra`
+--
+
+LOCK TABLES `cont_solution_fra` WRITE;
+/*!40000 ALTER TABLE `cont_solution_fra` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cont_solution_fra` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `cost`
 --
 
@@ -23,12 +104,12 @@ DROP TABLE IF EXISTS `cost`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cost` (
-  `id_cost` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` text DEFAULT NULL,
   `price` text DEFAULT NULL,
   `type` text DEFAULT NULL,
   `company` text DEFAULT NULL,
-  PRIMARY KEY (`id_cost`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -50,10 +131,10 @@ DROP TABLE IF EXISTS `data`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `data` (
-  `id_data` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` text DEFAULT NULL,
   `points` text DEFAULT NULL,
-  PRIMARY KEY (`id_data`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=128 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -68,6 +149,90 @@ INSERT INTO `data` VALUES (1,'2 Entrées 0-10V / 4-20mA','2\r'),(2,'Température
 UNLOCK TABLES;
 
 --
+-- Table structure for table `data_binding`
+--
+
+DROP TABLE IF EXISTS `data_binding`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `data_binding` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_product` int(11) DEFAULT NULL,
+  `id_data` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_product` (`id_product`),
+  KEY `FK_data` (`id_data`),
+  CONSTRAINT `FK_data` FOREIGN KEY (`id_data`) REFERENCES `data` (`id`),
+  CONSTRAINT `FK_product` FOREIGN KEY (`id_product`) REFERENCES `products` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `data_binding`
+--
+
+LOCK TABLES `data_binding` WRITE;
+/*!40000 ALTER TABLE `data_binding` DISABLE KEYS */;
+/*!40000 ALTER TABLE `data_binding` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `fk_binding`
+--
+
+DROP TABLE IF EXISTS `fk_binding`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `fk_binding` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_cadran` int(11) DEFAULT NULL,
+  `id_offre` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_cadran` (`id_cadran`),
+  KEY `id_offre` (`id_offre`),
+  CONSTRAINT `fk_binding_ibfk_1` FOREIGN KEY (`id_cadran`) REFERENCES `cont_cadran` (`id`),
+  CONSTRAINT `fk_binding_ibfk_2` FOREIGN KEY (`id_offre`) REFERENCES `cont_offre_fra` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `fk_binding`
+--
+
+LOCK TABLES `fk_binding` WRITE;
+/*!40000 ALTER TABLE `fk_binding` DISABLE KEYS */;
+/*!40000 ALTER TABLE `fk_binding` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `offre_binding`
+--
+
+DROP TABLE IF EXISTS `offre_binding`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `offre_binding` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_offre` int(11) DEFAULT NULL,
+  `id_solution` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_offre` (`id_offre`),
+  KEY `id_solution` (`id_solution`),
+  CONSTRAINT `offre_binding_ibfk_1` FOREIGN KEY (`id_offre`) REFERENCES `cont_offre_fra` (`id`),
+  CONSTRAINT `offre_binding_ibfk_2` FOREIGN KEY (`id_solution`) REFERENCES `cont_solution_fra` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `offre_binding`
+--
+
+LOCK TABLES `offre_binding` WRITE;
+/*!40000 ALTER TABLE `offre_binding` DISABLE KEYS */;
+/*!40000 ALTER TABLE `offre_binding` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `products`
 --
 
@@ -75,7 +240,7 @@ DROP TABLE IF EXISTS `products`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `products` (
-  `id_product` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `brand` text DEFAULT NULL,
   `name` text DEFAULT NULL,
   `ref` text DEFAULT NULL,
@@ -84,7 +249,7 @@ CREATE TABLE `products` (
   `price` text DEFAULT NULL,
   `data` text DEFAULT NULL,
   `solution` text DEFAULT NULL,
-  PRIMARY KEY (`id_product`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=128 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -99,6 +264,167 @@ INSERT INTO `products` VALUES (1,'Adeunis','Analog','ARF8190BA','ARF8190BA','Pil
 UNLOCK TABLES;
 
 --
+-- Table structure for table `question`
+--
+
+DROP TABLE IF EXISTS `question`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `question` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `content` text DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `question`
+--
+
+LOCK TABLES `question` WRITE;
+/*!40000 ALTER TABLE `question` DISABLE KEYS */;
+/*!40000 ALTER TABLE `question` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `question_reponse_binding`
+--
+
+DROP TABLE IF EXISTS `question_reponse_binding`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `question_reponse_binding` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_question` int(11) DEFAULT NULL,
+  `id_reponse` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_question` (`id_question`),
+  KEY `id_reponse` (`id_reponse`),
+  CONSTRAINT `question_reponse_binding_ibfk_1` FOREIGN KEY (`id_question`) REFERENCES `question` (`id`),
+  CONSTRAINT `question_reponse_binding_ibfk_2` FOREIGN KEY (`id_reponse`) REFERENCES `reponse` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `question_reponse_binding`
+--
+
+LOCK TABLES `question_reponse_binding` WRITE;
+/*!40000 ALTER TABLE `question_reponse_binding` DISABLE KEYS */;
+/*!40000 ALTER TABLE `question_reponse_binding` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `reponse`
+--
+
+DROP TABLE IF EXISTS `reponse`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `reponse` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `content` text DEFAULT NULL,
+  `question_suivante` int(11) DEFAULT NULL,
+  `data` text DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_rep` (`question_suivante`),
+  CONSTRAINT `FK_rep` FOREIGN KEY (`question_suivante`) REFERENCES `question` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `reponse`
+--
+
+LOCK TABLES `reponse` WRITE;
+/*!40000 ALTER TABLE `reponse` DISABLE KEYS */;
+/*!40000 ALTER TABLE `reponse` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sections`
+--
+
+DROP TABLE IF EXISTS `sections`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sections` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` text DEFAULT NULL,
+  `logo` text DEFAULT NULL,
+  `sous_texte` text DEFAULT NULL,
+  `position` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sections`
+--
+
+LOCK TABLES `sections` WRITE;
+/*!40000 ALTER TABLE `sections` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sections` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `solution_binding`
+--
+
+DROP TABLE IF EXISTS `solution_binding`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `solution_binding` (
+  `id_product` int(11) NOT NULL AUTO_INCREMENT,
+  `id_solution` int(11) DEFAULT NULL,
+  KEY `id_product` (`id_product`),
+  KEY `id_solution` (`id_solution`),
+  CONSTRAINT `solution_binding_ibfk_1` FOREIGN KEY (`id_product`) REFERENCES `products` (`id`),
+  CONSTRAINT `solution_binding_ibfk_2` FOREIGN KEY (`id_solution`) REFERENCES `solutions` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `solution_binding`
+--
+
+LOCK TABLES `solution_binding` WRITE;
+/*!40000 ALTER TABLE `solution_binding` DISABLE KEYS */;
+/*!40000 ALTER TABLE `solution_binding` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `solution_question_section_binding`
+--
+
+DROP TABLE IF EXISTS `solution_question_section_binding`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `solution_question_section_binding` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_solution` int(11) DEFAULT NULL,
+  `id_question` int(11) DEFAULT NULL,
+  `id_section` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_solution` (`id_solution`),
+  KEY `id_question` (`id_question`),
+  KEY `id_section` (`id_section`),
+  CONSTRAINT `solution_question_section_binding_ibfk_1` FOREIGN KEY (`id_solution`) REFERENCES `solutions` (`id`),
+  CONSTRAINT `solution_question_section_binding_ibfk_2` FOREIGN KEY (`id_question`) REFERENCES `question` (`id`),
+  CONSTRAINT `solution_question_section_binding_ibfk_3` FOREIGN KEY (`id_section`) REFERENCES `sections` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `solution_question_section_binding`
+--
+
+LOCK TABLES `solution_question_section_binding` WRITE;
+/*!40000 ALTER TABLE `solution_question_section_binding` DISABLE KEYS */;
+/*!40000 ALTER TABLE `solution_question_section_binding` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `solutions`
 --
 
@@ -106,9 +432,9 @@ DROP TABLE IF EXISTS `solutions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `solutions` (
-  `id_solution` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` text DEFAULT NULL,
-  PRIMARY KEY (`id_solution`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -130,13 +456,13 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
-  `id_user` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` text NOT NULL,
   `first_name` text NOT NULL,
   `last_name` text NOT NULL,
   `password` text NOT NULL,
   `status` text NOT NULL,
-  PRIMARY KEY (`id_user`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -159,4 +485,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-02-02 17:56:14
+-- Dump completed on 2021-02-03 21:35:33
