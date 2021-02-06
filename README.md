@@ -7,4 +7,9 @@ Installation et lancement du projet :
   - cd VinciApp (pour se déplacer dans le dossier VinciApp)
   - npm install (à nouveau)
   - ng serve (lancer l'application en local)
+  - ng add @angular/material
 - Une fois les commandes entrées, lancer un navigateur web et entrer l'adresse localhost:4200, la page par défaut de l'application apparaît
+
+Lancement de l'api en NodeJs
+- se placer dans le dossier PAI-25
+- node VinciBackend.js

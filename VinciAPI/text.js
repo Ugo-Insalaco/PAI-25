@@ -4,8 +4,16 @@ const xss = require('xss')
 
 const languageParser = function(req,res,next){
     req.language=xss(req.get('language'))
-    req.table = (req.language == 'fra') ?'contents_fra' : 'contents_eng'
+    req.lang_table = (req.language == 'fra') ?'contents_fra' : 'contents_eng'
     next()
+}
+
+const inserer_text = function(pool, text, id, table){
+    pool
+    .then(pool=>{
+        pool
+        .query(`INSERT INTO ?? SET ('id', 'text') VALUES (?,??)`, [table, id, text])
+    })
 }
 const text = function(app){
     app.get('/api/text/:id', languageParser, function(req,res){
@@ -15,7 +23,7 @@ const text = function(app){
         pool
         .then(pool=>{
             pool
-            .query('SELECT* FROM ?? WHERE id_content_ENG=?', [req.table, id])
+            .query('SELECT* FROM ?? WHERE id=?', [req.lang_table, id])
             .then(rows =>{
                 if(rows.length!=1){
                     res.send(200).send("text temporaire")
@@ -28,9 +36,42 @@ const text = function(app){
         })
     })
 
-    app.post('/api/text/', jsonParser, languageParser, function(req,res){
-        console.log(req.body)
-        res.send(JSON.stringify({message: "post reçu"}))
+    app.post('/api/text/:id', jsonParser, languageParser, function(req,res){
+        const body = xss(req.body)
+        const id = parseInt(xss(req.params.id))
+        console.log(body)
+        //res.send(JSON.stringify({message: "post reçu"}))
+        if(body.picture_url){
+            console.log("insertion d'image")
+            pool
+            .then(pool=>{
+                pool
+                .query(`INSERT INTO 'contents_fra' SET ('id', 'picture_url') VALUES (?,??)`, [id, body.picture_url])
+            })
+            .then(pool=>{
+                pool
+                .query(`INSERT INTO 'contents_eng' SET ('id', 'picture_url') VALUES (?,??)`, [id, body.picture_url])
+            })
+            .then(()=>{
+                res.status(200).send(`Texte ajouté : ${id}`)
+            })
+        }
+        else if(body.text){
+            console.log('insertion de text')
+            pool
+            .then(pool=>{
+                inserer_text(pool, body.text, id, 'contents_fra')
+            })
+            .then(pool=>{
+                inserer_text(pool, body.text, id, 'contents_eng')
+            })
+            .then(()=>{
+                res.status(200).send(`Texte ajouté : ${id}`)
+            })
+        }
+        else{
+            res.status(400).send("Arguments manquants : picture_url ou text")
+        }
     })
 
     app.patch('/api/text/:id', jsonParser, languageParser, function(req,res){
