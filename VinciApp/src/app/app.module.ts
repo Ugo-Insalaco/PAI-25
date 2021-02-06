@@ -37,7 +37,12 @@ import { ImagesComponent } from './images/images.component';
 import { VideoComponent } from './video/video.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { SearchComponent } from './search/search.component';
-import { FieldErrorDisplayComponent } from './field-error-display/field-error-display.component'; 
+import { FieldErrorDisplayComponent } from './field-error-display/field-error-display.component';
+import { BannerComponent } from './banner/banner.component';
+import { OfferComponent } from './offer/offer.component';
+import { CadranComponent } from './cadran/cadran.component';
+import { SolutionComponent } from './solution/solution.component';
+import { BtnlinkcadransComponent } from './btnlinkcadrans/btnlinkcadrans.component'; 
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,6 +55,11 @@ import { FieldErrorDisplayComponent } from './field-error-display/field-error-di
     ContactFormComponent,
     SearchComponent,
     FieldErrorDisplayComponent,
+    BannerComponent,
+    OfferComponent,
+    CadranComponent,
+    SolutionComponent,
+    BtnlinkcadransComponent,
   ],
   imports: [
     BrowserModule,

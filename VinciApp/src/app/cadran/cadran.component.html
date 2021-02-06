@@ -1,0 +1,35 @@
+<app-banner [admin]="admin"
+            [photo]="urlphotofond"
+            [logo]="urllogo"
+            [cercles]="urlcercles"
+            [couleur]="couleur"
+            [problematique]="problematiquecadran"
+            [nomcadran]="nomcadran">
+</app-banner>
+<app-offer [admin]="admin"
+           [photooffre]="urlphotooffre1"
+           [couleur]="couleur"
+           [nomoffre]="nomoffre1"
+           [texteoffre]="texteoffre1"
+           [offresolutions]="offre1solutions"
+           [configgauche]=false>
+</app-offer>
+<app-offer [admin]="admin"
+           [photooffre]="urlphotooffre2"
+           [couleur]="couleur"
+           [nomoffre]="nomoffre2"
+           [texteoffre]="texteoffre2"
+           [offresolutions]="offre2solutions"
+           [configgauche]=true
+           *ngIf="nomoffre2!==''">
+</app-offer>
+<app-offer [admin]="admin"
+           [photooffre]="urlphotooffre3"
+           [couleur]="couleur"
+           [nomoffre]="nomoffre3"
+           [texteoffre]="texteoffre3"
+           [offresolutions]="offre3solutions"
+           [configgauche]=false
+           *ngIf="nomoffre3!==''">
+</app-offer>
+<app-btnlinkcadrans></app-btnlinkcadrans>

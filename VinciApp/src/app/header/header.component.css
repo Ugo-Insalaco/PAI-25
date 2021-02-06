@@ -16,7 +16,7 @@
     justify-content: flex-end;
   }
 .fill-space {
-    flex: 1 1 auto; 
+    flex: 1 1 auto;
   }
 .space{
     margin-right: 100 px;
@@ -34,7 +34,7 @@
 }
 mat-select{
     color:black;
-    
+
 }
 mat-form-field{
     background-color: white;
@@ -48,7 +48,7 @@ button{
     font-size:35px !important;
 }
  img {
-    height: 100px;
+    height: 68px;
     width: auto;
 }
 
