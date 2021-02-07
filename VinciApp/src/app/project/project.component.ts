@@ -1,5 +1,5 @@
 import { componentFactoryName } from '@angular/compiler';
-import { OnInit } from '@angular/core';
+import { Input, OnInit } from '@angular/core';
 
 import { Component } from '@angular/core';
 import { ConfigService } from '../services/config.service'

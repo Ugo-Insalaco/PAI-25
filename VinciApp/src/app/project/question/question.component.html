@@ -1,0 +1,42 @@
+<div style="text-align: center;">
+
+    <p>
+      Combien de détecteurs de fumée ?
+      <br><input type="number" name="number" id="number" value="">
+    </p>
+    
+    <p>
+      {{question}}
+      <br><input type="radio" name="choix1" value="Public" onclick="console.log('Public')"> {{rep1}}
+      <br><input type="radio" name="choix1" value="Privé" onclick="console.log('Privé')"> {{rep2}}
+    </p>
+    
+    <p> Si oui, lesquels ?
+      <br><input type="checkbox"> Choix 1
+      <br><input type="checkbox"> Choix 2
+      <br><input type="checkbox"> Choix 3
+      <br><input type="checkbox"> Choix 4  
+    </p>
+    
+    <p>
+      Si oui, lesquels ?<br>
+      <SELECT ID="attributs">
+      <OPTION> Choix 1 </OPTION>
+      <OPTION> Choix 2 </OPTION>
+      <OPTION> Choix 3 </OPTION>
+      <OPTION> Choix 4 </OPTION>
+    
+      </SELECT>
+    <p id="attribut"></p>
+    
+    <p>
+      Ajouter un commentaire :
+      <br><input type="textarea" name="commentaire" id="commentaire" value="">
+    </p>
+    
+    <!--
+       <button class="btn btn-primary" value="Valider" (click)="valider()" type="button"> Valider</button>
+    -->
+    
+    
+    </div>

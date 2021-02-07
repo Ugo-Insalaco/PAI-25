@@ -42,7 +42,8 @@ import { BannerComponent } from './banner/banner.component';
 import { OfferComponent } from './offer/offer.component';
 import { CadranComponent } from './cadran/cadran.component';
 import { SolutionComponent } from './solution/solution.component';
-import { BtnlinkcadransComponent } from './btnlinkcadrans/btnlinkcadrans.component'; 
+import { BtnlinkcadransComponent } from './btnlinkcadrans/btnlinkcadrans.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +60,7 @@ import { BtnlinkcadransComponent } from './btnlinkcadrans/btnlinkcadrans.compone
     OfferComponent,
     CadranComponent,
     SolutionComponent,
-    BtnlinkcadransComponent,
+    BtnlinkcadransComponent
   ],
   imports: [
     BrowserModule,
@@ -77,9 +78,8 @@ import { BtnlinkcadransComponent } from './btnlinkcadrans/btnlinkcadrans.compone
     MatGridListModule,
     FormsModule, 
     ReactiveFormsModule,
-    MatRadioModule
-
-
+    MatRadioModule,
+    ProjectModule
   ],
   providers: [
     ConfigService,

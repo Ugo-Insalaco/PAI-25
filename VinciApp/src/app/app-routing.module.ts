@@ -6,12 +6,14 @@ import { SearchComponent } from './search/search.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { CadranComponent} from './cadran/cadran.component';
 import { SolutionComponent} from './solution/solution.component';
+import { ProjectComponent} from './project/project.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '', pathMatch: 'full'},
   {path: 'login', component: LoginComponent },
   {path: 'contact', component: ContactFormComponent},
   {path: 'search', component: SearchComponent},
+  {path: 'project', component: ProjectComponent},
   {path: 'cadran', children: [
     {path: 'actifs-techniques', component: CadranComponent},
     {path: 'actifs-techniques/:solution', component: SolutionComponent},
