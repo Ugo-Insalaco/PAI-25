@@ -11,6 +11,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { BackendService } from '../services/backend.service';
+import { FormsModule } from '@angular/forms';
 
 import { QuestionComponent } from "./question/question.component";
 
@@ -26,7 +27,8 @@ import { QuestionComponent } from "./question/question.component";
        MatStepperModule,
        MatCardModule,
        MatButtonModule,
-       MatGridListModule
+       MatGridListModule,
+       FormsModule
     ],
     providers: [
       BackendService
