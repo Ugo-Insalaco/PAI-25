@@ -25,3 +25,21 @@
   background-position: center;
   overflow: auto;
 }
+
+#buttonProject{
+  width: 12%;
+  height: 100%;
+  font-size: 18px;
+  background-color: #e97232;
+  border-radius: 3px;
+  color: white;
+  text-align: center;
+}
+
+#linkProject{
+  margin: 2%;
+  position: relative;
+  text-align: right;
+  width: inherit;
+  height: 8%;
+}

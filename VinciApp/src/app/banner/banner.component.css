@@ -26,10 +26,16 @@
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
+  filter: contrast(1.1);
 }
 
 #filtre{
     width:100%;
     height:100%;
     opacity: 0.75;
+}
+
+#solution{
+  margin-top: 10%;
+  font-size: 30px;
 }

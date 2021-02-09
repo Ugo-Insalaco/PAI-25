@@ -13,7 +13,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent },
   {path: 'contact', component: ContactFormComponent},
   {path: 'search', component: SearchComponent},
-  {path: 'project', component: ProjectComponent},
+  {path: 'project/:solution', component: ProjectComponent},
   {path: 'cadran', children: [
     {path: 'actifs-techniques', component: CadranComponent},
     {path: 'actifs-techniques/:solution', component: SolutionComponent},
@@ -23,7 +23,7 @@ const routes: Routes = [
 
     {path: 'confort-energie-environnement', component: CadranComponent},
     {path: 'confort-energie-environnement/:solution', component: SolutionComponent},
-    
+
     {path: 'espaces', component: CadranComponent},
     {path: 'espaces/:solution', component: SolutionComponent},
   ]}
