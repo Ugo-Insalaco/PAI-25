@@ -24,14 +24,14 @@ DROP TABLE IF EXISTS `cont_cadran`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cont_cadran` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` text DEFAULT NULL,
+  `name` int(11) DEFAULT NULL,
   `color` text DEFAULT NULL,
   `picture_back` text DEFAULT NULL,
   `logo` text DEFAULT NULL,
-  `circles` text DEFAULT NULL,
-  `problem_fr` text DEFAULT NULL,
+  `circles` int(11) DEFAULT NULL,
+  `problem` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `cont_cadran` (
 
 LOCK TABLES `cont_cadran` WRITE;
 /*!40000 ALTER TABLE `cont_cadran` DISABLE KEYS */;
-INSERT INTO `cont_cadran` VALUES (1,'Actifs Techniques','#062C6B','/assets/images/actifstechniques/exImageFond.png','/assets/images/actifstechniques/logo.png','/assets/images/actifstechniques/cerclesBandeau.png','Exemple de problématique');
+INSERT INTO `cont_cadran` VALUES (2,6,'#062C6B','/assets/images/actifstechniques/exImageFond.png','/assets/images/actifstechniques/logo.png',7,8);
 /*!40000 ALTER TABLE `cont_cadran` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -78,7 +78,7 @@ CREATE TABLE `cont_fra` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `text` text DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -87,6 +87,7 @@ CREATE TABLE `cont_fra` (
 
 LOCK TABLES `cont_fra` WRITE;
 /*!40000 ALTER TABLE `cont_fra` DISABLE KEYS */;
+INSERT INTO `cont_fra` VALUES (1,'Salut ça va ?!'),(2,'Ouais ça va et toi gros ?!'),(3,'c\'est moi la data'),(4,'numero1'),(5,' Bonjour je suis le sous_texte'),(6,' Actifs Techniques'),(7,'/assets/images/actifstechniques/cerclesBandeau.png'),(8,'Exemple de problématique'),(9,'Supervision des équipements CVC'),(10,'Texte offre supervision équipements CVC'),(11,'Production de froid'),(12,'Texte prod de froid'),(13,' Pb prod de froid'),(14,'Arg prod de froid'),(15,'Production de chaud'),(16,'Texte prod de chaud'),(17,' Pb prod de chaud'),(18,'Arg prod de chaud');
 /*!40000 ALTER TABLE `cont_fra` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -99,11 +100,11 @@ DROP TABLE IF EXISTS `cont_offre`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cont_offre` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` text DEFAULT NULL,
-  `text` text DEFAULT NULL,
+  `name` int(11) DEFAULT NULL,
+  `text` int(11) DEFAULT NULL,
   `picture` text DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -112,7 +113,7 @@ CREATE TABLE `cont_offre` (
 
 LOCK TABLES `cont_offre` WRITE;
 /*!40000 ALTER TABLE `cont_offre` DISABLE KEYS */;
-INSERT INTO `cont_offre` VALUES (1,'Supervision des équipements CVC','Texte offre supervision équipements CVC','/assets/images/actifstechniques/exImageSolution.jpg');
+INSERT INTO `cont_offre` VALUES (2,9,10,'/assets/images/actifstechniques/exImageSolution.jpg');
 /*!40000 ALTER TABLE `cont_offre` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -125,13 +126,13 @@ DROP TABLE IF EXISTS `cont_solution`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cont_solution` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` text DEFAULT NULL,
-  `text_db` text DEFAULT NULL,
+  `name` int(11) DEFAULT NULL,
+  `text_db` int(11) DEFAULT NULL,
   `picture_db` text DEFAULT NULL,
-  `problem` text DEFAULT NULL,
-  `arg` text DEFAULT NULL,
+  `problem` int(11) DEFAULT NULL,
+  `arg` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -140,7 +141,7 @@ CREATE TABLE `cont_solution` (
 
 LOCK TABLES `cont_solution` WRITE;
 /*!40000 ALTER TABLE `cont_solution` DISABLE KEYS */;
-INSERT INTO `cont_solution` VALUES (1,'Production de froid','Texte prod de froid','/assets/images/actifstechniques/exImageFond.png','Pb prod de froid','Arg prod de froid'),(2,'Production de chaud','Texte prod de chaud','/assets/images/actifstechniques/exImageSolution.png','Pb prod de chaud','Arg prod de chaud');
+INSERT INTO `cont_solution` VALUES (3,11,12,'/assets/images/actifstechniques/exImageFond.png',13,14),(4,15,16,'/assets/images/actifstechniques/exImageSolution.png',17,18);
 /*!40000 ALTER TABLE `cont_solution` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -240,7 +241,7 @@ CREATE TABLE `fk_binding` (
   KEY `id_offre` (`id_offre`),
   CONSTRAINT `fk_binding_ibfk_1` FOREIGN KEY (`id_cadran`) REFERENCES `cont_cadran` (`id`),
   CONSTRAINT `fk_binding_ibfk_2` FOREIGN KEY (`id_offre`) REFERENCES `cont_offre` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -249,7 +250,7 @@ CREATE TABLE `fk_binding` (
 
 LOCK TABLES `fk_binding` WRITE;
 /*!40000 ALTER TABLE `fk_binding` DISABLE KEYS */;
-INSERT INTO `fk_binding` VALUES (1,1,1);
+INSERT INTO `fk_binding` VALUES (2,2,2);
 /*!40000 ALTER TABLE `fk_binding` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -269,7 +270,7 @@ CREATE TABLE `offre_binding` (
   KEY `id_solution` (`id_solution`),
   CONSTRAINT `offre_binding_ibfk_1` FOREIGN KEY (`id_offre`) REFERENCES `cont_offre` (`id`),
   CONSTRAINT `offre_binding_ibfk_2` FOREIGN KEY (`id_solution`) REFERENCES `cont_solution` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -278,7 +279,7 @@ CREATE TABLE `offre_binding` (
 
 LOCK TABLES `offre_binding` WRITE;
 /*!40000 ALTER TABLE `offre_binding` DISABLE KEYS */;
-INSERT INTO `offre_binding` VALUES (1,1,2),(2,1,1);
+INSERT INTO `offre_binding` VALUES (3,2,3),(4,2,4);
 /*!40000 ALTER TABLE `offre_binding` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -321,9 +322,10 @@ DROP TABLE IF EXISTS `question`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `question` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `content` text DEFAULT NULL,
+  `content` int(11) DEFAULT NULL,
+  `type` text DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -332,7 +334,7 @@ CREATE TABLE `question` (
 
 LOCK TABLES `question` WRITE;
 /*!40000 ALTER TABLE `question` DISABLE KEYS */;
-INSERT INTO `question` VALUES (1,'Salut ça va ?!');
+INSERT INTO `question` VALUES (2,1,'je suis le type');
 /*!40000 ALTER TABLE `question` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -352,7 +354,7 @@ CREATE TABLE `question_reponse_binding` (
   KEY `id_reponse` (`id_reponse`),
   CONSTRAINT `question_reponse_binding_ibfk_1` FOREIGN KEY (`id_question`) REFERENCES `question` (`id`),
   CONSTRAINT `question_reponse_binding_ibfk_2` FOREIGN KEY (`id_reponse`) REFERENCES `reponse` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -361,7 +363,7 @@ CREATE TABLE `question_reponse_binding` (
 
 LOCK TABLES `question_reponse_binding` WRITE;
 /*!40000 ALTER TABLE `question_reponse_binding` DISABLE KEYS */;
-INSERT INTO `question_reponse_binding` VALUES (1,1,1);
+INSERT INTO `question_reponse_binding` VALUES (3,2,3);
 /*!40000 ALTER TABLE `question_reponse_binding` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -374,13 +376,13 @@ DROP TABLE IF EXISTS `reponse`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `reponse` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `content` text DEFAULT NULL,
+  `content` int(11) DEFAULT NULL,
   `question_suivante` int(11) DEFAULT NULL,
   `data` text DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_rep` (`question_suivante`),
   CONSTRAINT `FK_rep` FOREIGN KEY (`question_suivante`) REFERENCES `question` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -389,7 +391,7 @@ CREATE TABLE `reponse` (
 
 LOCK TABLES `reponse` WRITE;
 /*!40000 ALTER TABLE `reponse` DISABLE KEYS */;
-INSERT INTO `reponse` VALUES (1,'Ouais ça va et toi gros ?!',1,'c\'est moi la data');
+INSERT INTO `reponse` VALUES (3,2,2,'je suis le type');
 /*!40000 ALTER TABLE `reponse` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -402,12 +404,12 @@ DROP TABLE IF EXISTS `sections`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sections` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` text DEFAULT NULL,
+  `name` int(11) DEFAULT NULL,
   `logo` text DEFAULT NULL,
-  `sous_texte` text DEFAULT NULL,
+  `sous_texte` int(11) DEFAULT NULL,
   `position` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -416,7 +418,7 @@ CREATE TABLE `sections` (
 
 LOCK TABLES `sections` WRITE;
 /*!40000 ALTER TABLE `sections` DISABLE KEYS */;
-INSERT INTO `sections` VALUES (1,'numero1','/assets/images/logo.png','Bonjour je suis le sous_texte',21);
+INSERT INTO `sections` VALUES (2,4,'/assets/images/logo.png',5,21);
 /*!40000 ALTER TABLE `sections` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -467,7 +469,7 @@ CREATE TABLE `solution_question_section_binding` (
   CONSTRAINT `solution_question_section_binding_ibfk_1` FOREIGN KEY (`id_solution`) REFERENCES `solutions` (`id`),
   CONSTRAINT `solution_question_section_binding_ibfk_2` FOREIGN KEY (`id_question`) REFERENCES `question` (`id`),
   CONSTRAINT `solution_question_section_binding_ibfk_3` FOREIGN KEY (`id_section`) REFERENCES `sections` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -476,7 +478,7 @@ CREATE TABLE `solution_question_section_binding` (
 
 LOCK TABLES `solution_question_section_binding` WRITE;
 /*!40000 ALTER TABLE `solution_question_section_binding` DISABLE KEYS */;
-INSERT INTO `solution_question_section_binding` VALUES (1,1,1,1);
+INSERT INTO `solution_question_section_binding` VALUES (3,2,2,2);
 /*!40000 ALTER TABLE `solution_question_section_binding` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -541,4 +543,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-02-09 14:58:25
+-- Dump completed on 2021-02-09 18:20:56
