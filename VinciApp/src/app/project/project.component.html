@@ -3,7 +3,7 @@
 <mat-card id="outil">
     <mat-card-header>
         <mat-card-title id="outil_title">
-            Outil dimensionnement de Projet
+            Dimensionnement de votre projet : {{nomsolution}}
         </mat-card-title>
     </mat-card-header>
     <hr>
@@ -33,7 +33,7 @@
                     </div>
                     <br><app-question 
                         [tab]="selectedTab" 
-                        [id_question]="1" 
+                        [id_question]="3" 
                         [type]="'QCM'" 
                         [question]="'Quelle application souhaitez-vous utiliser ?'" 
                         [rep1]="'IoThink'"
@@ -50,7 +50,7 @@
                     </div>
                     <br><app-question 
                         [tab]="selectedTab" 
-                        [id_question]="1" 
+                        [id_question]="5" 
                         [type]="'QCM'" 
                         [question]="'Souhaitez-vous internaliser ou externaliser l installation des IoT ?'" 
                         [rep1]="'Internaliser'"

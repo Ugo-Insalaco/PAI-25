@@ -13,7 +13,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { BackendService } from '../services/backend.service';
 import { FormsModule } from '@angular/forms';
 
-import { QuestionComponent } from "./question/question.component";
+import { QuestionComponent } from '../question/question.component'
 
 @NgModule({
     declarations: [
