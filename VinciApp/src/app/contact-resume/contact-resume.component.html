@@ -1,0 +1,93 @@
+
+
+  <div class="container">
+    <div class="row">
+  
+      <div class="col-md-8" id="htmlData" #htmlData>
+        <h1>Résumé de demande</h1>
+        <h2>Information personnelles</h2>
+        <table class="table table-bordered">
+          <tr class="table-primary">
+           
+            <th>Civilité</th>
+            <td>{{data.Civilite}}</td></tr>  
+          <tr class="table-primary">
+           
+            <th>Nom</th>
+            <td>{{data.Name}}</td>
+
+
+
+            
+          </tr>
+          <tr class="table-primary">
+           
+            <th>Prénom</th>
+            <td>{{data.Surname}}</td></tr>
+          
+          <tr class="table-primary">
+           
+              <th>Entreprise</th>
+              <td>{{data.Entreprise}}</td></tr>
+              
+          <tr >
+            <th>Télephone</th> 
+            <td>{{data.Telephone}}</td>
+          </tr>
+          <tr >
+            <th>Email</th> 
+            <td>{{data.Email}}</td>
+          </tr>
+          <tr class="table-primary">
+           
+            <th>Entreprise</th>
+            <td>{{data.Entreprise}}</td></tr>
+            
+     <tr class="table-primary">
+           
+          <th>Addresse</th>
+          <td>{{data.Street}}</td></tr>
+        
+        <tr class="table-primary">
+         
+            <th>Ville</th>
+            <td>{{data.city}}</td></tr>
+            
+        <tr >
+          <th>Zip Code</th> 
+          <td>{{data.zip}}</td>
+        </tr>
+        <tr >
+       
+      </table>
+      <h2>Sujet de demande </h2>
+      <table class="table table-bordered"><tr class="table-primary">
+           
+        <th>Objet de la demande</th>
+        <td>{{data.object}}</td></tr>
+      
+      <tr class="table-primary">
+       
+          <th>Mon segment d’activité</th>
+          <td>{{data.activitySeg}}</td></tr>
+          
+      <tr >
+        <th>Je souhaite des informations sur :</th> 
+        <td>{{data.info}}</td>
+      </tr>
+      <tr >
+        <th>Message :</th> 
+        <td>{{data.message}}</td>
+      </tr>
+     
+    </table>
+      </div>
+  
+      <div class="col-md-4 text-right">
+        <button class="btn btn-success btn-block" (click)="openPDF()">Download PDF</button>
+        <br>
+        <button class="btn btn-success btn-block" >Confirmer la demande</button>
+      </div>
+  
+    </div>
+  </div>

@@ -10,6 +10,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatRadioModule} from '@angular/material/radio'; 
 
 
+import {MatDialogModule} from '@angular/material/dialog'; 
+
 import { BackendService } from './backend.service';
 import { HeaderComponent } from './header/header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -33,7 +35,8 @@ import { ImagesComponent } from './images/images.component';
 import { VideoComponent } from './video/video.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { SearchComponent } from './search/search.component';
-import { FieldErrorDisplayComponent } from './field-error-display/field-error-display.component'; 
+import { FieldErrorDisplayComponent } from './field-error-display/field-error-display.component';
+import { ContactResumeComponent } from './contact-resume/contact-resume.component'; 
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,6 +49,7 @@ import { FieldErrorDisplayComponent } from './field-error-display/field-error-di
     ContactFormComponent,
     SearchComponent,
     FieldErrorDisplayComponent,
+    ContactResumeComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,8 +66,8 @@ import { FieldErrorDisplayComponent } from './field-error-display/field-error-di
     MatGridListModule,
     FormsModule, 
     ReactiveFormsModule,
-    MatRadioModule
-
+    MatRadioModule,
+    MatDialogModule
 
   ],
   providers: [

@@ -1,6 +1,7 @@
 .container-fluid{
     background-color: rgb(143, 173, 229);
     max-width: 100%;
+    max-height: 75%;
 }
 h1{
   
