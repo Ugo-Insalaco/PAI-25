@@ -27,11 +27,14 @@ export class ProjectComponent implements OnInit{
         let body={
             text: 'Salutations'
         }
-        this.backend.GET('/api/text/1', e=>{
-            this.backendMessage = JSON.stringify(e)
-        })
+        // this.backend.GET('/api/text/1', e=>{
+        //     this.backendMessage = JSON.stringify(e)
+        // })
         // this.globalStorage.set('langage', 'ENG')
         // this.backendMessage =this.globalStorage.get('langage')
+        this.backend.POST('/api/questions', body, res=>{
+            console.log(res)
+        })
     }
 
     changeHandler(e){

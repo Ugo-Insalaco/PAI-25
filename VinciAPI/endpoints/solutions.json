@@ -1,0 +1,23 @@
+{
+    "name": "solution",
+    "table" : "cont_solution_fra",
+    "fields": {
+        "id":"",
+        "name":"", 
+        "text_db":"",
+        "picture_db":"",
+        "problem":"",
+        "arg":""
+    },
+    "primaryField": "id",
+    "updatable" : [
+        "name",
+        "text_db",
+        "picture_db",
+        "problem",
+        "arg"
+    ],
+    "include": [
+
+    ]
+}

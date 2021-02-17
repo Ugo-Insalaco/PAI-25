@@ -1,0 +1,31 @@
+{
+    "name": "reponse",
+    "table" : "reponse",
+    "fields": {
+        "id": "",
+        "content":"",
+        "question_suivante":"",
+        "data":""
+    },
+    "primaryField": "id",
+    "updatable" : [
+        "content",
+        "question_suivante",
+        "data"
+    ],
+    "include": 
+    [
+        {
+            "name": "question_suivante",
+            "default_inclusion": false,
+            "bind":[
+                {
+                    "id": 1,
+                    "endpoint": "question",
+                    "local_key": "question_suivante",
+                    "foreign_key": "id"
+                }
+            ]
+        }
+    ]
+}

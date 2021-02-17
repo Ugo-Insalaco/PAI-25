@@ -1,0 +1,41 @@
+{
+    "name": "user",
+    "table": "users",
+    "fields":{
+        "id":"",
+        "username":"",
+        "first_name":"",
+        "last_name":"",
+        "password":"",
+        "status":""
+    },
+    "primaryField": "id",
+    "updatable":[
+        "username",
+        "first_name",
+        "last_name",
+        "password",
+        "status"
+    ],
+    "include":[
+
+    ],
+    "get_response":{
+        "route": "/api/questions",
+        "method" : "GET",
+        "data":{
+            "id":"{{0::user::id}}",
+            "fields":{
+                "username":"{{0::user::username}}",
+                "first_name":"{{0::user::first_name}}",
+                "last_name":"{{0::user::lastname}}",
+                "password":"{{0::user::password}}",
+                "status":"{{0::user::status}}"
+            },
+            "included":{
+
+            }
+        }
+        
+    }
+}

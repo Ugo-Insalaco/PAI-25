@@ -1,0 +1,22 @@
+{
+    "name": "section",
+    "table" : "sections",
+    "fields": {
+        "id":"primary",
+        "name":"",
+        "logo":"",
+        "sous_texte":"",
+        "position":""
+    },
+    "primaryField": "id",
+    "updatable" : [
+        "name",
+        "logo",
+        "sous_texte",
+        "position"
+    ],
+    "include": 
+    [
+
+    ]
+}
