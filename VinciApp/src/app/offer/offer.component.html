@@ -1,0 +1,42 @@
+<div style="width: 99vw; height: 60vh;">
+  <div id="divtext" #divtext [contentEditable]="contentEditable">
+    <p id="text" style="text-align: justify;">
+      {{texteoffre}}
+    </p>
+    <div id="choixsolution">
+      Solutions associées à cette offre :
+      <select id="listesolutions" #listesolutions [(ngModel)]="selectedOption">
+        <option disabled selected> Solutions </option>
+      </select>
+      <button #buttonvalidersolution style="margin-left: 10px;"
+              (click)="onValiderSolution()">
+              Valider
+      </button>
+    </div>
+    <button style="position: absolute; right:0; bottom:0;"
+            (click)="onModifier()"
+            *ngIf="admin===true && modif===false">
+            Modification du texte
+    </button>
+    <button style="position: absolute; right:0; bottom:0; margin-left: 1vh;"
+            (click)="onValider()"
+            *ngIf="modif===true">
+            Valider
+    </button>
+  </div>
+  <div id="divimage" #divimage [style.background-image]="photooffre">
+    <div id="commimg" #commimg [contentEditable]="contentEditable" [style.background-color]="couleur">
+      {{nomoffre}}
+    </div>
+    <input type="file"
+           id="inputImgSolution"
+           style="position: absolute; right:0; bottom: 0;"
+           accept="image/png, image/jpeg"
+           *ngIf="admin===true">
+     <button style="position: absolute; right:0; bottom:0; margin-left: 1vh;"
+              (click)="updateImageDisplay()"
+             *ngIf="admin===true">
+             Valider
+     </button>
+  </div>
+</div>

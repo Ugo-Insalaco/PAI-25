@@ -1,0 +1,34 @@
+<app-banner [admin]="admin"
+            [photo]="urlphotofond"
+            [logo]="urllogo"
+            [cercles]="urlcercles"
+            [couleur]="couleur"
+            [problematique]="problematiquecadran"
+            [nomcadran]="nomcadran"
+            [nomsolution]="nomsolution">
+</app-banner>
+
+<div id="argumentscommerciaux" style="border-width:10px; border-color: #000000">
+  <p>
+    {{problematiquessolution}}
+  </p>
+  <p>
+    {{argumentscommerciaux}}
+  </p>
+</div>
+
+<div id="dashboard" style="width: 99vw; height: 60vh;">
+  <div id="divtext">
+    <p id="text" style="text-align: justify;">
+      {{textedashboard}}
+    </p>
+  </div>
+  <div id="divimage" [style.background-image]="photodashboard">
+  </div>
+</div>
+
+<div id="linkProject">
+  <button type="button" id="buttonProject" #buttonproject (click)="onSimulerProjet()">Simulez votre projet</button>
+</div>
+
+<app-btnlinkcadrans></app-btnlinkcadrans>
