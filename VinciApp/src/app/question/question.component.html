@@ -2,8 +2,8 @@
 
   <div *ngIf="type=='QCM'">
     {{question}}
-    <br><input type="radio" name="{{id_question}}" value="{{rep1}}" [(ngModel)]="answer"> {{rep1}}
-    <br><input type="radio" name="{{id_question}}" value="{{rep2}}" [(ngModel)]="answer"> {{rep2}}
+    <br><input type="radio" name="{{id_question}}" value="{{rep1}}" [(ngModel)]="answer" onchange="onAnswer()"> {{rep1}}
+    <br><input type="radio" name="{{id_question}}" value="{{rep2}}" [(ngModel)]="answer" onchange="onAnswer()"> {{rep2}}
   </div>
 
 

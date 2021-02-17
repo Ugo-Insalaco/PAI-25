@@ -44,4 +44,8 @@ export class QuestionComponent implements OnInit {
     return nom;
   }
 
+  onAnswer(){
+    this.globalStorage.set('projet_2', this.answer)
+  }
+
 }
