@@ -30,6 +30,8 @@ export class ProjectComponent implements OnInit{
         let body={
             text: 'Salutations'
         }
+        this.globalStorage.reset_default("projet")
+
 <<<<<<< HEAD
         // this.backend.GET('/api/text/1', e=>{
         //     this.backendMessage = JSON.stringify(e)
@@ -57,7 +59,11 @@ export class ProjectComponent implements OnInit{
         nom = nom.charAt(0).toUpperCase() + nom.slice(1); // Majuscule pour 1er mot
         nom = nom.replace(/%C3%A9/gi, "é");
         return nom;
-      }
+    }
+
+    recap(){
+        console.log("oui du js")
+    }
 
 
 }

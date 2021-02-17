@@ -30,7 +30,7 @@ export class GlobalStorageService{
     public set(key: string, value: any)
     {
         if(localStorage.getItem(key)===null){
-            return "La valeur n'existe pas par défault"
+            return "La valeur n'existe pas par défaut"
         }
         else{
             localStorage.setItem(key, JSON.stringify(value))
@@ -45,5 +45,16 @@ export class GlobalStorageService{
                 localStorage.setItem(key, value)
             }
         })
+    }
+
+    public reset_default(key: string)
+    {
+        if(localStorage.getItem(key)===null){
+            return "La valeur n'existe pas par défaut"
+        }
+        else{
+            let value = JSON.stringify(this.default[key])
+            localStorage.setItem(key, value)
+        }
     }
 }

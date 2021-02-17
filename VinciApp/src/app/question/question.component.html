@@ -1,26 +1,25 @@
 <div style="text-align: center;">
 
+
   <div *ngIf="type=='QCM'">
     {{question}}
-    <br><input type="radio" name="{{id_question}}" value="{{rep1}}" [(ngModel)]="answer" onchange="onAnswer()"> {{rep1}}
-    <br><input type="radio" name="{{id_question}}" value="{{rep2}}" [(ngModel)]="answer" onchange="onAnswer()"> {{rep2}}
+    <br><input type="radio" name="{{id_question}}" value="{{rep1}}" [(ngModel)]="answer" (change)="onAnswer()"> {{rep1}}
+    <br><input type="radio" name="{{id_question}}" value="{{rep2}}" [(ngModel)]="answer" (change)="onAnswer()"> {{rep2}}
   </div>
-
 
   <div *ngIf="type=='text'">
     {{question}}
-    <br><textarea [(ngModel)]="answer"></textarea>
+    <br><textarea [(ngModel)]="answer" (change)="onAnswer()"></textarea>
   </div>
 
   <div *ngIf="type=='number'">
     {{question}}
-    <br><input type="number" [(ngModel)]="answer">
+    <br><input type="number" [(ngModel)]="answer" (change)="onAnswer()">
   </div>
 
   <div *ngIf="type=='checkbox'">
     {{question}}
-    <br><input type="checkbox" [(ngModel)]="answer"> {{rep1}}
-    <br><input type="checkbox" [(ngModel)]="answer"> {{rep2}}
+    <br><input type="checkbox" value="{{rep1}}" [(ngModel)]="answer" onchange="console.log('ça marche pour checkbox 1')"> {{rep1}}
   </div>
 
   <div *ngIf="answer">
