@@ -14,6 +14,8 @@ import { GlobalStorageService } from './services/globalStorage.service'
 import { HttpClientModule } from '@angular/common/http';
 import { BackendService } from './services/backend.service'
 
+import {MatDialogModule} from '@angular/material/dialog'; 
+
 //import { BackendService } from './backend.service';
 import { HeaderComponent } from './header/header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -38,11 +40,13 @@ import { VideoComponent } from './video/video.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { SearchComponent } from './search/search.component';
 import { FieldErrorDisplayComponent } from './field-error-display/field-error-display.component';
+import { ContactResumeComponent } from './contact-resume/contact-resume.component'; 
 import { BannerComponent } from './banner/banner.component';
 import { OfferComponent } from './offer/offer.component';
 import { CadranComponent } from './cadran/cadran.component';
 import { SolutionComponent } from './solution/solution.component';
-import { BtnlinkcadransComponent } from './btnlinkcadrans/btnlinkcadrans.component'; 
+import { BtnlinkcadransComponent } from './btnlinkcadrans/btnlinkcadrans.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,11 +59,12 @@ import { BtnlinkcadransComponent } from './btnlinkcadrans/btnlinkcadrans.compone
     ContactFormComponent,
     SearchComponent,
     FieldErrorDisplayComponent,
+    ContactResumeComponent,
     BannerComponent,
     OfferComponent,
     CadranComponent,
     SolutionComponent,
-    BtnlinkcadransComponent,
+    BtnlinkcadransComponent
   ],
   imports: [
     BrowserModule,
@@ -77,9 +82,10 @@ import { BtnlinkcadransComponent } from './btnlinkcadrans/btnlinkcadrans.compone
     MatGridListModule,
     FormsModule, 
     ReactiveFormsModule,
-    MatRadioModule
+    MatRadioModule,
+    MatDialogModule,
 
-
+    ProjectModule
   ],
   providers: [
     ConfigService,

@@ -3,7 +3,7 @@
 <mat-card id="outil">
     <mat-card-header>
         <mat-card-title id="outil_title">
-            Outil dimensionnement de Projet
+            Dimensionnement de votre projet : {{nomsolution}}
         </mat-card-title>
     </mat-card-header>
     <hr>
@@ -11,60 +11,66 @@
         <mat-horizontal-stepper linear="true" selectedIndex = 0 labelPosition="bottom" (selectionChange)="changeHandler($event)">
             <mat-step completed= {{complete}}>
                 <mat-grid-list cols="2">
-                    <mat-grid-tile [style.border-right]="'1px double lightgrey'">
-                        Questionnaire de gauche (page {{selectedTab}})
-                    </mat-grid-tile>
-                    <mat-grid-tile>
-                        Questionnaire de droite
-                    </mat-grid-tile>
+                    <div style="text-align: center;">
+                        <font size="+2.5">Capteurs et connectivité</font><br>
+                    </div>
+                    <br><app-question 
+                        [tab]="selectedTab" 
+                        [id_question]="1" 
+                        [type]="'number'" 
+                        [question]="'Combien de détecteurs de fumée ?'" 
+                        [rep1]=""
+                        [rep2]="">
+                    </app-question>
                 </mat-grid-list>
                 <button mat-raised-button matStepperPrevious>Page précédente</button>
                 <button mat-raised-button style="float:right;" matStepperNext>Page suivante</button>
             </mat-step>
             <mat-step>
                 <mat-grid-list cols="2">
-                    <mat-grid-tile [style.border-right]="'1px double lightgrey'">
-                        Questionnaire de gauche (page {{selectedTab}})
-                    </mat-grid-tile>
-                    <mat-grid-tile>
-                        Questionnaire de droite
-                    </mat-grid-tile>
+                    <div style="text-align: center;">
+                        <font size="+2.5">Application et fonctionnalités</font><br>
+                    </div>
+                    <br><app-question 
+                        [tab]="selectedTab" 
+                        [id_question]="3" 
+                        [type]="'QCM'" 
+                        [question]="'Quelle application souhaitez-vous utiliser ?'" 
+                        [rep1]="'IoThink'"
+                        [rep2]="'Autre'">
+                    </app-question>
                 </mat-grid-list>
                 <button mat-raised-button matStepperPrevious>Page précédente</button>
                 <button mat-raised-button style="float:right;" matStepperNext>Page suivante</button>
             </mat-step>
             <mat-step>
                 <mat-grid-list cols="2">
-                    <mat-grid-tile [style.border-right]="'1px double lightgrey'">
-                        Questionnaire de gauche (page {{selectedTab}})
-                    </mat-grid-tile>
-                    <mat-grid-tile>
-                        Questionnaire de droite
-                    </mat-grid-tile>
+                    <div style="text-align: center;">
+                        <font size="+2.5">Installation physique des IoT et création du dashbord</font><br>
+                    </div>
+                    <br><app-question 
+                        [tab]="selectedTab" 
+                        [id_question]="5" 
+                        [type]="'QCM'" 
+                        [question]="'Souhaitez-vous internaliser ou externaliser l installation des IoT ?'" 
+                        [rep1]="'Internaliser'"
+                        [rep2]="'Externaliser'">
+                    </app-question>
                 </mat-grid-list>
                 <button mat-raised-button matStepperPrevious>Page précédente</button>
                 <button mat-raised-button style="float:right;" matStepperNext>Page suivante</button>
             </mat-step>
             <mat-step>
                 <mat-grid-list cols="2">
-                    <mat-grid-tile [style.border-right]="'1px double lightgrey'">
-                        Questionnaire de gauche (page {{selectedTab}})
-                    </mat-grid-tile>
-                    <mat-grid-tile>
-                        Questionnaire de droite
-                    </mat-grid-tile>
-                </mat-grid-list>
-                <button mat-raised-button matStepperPrevious>Page précédente</button>
-                <button mat-raised-button style="float:right;" matStepperNext>Page suivante</button>
-            </mat-step>
-            <mat-step>
-                <mat-grid-list cols="2">
-                    <mat-grid-tile [style.border-right]="'1px double lightgrey'">
-                        Questionnaire de gauche (page {{selectedTab}})
-                    </mat-grid-tile>
-                    <mat-grid-tile>
-                        Questionnaire de droite
-                    </mat-grid-tile>
+                    <div style="text-align: center;">
+                        <font size="+2.5">Récapitulatif et validation</font><br>
+                        <br> *Récapitulatif*
+                    </div>
+                    <br>
+                    <div style="text-align: center;">
+                        <button mat-raised-button>Valider</button>
+                    </div>
+                    
                 </mat-grid-list>
                 <button mat-raised-button matStepperPrevious>Page précédente</button>
                 <button mat-raised-button style="float:right;" matStepperNext>Page suivante</button>
@@ -72,8 +78,4 @@
         </mat-horizontal-stepper>
 
     </mat-card-content>
-    <div>
-        {{this.backendMessage}}
-    </div>
 </mat-card>
-

@@ -10,10 +10,15 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { BackendService } from '../services/backend.service';
+import { FormsModule } from '@angular/forms';
+
+import { QuestionComponent } from '../question/question.component'
 
 @NgModule({
     declarations: [
       ProjectComponent,
+      QuestionComponent,
     ],
     imports: [
        BrowserModule,
@@ -22,10 +27,11 @@ import { MatGridListModule } from '@angular/material/grid-list';
        MatStepperModule,
        MatCardModule,
        MatButtonModule,
-       MatGridListModule
+       MatGridListModule,
+       FormsModule
     ],
     providers: [
-      
+      BackendService
     ],
     exports: [ProjectComponent]
   })

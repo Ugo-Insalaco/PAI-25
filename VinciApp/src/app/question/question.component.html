@@ -1,0 +1,35 @@
+<div style="text-align: center;">
+
+  <div *ngIf="type=='QCM'">
+    {{question}}
+    <br><input type="radio" name="{{id_question}}" value="{{rep1}}" [(ngModel)]="answer"> {{rep1}}
+    <br><input type="radio" name="{{id_question}}" value="{{rep2}}" [(ngModel)]="answer"> {{rep2}}
+  </div>
+
+
+  <div *ngIf="type=='text'">
+    {{question}}
+    <br><textarea [(ngModel)]="answer"></textarea>
+  </div>
+
+  <div *ngIf="type=='number'">
+    {{question}}
+    <br><input type="number" [(ngModel)]="answer">
+  </div>
+
+  <div *ngIf="type=='checkbox'">
+    {{question}}
+    <br><input type="checkbox" [(ngModel)]="answer"> {{rep1}}
+    <br><input type="checkbox" [(ngModel)]="answer"> {{rep2}}
+  </div>
+
+  <div *ngIf="answer">
+    <app-question 
+      [tab]="selectedTab" 
+      [id_question]=2
+      [type]="'text'" 
+      [question]="'Ajoutez un commentaire :'" 
+      [rep1]=""
+      [rep2]="">
+    </app-question>
+  </div>

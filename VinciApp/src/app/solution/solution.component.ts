@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {Router} from '@angular/router';
 
@@ -8,6 +8,8 @@ import {Router} from '@angular/router';
   styleUrls: ['./solution.component.css']
 })
 export class SolutionComponent implements OnInit {
+
+  @ViewChild('buttonproject') buttonprojectView: ElementRef;
 
   admin: boolean = false;
 
@@ -35,14 +37,36 @@ export class SolutionComponent implements OnInit {
     this.nomsolution = this.getNomSolution();
     this.titleService.setTitle(`${this.nomsolution} - Vinci Facilities`);
 
-    // Paramètes pour tests à récup dans la BSS plus tard
-      this.couleur = "#9b9b9b";
-
+    // Paramètes pour tests à récup dans la BDD plus tard
       // Banner
-      this.urlphotofond = "url(/assets/images/bienetre/exImageFond.jpg)";
-      this.urllogo = "/assets/images/bienetre/logo.png";
-      this.urlcercles = "/assets/images/bienetre/cerclesBandeau.png";
-      this.problematiquecadran = "Problématique du cadran";
+      if(this.nomcadran == "Actifs Techniques"){
+        this.couleur = "#062C6B";
+        this.urlphotofond = "url(/assets/images/actifstechniques/exImageFond.png)";
+        this.urllogo = "/assets/images/actifstechniques/logo.png";
+        this.urlcercles = "/assets/images/actifstechniques/cerclesBandeau.png";
+        this.problematiquecadran = "Problématique du cadran Actifs Techniques";
+      }
+      else if(this.nomcadran == "Bien Etre"){
+        this.couleur = "#CC2871";
+        this.urlphotofond = "url(/assets/images/bienetre/exImageFond.jpg)";
+        this.urllogo = "/assets/images/bienetre/logo.png";
+        this.urlcercles = "/assets/images/bienetre/cerclesBandeau.png";
+        this.problematiquecadran = "Problématique du cadran Bien-Être";
+      }
+      else if(this.nomcadran == "Confort Energie Environnement"){
+        this.couleur = "#03B0B4";
+        this.urlphotofond = "url(/assets/images/confortenergieenvironnement/exImageFond.jpg)";
+        this.urllogo = "/assets/images/confortenergieenvironnement/logo.png";
+        this.urlcercles = "/assets/images/confortenergieenvironnement/cerclesBandeau.png";
+        this.problematiquecadran = "Problématique du cadran Confort Energie Environnement";
+      }
+      else if(this.nomcadran == "Espaces"){
+        this.couleur = "#0CAAEB";
+        this.urlphotofond = "url(/assets/images/espaces/exImageFond.jpg)";
+        this.urllogo = "/assets/images/espaces/logo.png";
+        this.urlcercles = "/assets/images/espaces/cerclesBandeau.png";
+        this.problematiquecadran = "Problématique du cadran Espaces";
+      }
 
     // Paramètres à récupérer dans les paramètres de la solution
       this.problematiquessolution = "Problématique de la solution";
@@ -67,5 +91,15 @@ export class SolutionComponent implements OnInit {
              .map(word => word.charAt(0).toUpperCase() + word.slice(1))
              .join(' ');
     return nom;
+  }
+
+  onSimulerProjet(){
+    // Get selected solution and redirect to solution's page
+    var solution = this.nomsolution;
+    solution = solution.replace(/ /gi, "-"); // Remplace - par espace
+    solution = solution.replace(/'/gi, "_"); // Remplace _ par '
+    solution = solution.toLowerCase()
+    var button = this.buttonprojectView.nativeElement;
+    this.router.navigate(["project/",solution]);
   }
 }
