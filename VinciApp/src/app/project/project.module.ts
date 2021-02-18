@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -21,6 +22,7 @@ import { QuestionComponent } from '../question/question.component'
       QuestionComponent,
     ],
     imports: [
+       CommonModule,
        BrowserModule,
        AppRoutingModule,
        BrowserAnimationsModule,

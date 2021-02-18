@@ -20,6 +20,7 @@ export class ProjectComponent implements OnInit{
     selectedTab: any
     backendMessage: String
     nomsolution: string;
+    questions: any;
     constructor(private router: Router, private backend: BackendService, private config: ConfigService, private globalStorage: GlobalStorageService){
     }
 
@@ -31,6 +32,7 @@ export class ProjectComponent implements OnInit{
             text: 'Salutations'
         }
         this.globalStorage.reset_default("projet")
+        this.questions = this.globalStorage.default["projet"]
 
 <<<<<<< HEAD
         // this.backend.GET('/api/text/1', e=>{
@@ -51,19 +53,19 @@ export class ProjectComponent implements OnInit{
 
     changeHandler(e){
         this.selectedTab=e.selectedIndex
+        if (this.selectedTab == 3) {
+            var questions_string = this.globalStorage.get("projet")
+            this.questions = JSON.parse(questions_string)           
+        }
     }
 
     getNomSolution(){
         var nom = this.router.url.split('/').pop();
         nom = nom.replace(/-/gi, " "); // Remplace - par espace
+        nom = nom.replace(/_/gi, "'"); // Remplace _ par '
         nom = nom.charAt(0).toUpperCase() + nom.slice(1); // Majuscule pour 1er mot
         nom = nom.replace(/%C3%A9/gi, "é");
         return nom;
     }
-
-    recap(){
-        console.log("oui du js")
-    }
-
 
 }

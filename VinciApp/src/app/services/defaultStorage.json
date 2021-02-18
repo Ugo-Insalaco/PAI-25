@@ -1,7 +1,5 @@
 {
     "langage": "FRA",
 
-    "projet": [
-                {"id_question": "", "partie": "1", "question": "q1.1", "reponse": "r1.1"}
-    ]
+    "projet": []
 }
