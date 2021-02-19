@@ -30,16 +30,9 @@ export class ProjectComponent implements OnInit{
         let body={
             text: 'Salutations'
         }
-<<<<<<< HEAD
         // this.backend.GET('/api/text/1', e=>{
         //     this.backendMessage = JSON.stringify(e)
         // })
-=======
-        this.backend.GET('/api/text/1', e=>{
-            this.backendMessage = JSON.stringify(e)
-        })
-        this.nomsolution = this.getNomSolution();
->>>>>>> 23db89fb417c7656bb4b28275c3623d9ccf02a25
         // this.globalStorage.set('langage', 'ENG')
         // this.backendMessage =this.globalStorage.get('langage')
         this.backend.POST('/api/questions', body, res=>{

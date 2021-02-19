@@ -3,7 +3,8 @@
     "table" : "question",
     "fields": {
         "id": "auto-increment",
-        "content": "mandatory updatable"
+        "content": "mandatory updatable",
+        "type":"mandatory updatable"
     },
     "primaryField": "id",
     "updatable" : [
@@ -15,7 +16,7 @@
     "include":[
         {
             "name": "solution_section",
-            "default_inclusion": true,
+            "default_inclusion": false,
             "bind":[
                 {
                     "id":1,
@@ -38,6 +39,18 @@
                     ]
                 }
             ]
+        },
+        {
+            "name": "text",
+            "default_inclusion": true,
+            "bind":[
+                {
+                    "id":4,
+                    "endpoint": "text",
+                    "local_key":"content",
+                    "foreign_key":"id"
+                }
+            ]
         }
     ],
     "get_response":{
@@ -46,7 +59,8 @@
         "data":{
             "id":"{{0::question::id}}",
             "fields":{
-                "content": "{{0::question::content}}"
+                "content": "{{0::question::content}}",
+                "type": "{{0::question::type}}"
             },
             "included":{
                 "solution_section":{
@@ -61,6 +75,9 @@
                     "logo_section":"{{3::section::logo}}",
                     "sous_texte_section":"{{3::section::sous_texte}}", 
                     "position_section":"{{3::section::position}}"
+                },
+                "text":{
+                    "content": "{{4::text::text}}"
                 }
             }
         }

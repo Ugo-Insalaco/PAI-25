@@ -10,8 +10,8 @@ config = {
     },
     endpoints: {},
     content_tables:{
-        fra: 'content_fra',
-        eng: 'content_eng'
+        fra: 'cont_fra',
+        eng: 'cont_eng'
     }
 }
 

@@ -1,0 +1,65 @@
+{
+    "name": "cadran",
+    "table": "cont_cadran",
+    "fields":{
+        "id":"",
+        "name":"",
+        "color":"",
+        "picture_back":"",
+        "logo":"",
+        "circles":"",
+        "problem":""
+    },
+    "primaryField":"id",
+    "updatable":[
+
+    ],
+    "include":[
+        {
+            "name": "text",
+            "default_inclusion": true,
+            "bind":[
+                {
+                    "id":1,
+                    "endpoint": "text",
+                    "local_key":"name",
+                    "foreign_key":"id"
+                },
+                {
+                    "id":2,
+                    "endpoint": "text",
+                    "local_key":"circles",
+                    "foreign_key":"id"
+                },
+                {
+                    "id":3,
+                    "endpoint": "text",
+                    "local_key":"problem",
+                    "foreign_key":"id"
+                }
+            ]
+        }
+    ],
+    "get_response":{
+        "route": "/api/cadrans",
+        "method" : "GET",
+        "data":{
+            "id":"{{0::cadran::id}}",
+            "fields":{
+                "name":"{{0::cadran::name}}",
+                "color":"{{0::cadran::color}}",
+                "picture_back":"{{0::cadran::picture_back}}",
+                "logo":"{{0::cadran::logo}}",
+                "circles":"{{0::cadran::circles}}",
+                "problem":"{{0::cadran::problem}}"
+            },
+            "included":{
+                "text":{
+                    "name": "{{1::text::text}}",
+                    "circles": "{{2::text::text}}",
+                    "problem": "{{3::text::text}}"
+                }
+            }
+        }
+    }
+}

@@ -44,7 +44,7 @@ const URL_parser = function(req, res, next){
 
 const languageParser = function(req,res,next){
     req.language=xss(req.get('language'))
-    req.lang_table = (req.language == 'fra') ?config.content_tables.fra : config.content_tables.eng
+    config.endpoints.text.table = (req.language == 'fra') ?config.content_tables.fra : config.content_tables.eng
     next()
 }
 
