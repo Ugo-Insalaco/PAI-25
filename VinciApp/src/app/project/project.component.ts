@@ -34,16 +34,16 @@ export class ProjectComponent implements OnInit{
         this.globalStorage.reset_default("projet")
         this.questions = this.globalStorage.default["projet"]
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
         // this.backend.GET('/api/text/1', e=>{
         //     this.backendMessage = JSON.stringify(e)
         // })
-=======
+//=======
         this.backend.GET('/api/text/1', e=>{
             this.backendMessage = JSON.stringify(e)
         })
         this.nomsolution = this.getNomSolution();
->>>>>>> 23db89fb417c7656bb4b28275c3623d9ccf02a25
+//>>>>>>> 23db89fb417c7656bb4b28275c3623d9ccf02a25
         // this.globalStorage.set('langage', 'ENG')
         // this.backendMessage =this.globalStorage.get('langage')
         this.backend.POST('/api/questions', body, res=>{
@@ -55,7 +55,7 @@ export class ProjectComponent implements OnInit{
         this.selectedTab=e.selectedIndex
         if (this.selectedTab == 3) {
             var questions_string = this.globalStorage.get("projet")
-            this.questions = JSON.parse(questions_string)           
+            this.questions = JSON.parse(questions_string)
         }
     }
 

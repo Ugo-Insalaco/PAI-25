@@ -11,7 +11,7 @@ app.use(cors())
 
 app.use('/',languageParser)
 
-text(app)
+//text(app)
 
 endpoints(app)
 

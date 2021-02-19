@@ -3,19 +3,28 @@ mat-card {
     height: auto;
     display: block;
     margin-left: auto;
-    margin-right: auto
+    margin-right: auto;
   }
-  h2{
-  
-      color:#56c7ec;
+  h1{
+      color:#00438a;
       display: block;
       margin-left: auto;
       margin-right: auto;
       text-align: center;
+      padding-top: 2vh;
   }
   h3{
       position: center;
-      color:#838889;
+      color:#777777;
       text-align: center;
-
+      padding-bottom: 2vh;
   }
+
+h1::after {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 2px;
+    background-color: #009FE3;
+    margin: 10px auto;
+}
