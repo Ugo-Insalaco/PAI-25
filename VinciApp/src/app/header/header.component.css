@@ -8,7 +8,7 @@
     float: left;
 }
 .at-icon{
-    width : 20 px;
+    width : 20px;
 }
 .header-align-right{
     display: flex;
@@ -40,7 +40,10 @@ mat-form-field{
     background-color: white;
 }
 button{
-    color: blue;
+    color: #00438a;
+}
+#connectbtn{
+  background-color: #00438a;
 }
 ::ng-deep .mat-icon{
     height:35px !important;
@@ -48,11 +51,14 @@ button{
     font-size:35px !important;
 }
  img {
-    height: 68px;
+    height: 60px;
     width: auto;
 }
-
-
 mat-toolbar{
-    background-color: white;
+    background-color: white; /*transparent*/
+}
+#container{
+  position: sticky;
+  top: 0;
+  z-index: 20;
 }

@@ -3,35 +3,70 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
+  background-color: #55555555;
+  background-blend-mode: difference;
   display: flex;
   flex-direction: row;
-  justify-content: center;
   position: relative;
   width: 100%;
-  height: 70vh;
+  height: 65vh;
   margin: 0;
   margin-bottom: 2vh;
   padding: 0;
 }
 
-.cadran{
+.container{
   display: flex;
   flex-direction: column;
   position: relative;
   width: 25%;
+  padding: 0;
+  margin: 0;
   justify-content: center;
   align-items: center;
   border-left: 1px solid rgba(255,255,255,1);
-  color: white;
-  text-decoration: none;
-  text-shadow: 1px 1px 2px black;
 }
 
 .title{
-  font-size: 200%;
-  margin-bottom: 1vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  text-align: center;
+  line-height: normal;
+  color: white;
+  visibility: visible;
+  text-shadow: 1px 1px 2px black;
+  transition: height 0.8s;
+  font-size: 210%;
 }
 
-.pb{
-  font-size: 120%;
+.overlay{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  bottom: 0;
+  text-decoration: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 0%;
+  width: 100%;
+  color: white;
+  padding: 6%;
+  font-size: 170%;
+  text-align: center;
+  justify-content: center;
+  visibility: hidden;
+  transition: height 1s;
+}
+
+.container:hover .overlay{
+  visibility: visible;
+  height: 200%;
+}
+
+.container:hover .title{
+  visibility: hidden;
+  height: 0%;
 }

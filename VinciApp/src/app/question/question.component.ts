@@ -3,8 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ConfigService } from '../services/config.service';
 import { GlobalStorageService } from '../services/globalStorage.service';
 import { BackendService } from '../services/backend.service';
-
-import {Router} from '@angular/router';
+import { ProjectComponent } from '../project/project.component';
 
 
 @Component({
@@ -14,7 +13,7 @@ import {Router} from '@angular/router';
 })
 export class QuestionComponent implements OnInit {
 
-  constructor(private router: Router, private backend: BackendService, private config: ConfigService, private globalStorage: GlobalStorageService){}
+  constructor(private backend: BackendService, private config: ConfigService, private globalStorage: GlobalStorageService){}
   @Input() tab; //numero de la page (donc de la section)
   @Input() id_question; //numero de la question
 
@@ -25,23 +24,30 @@ export class QuestionComponent implements OnInit {
   @Input() rep2;
 
   answer: string;
-  nomsolution: string;
-
-  test = this.globalStorage.get('projet')
   
-
   ngOnInit(): void {
-    this.nomsolution = this.getNomSolution();
-    // this.globalStorage.set('langage', 'ENG')
-    // this.globalStorage.set('projet', )
   }
 
-  getNomSolution(){
-    var nom = this.router.url.split('/').pop();
-    nom = nom.replace(/-/gi, " "); // Remplace - par espace
-    nom = nom.charAt(0).toUpperCase() + nom.slice(1); // Majuscule pour 1er mot
-    nom = nom.replace(/%C3%A9/gi, "é");
-    return nom;
+  onAnswer(){
+    var projectJSON = this.globalStorage.get("projet");
+    var project = JSON.parse(projectJSON);
+    var exists = false;
+    for(var i= 0; i < project.length; i++){
+      if (project[i].id_question == this.id_question) {
+        exists = true;
+        project[i].reponse = this.answer
+      }
+    }
+    if (exists == false) {
+      var reponse = {
+        "id_question": this.id_question, 
+        "partie": this.tab, 
+        "question": this.question, 
+        "reponse": this.answer
+      };
+      project.push(reponse);
+    }
+  this.globalStorage.set("projet", project)
   }
 
 }

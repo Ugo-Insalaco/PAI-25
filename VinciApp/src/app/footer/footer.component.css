@@ -1,42 +1,59 @@
 .card2{
-  background: rgb(30, 44, 126);
+  background-color: #00438a;
 }
 
 .row {
-background:#c3edf6;
-
+  background:#c3edf6;
 }
+
 .container{
-background: rgb(255, 255, 255);
-width: 100%;
-
-
+  background: rgb(255, 255, 255);
+  width: 100%;
+  z-index: 1;
+  position: relative;
+  margin-top: 3vh;
+  transform: translateY(15px);
 }
+
 .container-fluid{
-
-background: rgb(255, 255, 255);
-width: 100%;
-
-
+  background: rgb(255, 255, 255);
+  width: 100%;
 }
-.black-background {background-color:#FF1493;}
+
+.btn {
+  background-color:#FF1493;
+}
+
 .white {color:#ffffff;}
 
 button{
-align-self: center;
-text-align:center;
-margin-top: 1em;
+  align-self: center;
+  text-align:center;
+  margin-top: 1em;
 }
-h2{
-color: blue;
+
+h1{
+  color: #00438a;
+  padding-left: 1vh;
+  padding-top: 2vh;
 }
+
 h3{
-color:gray;
+  color:gray;
+  padding-left: 2vh;
 }
+
 img {
-  height: 100px;
+  height: 80px;
   width: auto;
   margin-left: 20px;
- 
- 
+}
+
+h1::after {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 2px;
+    background-color: #009FE3;
+    margin: 5px 0px;
 }
