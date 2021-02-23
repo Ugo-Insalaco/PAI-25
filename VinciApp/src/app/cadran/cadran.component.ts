@@ -57,13 +57,13 @@ export class CadranComponent implements OnInit {
       this.problematiquecadran = "Problématique du cadran Actifs Techniques";
 
       // Offer 1
-      this.urlphotooffre1 = "url(/assets/images/actifstechniques/exImageSolution.jpg)";
+      this.urlphotooffre1 = "url(/assets/images/actifstechniques/offre1.jpg)";
       this.nomoffre1 = "Offre 1 : Supervision des équipements CVC";
       this.texteoffre1 = 'Ceci est un texte pour la solution Supervision des équipements CVC du cadran actifs techniques.';
       this.offre1solutions = ["Production de froid", "Production de chaud","Traitement de l'air"];
 
       // Offer 2
-      this.urlphotooffre2 = "url(/assets/images/actifstechniques/exImageFond.png)";
+      this.urlphotooffre2 = "url(/assets/images/actifstechniques/offre2.jpg)";
       this.nomoffre2 = "Offre 2 : Rondes d'exploitation";
       this.texteoffre2 = "Ceci est un texte pour la solution Rondes d'exploitation du cadran actifs techniques.";
       this.offre2solutions = ["Rondes digitalisées"];
@@ -77,19 +77,19 @@ export class CadranComponent implements OnInit {
       this.problematiquecadran = "Problématique du cadran Bien-Être";
 
       // Offer 1
-      this.urlphotooffre1 = "url(/assets/images/bienetre/exImageSolution.jpg)";
+      this.urlphotooffre1 = "url(/assets/images/bienetre/offre1.jpg)";
       this.nomoffre1 = "Offre 1 : Qualité de vie au travail";
       this.texteoffre1 = "Ceci est un texte pour la solution Qualité de vie au travail du cadran bien etre.";
       this.offre1solutions = ["Santé et environnement de travail", "Satisfaction des usagers"];
 
       // Offer 2
-      this.urlphotooffre2 = "url(/assets/images/bienetre/exImageFond.jpg)";
+      this.urlphotooffre2 = "url(/assets/images/bienetre/offre2.jpg)";
       this.nomoffre2 = "Offre 2 : Sécurité";
       this.texteoffre2 = "Ceci est un texte pour la solution Sécurité du cadran actifs techniques.";
       this.offre2solutions = ["Détection incendie","Inondation"];
 
       // Offer 3
-      this.urlphotooffre3 = "url(/assets/images/bienetre/exImageFond.jpg)";
+      this.urlphotooffre3 = "url(/assets/images/bienetre/offre3.jpg)";
       this.nomoffre3 = "Offre 3 : Hygiène";
       this.texteoffre3 = "Ceci est un texte pour la solution Hygiène du cadran actifs techniques.";
       this.offre3solutions = ["Légionelle ECS","Nettoyage à l'usage"];
@@ -103,13 +103,13 @@ export class CadranComponent implements OnInit {
       this.problematiquecadran = "Problématique du cadran Confort Energie Environnement";
 
       // Offer 1
-      this.urlphotooffre1 = "url(/assets/images/confortenergieenvironnement/exImageSolution.jpg)";
+      this.urlphotooffre1 = "url(/assets/images/confortenergieenvironnement/offre1.jpg)";
       this.nomoffre1 = "Offre 1 : Maîtrise des énergies";
       this.texteoffre1 = "Ceci est un texte pour la solution Maîtrise des énergies du cadran Confort Energie Environnement.";
       this.offre1solutions = ["Consommations énergétiques", "Décret tertiaire","CPE","CEE"];
 
       // Offer 2
-      this.urlphotooffre2 = "url(/assets/images/confortenergieenvironnement/exImageFond.jpg)";
+      this.urlphotooffre2 = "url(/assets/images/confortenergieenvironnement/offre2.jpg)";
       this.nomoffre2 = "Offre 2 : Maîtrise des déchets";
       this.texteoffre2 = "Ceci est un texte pour la solution Maîtrise des déchets du cadran Confort Energie Environnement.";
       this.offre2solutions = ["Ronde digitalisées", "Gestion des collectes"];
@@ -123,13 +123,13 @@ export class CadranComponent implements OnInit {
       this.problematiquecadran = "Problématique du cadran Espaces";
 
       // Offer 1
-      this.urlphotooffre1 = "url(/assets/images/espaces/exImageSolution.jpg)";
+      this.urlphotooffre1 = "url(/assets/images/espaces/offre1.jpg)";
       this.nomoffre1 = "Offre 1 : Gestion des espaces";
       this.texteoffre1 = "Ceci est un texte pour la solution Gestion des espaces du cadran Espaces.";
       this.offre1solutions = ["Disponibilité des espaces collaboratifs", "Disponibilité des places de parking","Fréquentation et affluence"];
 
       // Offer 2
-      this.urlphotooffre2 = "url(/assets/images/espaces/exImageFond.jpg)";
+      this.urlphotooffre2 = "url(/assets/images/espaces/offre2.jpg)";
       this.nomoffre2 = "Offre 2 : Optimisation des espaces";
       this.texteoffre2 = "Ceci est un texte pour la solution Optimisation des espaces du cadran Confort Energie Environnement.";
       this.offre2solutions = ["Etude d'occupation"];
