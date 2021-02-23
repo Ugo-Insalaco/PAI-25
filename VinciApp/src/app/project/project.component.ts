@@ -30,24 +30,22 @@ export class ProjectComponent implements OnInit{
         this.complete=true
         this.selectedTab=0
         let body={
-            text: 'Salutations'
+            username: 'KN22',
+            password: 'toto22'
         }
         this.globalStorage.reset_default("projet")
         this.questions = this.globalStorage.default["projet"]
 
-//<<<<<<< HEAD
         // this.backend.GET('/api/text/1', e=>{
         //     this.backendMessage = JSON.stringify(e)
         // })
-//=======
         this.backend.GET('/api/text/1', e=>{
             this.backendMessage = JSON.stringify(e)
         })
         this.nomsolution = this.getNomSolution();
-//>>>>>>> 23db89fb417c7656bb4b28275c3623d9ccf02a25
         // this.globalStorage.set('langage', 'ENG')
         // this.backendMessage =this.globalStorage.get('langage')
-        this.backend.POST('/api/questions', body, res=>{
+        this.backend.POST('/auth/login', body, res=>{
             console.log(res)
         })
     }

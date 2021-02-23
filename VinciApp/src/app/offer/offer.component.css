@@ -2,7 +2,8 @@
   width: 50%;
   height: 60vh;
   padding: 1%;
-  padding-left: 5%;
+  padding-left: 3%;
+  padding-right: 3%;
   padding-top: 2%;
   position: absolute;
   text-align: center;
@@ -10,11 +11,12 @@
 
 #commimg{
   height: fit-content;
-  min-width: 40%;
+  min-width: 55%;
   position: absolute;
   bottom: 20%;
-  padding: 1%;
+  padding: 2%;
   color: white;
+  font-size: 20px;
 }
 
 #divimage{
@@ -29,4 +31,15 @@
 
 #choixsolution{
   margin-top: 5vh;
+}
+
+#buttonvalidersolution{
+  margin-left: 10px;
+}
+
+#container-admin-controls{
+  position: absolute;
+  right:0;
+  bottom:0;
+  margin-left: 1vh;
 }

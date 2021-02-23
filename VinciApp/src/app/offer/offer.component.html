@@ -8,8 +8,7 @@
       <select id="listesolutions" #listesolutions [(ngModel)]="selectedOption">
         <option disabled selected> Solutions </option>
       </select>
-      <button #buttonvalidersolution style="margin-left: 10px;"
-              (click)="onValiderSolution()">
+      <button id="buttonvalidersolution" #buttonvalidersolution (click)="onValiderSolution()">
               Valider
       </button>
     </div>
@@ -27,16 +26,19 @@
   <div id="divimage" #divimage [style.background-image]="photooffre">
     <div id="commimg" #commimg [contentEditable]="contentEditable" [style.background-color]="couleur">
       {{nomoffre}}
-    </div>
-    <input type="file"
-           id="inputImgSolution"
-           style="position: absolute; right:0; bottom: 0;"
-           accept="image/png, image/jpeg"
-           *ngIf="admin===true">
-     <button style="position: absolute; right:0; bottom:0; margin-left: 1vh;"
-              (click)="updateImageDisplay()"
-             *ngIf="admin===true">
-             Valider
-     </button>
+    </div>  
+    <div id="container-admin-controls"
+         *ngIf="admin===true">
+      <input type="file"
+             id="inputImgSolution"
+             #input
+             accept="image/png, image/jpeg">
+       <button (click)="updateImageDisplay()">
+               Visualiser
+       </button>
+       <button (click)="updateAssets()">
+               Valider
+       </button>
+     </div>
   </div>
 </div>
