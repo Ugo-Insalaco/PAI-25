@@ -21,6 +21,7 @@ export class OfferComponent implements OnInit, AfterViewInit{
     @ViewChild('listesolutions') selectView: ElementRef;
     @ViewChild('divtext') textView: ElementRef;
     @ViewChild('divimage') imageView: ElementRef;
+    @ViewChild('input') input: ElementRef;
     @ViewChild('commimg') commimageView: ElementRef;
     @ViewChild('buttonvalidersolution') buttonvalidersolutionView: ElementRef;
 
@@ -81,7 +82,23 @@ export class OfferComponent implements OnInit, AfterViewInit{
     }
 
     updateImageDisplay(): void {
-      //console.log(document.getElementById('image').style.backgroundImage);
-      console.log(document.getElementById('inputImgSolution'));
+      var preview = this.imageView.nativeElement;
+      var file    = this.input.nativeElement.files[0];
+      var reader  = new FileReader();
+
+      reader.onloadend = function () {
+        preview.style.backgroundImage = "url("+reader.result+")";
+      }
+
+      if (file) {
+        reader.readAsDataURL(file);
+      }
+    }
+
+    updateAssets(): void {
+      var file = this.input.nativeElement.files[0];
+      var renamedFile = new File([file],"offre1"+(file.type=="image/jpeg"? ".jpg":".png"),{type:file.type});
+      console.log(file);
+      console.log(renamedFile);
     }
 }

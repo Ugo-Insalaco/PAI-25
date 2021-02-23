@@ -36,3 +36,10 @@
 #buttonvalidersolution{
   margin-left: 10px;
 }
+
+#container-admin-controls{
+  position: absolute;
+  right:0;
+  bottom:0;
+  margin-left: 1vh;
+}
