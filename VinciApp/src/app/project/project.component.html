@@ -4,6 +4,7 @@
     <mat-card-header>
         <mat-card-title id="outil_title">
             Dimensionnement de votre projet : {{nomsolution}}
+            <button mat-raised-button *ngIf="isAuth" (click)="onModifProjet()">Admin : modifier ce projet</button>
         </mat-card-title>
     </mat-card-header>
     <hr>
