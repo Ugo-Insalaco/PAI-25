@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
@@ -15,15 +16,17 @@ export class LoginComponent implements OnInit {
   loginError: string;
   constructor(private fb: FormBuilder,
     private router: Router,
+    private titleService: Title
     //private authService: AuthService
     ) { }
 
     ngOnInit() {
+      this.titleService.setTitle(`Login - Vinci Facilities`);
       this.loginForm = this.fb.group({
         username: ['', Validators.required],
         password: ['', Validators.required]
       });
-  
+
       //this.authService.logout();
     }
   //this.authService.logout();

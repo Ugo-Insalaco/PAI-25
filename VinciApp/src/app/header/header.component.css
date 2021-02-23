@@ -33,8 +33,7 @@
     position: center;
 }
 mat-select{
-    color:black;
-
+  color: #00438a;
 }
 mat-form-field{
     background-color: white;

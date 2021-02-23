@@ -1,11 +1,11 @@
 
 
       <mat-card >
-        <mat-card-title> <img  src="../../assets/images/VF_CMYK_C.png" width="200px"  />
+        <mat-card-title> <img  src="../../assets/images/VF_RGB_C.png" width="200px"  />
         </mat-card-title>
 
       <mat-card-content>
-      
+
         <div class="row justify-content-center" *ngIf="!error">
           <div class="col-md-12">
               <div class="login-box">
@@ -35,7 +35,7 @@
                           <button type="submit"  [disabled]="!loginForm.valid" class="btn btn-primary">Je me connecte</button>
                       </div>
                   </form>
-              </div>         
+              </div>
           </div>
         </div>
         <div class="alert alert-danger" role="alert " *ngIf="error">
@@ -44,6 +44,6 @@
        </div>
 
 
-      
-    </mat-card-content>  
+
+    </mat-card-content>
       </mat-card>

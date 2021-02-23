@@ -1,38 +1,38 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-3" >
-      <div class="footer"><img  src="assets/images/VF_CMYK_W.png" alt="Angular Project"  /></div>
+      <div class="footer"><img  src="assets/images/VF_CMYK_W.png" alt="Angular Project" routerLink="/" /></div>
 
     </div>
     <div class="col-md-3" >
-      
+
     </div>
     <div class="col-md-6" >
-      
+
     </div>
 
   </div>
-    
+
      <h3> <strong>CONTACTEZ-NOUS
     </strong> </h3>
-   
+
      <h3>-------------------</h3>
      <br>
      <h1>Une question ? Un besoin ?  </h1>
-    
-    
+
+
  </div>
 <div class="container">
   <form class="form-horizontal" [formGroup]="form">
 
     <div class="form-group row" [ngClass]="displayFieldCss('civility')">
-   
+
       <div class="col-2">
         <label for="civility" class=" custom-select mr-sm-2 control-label required">Civilité</label>
         <select class="form-control"  id="civility" formControlName="civility">
             <option selected>Mr</option>
             <option>Mme</option>
-           
+
           </select>
         <app-field-error-display [displayError]="isFieldValid('name')" errorMsg="Please inform your name">
         </app-field-error-display>
@@ -50,7 +50,7 @@
         </app-field-error-display>
       </div>
     </div>
-  
+
     <div class="form-group row" [ngClass]="displayFieldCss('entreprise')">
       <div class="col-sm-4">
         <label for="entreprise" class="control-label required">Entreprise</label>
@@ -71,38 +71,38 @@
         </app-field-error-display>
       </div>
     </div>
-  
+
     <div formGroupName="address">
-  
+
       <div class="form-group row ">
-  
+
         <div class="col-md-6" [ngClass]="displayFieldCss('address.street')">
           <label for="street" class="control-label required">Addresse</label>
           <input type="text" id="street" class="form-control" formControlName="street">
           <app-field-error-display [displayError]="isFieldValid('address.street')" errorMsg="champs obligatoire">
           </app-field-error-display>
         </div>
-  
+
         <div class="col-md-4" [ngClass]="displayFieldCss('address.street')">
           <label for="city" class="control-label required">Ville</label>
           <input type="text" id="city" class="form-control" formControlName="city">
           <app-field-error-display [displayError]="isFieldValid('address.city')" errorMsg="champs obligatoire">
           </app-field-error-display>
         </div>
-  
+
         <div class="col-md-2" [ngClass]="displayFieldCss('address.zipCode')">
           <label for="zipCode" class="control-label required">Zip Code</label>
           <input type="text" id="zipCode" class="form-control" formControlName="zipCode">
           <app-field-error-display [displayError]="isFieldValid('address.zipCode')" errorMsg="champs obligatoire">
           </app-field-error-display>
         </div>
-  
+
       </div>
     </div>
     <div formGroupName="request">
 
       <div class="form-group row">
-  
+
         <div class="col-md-4" [ngClass]="displayFieldCss('request.object')">
           <label for="object" class="control-label required">Objet de la demande</label>
           <select class="form-control"  id="object" formControlName="object">
@@ -113,7 +113,7 @@
           <app-field-error-display [displayError]="isFieldValid('request.object')" errorMsg="champs obligatoire">
           </app-field-error-display>
         </div>
-  
+
         <div class="col-md-4" [ngClass]="displayFieldCss('request.activitySeg')">
           <label for="activitySeg" class="control-label required">Mon segment d’activité</label>
           <select class="form-control"  id="activitySeg" formControlName="activitySeg">
@@ -135,7 +135,7 @@
           <app-field-error-display [displayError]="isFieldValid('request.activitySeg')" errorMsg="champs obligatoire">
           </app-field-error-display>
         </div>
-  
+
         <div class="col-md-4" [ngClass]="displayFieldCss('request.info')">
           <label for="info" class="control-label required">Je souhaite des informations sur :</label>
           <select class="form-control"  id="info" formControlName="info">
@@ -148,11 +148,11 @@
           <app-field-error-display [displayError]="isFieldValid('request.info')" errorMsg="champs obligatoire">
           </app-field-error-display>
         </div>
-  
+
       </div>
-    
+
     <div class="form-group row">
-  
+
         <div class="col-md-12" [ngClass]="displayFieldCss('request.message')">
 
           <label for="message" class="control-label required">Message</label>
@@ -162,7 +162,7 @@
         </div>
     </div>
   </div>
-  
+
  <!--<div formGroupName="acceptation">
       <div class="form-group row">
           <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required>
@@ -171,11 +171,11 @@
         </label>
         <app-field-error-display [displayError]="isFieldValid('acceptation.accept')" errorMsg="champs obligatoire">
         </app-field-error-display>
-          
+
         </div>
       </div>-->
     <button class="btn btn-primary" (click)="onSubmit()">Submit</button>
     <button class="btn" (click)="reset()">Reset</button>
-  
+
   </form>
  </div>

@@ -81,6 +81,7 @@ export class SolutionComponent implements OnInit {
     nom = nom.replace(/_/gi, "'"); // Remplace _ par '
     nom = nom.charAt(0).toUpperCase() + nom.slice(1); // Majuscule pour 1er mot
     nom = nom.replace(/%C3%A9/gi, "é");
+    nom = nom.replace(/%C3%A0/gi, "à");
     return nom;
   }
 

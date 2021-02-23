@@ -1,8 +1,36 @@
+body{
+  background-color: #EEEEEE;
+}
+
 mat-card{
-    margin-left:350px;
-    position: center;
-    width: 600px;
-   
-      
-    
+  position: relative;
+  width: 30%;
+  height: auto;
+  left: 35%;
+  top: 22%;
+  border: 1px solid #00438a;
+}
+
+.btn{
+  background-color: #00438a;
+  border: none;
+}
+
+form{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+}
+
+.form-group{
+  display: flex;
+  margin-bottom: 2%;
+  width: 60%;
+  justify-content: center;
+}
+
+h1{
+  color: #00438a;
+  text-align: center;
 }

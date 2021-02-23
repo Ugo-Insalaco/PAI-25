@@ -2,6 +2,8 @@ import { FormGroup, FormBuilder, Validators,  FormControl } from '@angular/forms
 import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { ContactResumeComponent } from '../contact-resume/contact-resume.component';
+import {Title} from '@angular/platform-browser';
+
 @Component({
   selector: 'app-contact-form',
   templateUrl: './contact-form.component.html',
@@ -10,9 +12,10 @@ import { ContactResumeComponent } from '../contact-resume/contact-resume.compone
 export class ContactFormComponent implements OnInit {
   form: FormGroup;
   data:object;
-  constructor(private formBuilder: FormBuilder,public dialog: MatDialog) {}
+  constructor(private formBuilder: FormBuilder,public dialog: MatDialog, private titleService: Title) {}
 
   ngOnInit() {
+    this.titleService.setTitle(`Contact - Vinci Facilities`);
     this.form = this.formBuilder.group({
       surname: [null, Validators.required],
       name: [null, Validators.required],
@@ -21,23 +24,23 @@ export class ContactFormComponent implements OnInit {
       mobile: [null, Validators.required],
       email: [null, [Validators.required, Validators.email]],
       address: this.formBuilder.group({
-        
+
         street: [null, Validators.required],
         city: [null, Validators.required],
         zipCode: [null, Validators.required]
-        
+
       }),
       request: this.formBuilder.group({
-        
+
         object: [null, Validators.required],
         activitySeg: [null, Validators.required],
         info: [null, Validators.required],
         message:[null, Validators.required],
       }),
      /* acceptation: this.formBuilder.group({
-        
+
         accept: [null, Validators.required],
-        
+
       })*/
     });
   }
@@ -73,17 +76,17 @@ export class ContactFormComponent implements OnInit {
       'has-feedback': this.isFieldValid(field)
     };
   }
- 
+
 
   onSubmit() {
     //console.log(this.form);
     if (this.form.valid) {
-     console.log( this.email) 
+     console.log( this.email)
     const dialogRef = this.dialog.open(ContactResumeComponent,{data:{Name:this.name.value,
       Surname:this.surname.value,Civilite:this.civility.value,Entreprise:this.entreprise.value,Telephone:this.mobile.value
       ,Email:this.email.value,Street:this.street.value,city:this.city.value,zip:this.zipCode.value,object:this.object.value,
     activitySeg:this.activitySeg.value,info:this.info.value,message:this.message.value}});
-      
+
     } else {
       this.validateAllFormFields(this.form);
     }
@@ -106,9 +109,7 @@ export class ContactFormComponent implements OnInit {
 }
 
 
- 
+
 
 
   }
-
-
