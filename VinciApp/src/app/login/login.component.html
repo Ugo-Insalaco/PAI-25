@@ -1,7 +1,7 @@
 
 
       <mat-card >
-        <mat-card-title> <img  src="../../assets/images/VF_RGB_C.png" width="200px"  />
+        <mat-card-title> <img  src="../../assets/images/VF_RGB_C.png" width="270px"  />
         </mat-card-title>
 
       <mat-card-content>
@@ -9,24 +9,24 @@
         <div class="row justify-content-center" *ngIf="!error">
           <div class="col-md-12">
               <div class="login-box">
-                  <h1>     Se Connecter   </h1>
+                  <h1>     Se connecter   </h1>
                   <div class="alert alert-danger" *ngIf="loginError">
                      {{loginError}}
                   </div>
                   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                       <div class="form-group">
-                          <input type="text" formControlName="username" class="form-control" placeholder="identifiant" required>
+                          <input type="text" formControlName="username" class="form-control" placeholder="Identifiant" required>
                           <div *ngIf="username.invalid && (username.dirty || username.touched)" class="error">
                             <div class="alert alert-danger" role="alert "*ngIf="username.errors">
-                              Username is required.
+                              Le nom d'utilisateur est incorrect.
                             </div>
                           </div>
                       </div>
                       <div class="form-group">
-                          <input type="password" formControlName="password" class="form-control" placeholder="mot de passe" required>
+                          <input type="password" formControlName="password" class="form-control" placeholder="Mot de passe" required>
                           <div *ngIf="password.invalid && (password.dirty || password.touched)" class="error">
                             <div div class="alert alert-danger" role="alert " *ngIf="password.errors">
-                              Password is required.
+                              Le mot de passe est incorrect.
                             </div>
                           </div>
                       </div>

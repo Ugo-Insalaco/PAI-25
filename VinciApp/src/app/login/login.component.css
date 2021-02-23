@@ -4,9 +4,9 @@ body{
 
 mat-card{
   position: relative;
-  width: 30%;
+  width: 50%;
   height: auto;
-  left: 35%;
+  left: 25%;
   top: 22%;
   border: 1px solid #00438a;
 }
