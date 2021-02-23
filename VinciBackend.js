@@ -5,6 +5,7 @@ const languageParser = require('./VinciAPI/text').languageParser
 const endpoints = require('./VinciAPI/endpoints')
 const cors = require('cors')
 const mail = require('./VinciAPI/mail')
+const auth = require('./VinciAPI/auth')
 
 const app = express()
 
@@ -15,6 +16,8 @@ app.use('/',languageParser)
 //text(app)
 
 endpoints(app)
+
+auth(app)
 
 mail(app)
 
