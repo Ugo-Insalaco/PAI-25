@@ -10,6 +10,10 @@
         "status":""
     },
     "primaryField": "id",
+    "connexionFields":{
+        "username":"username",
+        "password":"password"
+    },
     "updatable":[
         "username",
         "first_name",
