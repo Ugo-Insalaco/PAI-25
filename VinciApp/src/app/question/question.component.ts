@@ -16,6 +16,7 @@ export class QuestionComponent implements OnInit {
   constructor(private backend: BackendService, private config: ConfigService, private globalStorage: GlobalStorageService){}
   @Input() tab; //numero de la page (donc de la section)
   @Input() id_question; //numero de la question
+  @Input() modif //pour savoir si on est en mode modif ou pas
 
   //Requêtes au serveur à partir de tab et question, pour récupérer le type et le contenu
   @Input() type;
@@ -24,6 +25,8 @@ export class QuestionComponent implements OnInit {
   @Input() rep2;
 
   answer: string;
+  admin = true;
+  next: string //id de la question suivante
   
   ngOnInit(): void {
   }
@@ -47,7 +50,9 @@ export class QuestionComponent implements OnInit {
       };
       project.push(reponse);
     }
-  this.globalStorage.set("projet", project)
+  this.globalStorage.set("projet", project) //mise à jour de la variable globale projet
+
+  this.next = this.id_question + 1 //requête au serveur
   }
 
 }
