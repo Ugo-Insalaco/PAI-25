@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import {Router} from '@angular/router';
+import { BackendService } from '../services/backend.service';
 
 @Component({
   selector: 'app-offer',
@@ -8,6 +9,7 @@ import {Router} from '@angular/router';
 })
 export class OfferComponent implements OnInit, AfterViewInit{
     @Input() admin: boolean;
+    @Input() id: int;
     @Input() photooffre: string = "url(${photooffre1})";
     @Input() couleur: string = "";
     @Input() texteoffre: string = "";
@@ -17,6 +19,8 @@ export class OfferComponent implements OnInit, AfterViewInit{
 
     contentEditable : boolean = false;
     modif : boolean = false;
+
+    visualizationActivated : boolean = false;
 
     @ViewChild('listesolutions') selectView: ElementRef;
     @ViewChild('divtext') textView: ElementRef;
@@ -28,7 +32,7 @@ export class OfferComponent implements OnInit, AfterViewInit{
     // To get the selected option in the select
     selectedOption: string = "";
 
-    constructor(private router: Router) {
+    constructor(private router: Router, private backend: BackendService) {
       this.admin = false;
     }
 
@@ -91,14 +95,23 @@ export class OfferComponent implements OnInit, AfterViewInit{
       }
 
       if (file) {
+        this.visualizationActivated=true;
         reader.readAsDataURL(file);
       }
     }
 
     updateAssets(): void {
       var file = this.input.nativeElement.files[0];
-      var renamedFile = new File([file],"offre1"+(file.type=="image/jpeg"? ".jpg":".png"),{type:file.type});
+      var nomcadran = this.router.url.split('/').pop().replace(/-/gi, "");
+      var fileName = nomcadran+"-offre"+this.id+(file.type=="image/jpeg"? ".jpg":".png");
+      var renamedFile = new File([file],fileName,{type:file.type});
       console.log(file);
       console.log(renamedFile);
+
+      let formData = new FormData();
+      formData.append("file",renamedFile);
+      this.backend.POST('/api/upload',formData, res=>{
+          console.log('response received is : ',res)
+      });
     }
 }

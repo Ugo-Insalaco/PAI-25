@@ -39,7 +39,15 @@
 
 #container-admin-controls{
   position: absolute;
-  right:0;
-  bottom:0;
+  right:1vw;
+  bottom:1vh;
   margin-left: 1vh;
+  background-color: white;
+  border: solid 1px black;
+}
+
+#btnmodif{
+  position: absolute;
+  right:1vw;
+  bottom:1vh;
 }

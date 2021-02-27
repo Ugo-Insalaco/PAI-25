@@ -12,7 +12,7 @@
               Valider
       </button>
     </div>
-    <button style="position: absolute; right:0; bottom:0;"
+    <button id="btnmodif"
             (click)="onModifier()"
             *ngIf="admin===true && modif===false">
             Modification du texte
@@ -26,7 +26,7 @@
   <div id="divimage" #divimage [style.background-image]="photooffre">
     <div id="commimg" #commimg [contentEditable]="contentEditable" [style.background-color]="couleur">
       {{nomoffre}}
-    </div>  
+    </div>
     <div id="container-admin-controls"
          *ngIf="admin===true">
       <input type="file"
@@ -36,7 +36,8 @@
        <button (click)="updateImageDisplay()">
                Visualiser
        </button>
-       <button (click)="updateAssets()">
+       <button (click)="updateAssets()"
+               *ngIf="visualizationActivated==true">
                Valider
        </button>
      </div>
