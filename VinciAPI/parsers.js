@@ -53,7 +53,6 @@ const languageParser = function(req,res,next){
 const jsonBodyParser = function(data){
     return function(req, res, next){
         // vérifier que le Body contient exactement les éléments de data
-        console.log(data)
         Promise.try(function(){
             jsonParser(req, res, (err)=>{
                 if(err){
@@ -62,12 +61,9 @@ const jsonBodyParser = function(data){
             })
         })
         .then(()=>{
-            console.log('bonjour')
-            console.log(req.body)
 
             if(Object.keys(req.body).every(key=>data[key])!==undefined && 
             Object.keys(data).filter(key=>data[key].split(' ').includes("mandatory")).every(key=>req.body[key]!==undefined)){
-                console.log("les clés sont bien incluses")
             }
             else{
                 throw "Erreur"

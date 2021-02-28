@@ -1,0 +1,28 @@
+{
+    "name": "data",
+    "table": "data",
+    "fields":{
+        "id":"",
+        "name":"",
+        "points":""
+    },
+    "primaryField":"id",
+    "include":[
+
+    ],
+    "get_response":{
+        "route": "/api/datas",
+        "method": "GET",
+        "data":{
+            "id": "{{0::data::id}}",
+            "fields":{
+                "name":"{{0::data::name}}",
+                "points":"{{0::data::points}}"
+            },
+            "included":{
+
+            }
+        }
+    }
+    
+}

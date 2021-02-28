@@ -51,8 +51,18 @@ const init = function(app){
                             querrystring+='?? AS ??, '
                             sqlvalues.push(`${bind.id}::${bind.endpoint}.${key}`,`${bind.id}::${bind.endpoint}::${key}`)
                         }
+                        confs[bind.endpoint].include
+                            .forEach(inclusion=>{
+                                if(inclusion.default_inclusion===true){
+                                    inclusion.bind.forEach(nextBind=>{
+                                        addInclusionFields(nextBind)
+                                    })
+                                }
+                            })
                     }
                     else if(bind.hasOwnProperty('bindTable')){
+                        querrystring+='?? AS ??, '
+                        sqlvalues.push(`${bind.id}::${bind.bindTable}.id`, `${bind.id}::${bind.bindTable}::id`)
                         bind.proxy.forEach(proxy=>{
                             addInclusionFields(proxy)
                         })
@@ -74,11 +84,19 @@ const init = function(app){
                 // Ajout des tables d'inclusion
                 const addInclusionTables= function(bind, currentTable, currentId){
                     if(bind.hasOwnProperty('endpoint')){
-                        sqlstring+= `JOIN ?? AS ?? ON ?? = ?? `
+                        sqlstring+= `LEFT JOIN ?? AS ?? ON ?? = ?? `
                         sqlvalues.push(confs[bind.endpoint].table, `${bind.id}::${confs[bind.endpoint].name}`, `${currentId}::${currentTable}.${bind.local_key}`, `${bind.id}::${confs[bind.endpoint].name}.${bind.foreign_key}`)
+                        confs[bind.endpoint].include
+                        .forEach(inclusion=>{
+                            if(inclusion.default_inclusion===true){
+                                inclusion.bind.forEach(nextBind=>{
+                                    addInclusionTables(nextBind, bind.endpoint, bind.id)
+                                })
+                            }
+                        })
                     }
                     else if(bind.hasOwnProperty('bindTable')){
-                        sqlstring+= `JOIN ?? AS ?? ON ?? = ?? `
+                        sqlstring+= `LEFT JOIN ?? AS ?? ON ?? = ?? `
                         sqlvalues.push(config.bindTables[bind.bindTable], `${bind.id}::${bind.bindTable}`, `${currentId}::${currentTable}.${bind.local_key}`,`${bind.id}::${bind.bindTable}.${bind.foreign_key}`)
                         bind.proxy.forEach(nextBind=>{
                             addInclusionTables(nextBind, bind.hasOwnProperty('bindTable') ? bind.bindTable : bind.endpoint, bind.id)
@@ -107,7 +125,7 @@ const init = function(app){
                         })
                         .catch(err=>{
                             res.status(500).send(JSON.stringify({
-                                message: 'Erreur parsing des données',
+                                message: 'Erreur parsing de la réponse',
                                 route: req.path,
                                 erreur: err
                             }))
@@ -164,9 +182,19 @@ const init = function(app){
                         for(let key in confs[bind.endpoint].fields){
                             querrystring+='?? AS ??, '
                             sqlvalues.push(`${bind.id}::${bind.endpoint}.${key}`,`${bind.id}::${bind.endpoint}::${key}`)
+                            confs[bind.endpoint].include
+                            .forEach(inclusion=>{
+                                if(inclusion.default_inclusion===true){
+                                    inclusion.bind.forEach(nextBind=>{
+                                        addInclusionFields(nextBind)
+                                    })
+                                }
+                            })
                         }
                     }
                     else if(bind.hasOwnProperty('bindTable')){
+                        querrystring+='?? AS ??, '
+                        sqlvalues.push(`${bind.id}::${bind.bindTable}.id`, `${bind.id}::${bind.bindTable}::id`)
                         bind.proxy.forEach(proxy=>{
                             addInclusionFields(proxy)
                         })
@@ -188,11 +216,19 @@ const init = function(app){
                 // Ajout des tables d'inclusion
                 const addInclusionTables= function(bind, currentTable, currentId){
                     if(bind.hasOwnProperty('endpoint')){
-                        sqlstring+= `JOIN ?? AS ?? ON ?? = ?? `
+                        sqlstring+= `LEFT JOIN ?? AS ?? ON ?? = ?? `
                         sqlvalues.push(confs[bind.endpoint].table, `${bind.id}::${confs[bind.endpoint].name}`, `${currentId}::${currentTable}.${bind.local_key}`, `${bind.id}::${confs[bind.endpoint].name}.${bind.foreign_key}`)
+                        confs[bind.endpoint].include
+                        .forEach(inclusion=>{
+                            if(inclusion.default_inclusion===true){
+                                inclusion.bind.forEach(nextBind=>{
+                                    addInclusionTables(nextBind, bind.endpoint, bind.id)
+                                })
+                            }
+                        })
                     }
                     else if(bind.hasOwnProperty('bindTable')){
-                        sqlstring+= `JOIN ?? AS ?? ON ?? = ?? `
+                        sqlstring+= `LEFT JOIN ?? AS ?? ON ?? = ?? `
                         sqlvalues.push(config.bindTables[bind.bindTable], `${bind.id}::${bind.bindTable}`, `${currentId}::${currentTable}.${bind.local_key}`,`${bind.id}::${bind.bindTable}.${bind.foreign_key}`)
                         bind.proxy.forEach(nextBind=>{
                             addInclusionTables(nextBind, bind.hasOwnProperty('bindTable') ? bind.bindTable : bind.endpoint, bind.id)
@@ -205,7 +241,7 @@ const init = function(app){
                         addInclusionTables(bind, conf.name, 0)
                     })
                 })
-
+                
                 // Requête à la base de données
                 pool.then(pool=>{
                     pool
@@ -217,7 +253,7 @@ const init = function(app){
                         })
                         .catch(err=>{
                             res.status(500).send(JSON.stringify({
-                                message: 'Erreur parsing des données',
+                                message: 'Erreur parsing de la réponse',
                                 route: req.path,
                                 erreur: err
                             }))

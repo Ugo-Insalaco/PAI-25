@@ -1,4 +1,7 @@
 {
     "solution_question_section": "solution_question_section_binding",
-    "solution": "solutions"
+    "solution": "solutions",
+    "question_reponse":"question_reponse_binding",
+    "data_binding":"data_binding",
+    "solution_binding":"solution_binding"
 }

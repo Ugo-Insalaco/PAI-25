@@ -20,19 +20,19 @@
             "default_inclusion": true,
             "bind":[
                 {
-                    "id":1,
+                    "id":14,
                     "endpoint": "text",
                     "local_key":"name",
                     "foreign_key":"id"
                 },
                 {
-                    "id":2,
+                    "id":15,
                     "endpoint": "text",
                     "local_key":"circles",
                     "foreign_key":"id"
                 },
                 {
-                    "id":3,
+                    "id":16,
                     "endpoint": "text",
                     "local_key":"problem",
                     "foreign_key":"id"
@@ -55,9 +55,10 @@
             },
             "included":{
                 "text":{
-                    "name": "{{1::text::text}}",
-                    "circles": "{{2::text::text}}",
-                    "problem": "{{3::text::text}}"
+                    "id":["{{14::text::id}}","{{15::text::id}}","{{16::text::id}}"],
+                    "name": "{{14::text::text}}",
+                    "circles": "{{15::text::text}}",
+                    "problem": "{{16::text::text}}"
                 }
             }
         }
