@@ -13,6 +13,13 @@
 
     ],
     "get_response":{
-        
+        "route": "/api/texts",
+        "method": "GET",
+        "data":{
+            "id":"{{0::text::id}}",
+            "fields":{
+                "text":"{{0::text::text}}"
+            }
+        }
     }
 }

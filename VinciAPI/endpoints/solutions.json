@@ -10,6 +10,62 @@
         "name"
     ],
     "include": [
-
-    ]
+        {
+            "name":"section_question",
+            "default_inclusion": false,
+            "bind":[
+                {
+                    "id": 9,
+                    "bindTable": "solution_question_section",
+                    "local_key": "id",
+                    "foreign_key": "id_solution",
+                    "proxy":[
+                        {
+                            "id": 10,
+                            "endpoint": "question",
+                            "local_key": "id_question",
+                            "foreign_key": "id"
+                        },
+                        {
+                            "id": 11,
+                            "endpoint": "section",
+                            "local_key": "id_section",
+                            "foreign_key": "id"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "get_response":{
+        "route":"/api/solutions",
+        "method": "GET",
+        "data":{
+            "id":"{{0::solution::id}}",
+            "fields":{
+                "name":"{{0::solution::name}}"
+            },
+            "included":{
+                "section_question":{
+                    "id": ["{{9::solution_question_section::id}}"],
+                    "id_question": "{{10::question::id}}",
+                    "type_question": "{{10::question::type}}",
+                    "id_section": "{{11::section::id}}", 
+                    "name_section":"{{11::section::name}}", 
+                    "logo_section":"{{11::section::logo}}",
+                    "sous_texte_section":"{{11::section::sous_texte}}", 
+                    "position_section":"{{11::section::position}}",
+                    "subIncluded":{
+                        "text_question":{
+                            "content":"{{4::text::text}}"
+                        },
+                        "text_section":{
+                            "name": "{{12::text::text}}",
+                            "sous_texte": "{{13::text::text}}"
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

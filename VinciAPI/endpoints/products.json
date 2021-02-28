@@ -1,0 +1,87 @@
+{
+    "name": "product",
+    "table": "products",
+    "fields":{
+        "id":"",
+        "brand": "",
+        "name":"",
+        "ref":"",
+        "ref_dataprint":"",
+        "power_supply":"",
+        "price":"",
+        "solution":""
+    },
+    "primaryField":"id",
+    "include":[
+        {
+            "name":"data",
+            "default_inclusion":false,
+            "bind":[
+                {
+                    "id":17,
+                    "bindTable":"data_binding",
+                    "local_key":"id",
+                    "foreign_key":"id_product",
+                    "proxy":[
+                        {
+                            "id":18,
+                            "endpoint":"data",
+                            "local_key":"id_data",
+                            "foreign_key":"id"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name":"solution",
+            "default_inclusion":false,
+            "bind":[
+                {
+                    "id":19,
+                    "bindTable":"solution_binding",
+                    "local_key":"id",
+                    "foreign_key":"id_product",
+                    "proxy":[
+                        {
+                            "id":20,
+                            "endpoint": "solution",
+                            "local_key":"id_solution",
+                            "foreign_key":"id"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "get_response":{
+        "route": "/api/products",
+        "method": "GET",
+        "data":{
+            "id": "{{0::product::id}}",
+            "fields":{
+                "brand": "{{0::product::brand}}",
+                "name":"{{0::product::name}}",
+                "ref":"{{0::product::ref}}",
+                "ref_dataprint":"{{0::product::ref_dataprint}}",
+                "power_supply":"{{0::product::power_supply}}",
+                "price":"{{0::product::price}}",
+                "solution":"{{0::product::solution}}"
+            },
+            "included":{
+                "data":{
+                    "id":["{{17::data_binding::id}}"],
+                    "id_data":"{{18::data::id}}",
+                    "name_data":"{{18::data::name}}", 
+                    "points_data":"{{18::data::points}}"
+                },
+                "solution":{
+                    "id":["{{19::solution_binding::id}}"],
+                    "id_solution":"{{20::solution::id}}",
+                    "name_solution":"{{20::solution::name}}"
+                }
+            }
+        }
+    }
+    
+}

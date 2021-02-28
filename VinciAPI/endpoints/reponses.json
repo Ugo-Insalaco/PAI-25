@@ -20,12 +20,50 @@
             "default_inclusion": false,
             "bind":[
                 {
-                    "id": 1,
+                    "id": 8,
                     "endpoint": "question",
                     "local_key": "question_suivante",
                     "foreign_key": "id"
                 }
             ]
+        },
+        {
+            "name": "text",
+            "default_inclusion": true,
+            "bind":[
+                {
+                    "id": 7,
+                    "endpoint": "text",
+                    "local_key": "content",
+                    "foreign_key": "id"
+                }
+            ]
         }
-    ]
+    ],
+    "get_response":{
+        "route":"/api/reponses",
+        "method": "GET",
+        "data":{
+            "id":"{{0::reponse::id}}",
+            "fields":{
+                "content":"{{0::reponse::content}}",
+                "question_suivante":"{{0::reponse::question_suivante}}",
+                "data":"{{0::reponse::data}}"
+            },
+            "included":{
+                "question_suivante":{
+                    "id": ["{{8::question::id}}"],
+                    "content": "{{8::question::content}}",
+                    "type":"{{8::question::type}}",
+                    "subIncluded":{
+                        "content":"{{4::text::text}}"
+                    }
+                },
+                "text":{
+                    "id":["{{7::text::id}}"],
+                    "content":"{{7::text::text}}"
+                }
+            }
+        }
+    }
 }

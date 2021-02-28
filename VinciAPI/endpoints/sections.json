@@ -17,6 +17,43 @@
     ],
     "include": 
     [
-
-    ]
+        {
+            "name": "text",
+            "default_inclusion": true,
+            "bind":[
+                {
+                    "id":12,
+                    "endpoint": "text",
+                    "local_key":"name",
+                    "foreign_key":"id"
+                },
+                {
+                    "id":13,
+                    "endpoint": "text",
+                    "local_key":"sous_texte",
+                    "foreign_key":"id"
+                }
+            ]
+        }
+    ],
+    "get_response":{
+        "route": "/api/sections",
+        "method" : "GET",
+        "data":{
+            "id":"{{0::section::id}}",
+            "fields":{
+                "name":"{{0::section::name}}",
+                "logo": "{{0::section::logo}}",
+                "sous_texte":"{{0::section::sous_texte}}", 
+                "position":"{{0::section::position}}"
+            },
+            "included":{
+                "text":{
+                    "id": ["{{12::text::id}}", "{{13::text::id}}"],
+                    "name": "{{12::text::text}}",
+                    "sous_texte": "{{13::text::text}}"
+                }
+            }
+        }
+    }
 }

@@ -21,6 +21,8 @@ export class ProjectComponent implements OnInit{
     backendMessage: String
     nomsolution: string;
     questions: any;
+    modif = false;
+    admin = true;
     constructor(private router: Router, private backend: BackendService, private config: ConfigService, private globalStorage: GlobalStorageService){
     }
 
@@ -29,24 +31,22 @@ export class ProjectComponent implements OnInit{
         this.complete=true
         this.selectedTab=0
         let body={
-            text: 'Salutations'
+            username: 'KN22',
+            password: 'toto22'
         }
         this.globalStorage.reset_default("projet")
         this.questions = this.globalStorage.default["projet"]
 
-//<<<<<<< HEAD
         // this.backend.GET('/api/text/1', e=>{
         //     this.backendMessage = JSON.stringify(e)
         // })
-//=======
         this.backend.GET('/api/text/1', e=>{
             this.backendMessage = JSON.stringify(e)
         })
         this.nomsolution = this.getNomSolution();
-//>>>>>>> 23db89fb417c7656bb4b28275c3623d9ccf02a25
         // this.globalStorage.set('langage', 'ENG')
         // this.backendMessage =this.globalStorage.get('langage')
-        this.backend.POST('/api/questions', body, res=>{
+        this.backend.POST('/auth/login', body, res=>{
             console.log(res)
         })
     }
@@ -66,6 +66,23 @@ export class ProjectComponent implements OnInit{
         nom = nom.charAt(0).toUpperCase() + nom.slice(1); // Majuscule pour 1er mot
         nom = nom.replace(/%C3%A9/gi, "é");
         return nom;
+    }
+
+    //onModifProjet(){
+        // Get selected solution and redirect to solution's page
+        //var solution = this.nomsolution;
+        //solution = solution.replace(/ /gi, "-"); // Remplace - par espace
+        //solution = solution.replace(/'/gi, "_"); // Remplace _ par '
+        //solution = solution.toLowerCase()
+        //this.router.navigate(["modif-project/",solution]);
+      //}
+    
+    onModifier(){
+        this.modif = true;
+    }
+
+    onValiderModif(){
+        this.modif = false;
     }
 
 }

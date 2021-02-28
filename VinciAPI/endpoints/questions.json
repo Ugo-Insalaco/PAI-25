@@ -15,32 +15,6 @@
     ],
     "include":[
         {
-            "name": "solution_section",
-            "default_inclusion": false,
-            "bind":[
-                {
-                    "id":1,
-                    "bindTable": "solution_question_section",
-                    "local_key": "id",
-                    "foreign_key": "id_question",
-                    "proxy":[
-                        {
-                            "id": 2,
-                            "endpoint": "solution",
-                            "local_key": "id_solution",
-                            "foreign_key": "id"
-                        },
-                        {
-                            "id": 3,
-                            "endpoint": "section",
-                            "local_key": "id_section",
-                            "foreign_key": "id"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
             "name": "text",
             "default_inclusion": true,
             "bind":[
@@ -49,6 +23,26 @@
                     "endpoint": "text",
                     "local_key":"content",
                     "foreign_key":"id"
+                }
+            ]
+        },
+        {
+            "name": "reponse",
+            "default_inclusion": false,
+            "bind":[
+                {
+                    "id":5,
+                    "bindTable": "question_reponse",
+                    "local_key":"id",
+                    "foreign_key":"id_question",
+                    "proxy":[
+                        {
+                            "id": 6,
+                            "endpoint":"reponse",
+                            "local_key":"id_reponse",
+                            "foreign_key":"id"
+                        }
+                    ]
                 }
             ]
         }
@@ -63,21 +57,21 @@
                 "type": "{{0::question::type}}"
             },
             "included":{
-                "solution_section":{
-                    "id_solution": "{{2::solution::id}}",
-                    "name_solution": "{{2::solution::name}}",
-                    "text_db_solution": "{{2::solution::text_db}}",
-                    "picture_db_solution":"{{2::solution::picture_db}}", 
-                    "problem_solution": "{{2::solution::problem}}", 
-                    "arg_solution": "{{2::solution::arg}}", 
-                    "id_section": "{{3::section::id}}", 
-                    "name_section":"{{3::section::name}}", 
-                    "logo_section":"{{3::section::logo}}",
-                    "sous_texte_section":"{{3::section::sous_texte}}", 
-                    "position_section":"{{3::section::position}}"
-                },
                 "text":{
+                    "id": ["{{4::text::id}}"],
                     "content": "{{4::text::text}}"
+                },
+                "reponse":{
+                    "id":["{{5::question_reponse::id}}"],
+                    "id_reponse": "{{6::reponse::id}}",
+                    "content": "{{6::reponse::content}}",
+                    "question_suivante": "{{6::reponse::question_suivante}}",
+                    "data":"{{6::reponse::data}}",
+                    "subIncluded":{
+                        "text":{
+                            "content":"{{7::text::text}}"
+                        }
+                    }
                 }
             }
         }
