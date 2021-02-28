@@ -1,11 +1,24 @@
 const express = require('express')
 
+const bodyParser = require("body-parser")
+const multer = require('multer')
+const storage = multer.diskStorage({
+	destination: (req, file, callBack) => {
+		callBack(null, `./VinciApp/src/assets/images/${file.originalname.split('-')[0]}`)
+	},
+	filename: (req, file, callBack) => {
+		callBack(null, file.originalname.split('-')[1])
+	}
+})
+var upload = multer({storage: storage})
+
 const text = require('./VinciAPI/text').text
 const languageParser = require('./VinciAPI/text').languageParser
 const endpoints = require('./VinciAPI/endpoints')
 const cors = require('cors')
 const mail = require('./VinciAPI/mail')
 const auth = require('./VinciAPI/auth')
+const fileupload = require('./VinciAPI/fileUpload')
 
 const app = express()
 
@@ -20,5 +33,9 @@ endpoints(app)
 auth(app)
 
 mail(app)
+
+app.use(bodyParser.json());
+
+fileupload(app,upload)
 
 app.listen(3000)

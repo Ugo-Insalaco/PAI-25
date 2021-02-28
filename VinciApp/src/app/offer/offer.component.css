@@ -11,11 +11,12 @@
 
 #commimg{
   height: fit-content;
-  min-width: 40%;
+  min-width: 55%;
   position: absolute;
   bottom: 20%;
-  padding: 1%;
+  padding: 2%;
   color: white;
+  font-size: 20px;
 }
 
 #divimage{
@@ -34,4 +35,19 @@
 
 #buttonvalidersolution{
   margin-left: 10px;
+}
+
+#container-admin-controls{
+  position: absolute;
+  right:1vw;
+  bottom:1vh;
+  margin-left: 1vh;
+  background-color: white;
+  border: solid 1px black;
+}
+
+#btnmodif{
+  position: absolute;
+  right:1vw;
+  bottom:1vh;
 }

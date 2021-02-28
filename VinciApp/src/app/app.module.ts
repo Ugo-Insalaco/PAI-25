@@ -46,6 +46,8 @@ import { OfferComponent } from './offer/offer.component';
 import { CadranComponent } from './cadran/cadran.component';
 import { SolutionComponent } from './solution/solution.component';
 import { BtnlinkcadransComponent } from './btnlinkcadrans/btnlinkcadrans.component';
+import { NewProjectComponent } from './new-project/new-project.component';
+import { ModifProjectComponent } from './modif-project/modif-project.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,9 @@ import { BtnlinkcadransComponent } from './btnlinkcadrans/btnlinkcadrans.compone
     OfferComponent,
     CadranComponent,
     SolutionComponent,
-    BtnlinkcadransComponent
+    BtnlinkcadransComponent,
+    NewProjectComponent,
+    ModifProjectComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import {Router} from '@angular/router';
+import { BackendService } from '../services/backend.service';
 
 @Component({
   selector: 'app-offer',
@@ -8,6 +9,7 @@ import {Router} from '@angular/router';
 })
 export class OfferComponent implements OnInit, AfterViewInit{
     @Input() admin: boolean;
+    @Input() id: int;
     @Input() photooffre: string = "url(${photooffre1})";
     @Input() couleur: string = "";
     @Input() texteoffre: string = "";
@@ -18,16 +20,19 @@ export class OfferComponent implements OnInit, AfterViewInit{
     contentEditable : boolean = false;
     modif : boolean = false;
 
+    visualizationActivated : boolean = false;
+
     @ViewChild('listesolutions') selectView: ElementRef;
     @ViewChild('divtext') textView: ElementRef;
     @ViewChild('divimage') imageView: ElementRef;
+    @ViewChild('input') input: ElementRef;
     @ViewChild('commimg') commimageView: ElementRef;
     @ViewChild('buttonvalidersolution') buttonvalidersolutionView: ElementRef;
 
     // To get the selected option in the select
     selectedOption: string = "";
 
-    constructor(private router: Router) {
+    constructor(private router: Router, private backend: BackendService) {
       this.admin = false;
     }
 
@@ -81,7 +86,32 @@ export class OfferComponent implements OnInit, AfterViewInit{
     }
 
     updateImageDisplay(): void {
-      //console.log(document.getElementById('image').style.backgroundImage);
-      console.log(document.getElementById('inputImgSolution'));
+      var preview = this.imageView.nativeElement;
+      var file    = this.input.nativeElement.files[0];
+      var reader  = new FileReader();
+
+      reader.onloadend = function () {
+        preview.style.backgroundImage = "url("+reader.result+")";
+      }
+
+      if (file) {
+        this.visualizationActivated=true;
+        reader.readAsDataURL(file);
+      }
+    }
+
+    updateAssets(): void {
+      var file = this.input.nativeElement.files[0];
+      var nomcadran = this.router.url.split('/').pop().replace(/-/gi, "");
+      var fileName = nomcadran+"-offre"+this.id+(file.type=="image/jpeg"? ".jpg":".png");
+      var renamedFile = new File([file],fileName,{type:file.type});
+      console.log(file);
+      console.log(renamedFile);
+
+      let formData = new FormData();
+      formData.append("file",renamedFile);
+      this.backend.POST('/api/upload',formData, res=>{
+          console.log('response received is : ',res)
+      });
     }
 }

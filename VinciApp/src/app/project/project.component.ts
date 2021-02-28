@@ -21,6 +21,8 @@ export class ProjectComponent implements OnInit{
     backendMessage: String
     nomsolution: string;
     questions: any;
+    modif = false;
+    admin = true;
     constructor(private router: Router, private backend: BackendService, private config: ConfigService, private globalStorage: GlobalStorageService){
     }
 
@@ -64,6 +66,23 @@ export class ProjectComponent implements OnInit{
         nom = nom.charAt(0).toUpperCase() + nom.slice(1); // Majuscule pour 1er mot
         nom = nom.replace(/%C3%A9/gi, "é");
         return nom;
+    }
+
+    //onModifProjet(){
+        // Get selected solution and redirect to solution's page
+        //var solution = this.nomsolution;
+        //solution = solution.replace(/ /gi, "-"); // Remplace - par espace
+        //solution = solution.replace(/'/gi, "_"); // Remplace _ par '
+        //solution = solution.toLowerCase()
+        //this.router.navigate(["modif-project/",solution]);
+      //}
+    
+    onModifier(){
+        this.modif = true;
+    }
+
+    onValiderModif(){
+        this.modif = false;
     }
 
 }
