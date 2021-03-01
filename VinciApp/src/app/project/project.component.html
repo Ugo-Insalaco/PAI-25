@@ -29,6 +29,9 @@
                         [rep2]=""
                         [modif]=modif>
                     </app-question>
+                    <div style="text-align: center;" *ngIf="modif && admin">
+                        <button>Ajouter une question</button>
+                    </div>
                 </mat-grid-list>
                 <button mat-raised-button style="float:right;" matStepperNext>Page suivante</button>
             </mat-step>
@@ -45,8 +48,12 @@
                         [type]="'QCM'" 
                         [question]="'Quelle application souhaitez-vous utiliser ?'" 
                         [rep1]="'IoThink'"
-                        [rep2]="'Autre'">
+                        [rep2]="'Autre'"
+                        [modif]=modif>
                     </app-question>
+                    <div style="text-align: center;" *ngIf="modif && admin">
+                        <button>Ajouter une question</button>
+                    </div>
                 </mat-grid-list>
                 <button mat-raised-button matStepperPrevious>Page précédente</button>
                 <button mat-raised-button style="float:right;" matStepperNext>Page suivante</button>
@@ -64,8 +71,12 @@
                         [type]="'QCM'" 
                         [question]="'Souhaitez-vous internaliser ou externaliser l installation des IoT ?'" 
                         [rep1]="'Internaliser'"
-                        [rep2]="'Externaliser'">
+                        [rep2]="'Externaliser'"
+                        [modif]=modif>
                     </app-question>
+                    <div style="text-align: center;" *ngIf="modif && admin">
+                        <button>Ajouter une question</button>
+                    </div>
                 </mat-grid-list>
                 <button mat-raised-button matStepperPrevious>Page précédente</button>
                 <button mat-raised-button style="float:right;" matStepperNext>Page suivante</button>
@@ -108,7 +119,8 @@
                         [type]="'text'" 
                         [question]="'Ajouter un commentaire :'" 
                         [rep1]="''"
-                        [rep2]="''">
+                        [rep2]="''"
+                        [modif]=modif>
                     </app-question>
                         <button mat-raised-button>Valider</button>
                     </div>

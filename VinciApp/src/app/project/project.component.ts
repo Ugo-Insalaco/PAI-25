@@ -57,6 +57,7 @@ export class ProjectComponent implements OnInit{
             var questions_string = this.globalStorage.get("projet")
             this.questions = JSON.parse(questions_string)
         }
+        this.modif=false
     }
 
     getNomSolution(){
