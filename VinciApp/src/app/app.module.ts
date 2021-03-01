@@ -48,6 +48,8 @@ import { SolutionComponent } from './solution/solution.component';
 import { BtnlinkcadransComponent } from './btnlinkcadrans/btnlinkcadrans.component';
 import { NewProjectComponent } from './new-project/new-project.component';
 import { ModifProjectComponent } from './modif-project/modif-project.component';
+import { ModifTexteComponent } from './modif-texte/modif-texte.component';
+import { ModifImageComponent } from './modif-image/modif-image.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +70,9 @@ import { ModifProjectComponent } from './modif-project/modif-project.component';
     SolutionComponent,
     BtnlinkcadransComponent,
     NewProjectComponent,
-    ModifProjectComponent
+    ModifProjectComponent,
+    ModifTexteComponent,
+    ModifImageComponent
   ],
   imports: [
     BrowserModule,

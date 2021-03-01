@@ -1,0 +1,26 @@
+<button class="btnmodif"
+        (click)="allowModifImage()"
+        *ngIf="admin===true && modifAllowed===false"
+        title="Modification">
+        Image <img class="pencil" src="/assets/images/pencil.png">
+</button>
+<div id="container-admin-controls"
+     *ngIf="admin===true && modifAllowed==true">
+  <input type="file"
+         id="inputImgSolution"
+         #input
+         accept="image/png, image/jpeg">
+   <button (click)="updateImageDisplay()"
+           title="Visualiser">
+           Visualiser
+   </button>
+   <button (click)="updateAssets()"
+           *ngIf="visualizationActivated==true"
+           title="Valider">
+           Valider
+   </button>
+   <button (click)="closeImageModifPanel()"
+           title="Annuler">
+           Annuler
+   </button>
+ </div>

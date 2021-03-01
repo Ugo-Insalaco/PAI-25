@@ -10,6 +10,8 @@
 }
 
 #commimg{
+  display: flex;
+  flex-direction: row;
   height: fit-content;
   min-width: 55%;
   position: absolute;
@@ -35,37 +37,4 @@
 
 #buttonvalidersolution{
   margin-left: 10px;
-}
-
-#container-admin-controls{
-  display: flex;
-  position: absolute;
-  justify-content: center;
-  height: 30px;
-  right:1vh;
-  bottom:1vh;
-  margin-left: 1vh;
-  background-color: white;
-  border: solid 1px #f0f0f0;
-}
-
-.btnmodif{
-  position: absolute;
-  height: 30px;
-  width: 100px;
-  right: 1vh;
-  bottom:1vh;
-  padding: 0;
-  vertical-align: center;
-}
-
-#btnvalid{
-  position: absolute;
-  height: 30px;
-  right:1vh;
-  bottom:1vh;
-}
-
-.pencil{
-  height: 100%;
 }

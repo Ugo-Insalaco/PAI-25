@@ -1,10 +1,10 @@
 <div style="width: 99vw; height: 60vh;">
-  <div id="divtext" #divtext [contentEditable]="contentEditable">
-    <p id="text" style="text-align: justify;">
+  <div id="divtext" #divtext>
+    <p id="text" style="text-align: justify;" [contentEditable]="contentEditableText1">
       {{texteoffre}}
     </p>
     <div id="choixsolution">
-      Solutions associées à cette offre :
+      <p [contentEditable]="contentEditableText1"> Solutions associées à cette offre : </p>
       <select id="listesolutions" #listesolutions [(ngModel)]="selectedOption">
         <option disabled selected> Solutions </option>
       </select>
@@ -12,47 +12,17 @@
         Découvrir cette solution
       </button>
     </div>
-    <button class="btnmodif"
-            (click)="allowModifText()"
-            *ngIf="admin===true && modifText===false"
-            title="Modification">
-            Textes <img class="pencil" src="/assets/images/pencil.png">
-    </button>
-    <button id="btnvalid"
-            (click)="confirmText()"
-            *ngIf="modifText===true">
-            Valider
-    </button>
+
+    <app-modif-texte [admin]="admin" [textView]="textView" [(editAllowed)]="contentEditableText1"></app-modif-texte>
+
   </div>
   <div id="divimage" #divimage [style.background-image]="photooffre">
-    <div id="commimg" #commimg [contentEditable]="contentEditable" [style.background-color]="couleur">
-      {{nomoffre}}
+    <div id="commimg" #commimg [style.background-color]="couleur">
+      <p [contentEditable]="contentEditableText2">{{nomoffre}}</p>
+      <app-modif-texte [admin]="admin" [textView]="commimageView" [(editAllowed)]="contentEditableText2"></app-modif-texte>
     </div>
-    <button class="btnmodif"
-            (click)="allowModifImage()"
-            *ngIf="admin===true && modifImage===false"
-            title="Modification">
-            Images <img class="pencil" src="/assets/images/pencil.png">
-    </button>
-    <div id="container-admin-controls"
-         *ngIf="admin===true && modifImage==true">
-      <input type="file"
-             id="inputImgSolution"
-             #input
-             accept="image/png, image/jpeg">
-       <button (click)="updateImageDisplay()"
-               title="Visualiser">
-               Visualiser
-       </button>
-       <button (click)="updateAssets()"
-               *ngIf="visualizationActivated==true"
-               title="Valider">
-               Valider
-       </button>
-       <button (click)="closeImageModifPanel()"
-               title="Annuler">
-               Annuler
-       </button>
-     </div>
+
+    <app-modif-image [admin]="admin" [imageView]="imageView" [offerid]="id"></app-modif-image>
+
   </div>
 </div>
