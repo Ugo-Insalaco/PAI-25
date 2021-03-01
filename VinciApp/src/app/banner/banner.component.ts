@@ -22,11 +22,12 @@ export class BannerComponent implements OnInit {
   ngOnInit(): void {
     this.backend.GET('/api/cadrans', e=>{
       // Test car que données pour cadran AT
+      console.log(e);
       if(e.data[0].fields.color==this.couleur){
         // Texts
-        this.nomcadran = e.data[0].included[0].name;
-        this.cercles = e.data[0].included[0].circles;
-        this.problematique = e.data[0].included[0].problem;
+        this.nomcadran = e.data[0].included["text"][0].name;
+        this.cercles = e.data[0].included["text"][0].circles;
+        this.problematique = e.data[0].included["text"][0].problem;
 
         // Images
         this.logo = e.data[0].fields.logo;

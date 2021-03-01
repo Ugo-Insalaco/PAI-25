@@ -9,17 +9,18 @@
         <option disabled selected> Solutions </option>
       </select>
       <button id="buttonvalidersolution" #buttonvalidersolution (click)="onValiderSolution()">
-              Valider
+        Découvrir cette solution
       </button>
     </div>
-    <button id="btnmodif"
-            (click)="onModifier()"
-            *ngIf="admin===true && modif===false">
-            Modification du texte
+    <button class="btnmodif"
+            (click)="allowModifText()"
+            *ngIf="admin===true && modifText===false"
+            title="Modification">
+            Textes <img class="pencil" src="/assets/images/pencil.png">
     </button>
-    <button style="position: absolute; right:0; bottom:0; margin-left: 1vh;"
-            (click)="onValider()"
-            *ngIf="modif===true">
+    <button id="btnvalid"
+            (click)="confirmText()"
+            *ngIf="modifText===true">
             Valider
     </button>
   </div>
@@ -27,18 +28,30 @@
     <div id="commimg" #commimg [contentEditable]="contentEditable" [style.background-color]="couleur">
       {{nomoffre}}
     </div>
+    <button class="btnmodif"
+            (click)="allowModifImage()"
+            *ngIf="admin===true && modifImage===false"
+            title="Modification">
+            Images <img class="pencil" src="/assets/images/pencil.png">
+    </button>
     <div id="container-admin-controls"
-         *ngIf="admin===true">
+         *ngIf="admin===true && modifImage==true">
       <input type="file"
              id="inputImgSolution"
              #input
              accept="image/png, image/jpeg">
-       <button (click)="updateImageDisplay()">
+       <button (click)="updateImageDisplay()"
+               title="Visualiser">
                Visualiser
        </button>
        <button (click)="updateAssets()"
-               *ngIf="visualizationActivated==true">
+               *ngIf="visualizationActivated==true"
+               title="Valider">
                Valider
+       </button>
+       <button (click)="closeImageModifPanel()"
+               title="Annuler">
+               Annuler
        </button>
      </div>
   </div>

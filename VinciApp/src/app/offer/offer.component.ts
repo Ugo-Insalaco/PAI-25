@@ -18,7 +18,8 @@ export class OfferComponent implements OnInit, AfterViewInit{
     @Input() configgauche : boolean = false;
 
     contentEditable : boolean = false;
-    modif : boolean = false;
+    modifText : boolean = false;
+    modifImage : boolean = false;
 
     visualizationActivated : boolean = false;
 
@@ -75,14 +76,22 @@ export class OfferComponent implements OnInit, AfterViewInit{
       }
     }
 
-    onModifier(): void {
+    allowModifText(): void {
       this.contentEditable = true;
-      this.modif = true;
+      this.modifText = true;
     }
 
-    onValider(): void {
+    allowModifImage(): void {
+      this.modifImage = true;
+    }
+
+    confirmText(): void {
       this.contentEditable = false;
-      this.modif = false;
+      this.modifText = false;
+    }
+
+    closeImageModifPanel(): void {
+      this.modifImage = false;
     }
 
     updateImageDisplay(): void {
@@ -101,6 +110,7 @@ export class OfferComponent implements OnInit, AfterViewInit{
     }
 
     updateAssets(): void {
+      this.closeImageModifPanel();
       var file = this.input.nativeElement.files[0];
       var nomcadran = this.router.url.split('/').pop().replace(/-/gi, "");
       var fileName = nomcadran+"-offre"+this.id+(file.type=="image/jpeg"? ".jpg":".png");
