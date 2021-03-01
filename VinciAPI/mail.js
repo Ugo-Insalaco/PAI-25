@@ -1,5 +1,5 @@
 const nodemailer = require("nodemailer");
-const details = require("/home/sirine/Desktop/PAI-25/VinciAPI/endpoints/details.json");
+//const details = require("./endpoints/details.json");
 
 const log = console.log;
 const mail = function(app){
@@ -8,11 +8,11 @@ const mail = function(app){
     let userContact = req.body;
     console.log(userContact);
     sendMail(user, info => {
-      
+
       res.send(info);
     });
   });
-  
+
   async function sendMail(user, callback) {
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
@@ -24,9 +24,9 @@ const mail = function(app){
         pass: testAccount.pass, // generated ethereal password
       },
     });
-    
-  
-    
+
+
+
     var mailOptions = {
       from: user.email,
       to: '',
@@ -38,7 +38,7 @@ const mail = function(app){
         path: '' // stream this file
     }]
     };
-    
+
     transporter.sendMail(mailOptions, function(error, info){
       if (error) {
         console.log(error);
@@ -46,13 +46,13 @@ const mail = function(app){
         console.log('Email sent: ' + info.response);
       }
     });
-  
+
     // send mail with defined transport object
     let info = await transporter.sendMail(mailOptions);
-  
+
     callback(info);
   }
-  
+
 }
 
 module.exports = mail

@@ -9,7 +9,7 @@ import { BackendService } from '../services/backend.service';
 })
 export class OfferComponent implements OnInit, AfterViewInit{
     @Input() admin: boolean;
-    @Input() id: int;
+    @Input() id: number;
     @Input() photooffre: string = "url(${photooffre1})";
     @Input() couleur: string = "";
     @Input() texteoffre: string = "";
