@@ -37,7 +37,17 @@
 }
 
 #buttonvalidersolution{
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 4px;
+  padding-bottom: 4px;
   margin-left: 10px;
+  border-radius: 3px;
+  background-color: #1E1E1E;
+  color: white;
+  border : 4px;
+  border-color: #272727;
+  box-shadow: 1px 1px 1px #646464;
 }
 
 #btnmodifimage{
