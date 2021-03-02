@@ -3,8 +3,8 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
-  background-color: #55555555;
-  background-blend-mode: difference;
+  background-color: #0004;
+  background-blend-mode: overlay;
   display: flex;
   flex-direction: row;
   position: relative;
@@ -13,10 +13,11 @@
   margin: 0;
   margin-bottom: 2vh;
   padding: 0;
+  overflow: hidden;
 }
 
 .container{
-  display: flex;
+  display: inline;
   flex-direction: column;
   position: relative;
   width: 25%;
@@ -25,6 +26,7 @@
   justify-content: center;
   align-items: center;
   border-left: 1px solid rgba(255,255,255,1);
+  transition: border 0.8s;
 }
 
 .title{
@@ -50,23 +52,36 @@
   bottom: 0;
   text-decoration: none;
   background-color: rgba(0, 0, 0, 0.5);
-  height: 0%;
+  height: 100%;
   width: 100%;
   color: white;
   padding: 6%;
   font-size: 170%;
   text-align: center;
   justify-content: center;
-  visibility: hidden;
-  transition: height 1s;
-}
-
-.container:hover .overlay{
-  visibility: visible;
-  height: 200%;
+  transition: transform 0.8s;
 }
 
 .container:hover .title{
-  visibility: hidden;
   height: 0%;
 }
+
+#container1{ border-bottom: solid 10px #062C6B; }
+#container1:hover{ border-bottom: none; }
+
+#container2{ border-bottom: solid 10px #03B0B4; }
+#container2:hover{ border-bottom: none; }
+
+#container3{ border-bottom: solid 10px #CC2871; }
+#container3:hover{ border-bottom: none; }
+
+#container4{ border-bottom: solid 10px #0CAAEB; }
+#container4:hover{ border-bottom: none; }
+
+#overlay1{ border-top: solid 10px #062C6B; }
+
+#overlay2{ border-top: solid 10px #03B0B4; }
+
+#overlay3{ border-top: solid 10px #CC2871; }
+
+#overlay4{ border-top: solid 10px #0CAAEB; }

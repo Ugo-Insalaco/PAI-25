@@ -1,7 +1,7 @@
 <div id="container"> <!--#134384-->
   <div #fond id="fond" [style.background-image]="photo"></div>
   <div id="filter" [style.background-color]="couleur"></div>
-  <div id="left">
+  <div #textcontainer id="left">
     <h4> {{nomcadran}} </h4>
     <h2> {{problematique}}</h2>
     <h2 *ngIf="nomsolution!==''" id="solution"> {{nomsolution}} </h2>
