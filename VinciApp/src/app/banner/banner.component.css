@@ -10,7 +10,7 @@
   transform: scale(1.2) translateX(-8%) translateY(-8%);
 }
 
-#logoCadran{
+#topright{
   position: absolute;
   right: 30%;
   top: 10%;
@@ -62,4 +62,20 @@ h2{
   position: absolute;
   top: 0;
   filter: opacity(0.8);
+}
+
+.modifimage{
+}
+
+#btnmodif{
+  display: flex;
+  position: absolute;
+  bottom: 1vh;
+  right: 1vh;
+}
+
+#btnmodiftexte{
+  position: absolute;
+  bottom: -2vh;
+  right: -2vh;
 }

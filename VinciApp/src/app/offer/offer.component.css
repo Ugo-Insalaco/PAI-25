@@ -15,6 +15,7 @@
   height: fit-content;
   min-width: 55%;
   position: absolute;
+  align-items: baseline;
   bottom: 20%;
   padding: 2%;
   color: white;
@@ -37,4 +38,16 @@
 
 #buttonvalidersolution{
   margin-left: 10px;
+}
+
+#btnmodifimage{
+  position: absolute;
+  bottom: 1vh;
+  right: 1vh;
+}
+
+#btnmodiftexte{
+  position: absolute;
+  bottom: 1vh;
+  right: 1vh;
 }

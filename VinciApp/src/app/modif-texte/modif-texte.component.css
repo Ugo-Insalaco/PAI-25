@@ -1,11 +1,7 @@
 .btnmodif{
-  position: absolute;
   height: 30px;
-  width: 100px;
-  right: 1vh;
-  bottom: 1vh;
-  padding: 0;
   vertical-align: center;
+  margin-left: 1vh;
 }
 
 .pencil{
@@ -14,10 +10,7 @@
 
 #container-admin-controls{
   display: flex;
-  position: absolute;
   justify-content: center;
   height: 30px;
-  right:1vh;
-  bottom:1vh;
   margin-left: 1vh;
 }

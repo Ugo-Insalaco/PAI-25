@@ -13,7 +13,7 @@
       </button>
     </div>
 
-    <app-modif-texte [admin]="admin" [textView]="textView" [(editAllowed)]="contentEditableText1"></app-modif-texte>
+    <div id="btnmodiftexte"><app-modif-texte [admin]="admin" [textView]="textView" [(editAllowed)]="contentEditableText1"></app-modif-texte></div>
 
   </div>
   <div id="divimage" #divimage [style.background-image]="photooffre">
@@ -22,7 +22,7 @@
       <app-modif-texte [admin]="admin" [textView]="commimageView" [(editAllowed)]="contentEditableText2"></app-modif-texte>
     </div>
 
-    <app-modif-image [admin]="admin" [imageView]="imageView" [offerid]="id"></app-modif-image>
+    <div id="btnmodifimage"><app-modif-image [admin]="admin" [imageType]="'offre'" [imageView]="imageView" [offerid]="id"></app-modif-image></div>
 
   </div>
 </div>
