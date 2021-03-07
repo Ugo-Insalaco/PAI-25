@@ -40,9 +40,10 @@ export class ProjectComponent implements OnInit{
         // this.backend.GET('/api/text/1', e=>{
         //     this.backendMessage = JSON.stringify(e)
         // })
-        this.backend.GET('/api/text/1', e=>{
+        this.backend.GET('/api/questions/2', e=>{
             this.backendMessage = JSON.stringify(e)
         })
+        console.log(this.backendMessage)
         this.nomsolution = this.getNomSolution();
         // this.globalStorage.set('langage', 'ENG')
         // this.backendMessage =this.globalStorage.get('langage')
