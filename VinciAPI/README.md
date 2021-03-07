@@ -17,6 +17,7 @@ Liste des requêtes GET et de leurs includes disponibles :
     * [/api/solutions] ? section_question
     * [/api/texts] ?
     * [/api/users] ?
+    * [/api/offres] ? text, cadran, solution
   
 Structure de la réponse :
 - La réponse de l'api aux réponses GET est toujours la même et la suivante :
@@ -37,3 +38,22 @@ Structure de la réponse :
   }
 - Si aucune valeur n'est retournée lors de l'inclusion, le champ dans l'objet include contient un tableau vide
 - Lors de l'inclusion automatique des texts, on retrouve donc leur valeur dans *includes.text[0].<champ_du_text>*
+
+Les requêtes POST :
+
+- l'url des requêtes POST est toujours [/api/quelque_chose] ou bien [/api/quelque_chose/<id_de_la_chose>/relationships/<nom_de_la_relation>]
+- Lors d'une requête POST, l'api attend certains arguments dans le body qui sont obligatoires et d'autres sont optionnels
+- les seuls arguments possibles dans le body sont ceux obligatoires ou optionnels (on ne peut rajouter un argument inattendu)
+- en réponse à chaque requête, l'api renvoie l'identifiant de l'objet qui a été ajouté dans la base de données.
+- dans le cas des textes où il faut donner dans le body l'id du texte correspondant, il faut d'abord envoyer le texte à la bdd pour qu'il l'ajoute puis utiliser l'identifiant renvoyé pour créer un objet utilisant le texte créé.
+- Le principe des relationships est de créer un lien entre deux objets de la base de données (utilisation des tables de bind), il faut donc mettre dans l'url l'id du premier objet à lier et dans le body l'id du second
+- On ne peut ajouter une relationships si elle existe déjà (de toute façon l'api renvoie une erreur)
+- Pour le contenu du body de chaque requête, se référer aux fichiers .json du dossier endpoints sous les attributs fields avec 'mandatory' ou 'optionnal', de même pour les relationships
+
+Liste des relationships disponibles :
+    * [/api/cadrans] : offre
+    * [/api/offre] : solution
+    * [/api/products] : data
+    * [/api/question] : reponse
+    * [/api/solutions] : section_question, product
+  

@@ -76,5 +76,15 @@
             }
         }
         
-    }
+    },
+    "relationships":[
+        {
+            "name": "reponse",
+            "bindTable": "question_reponse",
+            "key":"id_question",
+            "fields":{
+                "id_reponse": "mandatory"
+            }
+        }
+    ]
 }

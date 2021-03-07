@@ -4,20 +4,21 @@ const config = require('./config')
 const jwt = require('jsonwebtoken')
 const uuid = require('uuid')
 const cookieParser = require('cookie-parser')
+const bcrypt = require('bcrypt')
 
 const auth = function(app){
     app.post('/auth/login', parsers.jsonBody_parser({username:"mandatory",password:"mandatory"}), function(req,res){
         // vérification du l'utilisateur
         pool.then(pool=>{
+            console.log(req.body)
             // à faire : masquer le mot de passe de l'utilisateur
-            let sqlString = 'SELECT ?? FROM ?? WHERE ?? = ? AND ?? = ?'
+            let sqlString = 'SELECT ??, ?? FROM ?? WHERE ?? = ?'
             let sqlValues = [
                 config.endpoints.user.primaryField,
+                config.endpoints.user.connexionFields.password,
                 config.endpoints.user.table,
                 config.endpoints.user.connexionFields.username,
-                req.body.username,
-                config.endpoints.user.connexionFields.password,
-                req.body.password
+                req.body.username
             ]
             pool.query(sqlString, sqlValues)
             .then(rows=>{
@@ -46,16 +47,44 @@ const auth = function(app){
                 }
             })
             .then(row=>{
-                //protection csrf
-                const csrf = uuid.v4()
-                const token = jwt.sign(
-                    {username : req.body.username, id: row.id, csrf: csrf},
-                    config.auth.privateKey
-                )
-                res.cookie('VinciApp_authToken',token)
-                res.send({
-                    csrf:csrf,
-                    cookie: token
+                //vérification du mdp
+                bcrypt.compare(req.body.password, row.password, function(err, match){
+                    console.log(err, match)
+                    if(err){
+                        res.status(500).send({
+                            message: 'Erreur comparaison des mots de passe',
+                            route: req.path,
+                            erreur: {
+                                CODE: 'PASSWORD_COMPARISON_ERROR',
+                                message: 'La comparaison du mot de passe a échouée',
+                                error:err
+                            }
+                        })
+                    }
+                    else if(match===true){
+                        //protection csrf
+                        const csrf = uuid.v4()
+                        const token = jwt.sign(
+                            {username : req.body.username, id: row.id, csrf: csrf},
+                            config.auth.privateKey
+                        )
+                        res.cookie('VinciApp_authToken',token)
+                        res.send({
+                            csrf:csrf,
+                            cookie: token
+                        })
+                    }
+                    else{
+                        res.status(400).send({
+                            message: 'Mot de passe incorrect',
+                            route: req.path,
+                            erreur: {
+                                CODE: 'INVALID_PASSWORD',
+                                message: 'Le mot de passe est incorrect',
+                                error:err
+                            }
+                        })
+                    }
                 })
             })
             .catch(err=>{

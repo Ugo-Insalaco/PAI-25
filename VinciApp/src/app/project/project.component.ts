@@ -31,8 +31,8 @@ export class ProjectComponent implements OnInit{
         this.complete=true
         this.selectedTab=0
         let body={
-            username: 'KN22',
-            password: 'toto22'
+            username: "le dieu",
+            password:'je suis intelligent',
         }
         this.globalStorage.reset_default("projet")
         this.questions = this.globalStorage.default["projet"]

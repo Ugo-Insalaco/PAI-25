@@ -3,9 +3,9 @@
     "table" : "reponse",
     "fields": {
         "id": "",
-        "content":"",
-        "question_suivante":"",
-        "data":""
+        "content":"mandatory",
+        "question_suivante":"mandatory",
+        "data":"optionnal"
     },
     "primaryField": "id",
     "updatable" : [
@@ -65,5 +65,6 @@
                 }
             }
         }
-    }
+    },
+    "relationships":[]
 }

@@ -3,8 +3,8 @@
     "table": "data",
     "fields":{
         "id":"",
-        "name":"",
-        "points":""
+        "name":"mandatory",
+        "points":"mandatory"
     },
     "primaryField":"id",
     "include":[
@@ -23,6 +23,8 @@
 
             }
         }
-    }
+    },
+    "relationships":[
+    ]
     
 }

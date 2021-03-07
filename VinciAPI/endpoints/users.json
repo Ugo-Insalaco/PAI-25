@@ -3,11 +3,11 @@
     "table": "users",
     "fields":{
         "id":"",
-        "username":"",
-        "first_name":"",
-        "last_name":"",
-        "password":"",
-        "status":""
+        "username":"mandatory",
+        "first_name":"mandatory",
+        "last_name":"mandatory",
+        "password":"mandatory shadow",
+        "status":"mandatory"
     },
     "primaryField": "id",
     "connexionFields":{
@@ -41,5 +41,6 @@
             }
         }
         
-    }
+    },
+    "relationships":[]
 }
