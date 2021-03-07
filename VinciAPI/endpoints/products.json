@@ -3,13 +3,13 @@
     "table": "products",
     "fields":{
         "id":"",
-        "brand": "",
-        "name":"",
-        "ref":"",
-        "ref_dataprint":"",
-        "power_supply":"",
-        "price":"",
-        "solution":""
+        "brand": "optionnal",
+        "name":"mandatory",
+        "ref":"optionnal",
+        "ref_dataprint":"optionnal",
+        "power_supply":"optionnal",
+        "price":"mandatory",
+        "solution":"mandatory"
     },
     "primaryField":"id",
     "include":[
@@ -82,6 +82,16 @@
                 }
             }
         }
-    }
+    },
+    "relationships":[
+        {
+            "name":"data",
+            "bindTable":"data_binding",
+            "key":"id_product",
+            "fields":{
+                "id_data":"mandatory"
+            }
+        }
+    ]
     
 }

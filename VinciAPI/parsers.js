@@ -61,14 +61,22 @@ const jsonBodyParser = function(data){
             })
         })
         .then(()=>{
-
-            if(Object.keys(req.body).every(key=>data[key])!==undefined && 
-            Object.keys(data).filter(key=>data[key].split(' ').includes("mandatory")).every(key=>req.body[key]!==undefined)){
+            Object.keys(req.body)
+            .forEach(key=>{
+                value = xss(req.body[key])
+                req.body[key]=undefined
+                req.body[xss(key)]=value
+            })
+        })
+        .then(()=>{
+            if(Object.keys(req.body).every(key=>data[xss(key)]!==undefined) && 
+            Object.keys(data).filter(key=>data[key].split(' ').includes("mandatory")).every(key=>req.body[xss(key)]!==undefined)
+            ){
+                next()
             }
             else{
                 throw "Erreur"
             }
-            next()
         })
         .catch(err=>{
             res.status(400).send(JSON.stringify({

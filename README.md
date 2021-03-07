@@ -22,9 +22,9 @@ Initialisation de la bdd en local sur windows
 - (si le processus n'est pas en route : entrer 'mysqld') 
 - taper les commandes suivantes ensuite : 
   - mysql -u root -p (pour se connecter au serveur mysql et entrer son mdp)
-  - create database iot (créé la bdd iot vide)
-  - create user 'iot'@'localhost' identified by 'pwd' (créé un utilisateur mysql qui va interagir avec la bdd)
-  - grant all privileges on iot.* to 'iot'@'localhost' (donne les droits à l'utilisateur de se connecter à la bdd)
-  - exit (quitte le serveur mariadb mais pas la console)
+  - create database iot; (créé la bdd iot vide)
+  - create user 'iot'@'localhost' identified by 'pwd'; (créé un utilisateur mysql qui va interagir avec la bdd)
+  - grant all privileges on iot.* to 'iot'@'localhost'; (donne les droits à l'utilisateur de se connecter à la bdd)
+  - exit; (quitte le serveur mariadb mais pas la console)
   - mysql -u root -p iot < iotdb.sql (importe la bdd)
 - les fois d'après, il suffit de lancer le processus mysqld s'il n'est pas en cours
