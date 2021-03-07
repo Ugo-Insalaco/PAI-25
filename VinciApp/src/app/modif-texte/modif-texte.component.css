@@ -1,0 +1,16 @@
+.btnmodif{
+  height: 30px;
+  vertical-align: center;
+  margin-left: 1vh;
+}
+
+.pencil{
+  height: 100%;
+}
+
+#container-admin-controls{
+  display: flex;
+  justify-content: center;
+  height: 30px;
+  margin-left: 1vh;
+}

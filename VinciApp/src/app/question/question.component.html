@@ -8,7 +8,7 @@
     <br><input type="radio" name="{{id_question}}" value="{{rep2}}" [(ngModel)]="answer" (change)="onAnswer()"> {{rep2}}
   </div>
 
-  <div *ngIf="type=='text'">
+  <div *ngIf="type=='text'" [contentEditable]="modif && admin">
     {{question}}
     <br><textarea [(ngModel)]="answer" (change)="onAnswer()"></textarea>
   </div>
@@ -34,11 +34,25 @@
   <!-- Modification de la question en mode admin -->
   <div *ngIf="modif && admin">
     <button>Supprimer cette question</button>
-    <br> Question suivante : <!-- faire une requete au serveur dans le .ts-->
-    <select>
-      <option selected> Question a </option> 
-      <option> Question b </option>
-    </select>
+    <div *ngIf="type=='number' || type=='text'">
+      <br> Question suivante : <!-- faire une requete au serveur dans le .ts-->
+      <select>
+        <option selected> Question a </option> 
+        <option> Question b </option>
+      </select>
+    </div>
+    <div *ngIf="type=='QCM'">
+      <br> Question suivante si la réponse est {{rep1}} :
+      <select>
+        <option selected>Question a</option>
+        <option> Question b </option>
+      </select>
+      <br> Question suivante si la réponse est {{rep2}} :
+      <select>
+        <option> Question a </option>
+        <option selected> Question b </option>
+      </select>
+    </div>
   </div>
   <br>
 

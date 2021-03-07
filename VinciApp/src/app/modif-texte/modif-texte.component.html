@@ -1,0 +1,18 @@
+<button class="btnmodif"
+        (click)="allowModifText()"
+        *ngIf="admin===true && modifAllowed===false"
+        title="Modification">
+        Texte <img class="pencil" src="/assets/images/pencil.png">
+</button>
+<div id="container-admin-controls"
+     *ngIf="admin===true && modifAllowed==true">
+  <button class="btnvalid"
+          (click)="confirmText()"
+          title="Valider">
+          Valider
+  </button>
+  <button (click)="closeTextModifPanel()"
+          title="Annuler">
+          Annuler
+  </button>
+</div>

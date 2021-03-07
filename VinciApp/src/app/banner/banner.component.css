@@ -10,7 +10,7 @@
   transform: scale(1.2) translateX(-8%) translateY(-8%);
 }
 
-#logoCadran{
+#topright{
   position: absolute;
   right: 30%;
   top: 10%;
@@ -29,6 +29,7 @@
   width: 100%;
   position: relative;
   box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
 }
 
 #fond{
@@ -49,7 +50,6 @@
 h4{
   font-size: 25px;
   text-transform:uppercase;
-  padding: 1%;
 }
 
 h2{
@@ -63,4 +63,20 @@ h2{
   position: absolute;
   top: 0;
   filter: opacity(0.8);
+}
+
+.modifimage{
+}
+
+#btnmodif{
+  display: flex;
+  position: absolute;
+  bottom: 1vh;
+  right: 1vh;
+}
+
+#btnmodiftexte{
+  position: absolute;
+  bottom: -2vh;
+  right: -2vh;
 }

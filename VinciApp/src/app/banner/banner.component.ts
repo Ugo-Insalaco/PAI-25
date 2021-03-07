@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input, ElementRef, ViewChild } from '@angular/core';
 import { BackendService } from '../services/backend.service';
 
 @Component({
@@ -10,29 +10,37 @@ export class BannerComponent implements OnInit {
 
   @Input() admin: boolean = false;
   @Input() photo: string = "url(${photo})";
-  @Input() logo: string = "";
-  @Input() cercles: string = "";
+  @Input() logoURL: string = "";
+  @Input() cerclesURL: string = "";
   @Input() couleur: string = "";
   @Input() nomcadran: string = "";
   @Input() problematique: string = "";
   @Input() nomsolution: string = "";
 
-  constructor(private backend: BackendService) { }
+  @ViewChild('cercles') cerclesView: ElementRef;
+  @ViewChild('logo') logoView: ElementRef;
+  @ViewChild('fond') fondView: ElementRef;
+  @ViewChild('textcontainer') textView: ElementRef;
+
+  contentEditableText:boolean;
+
+  constructor(private backend: BackendService, private cd: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.backend.GET('/api/cadrans', e=>{
       // Test car que données pour cadran AT
       if(e.data[0].fields.color==this.couleur){
         // Texts
-        this.nomcadran = e.data[0].included[0].name;
-        this.cercles = e.data[0].included[0].circles;
-        this.problematique = e.data[0].included[0].problem;
+        this.nomcadran = e.data[0].included["text"][0].name;
+        this.cerclesURL = e.data[0].included["text"][0].circles;
+        this.problematique = e.data[0].included["text"][0].problem;
 
         // Images
-        this.logo = e.data[0].fields.logo;
+        this.logoURL = e.data[0].fields.logo;
         this.couleur = e.data[0].fields.color;
         this.photo = "url("+e.data[0].fields.picture_back+")";
       }
     });
+    this.cd.detectChanges();
   }
 }

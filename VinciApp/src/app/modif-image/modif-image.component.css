@@ -1,0 +1,18 @@
+.btnmodif{
+  height: 30px;
+  vertical-align: center;
+}
+
+#container-admin-controls{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  margin-left: 1vh;
+  background-color: white;
+  border: solid 1px #f0f0f0;
+}
+
+.pencil{
+  height: 100%;
+}

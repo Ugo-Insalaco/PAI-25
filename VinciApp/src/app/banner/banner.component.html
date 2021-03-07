@@ -1,13 +1,21 @@
 <div id="container"> <!--#134384-->
-  <div id="fond" [style.background-image]="photo"></div>
+  <div #fond id="fond" [style.background-image]="photo"></div>
   <div id="filter" [style.background-color]="couleur"></div>
-  <div id="left">
+  <div #textcontainer id="left">
     <h4> {{nomcadran}} </h4>
     <h2> {{problematique}}</h2>
     <h2 *ngIf="nomsolution!==''" id="solution"> {{nomsolution}} </h2>
   </div>
   <div id="right">
-    <img id="logoCadran" [src]="logo">
-    <img id="cercles" [src]="cercles">
+    <div id="topright">
+      <img #logo id="logoCadran" [src]="logoURL">
+      <app-modif-image [admin]="admin" [imageType]="'logo'" [imageView]="logoView"></app-modif-image>
+    </div>
+    <img #cercles id="cercles" [src]="cerclesURL">
+    <div id="btnmodif">
+      <app-modif-image [admin]="admin" [imageType]="'cerclesBandeau'" [imageView]="cerclesView"></app-modif-image>
+      <app-modif-image [admin]="admin" [imageType]="'exImageFond'" [imageView]="fondView"></app-modif-image>
+    </div>
   </div>
+
 </div>
