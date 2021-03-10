@@ -7,14 +7,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ProjectModule } from './project/project.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatRadioModule} from '@angular/material/radio'; 
+import {MatRadioModule} from '@angular/material/radio';
 
 import { ConfigService } from './services/config.service'
-import { GlobalStorageService } from './services/globalStorage.service' 
+import { GlobalStorageService } from './services/globalStorage.service'
 import { HttpClientModule } from '@angular/common/http';
 import { BackendService } from './services/backend.service'
 
-import {MatDialogModule} from '@angular/material/dialog'; 
+import {MatDialogModule} from '@angular/material/dialog';
 
 //import { BackendService } from './backend.service';
 import { HeaderComponent } from './header/header.component';
@@ -24,13 +24,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
-import { FooterComponent } from './footer/footer.component'; 
+import { FooterComponent } from './footer/footer.component';
 
-
-
-
-import {MatCardModule} from '@angular/material/card'; 
-
+import {MatCardModule} from '@angular/material/card';
 
 import {MatGridListModule} from '@angular/material/grid-list';
 import { LoginComponent } from './login/login.component';
@@ -40,7 +36,7 @@ import { VideoComponent } from './video/video.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { SearchComponent } from './search/search.component';
 import { FieldErrorDisplayComponent } from './field-error-display/field-error-display.component';
-import { ContactResumeComponent } from './contact-resume/contact-resume.component'; 
+import { ContactResumeComponent } from './contact-resume/contact-resume.component';
 import { BannerComponent } from './banner/banner.component';
 import { OfferComponent } from './offer/offer.component';
 import { CadranComponent } from './cadran/cadran.component';
@@ -50,6 +46,9 @@ import { NewProjectComponent } from './new-project/new-project.component';
 import { ModifProjectComponent } from './modif-project/modif-project.component';
 import { ModifTexteComponent } from './modif-texte/modif-texte.component';
 import { ModifImageComponent } from './modif-image/modif-image.component';
+import { SidenavMenuComponent } from './sidenav-menu/sidenav-menu.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -72,7 +71,8 @@ import { ModifImageComponent } from './modif-image/modif-image.component';
     NewProjectComponent,
     ModifProjectComponent,
     ModifTexteComponent,
-    ModifImageComponent
+    ModifImageComponent,
+    SidenavMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -88,11 +88,12 @@ import { ModifImageComponent } from './modif-image/modif-image.component';
     MatSelectModule,
     MatCardModule,
     MatGridListModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
     MatRadioModule,
     MatDialogModule,
-
+    MatSidenavModule,
+    MatListModule,
     ProjectModule
   ],
   providers: [

@@ -1,0 +1,36 @@
+.nav-item{
+  color: #00438a;
+}
+
+.nav-offre{
+  padding-left: 10%;
+}
+
+.nav-cadran{
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+.mat-list-item-disabled {
+    background-color: white;
+}
+
+a:hover {
+  font-weight: bold;
+}
+
+#cadran1:hover {
+  border-left: solid 8px #062C6B;
+}
+
+#cadran2:hover {
+  border-left: solid 8px #03B0B4;
+}
+
+#cadran3:hover {
+  border-left: solid 8px #CC2871;
+}
+
+#cadran4:hover {
+  border-left: solid 8px #0CAAEB;
+}

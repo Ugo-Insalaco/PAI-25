@@ -1,0 +1,20 @@
+<mat-nav-list>
+  <a mat-list-item routerLink="/" (click)="onCloseSidenav()">
+    <span class="nav-item">Accueil</span>
+  </a>
+  <a mat-list-item routerLink="/cadran/actifs-techniques" id="cadran1" (click)="onCloseSidenav()">
+    <span class="nav-item nav-cadran">Actifs Techniques</span>
+  </a>
+  <mat-list-item disabled><span class="nav-item nav-offre">Supervision des équipements CVC</span></mat-list-item>
+  <mat-list-item disabled><span class="nav-item nav-offre">Rondes d'exploitation</span></mat-list-item>
+
+  <a mat-list-item routerLink="/cadran/confort-energie-environnement" id="cadran2" (click)="onCloseSidenav()">
+    <span class="nav-item nav-cadran">Environnement</span>
+  </a>
+  <a mat-list-item routerLink="/cadran/bien-etre" id="cadran3" (click)="onCloseSidenav()">
+    <span class="nav-item nav-cadran">Santé et Bien-être</span>
+  </a>
+  <a mat-list-item routerLink="/cadran/espaces" id="cadran4" (click)="onCloseSidenav()">
+    <span class="nav-item nav-cadran">Espaces</span>
+  </a>
+</mat-nav-list>
