@@ -72,7 +72,7 @@ export class SolutionComponent implements OnInit {
       this.problematiquessolution = "Problématique de la solution";
       this.argumentscommerciaux = "Arguments commerciaux de qualité";
       this.textedashboard = "Texte pour le Dashboard";
-      this.photodashboard = "url(/assets/images/bienetre/exImageFond.jpg)";
+      this.photodashboard = "url(/assets/images/actifstechniques/offre1.jpg)";
   }
 
   getNomSolution(){

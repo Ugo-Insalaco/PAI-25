@@ -10,25 +10,19 @@
         <mat-option value="ENG"  >ENG</mat-option>
       </mat-select>
     </mat-form-field>
-    <span class="space"></span>
     <span></span>
     <span class="example-spacer"></span>
-    <span class="space"></span>
     <span></span>
     <span class="example-spacer"></span>
-    <span class="space"></span>
     <span></span>
     <button  mat-raised-button id="connectbtn" color="primary" class="space" routerLink="/login"> <mat-icon  >perm_identity</mat-icon> <strong>Se Connecter</strong>  </button>
-    <span class="space"></span>
     <span></span>
     <span class="example-spacer"></span>
-    <span class="space"></span>
     <span></span>
 
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"  class="space" routerLink="/">
+    <button mat-icon-button (click)="onToggleSidenav()" class="example-icon" aria-label="Example icon-button with menu icon">
     <mat-icon>menu</mat-icon>
     </button>
 
-    <span class="space"></span>
   </mat-toolbar>
 </div>
