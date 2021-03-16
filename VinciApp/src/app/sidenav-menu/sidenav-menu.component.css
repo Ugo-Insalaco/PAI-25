@@ -11,8 +11,18 @@
   padding-bottom: 2%;
 }
 
-.mat-list-item-disabled {
-    background-color: white;
+/*
+.mat-list-item:hover {
+  font-weight: bold;
+} */
+
+.mat-list-item:hover ul {
+  display: inline-block;
+}
+
+.mat-nav-list{
+  max-width: 310px;
+  size: 15px;
 }
 
 a:hover {
@@ -34,3 +44,26 @@ a:hover {
 #cadran4:hover {
   border-left: solid 8px #0CAAEB;
 }
+
+li{
+  font-size: 15px;
+  width: 230px;
+  padding: 8%;
+  min-height: 30px;
+}
+
+li:hover {
+  background-color: BUTTONFACE;
+  font-weight: bold;
+}
+
+ul {
+  display: none;
+  position: absolute;
+  top: 0%;
+  left: 92%;
+  color: #00438a;
+  list-style: none;
+  width: 200px;
+}
+
