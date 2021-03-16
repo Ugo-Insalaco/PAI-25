@@ -420,6 +420,9 @@ const init = function(app){
                 let sqlCheckString = 'SELECT id FROM ?? AS ?? WHERE '
                 let sqlCheckValues = [config.bindTables[relation.bindTable], relation.bindTable]
 
+                sqlCheckString+="??=? AND "
+                sqlCheckValues.push(relation.key, xss(req.params.id))
+
                 Object.keys(req.body)
                 .forEach(key=>{
                     sqlCheckString+= "??=? AND ",
