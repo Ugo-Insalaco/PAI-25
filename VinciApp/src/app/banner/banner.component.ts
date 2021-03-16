@@ -28,7 +28,6 @@ export class BannerComponent implements OnInit {
 
   ngOnInit(): void {
     this.backend.GET('/api/cadrans', e=>{
-      // Test car que données pour cadran AT
       if(e.data[0].fields.color==this.couleur){
         // Texts
         this.nomcadran = e.data[0].included["text"][0].name;
@@ -40,7 +39,25 @@ export class BannerComponent implements OnInit {
         this.couleur = e.data[0].fields.color;
         this.photo = "url("+e.data[0].fields.picture_back+")";
       }
+      this.cd.detectChanges();
     });
-    this.cd.detectChanges();
+  }
+
+
+  sendDatatoDB(): void{
+    /*var jsoncadran = {
+      "id": 4,
+      "name": 19,
+      "color": this.couleur,
+      "picture_back": this.photo,
+      "logo": this.logoURL,
+      "circles": 20,
+      "problem": 22
+    };
+    var jsontext = {
+      "text": "Problématique du cadran Environnement"
+    };
+
+    this.backend.POST('/api/cadrans', jsoncadran , e=>{});*/
   }
 }

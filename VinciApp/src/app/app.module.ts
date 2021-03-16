@@ -49,6 +49,9 @@ import { ModifImageComponent } from './modif-image/modif-image.component';
 import { SidenavMenuComponent } from './sidenav-menu/sidenav-menu.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { NewOfferComponent } from './new-offer/new-offer.component';
+import { NewSolutionComponent } from './new-solution/new-solution.component';
+import { NewSolutionFormComponent } from './new-solution-form/new-solution-form.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +75,10 @@ import { MatListModule } from '@angular/material/list';
     ModifProjectComponent,
     ModifTexteComponent,
     ModifImageComponent,
-    SidenavMenuComponent
+    SidenavMenuComponent,
+    NewOfferComponent,
+    NewSolutionComponent,
+    NewSolutionFormComponent
   ],
   imports: [
     BrowserModule,

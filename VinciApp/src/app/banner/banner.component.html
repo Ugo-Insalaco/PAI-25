@@ -2,9 +2,10 @@
   <div #fond id="fond" [style.background-image]="photo"></div>
   <div id="filter" [style.background-color]="couleur"></div>
   <div #textcontainer id="left">
-    <h4> {{nomcadran}} </h4>
-    <h2> {{problematique}}</h2>
-    <h2 *ngIf="nomsolution!==''" id="solution"> {{nomsolution}} </h2>
+    <p class="h4" [contentEditable]="contentEditableText"> {{nomcadran}} </p>
+    <p class="h2" [contentEditable]="contentEditableText"> {{problematique}}</p>
+    <p class="h2" *ngIf="nomsolution!==''" id="solution" [contentEditable]="contentEditableText"> {{nomsolution}} </p>
+    <div id="btnmodiftexte"><app-modif-texte [admin]="admin" [textView]="textView" [(editAllowed)]="contentEditableText"></app-modif-texte></div>
   </div>
   <div id="right">
     <div id="topright">
@@ -12,10 +13,12 @@
       <app-modif-image [admin]="admin" [imageType]="'logo'" [imageView]="logoView"></app-modif-image>
     </div>
     <img #cercles id="cercles" [src]="cerclesURL">
-    <div id="btnmodif">
+    <div id="btnmodifimage">
       <app-modif-image [admin]="admin" [imageType]="'cerclesBandeau'" [imageView]="cerclesView"></app-modif-image>
       <app-modif-image [admin]="admin" [imageType]="'exImageFond'" [imageView]="fondView"></app-modif-image>
     </div>
   </div>
+
+  <button type="button" id="btnvalid" (click)="sendDatatoDB()" *ngIf="admin===true"> Valider les modifications</button>
 
 </div>

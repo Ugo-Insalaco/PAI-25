@@ -47,12 +47,12 @@
   font-size: 35px;
 }
 
-h4{
+.h4{
   font-size: 25px;
   text-transform:uppercase;
 }
 
-h2{
+.h2{
   font-size: 30px;
 }
 
@@ -65,10 +65,7 @@ h2{
   filter: opacity(0.8);
 }
 
-.modifimage{
-}
-
-#btnmodif{
+#btnmodifimage{
   display: flex;
   position: absolute;
   bottom: 1vh;
@@ -79,4 +76,10 @@ h2{
   position: absolute;
   bottom: -2vh;
   right: -2vh;
+}
+
+#btnvalid{
+  position: absolute;
+  bottom: 2vh;
+  left: 2vh;
 }

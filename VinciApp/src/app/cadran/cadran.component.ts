@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 export class CadranComponent implements OnInit {
 
   // A récupérer dans variables globales
-  admin: boolean = false;
+  admin: boolean = true;
 
   // Paramètres pour cadran
     nomcadran: string = "";

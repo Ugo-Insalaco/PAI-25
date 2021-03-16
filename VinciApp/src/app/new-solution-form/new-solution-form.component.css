@@ -1,0 +1,22 @@
+#title{
+  width: 100%;
+  text-align: center;
+}
+
+.form-group{
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+}
+
+#divname{
+  width: 40%;
+}
+
+#divdesc #divtext{
+  height: 50px;
+}
+
+#bntcancel{
+  color: white;
+  background-color: #3e3e3e;
+}
