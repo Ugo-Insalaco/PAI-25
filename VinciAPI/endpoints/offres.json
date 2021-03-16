@@ -63,7 +63,7 @@
                     "proxy":[
                         {
                             "id":26,
-                            "endpoint":"solution",
+                            "endpoint":"solutionContent",
                             "local_key":"id_solution",
                             "foreign_key":"id"
                         }
@@ -108,8 +108,21 @@
                 },
                 "solution":{
                     "id":["{{25::solution_offre::id}}"],
-                    "id_solution":"{{26::solution::id}}",
-                    "name":"{{26::solution::name}}"
+                    "id_solution":"{{26::solutionContent::id}}",
+                    "name":"{{26::solutionContent::name}}",
+                    "text_db":"{{26::solutionContent::text_db}}",
+                    "picture_db":"{{26::solutionContent::picture_db}}",
+                    "problem":"{{26::solutionContent::problem}}",
+                    "arg":"{{26::solutionContent::arg}}",
+                    "subincluded":{
+                        "text":{
+                            "id": ["{{27::text::id}}","{{28::text::id}}","{{29::text::id}}","{{30::text::id}}"],
+                            "name": "{{27::text::text}}",
+                            "text_db":"{{28::text::text}}",
+                            "problem":"{{29::text::text}}",
+                            "arg":"{{30::text::text}}"
+                        }
+                    }
                 }
             }
         }

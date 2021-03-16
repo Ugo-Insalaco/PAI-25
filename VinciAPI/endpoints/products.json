@@ -5,7 +5,6 @@
         "id":"",
         "brand": "optionnal",
         "name":"mandatory",
-        "ref":"optionnal",
         "ref_dataprint":"optionnal",
         "power_supply":"optionnal",
         "price":"mandatory",

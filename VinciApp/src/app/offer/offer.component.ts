@@ -7,12 +7,13 @@ import {Router} from '@angular/router';
   styleUrls: ['./offer.component.css']
 })
 export class OfferComponent implements OnInit, AfterViewInit{
+    // Paramètres en input et initialisation des paramètres par défaut
     @Input() admin: boolean;
     @Input() id: number;
-    @Input() photooffre: string = "url(${photooffre1})";
-    @Input() couleur: string = "";
-    @Input() texteoffre: string = "";
-    @Input() nomoffre: string = "";
+    @Input() photooffre: string = "url(/assets/images/actifstechniques/offre1.jpg)";
+    @Input() couleur: string;
+    @Input() texteoffre: string = "Texte pour l'offre";
+    @Input() nomoffre: string = "Nom de l'offre";
     @Input() offresolutions : string[] = [""];
     @Input() configgauche : boolean = false;
 
