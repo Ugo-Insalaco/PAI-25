@@ -24,7 +24,6 @@ form{
 }
 
 .form-group{
-  display: flex;
   margin-bottom: 2%;
   width: 60%;
   justify-content: center;
@@ -33,4 +32,12 @@ form{
 h1{
   color: #00438a;
   text-align: center;
+}
+
+.error{
+  margin-top: 2%;
+}
+
+.alert{
+  padding: 2%;
 }
