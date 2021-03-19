@@ -136,5 +136,17 @@
                 "id_solution": "mandatory"
             }
         }
+    ],
+    "delete_before":[
+        {
+            "name":"solution",
+            "bindTable":"solution_offre",
+            "key":"id_offre"
+        },
+        {
+            "name":"cadran",
+            "bindTable":"cadran_offre",
+            "key":"id_offre"
+        }
     ]
 }

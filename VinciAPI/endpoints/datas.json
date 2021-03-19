@@ -25,6 +25,13 @@
         }
     },
     "relationships":[
+    ],
+    "delete_before":[
+        {
+            "name":"product",
+            "bindTable":"data_binding",
+            "key":"id_data"
+        }
     ]
     
 }

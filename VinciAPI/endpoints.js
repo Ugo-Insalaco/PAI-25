@@ -14,7 +14,7 @@ const init = function(app){
 
         app.get(`/api/${conf.name}s/:id`, parsers.URL_parser, function(req, res){
             const id = parseInt(xss(req.params.id))
-            console.log(`requête à GET ${req.path}`)
+            console.log(`requête à GET ${xss(req.path)}`)
 
             // Requête des champs principaux
             let querrystring = ""
@@ -290,7 +290,7 @@ const init = function(app){
         app.post(`/api/${conf.name}s`, 
         parsers.jsonBody_parser(postables), 
         function(req, res){
-            console.log(`requête à POST ${req.path}`)
+            console.log(`requête à POST ${xss(req.path)}`)
 
             //Initialisation de la requête SQL
             let sqlString = "INSERT INTO ?? (??, "
@@ -307,13 +307,11 @@ const init = function(app){
             sqlString+= ") VALUES ({{id}}, "
 
             //Création des hash
-            console.log(1)
             const crypted = shadows.map(shadow=>{
                 if(req.body[shadow]!==undefined){
                     return bcrypt
                     .hash(req.body[shadow],config.bcrypt.rounds)
                     .then(hash=>{
-                        console.log(2)
                         req.body[shadow]=hash
                         return hash
                     })
@@ -321,7 +319,6 @@ const init = function(app){
             })
             Promise.all(crypted)
             .then(()=>{
-                console.log(3)
                 //Ajout des valeurs à insérer
                 Object.values(req.body)
                 .forEach(value=>{
@@ -396,7 +393,159 @@ const init = function(app){
                 }))
             })
         })
+        let updatables = {}
+        Object.keys(conf.fields)
+        .map(key=>{
+            let attr = conf.fields[key].split(' ')
+            if(attr.includes('updatable')){
+                updatables[key]= ""
+            }
+        })
 
+        app.patch(`/api/${conf.name}s/:id`,
+        parsers.jsonBody_parser(updatables),
+        function(req, res){
+            console.log(`requête à PATCH ${xss(req.path)}`)
+            //Vérification que l'id existe
+            pool.then(pool=>{
+                pool.query(`SELECT ?? FROM ?? WHERE ??=?`, [
+                    conf.primaryField,
+                    conf.table,
+                    conf.primaryField,
+                    xss(req.params.id)
+                ])
+                .then(rows=>{
+                    if(rows.length!==1){
+                        res.status(404).send(JSON.stringify({
+                            message: 'Ressource demandée inconnue',
+                            route: req.path,
+                            erreur: {}
+                        }))
+                    }
+                    else if(req.body.length===0){
+                        res.status(403).send(JSON.stringify({
+                            message: 'Aucun paramètre donné',
+                            route: req.path,
+                            erreur: {}
+                        }))
+                    }
+                    else{
+                        let sqlString = "UPDATE ?? SET "
+                        let sqlValues = [conf.table]
+                        Object.keys(req.body)
+                        .forEach(key=>{
+                            sqlString += "??=? "
+                            sqlValues.push(key, req.body[key])
+                        })
+
+                        sqlString+="WHERE ??=?"
+                        sqlValues.push(conf.primaryField, xss(req.params.id))
+
+                        pool
+                        .query(sqlString, sqlValues)
+                        .then(rows =>{
+                            // ne devrait pas arriver puisqu'on vérifie avant l'unicité de l'élément
+                            if(rows.length!==1){
+                                res.status(500).send(JSON.stringify({
+                                    message: 'Clé primaire non unique, danger !',
+                                    route: req.path,
+                                    erreur: {}
+                                }))
+                            }
+                            else{
+                                res.status(200).send({
+                                    route:`/api/${conf.name}s/${xss(req.params.id)}`,
+                                    method: "PATCH",
+                                    id: xss(req.params.id)
+                                })
+                            }
+                        })
+
+                        
+                    }
+                })
+            })
+        })
+
+
+        app.delete(`/api/${conf.name}s/:id`,
+        function(req, res){
+            console.log(`requête à DELETE ${xss(req.path)}`)
+            pool.then(pool=>{
+                pool.query('SELECT ?? FROM ?? WHERE ??=?',
+                [
+                    conf.primaryField,
+                    conf.table,
+                    conf.primaryField,
+                    xss(req.params.id)
+                ])
+                .then(rows=>{
+                    if(rows.length!==1){
+                        res.status(404).send(JSON.stringify({
+                            message: 'Ressource demandée inconnue',
+                            route: req.path,
+                            erreur: {}
+                        }))
+                    }
+                    else{
+                        const depletions = 
+                        conf.delete_before
+                        .map(depletion=>{
+                            if(depletion.hasOwnProperty("bindTable")){
+                                return pool.query('DELETE FROM ?? WHERE ??=?',
+                                [
+                                    config.bindTables[depletion.bindTable],
+                                    depletion.key,
+                                    xss(req.params.id)
+                                ])
+                            }
+                            else if(depletion.hasOwnProperty("endpoint")){
+                                return pool.query('UPDATE ?? SET ??= NULL WHERE ??=?',
+                                [
+                                    config.endpoints[depletion.endpoint].table,
+                                    depletion.key,
+                                    depletion.key,
+                                    xss(req.params.id)
+                                ])
+                            }
+                            else{
+                                //Logger qu'on a ignoré une suppression
+                            }
+                        })
+                        Promise.all(depletions)
+                        .then(()=>{
+                            //Cas d'une suppression sur plusieurs tables
+                            if(conf.all_tables && conf.all_tables.length>1){
+                                for(let i=0; i< conf.all_tables.length; i++){
+                                    pool.query('DELETE FROM ?? WHERE ??=?',
+                                [
+                                    conf.all_tables[i],
+                                    conf.primaryField,
+                                    xss(req.params.id)
+                                ])
+                                }
+                            }
+                            //Cas d'une suppression sur une seule table
+                            else{
+                                pool.query('DELETE FROM ?? WHERE ??=?',
+                                [
+                                    conf.table,
+                                    conf.primaryField,
+                                    xss(req.params.id)
+                                ])
+                                .then(rows=>{
+                                    res.status(200).send({
+                                        route:`/api/${conf.name}s/${xss(req.params.id)}`,
+                                        method: "DELETE",
+                                        id: xss(req.params.id),
+                                    })
+                                })
+                            }
+                        })
+                    }
+                })
+            })
+        })
         conf.relationships.forEach(relation=>{
 
             let postables = {}
@@ -414,7 +563,7 @@ const init = function(app){
             app.post(`/api/${conf.name}s/:id/relationships/${relation.name}`,
             parsers.jsonBody_parser(postables), 
             function(req, res){
-                console.log(`requête à POST ${req.path}`)
+                console.log(`requête à POST ${xss(req.path)}`)
 
                 //On vérifie que la relation n'existe pas déjà
                 let sqlCheckString = 'SELECT id FROM ?? AS ?? WHERE '
@@ -435,7 +584,7 @@ const init = function(app){
                     .query(sqlCheckString, sqlCheckValues)
                     .then(rows=>{
                         if(rows.length>0){
-                            res.status(500).send(JSON.stringify({
+                            res.status(403).send(JSON.stringify({
                                 message: 'La relation existe déjà',
                                 route: req.path,
                                 erreur: {}
@@ -472,7 +621,7 @@ const init = function(app){
                             })
                             .then(()=>{
                                 res.status(200).send({
-                                    route:`/api/${conf.name}s/:id/${relation.name}`,
+                                    route:`/api/${conf.name}s/:id/relationships/${relation.name}`,
                                     method: "POST",
                                     id: idValue
                                 })
@@ -485,6 +634,70 @@ const init = function(app){
                                 }))
                             })
                             
+                        }
+                    })
+                })
+            })
+            let relationDelete = {}
+            Object.keys(relation.fields)
+            .map(key=>{
+                let attr = relation.fields[key].split(' ')
+                if(attr.includes('mandatory')){
+                    relationDelete[key]= "mandatory"
+                }
+            })
+
+            app.delete(`/api/${conf.name}s/:id/relationships/${relation.name}`,
+            parsers.jsonBody_parser(relationDelete),
+            function(req, res){
+                console.log(`requête à DELETE ${xss(req.path)}`)
+                pool.then(pool=>{
+                    let sqlCheckString = "SELECT id FROM ?? WHERE ??=? AND "
+                    let sqlCheckValues = [
+                        config.bindTables[relation.bindTable],
+                        relation.key,
+                        xss(req.params.id)
+                    ]
+
+                    Object.keys(req.body)
+                    .forEach(key=>{
+                        sqlCheckString += "??=? AND ",
+                        sqlCheckValues.push(key, req.body[key])
+                    })
+
+                    sqlCheckString = sqlCheckString.slice(0,-4)
+                    pool.query(sqlCheckString, sqlCheckValues)
+                    .then(rows=>{
+                        if(rows.length===0){
+                            res.status(404).send(JSON.stringify({
+                                message: 'La relation n\'existe pas',
+                                route: req.path,
+                                erreur: {}
+                            }))
+                        }
+                        else{
+                            let sqlDeleteString = "DELETE FROM ?? WHERE ??=? AND "
+                            let sqlDeleteValues = [
+                                config.bindTables[relation.bindTable],
+                                relation.key,
+                                xss(req.params.id)
+                            ]
+
+                            Object.keys(req.body)
+                            .forEach(key=>{
+                                sqlDeleteString += "??=? AND ",
+                                sqlDeleteValues.push(key, req.body[key])
+                            })
+                            sqlDeleteString = sqlDeleteString.slice(0,-4)
+
+                            pool.query(sqlDeleteString, sqlDeleteValues)
+                            .then(rows=>{
+                                res.status(200).send({
+                                    route:`/api/${conf.name}s/:id/relationships/${relation.name}`,
+                                    method: "DELETE",
+                                    id: xss(req.params.id)
+                                })
+                            })
                         }
                     })
                 })

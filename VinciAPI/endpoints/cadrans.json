@@ -72,5 +72,12 @@
                 "id_offre": "mandatory"
             }
         }
+    ],
+    "delete_before":[
+        {
+            "name": "offre",
+            "bindTable":"cadran_offre",
+            "key":"id_cadran"
+        }
     ]
 }
