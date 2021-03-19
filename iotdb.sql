@@ -78,7 +78,7 @@ CREATE TABLE `cont_fra` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `text` text DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -87,7 +87,7 @@ CREATE TABLE `cont_fra` (
 
 LOCK TABLES `cont_fra` WRITE;
 /*!40000 ALTER TABLE `cont_fra` DISABLE KEYS */;
-INSERT INTO `cont_fra` VALUES (1,'Salut ça va ?!'),(2,'Ouais ça va et toi gros ?!'),(3,'c\'est moi la data'),(4,'numero1'),(5,' Bonjour je suis le sous_texte'),(6,' Actifs Techniques'),(7,'/assets/images/actifstechniques/cerclesBandeau.png'),(8,'Exemple de problématique'),(9,'Supervision des équipements CVC'),(10,'Texte offre supervision équipements CVC'),(11,'Production de froid'),(12,'Texte prod de froid'),(13,' Pb prod de froid'),(14,'Arg prod de froid'),(15,'Production de chaud'),(16,'Texte prod de chaud'),(17,' Pb prod de chaud'),(18,'Arg prod de chaud');
+INSERT INTO `cont_fra` VALUES (1,'Salut ça va ?!'),(2,'Ouais ça va et toi gros ?!'),(3,'c\'est moi la data'),(4,'numero1'),(5,' Bonjour je suis le sous_texte'),(6,' Actifs Techniques'),(7,'/assets/images/actifstechniques/cerclesBandeau.png'),(8,'Exemple de problématique'),(9,'Supervision des équipements CVC'),(10,'Texte offre supervision équipements CVC'),(11,'Production de froid'),(12,'Texte prod de froid'),(13,' Pb prod de froid'),(14,'Arg prod de froid'),(15,'Production de chaud'),(16,'Texte prod de chaud'),(17,' Pb prod de chaud'),(18,'Arg prod de chaud'),(19,'Choissisez votre solution :\r'),(20,'Retour état brûleur uniquement si le brûleur a une sortie TOR d\'état disponible\r'),(21,'Nombre de chaudières :\r'),(22,'Souhaitez-vous personnaliser votre solution en ajoutant d\'autres IoT ?\r'),(23,'Selectionnez les autres IoT à ajouter :\r'),(24,'Souhaitez-vous utiliser un réseau public ou privé ?\r'),(25,'Quelle application souhaitez-vous utiliser ?\r'),(26,'Type d\'hébergement et accès logiciel :\r'),(27,'Type de dashboard :\r'),(28,'Précisez l\'outil souhaité :\r'),(29,'Précisez le besoin :\r'),(30,'Fonctionnalités souhaitées :\r'),(31,'Souhaitez-vous internaliser ou externaliser l\'installation des IoT ?\r'),(32,'Souhaitez-vous internaliser ou externaliser la création des dashboards ?\r'),(33,'Durée de vie souhaitée de la solution (en année) :\r'),(34,'Ajouter un commentaire :\r'),(35,'T° départ/retour\r'),(36,'T° départ/retour + retour état brûleur\r'),(37,'number\r'),(38,'Oui\r'),(39,'Non\r'),(40,'Réseau public LoRaWAN Orange\r'),(41,'Réseau privé LoRaWAN avec GW WATTSENSE\r'),(42,'IoThink\r'),(43,'SaaS (Cloud)\r'),(44,'On-Premise (Serveur interne client)\r'),(45,'Autre\r'),(46,'Public (au catalogue avec plan 2d)\r'),(47,'Spécifique\r'),(48,'Alertes (dépassement seuil, évènement...)\r'),(49,'Reporting\r'),(50,'Aucune (accès dashboard uniquement)\r'),(51,'text\r'),(52,'text\r'),(53,'[ là il faudrait la liste de tous les iot disponibles donc à voir ]\r'),(54,'Internaliser\r'),(55,'Externaliser (VF RHÔNE IIT)\r'),(56,'Internaliser\r'),(57,'Externaliser (VF RHÔNE IIT)\r'),(58,'number\r'),(59,'text\r'),(60,'Capteurs et connectivité\r'),(61,'Application et fonctionnalités\r'),(62,'Installation physique des IoT et création du dashboard\r'),(63,'Récapitulatif et validation'),(64,'https://www.orange-business.com/fr/reseau-iot');
 /*!40000 ALTER TABLE `cont_fra` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -299,7 +299,7 @@ CREATE TABLE `products` (
   `power_supply` text DEFAULT NULL,
   `price` text DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=128 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -321,11 +321,11 @@ DROP TABLE IF EXISTS `question`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `question` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `content` text DEFAULT NULL,
+  `content` int(11) DEFAULT NULL,
   `type` text DEFAULT NULL,
-  `info` text DEFAULT NULL,
+  `info` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -334,7 +334,7 @@ CREATE TABLE `question` (
 
 LOCK TABLES `question` WRITE;
 /*!40000 ALTER TABLE `question` DISABLE KEYS */;
-INSERT INTO `question` VALUES (1,'Choissisez votre solution :','radio','Retour état brûleur uniquement si le brûleur a une sortie TOR d\'état disponible'),(2,'Nombre de chaudières :','number',''),(3,'Souhaitez-vous personnaliser votre solution en ajoutant d\'autres IoT ?','radio',''),(4,'Selectionnez les autres IoT à ajouter :','select',''),(5,'Souhaitez-vous utiliser un réseau public ou privé ?','radio','https://www.orange-business.com/fr/reseau-iot');
+INSERT INTO `question` VALUES (1,19,'radio',20),(2,21,'number',NULL),(3,22,'radio',NULL),(4,23,'select',NULL),(5,24,'radio',64),(6,25,'radio',NULL),(7,26,'radio',NULL),(8,27,'radio',NULL),(9,28,'text',NULL),(10,29,'text',NULL),(11,30,'select',NULL),(12,31,'radio',NULL),(13,32,'radio',NULL),(14,33,'number',NULL),(15,34,'text',NULL);
 /*!40000 ALTER TABLE `question` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -354,7 +354,7 @@ CREATE TABLE `question_reponse_binding` (
   KEY `question_reponse_binding_ibfk_1` (`id_question`),
   CONSTRAINT `question_reponse_binding_ibfk_1` FOREIGN KEY (`id_question`) REFERENCES `question` (`id`),
   CONSTRAINT `question_reponse_binding_ibfk_2` FOREIGN KEY (`id_reponse`) REFERENCES `reponse` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -363,7 +363,7 @@ CREATE TABLE `question_reponse_binding` (
 
 LOCK TABLES `question_reponse_binding` WRITE;
 /*!40000 ALTER TABLE `question_reponse_binding` DISABLE KEYS */;
-INSERT INTO `question_reponse_binding` VALUES (1,1,1),(2,1,2),(3,2,3);
+INSERT INTO `question_reponse_binding` VALUES (1,1,1),(2,1,2),(3,2,3),(4,3,4),(5,3,5),(6,5,6),(7,5,7),(8,6,8),(9,6,9),(10,7,10),(11,7,11),(12,8,12),(13,8,13),(14,11,14),(15,11,15),(16,11,16),(17,9,17),(18,10,18),(19,4,19),(20,12,20),(21,12,21),(22,13,22),(23,13,23),(24,14,24),(25,15,25);
 /*!40000 ALTER TABLE `question_reponse_binding` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -376,13 +376,13 @@ DROP TABLE IF EXISTS `reponse`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `reponse` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `content` text DEFAULT NULL,
+  `content` int(11) DEFAULT NULL,
   `question_suivante` int(11) DEFAULT NULL,
   `data` text DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_rep` (`question_suivante`),
   CONSTRAINT `FK_rep` FOREIGN KEY (`question_suivante`) REFERENCES `question` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -391,7 +391,7 @@ CREATE TABLE `reponse` (
 
 LOCK TABLES `reponse` WRITE;
 /*!40000 ALTER TABLE `reponse` DISABLE KEYS */;
-INSERT INTO `reponse` VALUES (1,'T° départ/retour',2,'remplir plus tard 1'),(2,'T° départ/retour + retour état brûleur',2,'remplir plus tard 2'),(3,'number',2,'remplir plus tard 3');
+INSERT INTO `reponse` VALUES (1,35,2,NULL),(2,36,2,NULL),(3,37,3,NULL),(4,38,4,NULL),(5,39,5,NULL),(6,40,NULL,NULL),(7,41,NULL,NULL),(8,42,7,NULL),(9,43,8,NULL),(10,44,8,NULL),(11,45,9,NULL),(12,46,11,NULL),(13,47,10,NULL),(14,48,NULL,NULL),(15,49,NULL,NULL),(16,50,NULL,NULL),(17,51,NULL,NULL),(18,52,11,NULL),(19,53,5,NULL),(20,54,13,NULL),(21,55,13,NULL),(22,56,14,NULL),(23,57,14,NULL),(24,58,NULL,NULL),(25,59,NULL,NULL);
 /*!40000 ALTER TABLE `reponse` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -409,7 +409,7 @@ CREATE TABLE `sections` (
   `sous_texte` int(11) DEFAULT NULL,
   `position` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -418,7 +418,7 @@ CREATE TABLE `sections` (
 
 LOCK TABLES `sections` WRITE;
 /*!40000 ALTER TABLE `sections` DISABLE KEYS */;
-INSERT INTO `sections` VALUES (2,4,'/assets/images/logo.png',5,21);
+INSERT INTO `sections` VALUES (1,60,'/assets/images/logo.png',NULL,0),(2,61,'/assets/images/logo.png',NULL,1),(3,62,'/assets/images/logo.png',NULL,2),(4,63,'/assets/images/logo.png',NULL,3);
 /*!40000 ALTER TABLE `sections` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -470,7 +470,7 @@ CREATE TABLE `solution_question_section_binding` (
   CONSTRAINT `solution_question_section_binding_ibfk_1` FOREIGN KEY (`id_solution`) REFERENCES `solutions` (`id`),
   CONSTRAINT `solution_question_section_binding_ibfk_2` FOREIGN KEY (`id_question`) REFERENCES `question` (`id`),
   CONSTRAINT `solution_question_section_binding_ibfk_3` FOREIGN KEY (`id_section`) REFERENCES `sections` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -479,7 +479,7 @@ CREATE TABLE `solution_question_section_binding` (
 
 LOCK TABLES `solution_question_section_binding` WRITE;
 /*!40000 ALTER TABLE `solution_question_section_binding` DISABLE KEYS */;
-INSERT INTO `solution_question_section_binding` VALUES (1,14,1,NULL),(2,14,2,2),(3,14,1,2);
+INSERT INTO `solution_question_section_binding` VALUES (1,14,1,1),(2,14,6,2),(3,14,12,3),(4,14,15,4);
 /*!40000 ALTER TABLE `solution_question_section_binding` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -544,4 +544,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-18 17:08:16
+-- Dump completed on 2021-03-19 11:25:59
