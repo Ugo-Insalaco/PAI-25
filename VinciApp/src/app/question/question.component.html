@@ -2,10 +2,11 @@
 
   <!-- Affichage de la question -->
 
-  <div *ngIf="type=='QCM'" [contentEditable]="modif && admin">
+  <div *ngIf="type=='radio'" [contentEditable]="modif && admin">
     {{question}}
-    <br><input type="radio" name="{{id_question}}" value="{{rep1}}" [(ngModel)]="answer" (change)="onAnswer()"> {{rep1}}
-    <br><input type="radio" name="{{id_question}}" value="{{rep2}}" [(ngModel)]="answer" (change)="onAnswer()"> {{rep2}}
+    <ngcontainer *ngFor="let r of reponses">
+      <br><input type="radio" name="{{id_question}}" value="{{r.id}}" [(ngModel)]="id_answer" (change)="onAnswer()"> {{r.reponse}}
+    </ngcontainer>
   </div>
 
   <div *ngIf="type=='text'" [contentEditable]="modif && admin">
@@ -18,16 +19,28 @@
     <br><input type="number" [(ngModel)]="answer" (change)="onAnswer()">
   </div>
   
-  <div *ngIf="type=='checkbox'">
+  <!-- <div *ngIf="type=='checkbox'">
     {{question}}
-    <br><input type="checkbox" value="{{rep1}}" [(ngModel)]="answer" onchange="console.log('ça marche pour checkbox 1')"> {{rep1}}
+    <ngcontainer *ngFor = "let r of reponses">
+      <br><input type="checkbox" (change)="onAnswer2(r[0])"> {{r[1]}}
+    </ngcontainer>
+  </div> -->
+
+  <div *ngIf="type=='select'">
+    {{question}}
+    <select multiple [(ngModel)]="answer" (change)="onAnswer()">
+      <ngcontainer *ngFor = "let r of reponses">
+        <option> {{r.reponse}} </option>
+      </ngcontainer>
+    </select>
   </div>
 
-  <div *ngIf="type=='scroll'">
+  <div *ngIf="type=='select_all_iot'">
     {{question}}
-    <select>
-      <option value="{{rep1}}"> {{rep1}} </option>
-      <option value="{{rep2}}"> {{rep2}} </option>
+    <select [(ngModel)]="answer" (change)="onAnswer()">
+      <ngcontainer *ngFor = "let iot of all_iot">
+        <option> {{iot.name}} </option>
+      </ngcontainer>
     </select>
   </div>
 
@@ -42,29 +55,22 @@
       </select>
     </div>
     <div *ngIf="type=='QCM'">
-      <br> Question suivante si la réponse est {{rep1}} :
-      <select>
-        <option selected>Question a</option>
-        <option> Question b </option>
-      </select>
-      <br> Question suivante si la réponse est {{rep2}} :
-      <select>
-        <option> Question a </option>
-        <option selected> Question b </option>
-      </select>
+      <ngcontainer *ngFor="let r of reponses">
+        <br> Question suivante si la réponse est {{r.reponse}} :
+        <select>
+          <option selected> Question a </option>
+          <option> Question b </option>
+        </select>
+      </ngcontainer>
     </div>
   </div>
   <br>
 
   <!-- Affichage de la question suivante -->
-  <div *ngIf="answer || modif">
-    <app-question *ngIf="10>id_question" 
+  <div *ngIf="answer || id_answer || modif">
+    <app-question *ngIf="next" 
       [id_question]=next
       [tab]=tab
-      [type]="'text'" 
-      [question]="'Ajoutez un commentaire :'" 
-      [rep1]=""
-      [rep2]=""
       [modif]=modif>
     </app-question>
   </div>
