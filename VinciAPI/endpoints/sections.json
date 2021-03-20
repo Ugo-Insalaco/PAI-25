@@ -56,5 +56,12 @@
             }
         }
     },
-    "relationships": []
+    "relationships": [],
+    "delete_before":[
+        {
+            "name":"solution_question",
+            "bindTable":"solution_question_section",
+            "key":"id_section"
+        }
+    ]
 }

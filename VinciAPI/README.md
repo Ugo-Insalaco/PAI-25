@@ -57,3 +57,26 @@ Liste des relationships disponibles :
     * [/api/question] : reponse
     * [/api/solutions] : section_question, product
   
+Les requêtes PATCH :
+
+- l'url des requêtes PATCH est simplement [/api/<quelque_chose>/<id_de_la_chose>]
+en donnant l'identifiant de la ressource que l'on cherche à modifier
+- il n'est pas possible de modifier des relations, il faudra les supprimer totalement et les refaire après
+- les arguments du body des requêtes PATCH sont tous optionnels (on peut mettre tous les arguments de la table qui ont le tag 'updatable')
+
+Les requêtes DELETE :
+  
+- Les url des requêtes DELETE sont [/api/<quelque_chose>/<id_de_la_chose>] ou bien [/api/quelque_chose/<id_de_la_chose>/relationships/<nom_de_la_relation>]
+- dans le cas des suppressions dans les tables principales, **tous les binds dans les autres tables avec la ligne que l'on veut supprimer seront enlevés** (faire attention donc). De même les lignes de tables principales qui possèdent une foreign key vers la ligne que l'on supprime verront leur valeur mise à NULL
+> Supprimer une ligne de la table *cont_fra* ou *cont_en* va mettre à NULL toutes les lignes qui référencent ce texte
+- Dans le cas de suppression d'une relation, on donne en paramètre dans le body les id des objets lié à la table principale que l'on souhaite supprimer. 
+> Par exemple pour supprimer la relation liant les tables *question*, *sections*, *solution* avec *id_section*=1, *id_question*=2, *id_solution*=3 depuis [/api/questions/relationships/solution_section], on met dans le body les paramètres
+    {
+        id_solution:2,
+        id_section:1
+    }
+> voir l'attribut *fields* dans les *relationships* de chaque fichier de configuration
+
+Remarques : 
+
+- Les tables *cont_fra* et *cont_en* sont liées entre elles par l'endpoint text. Si l'on ajoute un texte dans la base de données, il sera ajouté dans les deux tables et de même si on le supprime. **Ce n'est pas le cas si on modifie la table**

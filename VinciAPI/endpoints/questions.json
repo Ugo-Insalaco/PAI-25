@@ -4,7 +4,8 @@
     "fields": {
         "id": "auto-increment",
         "content": "mandatory updatable",
-        "type":"mandatory updatable"
+        "type":"mandatory",
+        "info":"optionnal updatable"
     },
     "primaryField": "id",
     "updatable" : [
@@ -85,6 +86,24 @@
             "fields":{
                 "id_reponse": "mandatory"
             }
+        }
+    ],
+
+    "delete_before":[
+        {
+            "name": "solution_section",
+            "bindTable": "solution_question_section",
+            "key":"id_question"
+        },
+        {
+            "name": "reponse_binding",
+            "bindTable": "question_reponse",
+            "key": "id_question"
+        },
+        {
+            "name": "reponse",
+            "endpoint": "reponse",
+            "key":"question_suivante"
         }
     ]
 }

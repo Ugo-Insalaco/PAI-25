@@ -68,7 +68,12 @@
             }
         }
     },
-    "relationships":[
-        
+    "relationships":[],
+    "delete_before":[
+        {
+            "name":"offre",
+            "bindTable":"solution_offre",
+            "key":"id_solution"
+        }
     ]
 }

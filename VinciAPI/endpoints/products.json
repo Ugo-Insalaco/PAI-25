@@ -7,8 +7,7 @@
         "name":"mandatory",
         "ref_dataprint":"optionnal",
         "power_supply":"optionnal",
-        "price":"mandatory",
-        "solution":"mandatory"
+        "price":"mandatory"
     },
     "primaryField":"id",
     "include":[
@@ -90,6 +89,18 @@
             "fields":{
                 "id_data":"mandatory"
             }
+        }
+    ],
+    "delete_before":[
+        {
+            "name":"data",
+            "bindTable":"data_binding",
+            "key":"id_product"
+        },
+        {
+            "name":"solution",
+            "bindTable":"solution_binding",
+            "key":"id_product"
         }
     ]
     
