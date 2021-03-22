@@ -1,5 +1,5 @@
 import { Component,Inject, OnInit,ViewChild,ElementRef  } from '@angular/core';
-import {EmailService} from '/home/sirine/Desktop/PAI-25/VinciApp/src/app/email.service'
+import {EmailService} from 'src/app/services/email.service'
  import  jsPDF from 'jspdf';
  import html2canvas from 'html2canvas';
 
@@ -39,7 +39,7 @@ export class ContactResumeComponent implements OnInit {
               email: this.data.Email,
               doc: PDF,
             }
-            this.http.sendEmail("http://localhost:3000/sendmail", contactUser).subscribe(
+            this.http.sendEmail("/sendmail", contactUser).subscribe(
             data => {
              let res:any = data; 
               console.log("mail envoyée correctement");},

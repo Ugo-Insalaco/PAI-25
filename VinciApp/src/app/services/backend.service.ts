@@ -40,6 +40,7 @@ export class BackendService {
         })
         .subscribe(e=>{
             console.log('requête POST effectuée')
+            console.log(e)
             callback(e)
         })
     }

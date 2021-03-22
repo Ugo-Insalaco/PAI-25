@@ -1,7 +1,4 @@
 const nodemailer = require("nodemailer");
-const details = require("/home/sirine/Desktop/PAI-25/VinciAPI/endpoints/details.json");
-
-const log = console.log;
 const mail = function(app){
   app.post("/sendmail", (req, res) => {
     console.log("request came");
