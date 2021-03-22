@@ -14,7 +14,6 @@ const routes: Routes = [
   {path: '', redirectTo: '', pathMatch: 'full'},
   {path: 'login', component: LoginComponent },
   {path: 'contact', component: ContactFormComponent},
-  {path: 'search', component: SearchComponent},
   {path: 'project/:solution', component: ProjectComponent},
   {path: 'modif-project/:project', component: ModifProjectComponent},
   {path: 'new-project', component: NewProjectComponent},
@@ -34,7 +33,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: "enabled"})],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

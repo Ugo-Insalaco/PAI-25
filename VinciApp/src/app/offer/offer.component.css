@@ -10,9 +10,12 @@
 }
 
 #commimg{
+  display: flex;
+  flex-direction: row;
   height: fit-content;
   min-width: 55%;
   position: absolute;
+  align-items: baseline;
   bottom: 20%;
   padding: 2%;
   color: white;
@@ -34,20 +37,27 @@
 }
 
 #buttonvalidersolution{
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 4px;
+  padding-bottom: 4px;
   margin-left: 10px;
+  border-radius: 3px;
+  background-color: #1E1E1E;
+  color: white;
+  border : 4px;
+  border-color: #272727;
+  box-shadow: 1px 1px 1px #646464;
 }
 
-#container-admin-controls{
+#btnmodifimage{
   position: absolute;
-  right:1vw;
-  bottom:1vh;
-  margin-left: 1vh;
-  background-color: white;
-  border: solid 1px black;
+  bottom: 1vh;
+  right: 1vh;
 }
 
-#btnmodif{
+#btnmodiftexte{
   position: absolute;
-  right:1vw;
-  bottom:1vh;
+  bottom: 1vh;
+  right: 1vh;
 }

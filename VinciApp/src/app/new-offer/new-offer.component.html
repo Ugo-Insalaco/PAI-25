@@ -1,0 +1,15 @@
+<div id="container">
+  <button id="btnnewoffer" (click)="displayEmptyOffer()" *ngIf="createNewOffer===false">
+    <mat-icon>add_circle</mat-icon>
+    <span>Créer une nouvelle offre</span>
+  </button>
+  <app-offer *ngIf="createNewOffer===true" [admin]="true" [id]="3"></app-offer>
+  <button id="btnConfirmOfferCreation" (click)="sendDatatoDB()" *ngIf="createNewOffer===true">
+    <mat-icon>done</mat-icon>
+    <span>Valider la création de l'offre</span>
+  </button>
+  <button id="btnCancelCreation" (click)="cancelCreation()" *ngIf="createNewOffer===true">
+    <mat-icon>clear</mat-icon>
+    <span>Annuler</span>
+  </button>
+</div>

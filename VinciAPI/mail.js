@@ -1,15 +1,21 @@
 const nodemailer = require("nodemailer");
+<<<<<<< HEAD
+=======
+//const details = require("./endpoints/details.json");
+
+const log = console.log;
+>>>>>>> 8f6290b830cbfb3738e2bcf2adcd9e28fcf4a87f
 const mail = function(app){
   app.post("/sendmail", (req, res) => {
     console.log("request came");
     let userContact = req.body;
     console.log(userContact);
     sendMail(user, info => {
-      
+
       res.send(info);
     });
   });
-  
+
   async function sendMail(user, callback) {
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
@@ -21,9 +27,9 @@ const mail = function(app){
         pass: testAccount.pass, // generated ethereal password
       },
     });
-    
-  
-    
+
+
+
     var mailOptions = {
       from: user.email,
       to: '',
@@ -35,7 +41,7 @@ const mail = function(app){
         path: '' // stream this file
     }]
     };
-    
+
     transporter.sendMail(mailOptions, function(error, info){
       if (error) {
         console.log(error);
@@ -43,13 +49,13 @@ const mail = function(app){
         console.log('Email sent: ' + info.response);
       }
     });
-  
+
     // send mail with defined transport object
     let info = await transporter.sendMail(mailOptions);
-  
+
     callback(info);
   }
-  
+
 }
 
 module.exports = mail

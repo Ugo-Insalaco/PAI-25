@@ -1,0 +1,152 @@
+{
+    "name": "offre",
+    "table": "cont_offre",
+    "fields":{
+        "id":"",
+        "name":"mandatory",
+        "text":"mandatory",
+        "picture":"optionnal"
+    },
+    "primaryField":"id",
+    "updatable":[
+
+    ],
+    "include":[
+        {
+            "name": "text",
+            "default_inclusion": true,
+            "bind":[
+                {
+                    "id":21,
+                    "endpoint": "text",
+                    "local_key":"name",
+                    "foreign_key":"id"
+                },
+                {
+                    "id":22,
+                    "endpoint": "text",
+                    "local_key":"text",
+                    "foreign_key":"id"
+                }
+            ]
+        },
+        {
+            "name": "cadran",
+            "default_inclusion": false,
+            "bind":[
+                {
+                    "id": 23,
+                    "bindTable":"cadran_offre",
+                    "local_key":"id",
+                    "foreign_key":"id_offre",
+                    "proxy":[
+                        {
+                            "id":24,
+                            "endpoint":"cadran",
+                            "local_key":"id_cadran",
+                            "foreign_key":"id"
+                        }
+                    ]
+                }
+            ]
+
+        },
+        {
+            "name": "solution",
+            "default_inclusion": false,
+            "bind":[
+                {
+                    "id":25,
+                    "bindTable":"solution_offre",
+                    "local_key":"id",
+                    "foreign_key":"id_offre",
+                    "proxy":[
+                        {
+                            "id":26,
+                            "endpoint":"solutionContent",
+                            "local_key":"id_solution",
+                            "foreign_key":"id"
+                        }
+                    ]
+                }
+            ]
+        }
+
+    ],
+    "get_response":{
+        "route": "/api/offres",
+        "method" : "GET",
+        "data":{
+            "id":"{{0::offre::id}}",
+            "fields":{
+                "name":"{{0::offre::name}}",
+                "text":"{{0::offre::text}}"
+            },
+            "included":{
+                "text":{
+                    "id":["{{21::text::id}}","{{22::text::id}}"],
+                    "name": "{{21::text::text}}",
+                    "text": "{{22::text::text}}"
+                },
+                "cadran":{
+                    "id":["{{23::cadran_offre::id}}"],
+                    "id_cadran":"{{24::cadran::id}}",
+                    "name":"{{24::cadran::name}}",
+                    "color":"{{24::cadran::color}}",
+                    "picture_back":"{{24::cadran::picture_back}}",
+                    "logo":"{{24::cadran::logo}}",
+                    "circles":"{{24::cadran::circles}}",
+                    "problem":"{{24::cadran::problem}}",
+                    "subincluded":{
+                        "text":{
+                            "id":["{{14::text::id}}","{{15::text::id}}","{{16::text::id}}"],
+                            "name": "{{14::text::text}}",
+                            "circles": "{{15::text::text}}",
+                            "problem": "{{16::text::text}}"
+                        }
+                    }
+                },
+                "solution":{
+                    "id":["{{25::solution_offre::id}}"],
+                    "id_solution":"{{26::solutionContent::id}}",
+                    "name":"{{26::solutionContent::name}}",
+                    "text_db":"{{26::solutionContent::text_db}}",
+                    "picture_db":"{{26::solutionContent::picture_db}}",
+                    "problem":"{{26::solutionContent::problem}}",
+                    "arg":"{{26::solutionContent::arg}}",
+                    "subincluded":{
+                        "text":{
+                            "id": ["{{27::text::id}}","{{28::text::id}}","{{29::text::id}}","{{30::text::id}}"],
+                            "name": "{{27::text::text}}",
+                            "text_db":"{{28::text::text}}",
+                            "problem":"{{29::text::text}}",
+                            "arg":"{{30::text::text}}"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "relationships":[
+        {
+            "name":"solution",
+            "bindTable":"solution_offre",
+            "key":"id_offre",
+            "fields":{
+                "id_solution": "mandatory"
+            }
+        }
+    ],
+    "delete_before":[
+        {
+            "name":"solution",
+            "bindTable":"solution_offre",
+            "key":"id_offre"
+        },
+        {
+            "name":"cadran",
+            "bindTable":"cadran_offre",
+            "key":"id_offre"
+        }
+    ]
+}

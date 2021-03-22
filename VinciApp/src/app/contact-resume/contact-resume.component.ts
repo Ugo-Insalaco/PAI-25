@@ -1,5 +1,9 @@
 import { Component,Inject, OnInit,ViewChild,ElementRef  } from '@angular/core';
+<<<<<<< HEAD
 import {EmailService} from 'src/app/services/email.service'
+=======
+import {EmailService} from '../services/email.service'
+>>>>>>> 8f6290b830cbfb3738e2bcf2adcd9e28fcf4a87f
  import  jsPDF from 'jspdf';
  import html2canvas from 'html2canvas';
 
@@ -15,22 +19,22 @@ export class ContactResumeComponent implements OnInit {
 
   ngOnInit(): void {
   }
- 
-      
+
+
       public openPDF():void {
         //génération pdf
         let DATA = document.getElementById('htmlData') as HTMLDataElement;
-          
+
         html2canvas(DATA).then(canvas => {
-            
+
             let fileWidth = 500;
             let fileHeight = canvas.height * fileWidth / canvas.width;
-            
+
             const FILEURI = canvas.toDataURL('image/png')
             let PDF = new jsPDF('p', 'pt', 'a4');
             let position = 0;
             PDF.addImage(FILEURI, 'PNG', 0, position,fileWidth, fileHeight)
-            
+
             PDF.save('Demande.pdf');
 
             //envoi email
@@ -41,27 +45,18 @@ export class ContactResumeComponent implements OnInit {
             }
             this.http.sendEmail("/sendmail", contactUser).subscribe(
             data => {
-             let res:any = data; 
+             let res:any = data;
               console.log("mail envoyée correctement");},
              err => {
             console.log(err);
-        });   
-      })  
+        });
+      })
       }
-   
-    
-    
-    
 
-   
+
+
+
+
+
 
 }
-
-
-  
-  
-  
-  
-  
-
-

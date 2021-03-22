@@ -5,3 +5,11 @@
     margin-right: auto;
     
 }
+
+::ng-deep .mat-step-header .mat-step-icon-selected {
+    background-color: #00438a;
+ }
+
+::ng-deep .mat-step-header .mat-step-icon-state-edit {
+    background-color: #00438a; 
+}

@@ -3,7 +3,7 @@
     "table" : "solutions",
     "fields": {
         "id":"",
-        "name":""
+        "name":"mandatory"
     },
     "primaryField": "id",
     "updatable" : [
@@ -67,5 +67,36 @@
                 }
             }
         }
-    }
+    },
+    "relationships":[
+        {
+            "name":"section_question",
+            "bindTable":"solution_question_section",
+            "key":"id_solution",
+            "fields":{
+                "id_question":"mandatory",
+                "id_section":"mandatory"
+            }
+        },
+        {
+            "name":"product",
+            "bindTable":"solution_binding",
+            "key":"id_solution",
+            "fields":{
+                "id_product":"mandatory"
+            }
+        }
+    ],
+    "delete_before":[
+        {
+            "name":"section_question",
+            "bindTable":"solution_question_section",
+            "key":"id_solution"
+        },
+        {
+            "name":"product",
+            "bindTable":"solution_binding",
+            "key":"id_solution"
+        }
+    ]
 }

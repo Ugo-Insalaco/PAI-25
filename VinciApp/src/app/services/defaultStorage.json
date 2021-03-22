@@ -1,5 +1,11 @@
 {
     "langage": "FRA",
 
-    "projet": []
+    "projet": [
+        {"partie": "", "id_question": "", "question": "", "id_reponse": "", "reponse": ""}
+    ],
+
+    "iot": [
+        {"reference": "", "quantite": ""}
+    ]
 }

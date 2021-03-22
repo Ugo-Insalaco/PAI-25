@@ -3,5 +3,7 @@
     "solution": "solutions",
     "question_reponse":"question_reponse_binding",
     "data_binding":"data_binding",
-    "solution_binding":"solution_binding"
+    "solution_binding":"solution_binding",
+    "cadran_offre": "fk_binding",
+    "solution_offre":"offre_binding"
 }

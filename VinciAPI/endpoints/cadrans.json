@@ -3,12 +3,12 @@
     "table": "cont_cadran",
     "fields":{
         "id":"",
-        "name":"",
-        "color":"",
-        "picture_back":"",
-        "logo":"",
-        "circles":"",
-        "problem":""
+        "name":"mandatory",
+        "color":"mandatory",
+        "picture_back":"mandatory",
+        "logo":"mandatory",
+        "circles":"mandatory",
+        "problem":"mandatory"
     },
     "primaryField":"id",
     "updatable":[
@@ -62,5 +62,22 @@
                 }
             }
         }
-    }
+    },
+    "relationships":[
+        {
+            "name":"offre",
+            "bindTable":"cadran_offre",
+            "key":"id_cadran",
+            "fields":{
+                "id_offre": "mandatory"
+            }
+        }
+    ],
+    "delete_before":[
+        {
+            "name": "offre",
+            "bindTable":"cadran_offre",
+            "key":"id_cadran"
+        }
+    ]
 }

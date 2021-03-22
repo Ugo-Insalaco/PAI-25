@@ -1,6 +1,5 @@
-import { Component, OnInit, Input, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import {Router} from '@angular/router';
-import { BackendService } from '../services/backend.service';
 
 @Component({
   selector: 'app-offer',
@@ -8,19 +7,18 @@ import { BackendService } from '../services/backend.service';
   styleUrls: ['./offer.component.css']
 })
 export class OfferComponent implements OnInit, AfterViewInit{
+    // Paramètres en input et initialisation des paramètres par défaut
     @Input() admin: boolean;
     @Input() id: number;
-    @Input() photooffre: string = "url(${photooffre1})";
-    @Input() couleur: string = "";
-    @Input() texteoffre: string = "";
-    @Input() nomoffre: string = "";
+    @Input() photooffre: string = "url(/assets/images/actifstechniques/offre1.jpg)";
+    @Input() couleur: string;
+    @Input() texteoffre: string = "Texte pour l'offre";
+    @Input() nomoffre: string = "Nom de l'offre";
     @Input() offresolutions : string[] = [""];
     @Input() configgauche : boolean = false;
 
-    contentEditable : boolean = false;
-    modif : boolean = false;
-
-    visualizationActivated : boolean = false;
+    contentEditableText1 : boolean = false;
+    contentEditableText2 : boolean = false;
 
     @ViewChild('listesolutions') selectView: ElementRef;
     @ViewChild('divtext') textView: ElementRef;
@@ -32,7 +30,7 @@ export class OfferComponent implements OnInit, AfterViewInit{
     // To get the selected option in the select
     selectedOption: string = "";
 
-    constructor(private router: Router, private backend: BackendService) {
+    constructor(private cd: ChangeDetectorRef,private router: Router) {
       this.admin = false;
     }
 
@@ -64,6 +62,7 @@ export class OfferComponent implements OnInit, AfterViewInit{
         var img = this.imageView.nativeElement;
         img.style.right=0;
       }
+      this.cd.detectChanges();
     }
 
     onValiderSolution(){
@@ -73,45 +72,5 @@ export class OfferComponent implements OnInit, AfterViewInit{
       if(solution!=""){
         this.router.navigate([this.router.url,solution]);
       }
-    }
-
-    onModifier(): void {
-      this.contentEditable = true;
-      this.modif = true;
-    }
-
-    onValider(): void {
-      this.contentEditable = false;
-      this.modif = false;
-    }
-
-    updateImageDisplay(): void {
-      var preview = this.imageView.nativeElement;
-      var file    = this.input.nativeElement.files[0];
-      var reader  = new FileReader();
-
-      reader.onloadend = function () {
-        preview.style.backgroundImage = "url("+reader.result+")";
-      }
-
-      if (file) {
-        this.visualizationActivated=true;
-        reader.readAsDataURL(file);
-      }
-    }
-
-    updateAssets(): void {
-      var file = this.input.nativeElement.files[0];
-      var nomcadran = this.router.url.split('/').pop().replace(/-/gi, "");
-      var fileName = nomcadran+"-offre"+this.id+(file.type=="image/jpeg"? ".jpg":".png");
-      var renamedFile = new File([file],fileName,{type:file.type});
-      console.log(file);
-      console.log(renamedFile);
-
-      let formData = new FormData();
-      formData.append("file",renamedFile);
-      this.backend.POST('/api/upload',formData, res=>{
-          console.log('response received is : ',res)
-      });
     }
 }

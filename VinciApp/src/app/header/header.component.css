@@ -18,9 +18,6 @@
 .fill-space {
     flex: 1 1 auto;
   }
-.space{
-    margin-right: 100 px;
-}
 
 .transparant{
     opacity: 0;

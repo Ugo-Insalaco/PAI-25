@@ -20,9 +20,15 @@ export class ProjectComponent implements OnInit{
     selectedTab: any
     backendMessage: String
     nomsolution: string;
-    questions: any;
+    questions = [];
     modif = false;
     admin = true;
+    id_solution = 14; // voir comment récupérer cet id !
+    id_question_0: number //1ere question de la première section
+    id_question_1: number //1ere question de la deuxième section
+    id_question_2: number //1ere question de la troisième section
+    id_question_3: number //1ere question de la quatrième section (ajouter un commentaire)
+
     constructor(private router: Router, private backend: BackendService, private config: ConfigService, private globalStorage: GlobalStorageService){
     }
 
@@ -30,24 +36,52 @@ export class ProjectComponent implements OnInit{
     ngOnInit(){
         this.complete=true
         this.selectedTab=0
-        let body={
-            username: 'KN22',
-            password: 'toto22'
-        }
-        this.globalStorage.reset_default("projet")
-        this.questions = this.globalStorage.default["projet"]
+        // let body={
+        //     username: "le dieu",
+        //     password:'je suis intelligent',
+        // }
+
+        this.globalStorage.set("projet", []) //initialisation de la variable globale projet
+        this.globalStorage.set("iot", []) //initialisation de la variable globale iot (quantité et ref des iot)
 
         // this.backend.GET('/api/text/1', e=>{
         //     this.backendMessage = JSON.stringify(e)
         // })
-        this.backend.GET('/api/text/1', e=>{
-            this.backendMessage = JSON.stringify(e)
-        })
+
         this.nomsolution = this.getNomSolution();
-        // this.globalStorage.set('langage', 'ENG')
-        // this.backendMessage =this.globalStorage.get('langage')
-        this.backend.POST('/auth/login', body, res=>{
-            console.log(res)
+
+        // this.backend.POST('/auth/login', body, res=>{
+        //     console.log(res)
+        // })
+
+        // this.backend.GET(`/api/solutions/${this.id_solution}?include=section_question`, e=>{
+        //     e.data[0].included["section_question"][0].id_question
+        // });
+
+        //Récupération des premières questions de chaque section :
+        this.backend.GET(`/api/solutions/${this.id_solution}?include=section_question`, e=>{
+            for (let i = 0; i < e.data[0].included["section_question"].length; i++) {
+                const id_section = e.data[0].included["section_question"][i].id_section;
+                this.backend.GET(`/api/sections/${id_section}`, e2=>{
+                    if (e2.data[0].fields.position==0) {
+                        this.id_question_0 = e.data[0].included["section_question"][i].id_question
+                        console.log(this.id_question_0)                
+                    }
+                    if (e2.data[0].fields.position==1) {
+                        this.id_question_1 = e.data[0].included["section_question"][i].id_question 
+                        console.log(this.id_question_1)               
+                    }
+                    if (e2.data[0].fields.position==2) {
+                        this.id_question_2 = e.data[0].included["section_question"][i].id_question
+                        console.log(this.id_question_2)                
+                    }
+                    if (e2.data[0].fields.position==3) {
+                        this.id_question_3 = e.data[0].included["section_question"][i].id_question  
+                        console.log(this.id_question_3)              
+                    }
+                })
+            }
+            
         })
     }
 
@@ -57,6 +91,7 @@ export class ProjectComponent implements OnInit{
             var questions_string = this.globalStorage.get("projet")
             this.questions = JSON.parse(questions_string)
         }
+        this.modif=false
     }
 
     getNomSolution(){

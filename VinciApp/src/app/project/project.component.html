@@ -20,15 +20,14 @@
                         <button *ngIf="!modif && admin" (click)=onModifier()>Modifier</button>
                         <button *ngIf="modif && admin" (click)=onValiderModif()>Valider les modifications</button>
                     </div>
-                    <br><app-question 
+                    <br><app-question *ngIf="id_question_0"
                         [tab]="selectedTab" 
-                        [id_question]="1" 
-                        [type]="'number'" 
-                        [question]="'Combien de détecteurs de fumée ?'" 
-                        [rep1]=""
-                        [rep2]=""
+                        [id_question]=id_question_0
                         [modif]=modif>
                     </app-question>
+                    <div style="text-align: center;" *ngIf="modif && admin">
+                        <button>Ajouter une question</button>
+                    </div>
                 </mat-grid-list>
                 <button mat-raised-button style="float:right;" matStepperNext>Page suivante</button>
             </mat-step>
@@ -39,14 +38,14 @@
                         <button *ngIf="!modif && admin" (click)=onModifier()>Modifier</button>
                         <button *ngIf="modif && admin" (click)=onValiderModif()>Valider les modifications</button>
                     </div>
-                    <br><app-question 
+                    <br><app-question *ngIf="id_question_1"
                         [tab]="selectedTab" 
-                        [id_question]="3" 
-                        [type]="'QCM'" 
-                        [question]="'Quelle application souhaitez-vous utiliser ?'" 
-                        [rep1]="'IoThink'"
-                        [rep2]="'Autre'">
+                        [id_question]=id_question_1
+                        [modif]=modif>
                     </app-question>
+                    <div style="text-align: center;" *ngIf="modif && admin">
+                        <button>Ajouter une question</button>
+                    </div>
                 </mat-grid-list>
                 <button mat-raised-button matStepperPrevious>Page précédente</button>
                 <button mat-raised-button style="float:right;" matStepperNext>Page suivante</button>
@@ -58,14 +57,14 @@
                         <button *ngIf="!modif && admin" (click)=onModifier()>Modifier</button>
                         <button *ngIf="modif && admin" (click)=onValiderModif()>Valider les modifications</button>
                     </div>
-                    <br><app-question 
+                    <br><app-question *ngIf="id_question_2"
                         [tab]="selectedTab" 
-                        [id_question]="5" 
-                        [type]="'QCM'" 
-                        [question]="'Souhaitez-vous internaliser ou externaliser l installation des IoT ?'" 
-                        [rep1]="'Internaliser'"
-                        [rep2]="'Externaliser'">
+                        [id_question]=id_question_2
+                        [modif]=modif>
                     </app-question>
+                    <div style="text-align: center;" *ngIf="modif && admin">
+                        <button>Ajouter une question</button>
+                    </div>
                 </mat-grid-list>
                 <button mat-raised-button matStepperPrevious>Page précédente</button>
                 <button mat-raised-button style="float:right;" matStepperNext>Page suivante</button>
@@ -102,13 +101,10 @@
                     </div>
                     <br>
                     <div style="text-align: center;">
-                    <app-question 
+                    <app-question *ngIf="id_question_3"
                         [tab]="selectedTab" 
-                        [id_question]="10" 
-                        [type]="'text'" 
-                        [question]="'Ajouter un commentaire :'" 
-                        [rep1]="''"
-                        [rep2]="''">
+                        [id_question]=id_question_3
+                        [modif]=modif>
                     </app-question>
                         <button mat-raised-button>Valider</button>
                     </div>

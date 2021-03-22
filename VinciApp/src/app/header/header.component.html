@@ -4,32 +4,25 @@
       <img src="assets/images/VF_RGB_C.png" alt="Angular Project" />
     </a>
     <span class="fill-space" ></span>
-      <mat-form-field   appearance="fill" class="mat-form-field">
-          <mat-select [(value)]="selected"  >
-            <mat-option value="FR"  >FR</mat-option>
-            <mat-option value="ENG"  >ENG</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <span class="space"></span>
-          <span></span>
-          <span class="example-spacer"></span>
-          <span class="space"></span>
-          <span></span>
-          <button mat-button  class="space" (click)="searchNavigate()" routerLinkActive="active"><mat-icon>search  </mat-icon><span>Rechercher</span></button>
+    <mat-form-field   appearance="fill" class="mat-form-field">
+      <mat-select [(value)]="selected"  >
+        <mat-option value="FR"  >FR</mat-option>
+        <mat-option value="ENG"  >ENG</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <span></span>
+    <span class="example-spacer"></span>
+    <span></span>
+    <span class="example-spacer"></span>
+    <span></span>
+    <button  mat-raised-button id="connectbtn" color="primary" class="space" routerLink="/login"> <mat-icon  >perm_identity</mat-icon> <strong>Se Connecter</strong>  </button>
+    <span></span>
+    <span class="example-spacer"></span>
+    <span></span>
 
-          <span></span>
-          <span class="example-spacer"></span>
-          <span class="space"></span>
-          <span></span>
-          <button  mat-raised-button id="connectbtn" color="primary" class="space" (click)="loginNavigate()" routerLinkActive="active"> <mat-icon  >perm_identity</mat-icon> <strong>Se Connecter</strong>  </button>
-          <span class="space"></span>
-          <span></span>
-          <span class="example-spacer"></span>
-          <span class="space"></span>
-          <span></span>
-          <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"  class="space" (click)="homeNavigate()" routerLinkActive="active">
-          <mat-icon>menu</mat-icon>
-          </button>
-          <span class="space"></span>
+    <button mat-icon-button (click)="onToggleSidenav()" class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+    </button>
+
   </mat-toolbar>
 </div>
