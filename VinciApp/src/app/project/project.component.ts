@@ -31,8 +31,8 @@ export class ProjectComponent implements OnInit{
         this.complete=true
         this.selectedTab=0
         let body={
-            username: "le dieu",
-            password:'je suis intelligent',
+            username: "KN22",
+            password:'Bonjour',
         }
         this.globalStorage.reset_default("projet")
         this.questions = this.globalStorage.default["projet"]
@@ -47,7 +47,10 @@ export class ProjectComponent implements OnInit{
         // this.globalStorage.set('langage', 'ENG')
         // this.backendMessage =this.globalStorage.get('langage')
         this.backend.POST('/auth/login', body, res=>{
-            console.log(res)
+            console.log("requête POST faite")
+            console.log(res.error)
+        }, err=>{
+            console.log(err.error)
         })
     }
 

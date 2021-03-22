@@ -10,7 +10,6 @@ const auth = function(app){
     app.post('/auth/login', parsers.jsonBody_parser({username:"mandatory",password:"mandatory"}), function(req,res){
         // vérification du l'utilisateur
         pool.then(pool=>{
-            console.log(req.body)
             // à faire : masquer le mot de passe de l'utilisateur
             let sqlString = 'SELECT ??, ?? FROM ?? WHERE ?? = ?'
             let sqlValues = [
@@ -49,7 +48,6 @@ const auth = function(app){
             .then(row=>{
                 //vérification du mdp
                 bcrypt.compare(req.body.password, row.password, function(err, match){
-                    console.log(err, match)
                     if(err){
                         res.status(500).send({
                             message: 'Erreur comparaison des mots de passe',

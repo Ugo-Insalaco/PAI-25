@@ -12,7 +12,6 @@ const storage = multer.diskStorage({
 })
 var upload = multer({storage: storage})
 
-const text = require('./VinciAPI/text').text
 const languageParser = require('./VinciAPI/text').languageParser
 const endpoints = require('./VinciAPI/endpoints')
 const cors = require('cors')

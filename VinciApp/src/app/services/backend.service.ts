@@ -18,7 +18,7 @@ export class BackendService {
         return this.message
     }
 
-    public GET(url: string, callback: Function) {
+    public GET(url: string, success: Function, error: Function=null) {
         this.http.get(this.config.backend.url_api+url, {
             headers: new HttpHeaders({
                 langage: this.globalStorage.get('langage')
@@ -27,11 +27,15 @@ export class BackendService {
         }) 
         .subscribe(e=>{
             console.log('requête GET effectuée')
-            callback(e)
+            success(e)
+        },
+        err=>{
+            error(err)
         })
+        
     }
 
-    public POST(url: string, body: Object, callback: Function){
+    public POST(url: string, body: Object, success: Function, error: Function=null){
         this.http.post(this.config.backend.url_api+url, body, {
             headers: new HttpHeaders({
                 langage: this.globalStorage.get('langage')
@@ -40,11 +44,14 @@ export class BackendService {
         })
         .subscribe(e=>{
             console.log('requête POST effectuée')
-            callback(e)
+            success(e)
+        },
+        err=>{
+            error(err)
         })
     }
 
-    public DELETE(url: string, callback: Function){
+    public DELETE(url: string, success: Function, error: Function=null){
         this.http.delete(this.config.backend.url_api+url, {
             headers: new HttpHeaders({
                 langage: this.globalStorage.get('langage')
@@ -53,11 +60,14 @@ export class BackendService {
         })
         .subscribe(e=>{
             console.log('requête DELETE effectuée')
-            callback(e)
+            success(e)
+        },
+        err=>{
+            error(err)
         })
     }
 
-    public PATCH(url: string, body: Object, callback: Function){
+    public PATCH(url: string, body: Object, success: Function, error: Function=null){
         this.http.patch(this.config.backend.url_api+url, body,{
             headers: new HttpHeaders({
                 langage: this.globalStorage.get('langage')
@@ -66,7 +76,10 @@ export class BackendService {
         })
         .subscribe(e=>{
             console.log('requête PATCH effectuée')
-            callback(e)
+            success(e)
+        },
+        err=>{
+            error(err)
         })
     }
 }
