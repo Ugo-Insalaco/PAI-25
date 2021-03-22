@@ -4,10 +4,10 @@
     "fields": {
         "id":"",
         "name":"mandatory",
-        "text_db":"",
-        "picture_db":"",
-        "problem":"",
-        "arg":""
+        "text_db":"optionnal",
+        "picture_db":"optionnal",
+        "problem":"optionnal",
+        "arg":"optionnal"
     },
     "primaryField": "id",
     "updatable" : [

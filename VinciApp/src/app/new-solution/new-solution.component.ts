@@ -10,6 +10,8 @@ import { NewSolutionFormComponent } from '../new-solution-form/new-solution-form
 })
 export class NewSolutionComponent implements OnInit {
 
+  @Input() idOffer: number;
+
   constructor(public matDialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -20,6 +22,7 @@ export class NewSolutionComponent implements OnInit {
     dialogConfig.disableClose = true;  // The user can't close the dialog by clicking outside its body
     dialogConfig.id = "new-solution-form-component";
     dialogConfig.width = "70%";
+    dialogConfig.data = {id: this.idOffer};
     const modalDialog = this.matDialog.open(NewSolutionFormComponent, dialogConfig);
   }
 }
