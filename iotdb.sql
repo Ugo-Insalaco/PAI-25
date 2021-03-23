@@ -1,8 +1,8 @@
--- MariaDB dump 10.18  Distrib 10.5.7-MariaDB, for Win64 (AMD64)
+-- MariaDB dump 10.18  Distrib 10.5.8-MariaDB, for osx10.12 (x86_64)
 --
--- Host: localhost    Database: iotdb
+-- Host: localhost    Database: iot3
 -- ------------------------------------------------------
--- Server version	10.5.7-MariaDB
+-- Server version	10.5.8-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -31,7 +31,7 @@ CREATE TABLE `cont_cadran` (
   `circles` int(11) DEFAULT NULL,
   `problem` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `cont_cadran` (
 
 LOCK TABLES `cont_cadran` WRITE;
 /*!40000 ALTER TABLE `cont_cadran` DISABLE KEYS */;
-INSERT INTO `cont_cadran` VALUES (2,6,'#062C6B','/assets/images/actifstechniques/exImageFond.png','/assets/images/actifstechniques/logo.png',7,8);
+INSERT INTO `cont_cadran` VALUES (2,6,'#062C6B','/assets/images/actifstechniques/exImageFond.png','/assets/images/actifstechniques/logo.png',7,8),(3,65,'#03b0b4','/assets/images/confortenergieenvironnement/exImageFond.jpg','/assets/images/confortenergieenvironnement/logo.png',66,8),(4,67,'#cc2871','/assets/images/bienetre/exImageFond.jpg','/assets/images/bienetre/logo.png',68,8),(5,69,'#0caaeb','/assets/images/espaces/exImageFond.jpg','/assets/images/espaces/logo.png',70,8);
 /*!40000 ALTER TABLE `cont_cadran` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -78,7 +78,7 @@ CREATE TABLE `cont_fra` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `text` text DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -87,7 +87,7 @@ CREATE TABLE `cont_fra` (
 
 LOCK TABLES `cont_fra` WRITE;
 /*!40000 ALTER TABLE `cont_fra` DISABLE KEYS */;
-INSERT INTO `cont_fra` VALUES (1,'Salut ça va ?!'),(2,'Ouais ça va et toi gros ?!'),(3,'c\'est moi la data'),(4,'numero1'),(5,' Bonjour je suis le sous_texte'),(6,' Actifs Techniques'),(7,'/assets/images/actifstechniques/cerclesBandeau.png'),(8,'Exemple de problématique'),(9,'Supervision des équipements CVC'),(10,'Texte offre supervision équipements CVC'),(11,'Production de froid'),(12,'Texte prod de froid'),(13,'Pb prod de froid'),(14,'Arg prod de froid'),(15,'Production de chaud'),(16,'Texte prod de chaud'),(17,'Pb prod de chaud'),(18,'Arg prod de chaud'),(19,'Choissisez votre solution :'),(20,'Retour état brûleur uniquement si le brûleur a une sortie TOR d\'état disponible'),(21,'Nombre de chaudières :'),(22,'Souhaitez-vous personnaliser votre solution en ajoutant d\'autres IoT ?'),(23,'Selectionnez les autres IoT à ajouter :'),(24,'Souhaitez-vous utiliser un réseau public ou privé ?'),(25,'Quelle application souhaitez-vous utiliser ?'),(26,'Type d\'hébergement et accès logiciel :'),(27,'Type de dashboard :'),(28,'Précisez l\'outil souhaité :'),(29,'Précisez le besoin :'),(30,'Fonctionnalités souhaitées :'),(31,'Souhaitez-vous internaliser ou externaliser l\'installation des IoT ?'),(32,'Souhaitez-vous internaliser ou externaliser la création des dashboards ?'),(33,'Durée de vie souhaitée de la solution (en année) :'),(34,'Ajouter un commentaire :'),(35,'T° départ/retour'),(36,'T° départ/retour + retour état brûleur'),(37,'number'),(38,'Oui'),(39,'Non'),(40,'Réseau public LoRaWAN Orange'),(41,'Réseau privé LoRaWAN avec GW WATTSENSE'),(42,'IoThink'),(43,'SaaS (Cloud)'),(44,'On-Premise (Serveur interne client)'),(45,'Autre'),(46,'Public (au catalogue avec plan 2d)'),(47,'Spécifique'),(48,'Alertes (dépassement seuil, évènement...)'),(49,'Reporting'),(50,'Aucune (accès dashboard uniquement)'),(51,'text'),(52,'text'),(53,'[ là il faudrait la liste de tous les iot disponibles donc à voir ]'),(54,'Internaliser'),(55,'Externaliser (VF RHÔNE IIT)'),(56,'Internaliser'),(57,'Externaliser (VF RHÔNE IIT)'),(58,'number'),(59,'text'),(60,'Capteurs et connectivité'),(61,'Application et fonctionnalités'),(62,'Installation physique des IoT et création du dashboard'),(63,'Récapitulatif et validation'),(64,'https://www.orange-business.com/fr/reseau-iot');
+INSERT INTO `cont_fra` VALUES (1,'Salut ça va ?!'),(2,'Ouais ça va et toi gros ?!'),(3,'c\'est moi la data'),(4,'numero1'),(5,' Bonjour je suis le sous_texte'),(6,' Actifs Techniques'),(7,'/assets/images/actifstechniques/cerclesBandeau.png'),(8,'Exemple de problématique'),(9,'Supervision des équipements CVC'),(10,'Texte offre supervision équipements CVC'),(11,'Production de froid'),(12,'Texte prod de froid'),(13,'Pb prod de froid'),(14,'Arg prod de froid'),(15,'Production de chaud'),(16,'Texte prod de chaud'),(17,'Pb prod de chaud'),(18,'Arg prod de chaud'),(19,'Choissisez votre solution :'),(20,'Retour état brûleur uniquement si le brûleur a une sortie TOR d\'état disponible'),(21,'Nombre de chaudières :'),(22,'Souhaitez-vous personnaliser votre solution en ajoutant d\'autres IoT ?'),(23,'Selectionnez les autres IoT à ajouter :'),(24,'Souhaitez-vous utiliser un réseau public ou privé ?'),(25,'Quelle application souhaitez-vous utiliser ?'),(26,'Type d\'hébergement et accès logiciel :'),(27,'Type de dashboard :'),(28,'Précisez l\'outil souhaité :'),(29,'Précisez le besoin :'),(30,'Fonctionnalités souhaitées :'),(31,'Souhaitez-vous internaliser ou externaliser l\'installation des IoT ?'),(32,'Souhaitez-vous internaliser ou externaliser la création des dashboards ?'),(33,'Durée de vie souhaitée de la solution (en année) :'),(34,'Ajouter un commentaire :'),(35,'T° départ/retour'),(36,'T° départ/retour + retour état brûleur'),(37,'number'),(38,'Oui'),(39,'Non'),(40,'Réseau public LoRaWAN Orange'),(41,'Réseau privé LoRaWAN avec GW WATTSENSE'),(42,'IoThink'),(43,'SaaS (Cloud)'),(44,'On-Premise (Serveur interne client)'),(45,'Autre'),(46,'Public (au catalogue avec plan 2d)'),(47,'Spécifique'),(48,'Alertes (dépassement seuil, évènement...)'),(49,'Reporting'),(50,'Aucune (accès dashboard uniquement)'),(51,'text'),(52,'text'),(53,'[ là il faudrait la liste de tous les iot disponibles donc à voir ]'),(54,'Internaliser'),(55,'Externaliser (VF RHÔNE IIT)'),(56,'Internaliser'),(57,'Externaliser (VF RHÔNE IIT)'),(58,'number'),(59,'text'),(60,'Capteurs et connectivité'),(61,'Application et fonctionnalités'),(62,'Installation physique des IoT et création du dashboard'),(63,'Récapitulatif et validation'),(64,'https://www.orange-business.com/fr/reseau-iot'),(65,'Environnement'),(66,'/assets/images/confortenergieenvironnement/cerclesBandeau.png'),(67,'Santé et Bien-être'),(68,'/assets/images/bienetre/cerclesBandeau.png'),(69,'Esapces'),(70,'/assets/images/espaces/cerclesBandeau.png');
 /*!40000 ALTER TABLE `cont_fra` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -544,4 +544,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-19 11:25:59
+-- Dump completed on 2021-03-23 17:36:21
