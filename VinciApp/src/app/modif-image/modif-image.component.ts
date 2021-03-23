@@ -33,7 +33,7 @@ export class ModifImageComponent implements OnInit {
 
   closeImageModifPanel(): void {
     this.modifAllowed = false;
-    var img = this.imageView.nativeElement.style.backgroundImage = this.initialURL;
+    this.imageView.nativeElement.style.backgroundImage = this.initialURL;
   }
 
   updateImageDisplay(): void {
@@ -57,8 +57,6 @@ export class ModifImageComponent implements OnInit {
     var nomcadran = this.router.url.split('/').pop().replace(/-/gi, "");
     var fileName = nomcadran+"-"+this.imageType+(this.offerid!=0? this.offerid : "")+(file.type=="image/jpeg"? ".jpg":".png");
     var renamedFile = new File([file],fileName,{type:file.type});
-    console.log(file);
-    console.log(renamedFile);
 
     let formData = new FormData();
     formData.append("file",renamedFile);

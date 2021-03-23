@@ -20,6 +20,8 @@ export class OfferComponent implements OnInit, AfterViewInit{
     contentEditableText1 : boolean = false;
     contentEditableText2 : boolean = false;
 
+    idBDD: number = 2; // A changer avec l'id de l'offre dans la BDD
+
     @ViewChild('listesolutions') selectView: ElementRef;
     @ViewChild('divtext') textView: ElementRef;
     @ViewChild('divimage') imageView: ElementRef;
