@@ -52,6 +52,7 @@ import { MatListModule } from '@angular/material/list';
 import { NewOfferComponent } from './new-offer/new-offer.component';
 import { NewSolutionComponent } from './new-solution/new-solution.component';
 import { NewSolutionFormComponent } from './new-solution-form/new-solution-form.component';
+import { NewOfferFormComponent } from './new-offer-form/new-offer-form.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { NewSolutionFormComponent } from './new-solution-form/new-solution-form.
     SidenavMenuComponent,
     NewOfferComponent,
     NewSolutionComponent,
-    NewSolutionFormComponent
+    NewSolutionFormComponent,
+    NewOfferFormComponent
   ],
   imports: [
     BrowserModule,

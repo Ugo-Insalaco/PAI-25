@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, Input, Inject } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -45,8 +45,8 @@ export class NewSolutionFormComponent implements OnInit {
       var file = this.imgInput.nativeElement.files[0];
       var nomcadran = this.router.url.split('/').pop().replace(/-/gi, "");
       var nomsolution = input["nom"].replace(/ /gi, "")
-      var fileName = nomcadran+"-"+nomsolution+(file.type=="image/jpeg"? ".jpg":".png");
-      var renamedFile = new File([file],fileName,{type:file.type});
+      var fileName = nomsolution+(file.type=="image/jpeg"? ".jpg":".png");
+      var renamedFile = new File([file],nomcadran+"-"+fileName,{type:file.type});
 
       let formData = new FormData();
       formData.append("file",renamedFile);
