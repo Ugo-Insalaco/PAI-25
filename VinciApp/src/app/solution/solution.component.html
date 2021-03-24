@@ -1,29 +1,29 @@
 <app-banner [admin]="admin"
-            [photo]="urlphotofond"
-            [logoURL]="urllogo"
-            [cerclesURL]="urlcercles"
-            [couleur]="couleur"
-            [problematique]="problematiquecadran"
-            [nomcadran]="nomcadran"
+            [photo]="databanner.picture_back"
+            [logoURL]="databanner.logo"
+            [cerclesURL]="databanner.circles"
+            [couleur]="databanner.color"
+            [problematique]="databanner.problem"
+            [nomcadran]="databanner.name"
             [nomsolution]="nomsolution">
 </app-banner>
 
 <div id="argumentscommerciaux" style="border-width:10px; border-color: #000000">
   <p>
-    {{problematiquessolution}}
+    {{datasolution.problem}}
   </p>
   <p>
-    {{argumentscommerciaux}}
+    {{datasolution.desc}}
   </p>
 </div>
 
 <div id="dashboard" style="width: 99vw; height: 60vh;">
   <div id="divtext">
     <p id="text" style="text-align: justify;">
-      {{textedashboard}}
+      {{datasolution.text_db}}
     </p>
   </div>
-  <div id="divimage" [style.background-image]="photodashboard">
+  <div id="divimage" [style.background-image]="datasolution.picture_db">
   </div>
 </div>
 

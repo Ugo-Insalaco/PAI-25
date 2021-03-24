@@ -9,14 +9,14 @@ import { BackendService } from '../services/backend.service';
 })
 export class ModifImageComponent implements OnInit {
 
-  @Input() admin: boolean;
-  @Input() offerid: number = 0;
-  @Input() imageView : ElementRef;
-  @Input() imageType: string;
+  @Input() admin!: boolean;
+  @Input() numoffer!: number;
+  @Input() imageView!: ElementRef;
+  @Input() imageType!: string;
 
   @ViewChild('input') input : ElementRef;
 
-  initialURL: string;
+  initialURL!: string;
   modifAllowed: boolean = false;
   visualizationActivated : boolean = false;
 
@@ -55,7 +55,7 @@ export class ModifImageComponent implements OnInit {
     this.closeImageModifPanel();
     var file = this.input.nativeElement.files[0];
     var nomcadran = this.router.url.split('/').pop().replace(/-/gi, "");
-    var fileName = nomcadran+"-"+this.imageType+(this.offerid!=0? this.offerid : "")+(file.type=="image/jpeg"? ".jpg":".png");
+    var fileName = nomcadran+"-"+this.imageType+(this.numoffer!=0? this.numoffer : "")+(file.type=="image/jpeg"? ".jpg":".png");
     var renamedFile = new File([file],fileName,{type:file.type});
 
     let formData = new FormData();

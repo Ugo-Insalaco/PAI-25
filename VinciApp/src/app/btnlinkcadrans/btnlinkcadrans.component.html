@@ -1,6 +1,5 @@
-<div id="buttonLinkCadran">
-  <button routerLink="/cadran/actifs-techniques" style="background-color: #062c6b;color: #FFFFFF;">Actifs Techniques</button>
-  <button routerLink="/cadran/confort-energie-environnement" style="background-color: #03b0b4; color: #FFFFFF;">Confort Energie Environnement</button>
-  <button routerLink="/cadran/bien-etre" style="background-color: #cc2871; color: #FFFFFF;">Bien Etre</button>
-  <button routerLink="/cadran/espaces" style="background-color: #0caaeb; color: #FFFFFF;">Espaces</button>
-</div>
+<ul>
+  <li *ngFor="let cadran of cadranList;">
+    <button [routerLink]="cadran.url" [style.background-color]="cadran.color">{{cadran.name}}</button>
+  </li>
+</ul>

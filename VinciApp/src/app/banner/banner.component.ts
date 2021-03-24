@@ -1,5 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, Input, ElementRef, ViewChild } from '@angular/core';
-import { BackendService } from '../services/backend.service';
+import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-banner',
@@ -24,40 +23,8 @@ export class BannerComponent implements OnInit {
 
   contentEditableText:boolean;
 
-  constructor(private backend: BackendService, private cd: ChangeDetectorRef) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.backend.GET('/api/cadrans', e=>{
-      if(e.data[0].fields.color==this.couleur){
-        // Texts
-        this.nomcadran = e.data[0].included["text"][0].name;
-        this.cerclesURL = e.data[0].included["text"][0].circles;
-        this.problematique = e.data[0].included["text"][0].problem;
-
-        // Images
-        this.logoURL = e.data[0].fields.logo;
-        this.couleur = e.data[0].fields.color;
-        this.photo = "url("+e.data[0].fields.picture_back+")";
-      }
-      this.cd.detectChanges();
-    });
-  }
-
-
-  sendDatatoDB(): void{
-    /*var jsoncadran = {
-      "id": 4,
-      "name": 19,
-      "color": this.couleur,
-      "picture_back": this.photo,
-      "logo": this.logoURL,
-      "circles": 20,
-      "problem": 22
-    };
-    var jsontext = {
-      "text": "Problématique du cadran Environnement"
-    };
-
-    this.backend.POST('/api/cadrans', jsoncadran , e=>{});*/
   }
 }

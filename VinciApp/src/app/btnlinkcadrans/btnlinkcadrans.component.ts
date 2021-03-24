@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BackendService } from '../services/backend.service';
 
 @Component({
   selector: 'app-btnlinkcadrans',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BtnlinkcadransComponent implements OnInit {
 
-  constructor() { }
+  cadranList: any[] = [];
+
+  constructor(private backend: BackendService) { }
 
   ngOnInit(): void {
+    this.backend.GET('/api/cadrans', e=>{
+      for(var i=0; i<e.data.length; i++){
+        var name = e.data[i].included["text"][0].name.replace(/ /gi, "-").toLowerCase();
+        var data = {
+          "color": e.data[i].fields.color,
+          "name": e.data[i].included["text"][0].name,
+          "url": "/cadran/"+e.data[i].id+"&"+name
+        };
+        this.cadranList.push(data);
+      }
+    });
   }
-
 }

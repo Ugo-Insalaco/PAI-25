@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {Router} from '@angular/router';
+import { BackendService } from '../services/backend.service';
 
 @Component({
   selector: 'app-solution',
@@ -13,70 +14,55 @@ export class SolutionComponent implements OnInit {
 
   admin: boolean = false;
 
-  // Données à récupérer dans les paramètres du cadran
-    nomcadran: string = "";
-    couleur: string = "";
+  // Données récupérées dans l'url
+  idcadran!: number;
+  idsolution!: number;
+  nomcadran!: string;
+  nomsolution!: string;
 
-    // Banner
-    urlphotofond: string = "";
-    urllogo: string = "";
-    urlcercles: string = "";
-    problematiquecadran: string = "";
+  // Paramètres pour banner
+  databanner: { [key: string]: string;} = {};
 
-  // Paramètres à récupérer dans les paramètres de la solution
-    nomsolution: string = "";
-    problematiquessolution: string = "";
-    argumentscommerciaux: string = "";
-    textedashboard: string = "";
-    photodashboard: string = "";
+  // Paramètres pour solution
+  datasolution: { [key: string]: string;} = {};
 
-  constructor(private titleService: Title, private router: Router) { }
+  constructor(private titleService: Title,
+              private router: Router,
+              private backend: BackendService) { }
 
   ngOnInit(): void {
     this.nomcadran = this.getNomCadran();
     this.nomsolution = this.getNomSolution();
+    this.idcadran = this.getIdCadran();
+    this.idsolution = this.getIdSolution();
     this.titleService.setTitle(`${this.nomsolution} - Vinci Facilities`);
 
-    // Paramètes pour tests à récup dans la BDD plus tard
-      // Banner
-      if(this.nomcadran == "Actifs Techniques"){
-        this.couleur = "#062C6B";
-        this.urlphotofond = "url(/assets/images/actifstechniques/exImageFond.png)";
-        this.urllogo = "/assets/images/actifstechniques/logo.png";
-        this.urlcercles = "/assets/images/actifstechniques/cerclesBandeau.png";
-        this.problematiquecadran = "Problématique du cadran Actifs Techniques";
-      }
-      else if(this.nomcadran == "Bien Etre"){
-        this.couleur = "#CC2871";
-        this.urlphotofond = "url(/assets/images/bienetre/exImageFond.jpg)";
-        this.urllogo = "/assets/images/bienetre/logo.png";
-        this.urlcercles = "/assets/images/bienetre/cerclesBandeau.png";
-        this.problematiquecadran = "Problématique du cadran Bien-Être";
-      }
-      else if(this.nomcadran == "Confort Energie Environnement"){
-        this.couleur = "#03B0B4";
-        this.urlphotofond = "url(/assets/images/confortenergieenvironnement/exImageFond.jpg)";
-        this.urllogo = "/assets/images/confortenergieenvironnement/logo.png";
-        this.urlcercles = "/assets/images/confortenergieenvironnement/cerclesBandeau.png";
-        this.problematiquecadran = "Problématique du cadran Confort Energie Environnement";
-      }
-      else if(this.nomcadran == "Espaces"){
-        this.couleur = "#0CAAEB";
-        this.urlphotofond = "url(/assets/images/espaces/exImageFond.jpg)";
-        this.urllogo = "/assets/images/espaces/logo.png";
-        this.urlcercles = "/assets/images/espaces/cerclesBandeau.png";
-        this.problematiquecadran = "Problématique du cadran Espaces";
-      }
+    // Récupération des données du cadran
+    this.backend.GET('/api/cadrans/'+this.idcadran, e=>{
+      // Texts Banner
+      this.databanner["name"] = e.data[0].included["text"][0].name;
+      this.databanner["circles"] = e.data[0].included["text"][0].circles;
+      this.databanner["problem"] = e.data[0].included["text"][0].problem;
 
-    // Paramètres à récupérer dans les paramètres de la solution
-      this.problematiquessolution = "Problématique de la solution";
-      this.argumentscommerciaux = "Arguments commerciaux de qualité";
-      this.textedashboard = "Texte pour le Dashboard";
-      this.photodashboard = "url(/assets/images/actifstechniques/offre1.jpg)";
+      // Images Banner
+      this.databanner["logo"] = e.data[0].fields.logo;
+      this.databanner["color"] = e.data[0].fields.color;
+      this.databanner["picture_back"] = "url("+e.data[0].fields.picture_back+")";
+
+      // Récupération des données pour la solution
+      this.backend.GET('/api/solutionContents/'+this.idsolution, e=>{
+        this.datasolution["name"] = e.data[0].included["text"][0].name;
+        this.datasolution["problem"] = e.data[0].included["text"][0].problem;
+        this.datasolution["desc"] = e.data[0].included["text"][0].arg;
+        this.datasolution["text_db"] = e.data[0].included["text"][0].text_db;
+        this.datasolution["picture_db"] = "url("+e.data[0].fields.picture_db+")";
+      });
+    });
   }
 
   getNomSolution(){
     var nom = this.router.url.split('/').pop();
+    nom = nom.split('&').pop();
     nom = nom.replace(/-/gi, " "); // Remplace - par espace
     nom = nom.replace(/_/gi, "'"); // Remplace _ par '
     nom = nom.charAt(0).toUpperCase() + nom.slice(1); // Majuscule pour 1er mot
@@ -85,13 +71,46 @@ export class SolutionComponent implements OnInit {
     return nom;
   }
 
+  /*getNomCadran(){
+    var nom = this.router.url.split('/').pop();
+    nom = nom.split('&').pop();
+    nom = nom.replace(/-/gi, " ");
+    nom = nom.replace(/%C3%A9/gi, "é");
+    nom = nom.replace(/%C3%AA/gi, "ê");
+    nom = nom.split(' ')
+             .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+             .join(' ');
+    return nom;
+  }
+
+  getIdCadran(){
+    var id = this.router.url.split('/').pop();
+    id = id.split('&')[0];
+    return Number(id);
+  }*/
+
   getNomCadran(){
     var nom = this.router.url.split('/')[2];
+    nom = nom.split('&').pop();
     nom = nom.replace(/-/gi, " "); // Remplace - par espace
+    nom = nom.replace(/%C3%A9/gi, "é");
+    nom = nom.replace(/%C3%AA/gi, "ê");
     nom = nom.split(' ')  // Majuscule à chaque mot
              .map(word => word.charAt(0).toUpperCase() + word.slice(1))
              .join(' ');
     return nom;
+  }
+
+  getIdCadran(){
+    var id = this.router.url.split('/')[2];
+    id = id.split('&')[0];
+    return Number(id);
+  }
+
+  getIdSolution(){
+    var id = this.router.url.split('/').pop();
+    id = id.split('&')[0];
+    return Number(id);
   }
 
   onSimulerProjet(){

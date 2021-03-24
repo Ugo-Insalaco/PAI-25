@@ -80,7 +80,8 @@
             "id":"{{0::offre::id}}",
             "fields":{
                 "name":"{{0::offre::name}}",
-                "text":"{{0::offre::text}}"
+                "text":"{{0::offre::text}}",
+				"picture":"{{0::offre::picture}}"
             },
             "included":{
                 "text":{

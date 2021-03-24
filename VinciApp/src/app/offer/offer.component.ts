@@ -8,19 +8,18 @@ import {Router} from '@angular/router';
 })
 export class OfferComponent implements OnInit, AfterViewInit{
     // Paramètres en input et initialisation des paramètres par défaut
-    @Input() admin: boolean;
-    @Input() id: number;
-    @Input() photooffre: string = "url(/assets/images/actifstechniques/offre1.jpg)";
-    @Input() couleur: string;
-    @Input() texteoffre: string = "Texte pour l'offre";
-    @Input() nomoffre: string = "Nom de l'offre";
-    @Input() offresolutions : string[] = [""];
-    @Input() configgauche : boolean = false;
+    @Input() admin!: boolean;
+    @Input() num!: number;
+    @Input() idBDD!: number;
+    @Input() photooffre!: string;
+    @Input() couleur!: string;
+    @Input() texteoffre!: string;
+    @Input() nomoffre!: string;
+    @Input() solutions!: string[];
+    @Input() configgauche!: boolean;
 
     contentEditableText1 : boolean = false;
     contentEditableText2 : boolean = false;
-
-    idBDD: number = 2; // A changer avec l'id de l'offre dans la BDD
 
     @ViewChild('listesolutions') selectView: ElementRef;
     @ViewChild('divtext') textView: ElementRef;
@@ -30,26 +29,18 @@ export class OfferComponent implements OnInit, AfterViewInit{
     @ViewChild('buttonvalidersolution') buttonvalidersolutionView: ElementRef;
 
     // To get the selected option in the select
-    selectedOption: string = "";
+    selectedOption!: string;
+    selectedText!: string;
 
     constructor(private cd: ChangeDetectorRef,private router: Router) {
       this.admin = false;
     }
 
     ngOnInit(): void {
+      this.num += 1;
     }
 
     ngAfterViewInit(){
-      var index = 0;
-      var select = this.selectView.nativeElement;
-      for(var solution of this.offresolutions){
-        var opt = document.createElement("option");
-        opt.value = solution.replace(/ /gi, "-");
-        opt.value = opt.value.replace(/'/gi, "_").toLowerCase();
-        opt.innerHTML = solution;
-        select.appendChild(opt);
-        index++;
-      }
       if(this.configgauche){
         var text = this.textView.nativeElement;
         text.style.right=0;
@@ -67,12 +58,22 @@ export class OfferComponent implements OnInit, AfterViewInit{
       this.cd.detectChanges();
     }
 
+    getSelectedOptionText(event: Event) {
+       let options = event.target['options'];
+       let selectedIndex = options.selectedIndex;
+       let selectElementText = options[selectedIndex].text;
+       this.selectedText = selectElementText;
+    }
+
     onValiderSolution(){
-      // Get selected solution and redirect to solution's page
-      var solution = this.selectedOption;
+      // Récupération de l'option sélectionnée et redirection vers page solution
+      var idsolution = this.selectedOption;
+      var textsolution = this.selectedText;
       var button = this.buttonvalidersolutionView.nativeElement;
-      if(solution!=""){
-        this.router.navigate([this.router.url,solution]);
+      if(textsolution!=""){
+        textsolution = textsolution.replace(/ /gi, "-");
+        textsolution = textsolution.replace(/'/gi, "_").toLowerCase();
+        this.router.navigate([this.router.url,idsolution+"&"+textsolution]);
       }
     }
 }

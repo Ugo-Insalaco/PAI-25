@@ -5,8 +5,12 @@
     </p>
     <div id="choixsolution">
       <p [contentEditable]="contentEditableText1"> Solutions associées à cette offre : </p>
-      <select id="listesolutions" #listesolutions [(ngModel)]="selectedOption">
+      <select id="listesolutions" #listesolutions [(ngModel)]="selectedOption" (change)="getSelectedOptionText($event)">
         <option disabled selected> Solutions </option>
+        <option *ngFor="let sol of solutions"
+            [value]="sol.id">
+          {{sol.name}}
+        </option>
       </select>
       <button id="buttonvalidersolution" #buttonvalidersolution (click)="onValiderSolution()">
         Découvrir cette solution
@@ -23,7 +27,7 @@
       <app-modif-texte [admin]="admin" [textView]="commimageView" [(editAllowed)]="contentEditableText2"></app-modif-texte>
     </div>
 
-    <div id="btnmodifimage"><app-modif-image [admin]="admin" [imageType]="'offre'" [imageView]="imageView" [offerid]="id"></app-modif-image></div>
+    <div id="btnmodifimage"><app-modif-image [admin]="admin" [imageType]="'offre'" [imageView]="imageView" [numoffer]="num"></app-modif-image></div>
 
   </div>
 </div>
