@@ -4,10 +4,10 @@ const bodyParser = require("body-parser")
 const multer = require('multer')
 const storage = multer.diskStorage({
 	destination: (req, file, callBack) => {
-		callBack(null, `./VinciApp/src/assets/images/${file.originalname.split('-')[0]}`)
+		callBack(null, './VinciApp/src/assets/images')
 	},
 	filename: (req, file, callBack) => {
-		callBack(null, file.originalname.split('-')[1])
+		callBack(null, file.originalname)
 	}
 })
 var upload = multer({storage: storage})

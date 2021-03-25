@@ -10,7 +10,7 @@ import { BackendService } from '../services/backend.service';
 export class ModifImageComponent implements OnInit {
 
   @Input() admin!: boolean;
-  @Input() numoffer!: number;
+  @Input() numoffer: number = 0;
   @Input() imageView!: ElementRef;
   @Input() imageType!: string;
 
@@ -54,8 +54,8 @@ export class ModifImageComponent implements OnInit {
   updateAssets(): void {
     this.closeImageModifPanel();
     var file = this.input.nativeElement.files[0];
-    var nomcadran = this.router.url.split('/').pop().replace(/-/gi, "");
-    var fileName = nomcadran+"-"+this.imageType+(this.numoffer!=0? this.numoffer : "")+(file.type=="image/jpeg"? ".jpg":".png");
+    var nomcadran = this.router.url.split('/').pop().split("&").pop().replace(/-/gi, "");
+    var fileName = nomcadran+"_"+this.imageType+(this.numoffer!=0? this.numoffer : "")+(file.type=="image/jpeg"? ".jpg":".png");
     var renamedFile = new File([file],fileName,{type:file.type});
 
     let formData = new FormData();

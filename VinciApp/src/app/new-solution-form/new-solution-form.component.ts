@@ -43,10 +43,10 @@ export class NewSolutionFormComponent implements OnInit {
 
       // Enregistrement de l'image dans assets
       var file = this.imgInput.nativeElement.files[0];
-      var nomcadran = this.router.url.split('/').pop().replace(/-/gi, "");
-      var nomsolution = input["nom"].replace(/ /gi, "")
-      var fileName = nomsolution+(file.type=="image/jpeg"? ".jpg":".png");
-      var renamedFile = new File([file],nomcadran+"-"+fileName,{type:file.type});
+      var nomcadran = this.router.url.split('/').pop().split("&").pop().replace(/-/gi, "");
+      var nomsolution = input["nom"].replace(/ /gi, "").toLowerCase();
+      var fileName = nomcadran+"_"+nomsolution+(file.type=="image/jpeg"? ".jpg":".png");
+      var renamedFile = new File([file],fileName,{type:file.type});
 
       let formData = new FormData();
       formData.append("file",renamedFile);
@@ -73,7 +73,7 @@ export class NewSolutionFormComponent implements OnInit {
                       var idtext = res["id"];
 
                       // Creation de la solution dans la table cont_solution
-                      var urlImg = "/assets/images/"+nomcadran+"/"+fileName;
+                      var urlImg = "/assets/images/"+fileName;
 
                       var jsonSolution = {
                         "name": idnom,
