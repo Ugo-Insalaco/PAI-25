@@ -1,4 +1,4 @@
-<div style="width: 99vw; height: 60vh;">
+<div id="container">
   <div id="divtext" #divtext>
     <p id="text" style="text-align: justify;" [contentEditable]="contentEditableText1">
       {{texteoffre}}
@@ -12,12 +12,18 @@
           {{sol.name}}
         </option>
       </select>
-      <button id="buttonvalidersolution" #buttonvalidersolution (click)="onValiderSolution()">
+      <button id="buttonvalidersolution" (click)="onValiderSolution()">
         Découvrir cette solution
       </button>
     </div>
 
-    <app-new-solution [idOffer]="idBDD"></app-new-solution>
+    <app-new-solution [idOffer]="idoffre" *ngIf="admin===true"></app-new-solution>
+
+    <button type="button" class="btn btn-sm" id="buttondeletesolution" (click)="onDeleteSolution()" *ngIf="admin===true">
+      <mat-icon>clear</mat-icon>
+      <span>Supprimer la solution sélectionnée</span>
+    </button>
+
     <div id="btnmodiftexte"><app-modif-texte [admin]="admin" [textView]="textView" [(editAllowed)]="contentEditableText1"></app-modif-texte></div>
 
   </div>
@@ -30,4 +36,7 @@
     <div id="btnmodifimage"><app-modif-image [admin]="admin" [imageType]="'offre'" [imageView]="imageView" [numoffer]="num"></app-modif-image></div>
 
   </div>
+
+  <button type="button" class="btn btn-sm" id="buttondeleteoffer" (click)="onDeleteOffer()" *ngIf="admin===true"><mat-icon>clear</mat-icon></button>
+
 </div>

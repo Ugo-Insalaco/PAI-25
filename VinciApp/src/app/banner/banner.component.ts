@@ -1,11 +1,11 @@
-import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-banner',
   templateUrl: './banner.component.html',
   styleUrls: ['./banner.component.css']
 })
-export class BannerComponent implements OnInit {
+export class BannerComponent implements OnInit, AfterViewInit {
 
   @Input() admin: boolean = false;
   @Input() photo: string = "url(${photo})";
@@ -21,10 +21,14 @@ export class BannerComponent implements OnInit {
   @ViewChild('fond') fondView: ElementRef;
   @ViewChild('textcontainer') textView: ElementRef;
 
-  contentEditableText:boolean;
+  contentEditableText:boolean = false;
 
-  constructor() { }
+  constructor(private cd: ChangeDetectorRef) { }
 
   ngOnInit(): void {
+  }
+
+  ngAfterViewInit() {
+      this.cd.detectChanges();
   }
 }

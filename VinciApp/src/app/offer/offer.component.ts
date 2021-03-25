@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef, Input, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import {Router} from '@angular/router';
+import { BackendService } from '../services/backend.service';
 
 @Component({
   selector: 'app-offer',
@@ -10,7 +11,7 @@ export class OfferComponent implements OnInit, AfterViewInit{
     // Paramètres en input et initialisation des paramètres par défaut
     @Input() admin!: boolean;
     @Input() num!: number;
-    @Input() idBDD!: number;
+    @Input() idoffre!: number;
     @Input() photooffre!: string;
     @Input() couleur!: string;
     @Input() texteoffre!: string;
@@ -26,13 +27,14 @@ export class OfferComponent implements OnInit, AfterViewInit{
     @ViewChild('divimage') imageView: ElementRef;
     @ViewChild('input') input: ElementRef;
     @ViewChild('commimg') commimageView: ElementRef;
-    @ViewChild('buttonvalidersolution') buttonvalidersolutionView: ElementRef;
 
     // To get the selected option in the select
     selectedOption!: string;
     selectedText!: string;
 
-    constructor(private cd: ChangeDetectorRef,private router: Router) {
+    constructor(private backend: BackendService,
+                private cd: ChangeDetectorRef,
+                private router: Router) {
       this.admin = false;
     }
 
@@ -69,11 +71,44 @@ export class OfferComponent implements OnInit, AfterViewInit{
       // Récupération de l'option sélectionnée et redirection vers page solution
       var idsolution = this.selectedOption;
       var textsolution = this.selectedText;
-      var button = this.buttonvalidersolutionView.nativeElement;
       if(textsolution!=""){
         textsolution = textsolution.replace(/ /gi, "-");
         textsolution = textsolution.replace(/'/gi, "_").toLowerCase();
         this.router.navigate([this.router.url,idsolution+"&"+textsolution]);
+      }
+    }
+
+    onDeleteOffer(){
+      var input = confirm("Voulez-vous vraiment supprimer cette offre ? \n(Les solutions associées seront également supprimées) \n\nATTENTION : Opération irréversible");
+      if(input){
+        this.backend.DELETE('/api/offres/'+this.idoffre, e=>{
+          // Suppression des solutions associées
+          for(let solution in this.solutions){
+            var idsol = this.solutions[solution]["id"];
+            if(idsol != null){
+              console.log(idsol);
+              this.backend.DELETE('/api/solutionContents/'+idsol, e=>{
+                console.log("Solution supprimée");
+              });
+            }
+          }
+          console.log("Offre supprimée");
+          window.location.reload();
+        });
+      }
+    }
+
+    onDeleteSolution(){
+      var idsolution = this.selectedOption;
+      var textsolution = this.selectedText;
+      if(textsolution!=undefined){
+        var input = confirm('Voulez-vous vraiment supprimer la solution : "'+textsolution+'" ? \n\nATTENTION : Opération irréversible');
+        if(input){
+          this.backend.DELETE('/api/solutionContents/'+idsolution, e=>{
+            console.log("Solution supprimée");
+            window.location.reload();
+          });
+        }
       }
     }
 }

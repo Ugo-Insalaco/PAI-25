@@ -11,7 +11,7 @@
   <li *ngFor="let offer of offerList; let index = index; let isOdd = odd;">
       <app-offer [admin]="admin"
                  [num]="index"
-                 [idBDD]="offer.id"
+                 [idoffre]="offer.id"
                  [photooffre]="offer.picture"
                  [couleur]="couleur"
                  [nomoffre]="offer.name"
@@ -23,6 +23,7 @@
 </ul>
 
 <app-new-offer [numoffre]="nboffre"
-               [idcadran]="idcadran">
+               [idcadran]="idcadran"
+               *ngIf="admin===true">
 </app-new-offer>
 <app-btnlinkcadrans></app-btnlinkcadrans>
