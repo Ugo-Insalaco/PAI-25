@@ -10,12 +10,17 @@
   <div id="right">
     <div id="topright">
       <img #logo id="logoCadran" [src]="logoURL">
-      <app-modif-image [admin]="admin" [imageType]="'logo'" [imageView]="logoView"></app-modif-image>
+      <app-modif-image [admin]="admin"
+                       [containerId]="idcadran"
+                       containerType="cadrans"
+                       imageType="logo"
+                       [imageView]="logoView"
+                       img="true"></app-modif-image>
     </div>
     <img #cercles id="cercles" [src]="cerclesURL">
     <div id="btnmodifimage">
-      <app-modif-image [admin]="admin" [imageType]="'cerclesBandeau'" [imageView]="cerclesView"></app-modif-image>
-      <app-modif-image [admin]="admin" [imageType]="'exImageFond'" [imageView]="fondView"></app-modif-image>
+      <app-modif-image [admin]="admin" [containerId]="idcercles" containerType="texts" imageType="text" [imageView]="cerclesView" img="true"></app-modif-image>
+      <app-modif-image [admin]="admin" [containerId]="idcadran" containerType="cadrans" imageType="picture_back" [imageView]="fondView"></app-modif-image>
     </div>
   </div>
 </div>

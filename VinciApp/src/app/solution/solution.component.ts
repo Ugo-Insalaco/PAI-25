@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {Router} from '@angular/router';
 import { BackendService } from '../services/backend.service';
@@ -11,8 +11,9 @@ import { BackendService } from '../services/backend.service';
 export class SolutionComponent implements OnInit {
 
   @ViewChild('buttonproject') buttonprojectView: ElementRef;
+  @ViewChild('divimage') imageView: ElementRef;
 
-  admin: boolean = false;
+  admin: boolean = true;
 
   // Données récupérées dans l'url
   idcadran!: number;
@@ -21,12 +22,13 @@ export class SolutionComponent implements OnInit {
   nomsolution!: string;
 
   // Paramètres pour banner
-  databanner: { [key: string]: string;} = {};
+  databanner: { [key: string]: any;} = {};
 
   // Paramètres pour solution
   datasolution: { [key: string]: string;} = {};
 
   constructor(private titleService: Title,
+              private cd: ChangeDetectorRef,
               private router: Router,
               private backend: BackendService) { }
 
@@ -36,6 +38,7 @@ export class SolutionComponent implements OnInit {
     this.idcadran = this.getIdCadran();
     this.idsolution = this.getIdSolution();
     this.titleService.setTitle(`${this.nomsolution} - Vinci Facilities`);
+    this.databanner["idcadran"] = this.idcadran;
 
     // Récupération des données du cadran
     this.backend.GET('/api/cadrans/'+this.idcadran, e=>{
@@ -58,6 +61,7 @@ export class SolutionComponent implements OnInit {
         this.datasolution["picture_db"] = "url("+e.data[0].fields.picture_db+")";
       });
     });
+    this.cd.detectChanges();
   }
 
   getNomSolution(){

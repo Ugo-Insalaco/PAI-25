@@ -11,8 +11,10 @@ export class BannerComponent implements OnInit, AfterViewInit {
   @Input() photo: string = "url(${photo})";
   @Input() logoURL: string = "";
   @Input() cerclesURL: string = "";
+  @Input() idcercles!: number;
   @Input() couleur: string = "";
   @Input() nomcadran: string = "";
+  @Input() idcadran!: number;
   @Input() problematique: string = "";
   @Input() nomsolution: string = "";
 

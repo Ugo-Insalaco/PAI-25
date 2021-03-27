@@ -5,6 +5,7 @@
             [couleur]="databanner.color"
             [problematique]="databanner.problem"
             [nomcadran]="databanner.name"
+            [idcadran]="databanner.idcadran"
             [nomsolution]="nomsolution">
 </app-banner>
 
@@ -23,7 +24,16 @@
       {{datasolution.text_db}}
     </p>
   </div>
-  <div id="divimage" [style.background-image]="datasolution.picture_db">
+  <div id="divimage" #divimage [style.background-image]="datasolution.picture_db">
+    <div id="btnmodifimage">
+      <app-modif-image [admin]="admin"
+                       [containerId]="idsolution"
+                       containerType="solutionContents"
+                       imageType="picture_db"
+                       [imageView]="imageView"
+                       [nomSolution]="nomsolution">
+      </app-modif-image>
+    </div>
   </div>
 </div>
 

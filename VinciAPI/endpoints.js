@@ -445,7 +445,7 @@ const init = function(app){
                         .query(sqlString, sqlValues)
                         .then(rows =>{
                             // ne devrait pas arriver puisqu'on vérifie avant l'unicité de l'élément
-                            if(rows.length!==1){
+                            if(rows.affectedRows!==1){
                                 res.status(500).send(JSON.stringify({
                                     message: 'Clé primaire non unique, danger !',
                                     route: req.path,

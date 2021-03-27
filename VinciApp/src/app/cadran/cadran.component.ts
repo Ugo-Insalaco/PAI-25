@@ -20,7 +20,7 @@ export class CadranComponent implements OnInit {
   nboffre: number = 0;
 
   // Paramètres pour banner
-  databanner: { [key: string]: string;} = {};
+  databanner: { [key: string]: any;} = {};
 
   constructor(private backend: BackendService,
               private titleService: Title,
@@ -31,6 +31,7 @@ export class CadranComponent implements OnInit {
     this.nomcadran = this.getNomCadran();
     this.idcadran = this.getIdCadran();
     this.titleService.setTitle(`${this.nomcadran} - Vinci Facilities`);
+    this.databanner["idcadran"] = this.idcadran;
 
     // Récupération des données de la BDD
     // Récupération des données du cadran
@@ -38,6 +39,7 @@ export class CadranComponent implements OnInit {
       // Texts Banner
       this.databanner["name"] = e.data[0].included["text"][0].name;
       this.databanner["circles"] = e.data[0].included["text"][0].circles;
+      this.databanner["idcircles"] = e.data[0].fields.circles;
       this.databanner["problem"] = e.data[0].included["text"][0].problem;
 
       // Images Banner

@@ -33,8 +33,7 @@
       <app-modif-texte [admin]="admin" [textView]="commimageView" [(editAllowed)]="contentEditableText2"></app-modif-texte>
     </div>
 
-    <div id="btnmodifimage"><app-modif-image [admin]="admin" [imageType]="'offre'" [imageView]="imageView" [numoffer]="num"></app-modif-image></div>
-
+    <div id="btnmodifimage"><app-modif-image [admin]="admin" [containerId]="idoffre" containerType="offres" imageType="picture" [imageView]="imageView" [numoffer]="num"></app-modif-image></div>
   </div>
 
   <button type="button" class="btn btn-sm" id="buttondeleteoffer" (click)="onDeleteOffer()" *ngIf="admin===true"><mat-icon>clear</mat-icon></button>

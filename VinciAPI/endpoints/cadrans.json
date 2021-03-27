@@ -3,12 +3,12 @@
     "table": "cont_cadran",
     "fields":{
         "id":"",
-        "name":"mandatory",
-        "color":"mandatory",
-        "picture_back":"mandatory",
-        "logo":"mandatory",
-        "circles":"mandatory",
-        "problem":"mandatory"
+        "name":"mandatory, updatable",
+        "color":"mandatory, updatable",
+        "picture_back":"mandatory, updatable",
+        "logo":"mandatory, updatable",
+        "circles":"mandatory, updatable",
+        "problem":"mandatory, updatable"
     },
     "primaryField":"id",
     "updatable":[

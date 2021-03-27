@@ -11,8 +11,11 @@ export class ModifImageComponent implements OnInit {
 
   @Input() admin!: boolean;
   @Input() numoffer: number = 0;
+  @Input() nomSolution!: string;
   @Input() imageView!: ElementRef;
-  @Input() imageType!: string;
+  @Input() imageType!: string; // nom de la variable image dans la BDD
+  @Input() containerType!: string;
+  @Input() containerId!: string;
 
   @ViewChild('input') input : ElementRef;
 
@@ -51,17 +54,57 @@ export class ModifImageComponent implements OnInit {
     }
   }
 
-  updateAssets(): void {
+  sendDatatoDB(): void {
     this.closeImageModifPanel();
+    // Upload de l'image dans le dossier assets
     var file = this.input.nativeElement.files[0];
-    var nomcadran = this.router.url.split('/').pop().split("&").pop().replace(/-/gi, "");
-    var fileName = nomcadran+"_"+this.imageType+(this.numoffer!=0? this.numoffer : "")+(file.type=="image/jpeg"? ".jpg":".png");
+    var nomcadran = "";
+
+    var complementnomimage = "";
+    if(this.containerType == "offres"){
+      complementnomimage = "offre";
+      nomcadran = this.router.url.split('/').pop().split("&").pop().replace(/-/gi, "");
+    }
+    else if(this.containerType == "solutionContents"){
+      complementnomimage = this.nomSolution.replace(/ /gi, "").toLowerCase();
+      nomcadran = this.router.url.split('/')[2].split("&").pop().replace(/-/gi, "");
+    }
+    else if(this.containerType == "cadrans"){
+      complementnomimage = this.imageType;
+      if(this.nomSolution!=""){
+        // Page solution
+        nomcadran = this.router.url.split('/')[2].split("&").pop().replace(/-/gi, "");
+      }
+      else{
+        // Page cadran
+        nomcadran = this.router.url.split('/').pop().split("&").pop().replace(/-/gi, "");
+      }
+    }
+    else if(this.containerType == "texts"){
+      complementnomimage = this.imageType;
+      if(this.nomSolution!=""){
+        // Page solution
+        nomcadran = this.router.url.split('/')[2].split("&").pop().replace(/-/gi, "");
+      }
+      else{
+        // Page cadran
+        nomcadran = this.router.url.split('/').pop().split("&").pop().replace(/-/gi, "");
+      }
+    }
+
+    var fileName = nomcadran+"_"+complementnomimage+(this.numoffer!=0? this.numoffer : "")+(file.type=="image/jpeg"? ".jpg":".png");
     var renamedFile = new File([file],fileName,{type:file.type});
 
     let formData = new FormData();
     formData.append("file",renamedFile);
     this.backend.POST('/api/upload',formData, res=>{
-        console.log('response received is : ',res)
+    });
+
+    // Mise à jour de l'url dans la base de données
+    var data = {};
+    data[this.imageType] = "/assets/images/"+fileName;
+    console.log(data);
+    this.backend.PATCH('/api/'+this.containerType+"/"+this.containerId, data, res=>{
     });
   }
 }
