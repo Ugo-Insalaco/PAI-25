@@ -11,12 +11,9 @@ export class OfferComponent implements OnInit, AfterViewInit{
     // Paramètres en input et initialisation des paramètres par défaut
     @Input() admin!: boolean;
     @Input() num!: number;
-    @Input() idoffre!: number;
-    @Input() photooffre!: string;
     @Input() couleur!: string;
-    @Input() texteoffre!: string;
-    @Input() nomoffre!: string;
     @Input() solutions!: string[];
+    @Input() dataoffer!: { [key: string]: any;};
     @Input() configgauche!: boolean;
 
     contentEditableText1 : boolean = false;
@@ -81,7 +78,7 @@ export class OfferComponent implements OnInit, AfterViewInit{
     onDeleteOffer(){
       var input = confirm("Voulez-vous vraiment supprimer cette offre ? \n(Les solutions associées seront également supprimées) \n\nATTENTION : Opération irréversible");
       if(input){
-        this.backend.DELETE('/api/offres/'+this.idoffre, e=>{
+        this.backend.DELETE('/api/offres/'+this.dataoffer["idoffre"], e=>{
           // Suppression des solutions associées
           for(let solution in this.solutions){
             var idsol = this.solutions[solution]["id"];

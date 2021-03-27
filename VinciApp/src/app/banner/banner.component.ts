@@ -8,22 +8,21 @@ import { Component, OnInit, Input, ElementRef, ViewChild, ChangeDetectorRef, Aft
 export class BannerComponent implements OnInit, AfterViewInit {
 
   @Input() admin: boolean = false;
-  @Input() photo: string = "url(${photo})";
-  @Input() logoURL: string = "";
-  @Input() cerclesURL: string = "";
-  @Input() idcercles!: number;
   @Input() couleur: string = "";
-  @Input() nomcadran: string = "";
-  @Input() idcadran!: number;
-  @Input() problematique: string = "";
   @Input() nomsolution: string = "";
+  @Input() idnamesolution: number = 0;
+  @Input() databanner!: { [key: string]: any;};
 
   @ViewChild('cercles') cerclesView: ElementRef;
   @ViewChild('logo') logoView: ElementRef;
   @ViewChild('fond') fondView: ElementRef;
-  @ViewChild('textcontainer') textView: ElementRef;
+  @ViewChild('nom') nomView: ElementRef;
+  @ViewChild('problem') problemView: ElementRef;
+  @ViewChild('sol') solutionView: ElementRef;
 
-  contentEditableText:boolean = false;
+  contentEditableNom:boolean = false;
+  contentEditableProblem:boolean = false;
+  contentEditableSolution:boolean = false;
 
   constructor(private cd: ChangeDetectorRef) { }
 

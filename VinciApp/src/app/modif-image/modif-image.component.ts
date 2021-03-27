@@ -103,7 +103,6 @@ export class ModifImageComponent implements OnInit {
     // Mise à jour de l'url dans la base de données
     var data = {};
     data[this.imageType] = "/assets/images/"+fileName;
-    console.log(data);
     this.backend.PATCH('/api/'+this.containerType+"/"+this.containerId, data, res=>{
     });
   }

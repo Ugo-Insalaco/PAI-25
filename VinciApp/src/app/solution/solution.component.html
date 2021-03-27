@@ -1,28 +1,35 @@
 <app-banner [admin]="admin"
-            [photo]="databanner.picture_back"
-            [logoURL]="databanner.logo"
-            [cerclesURL]="databanner.circles"
             [couleur]="databanner.color"
-            [problematique]="databanner.problem"
-            [nomcadran]="databanner.name"
-            [idcadran]="databanner.idcadran"
-            [nomsolution]="nomsolution">
+            [databanner]="databanner"
+            [nomsolution]="datasolution.name"
+            [idnamesolution]="datasolution.idname">
 </app-banner>
 
-<div id="argumentscommerciaux" style="border-width:10px; border-color: #000000">
-  <p>
-    {{datasolution.problem}}
-  </p>
-  <p>
-    {{datasolution.desc}}
-  </p>
+<div id="argumentscommerciaux">
+  <div #problem>
+    <p [contentEditable]="contentEditableProblem">
+      {{datasolution.problem}}
+    </p>
+  </div>
+  <div #desc>
+    <p [contentEditable]="contentEditableDesc">
+      {{datasolution.desc}}
+    </p>
+  </div>
+  <div class="btnmodiftexte">
+    <app-modif-texte [admin]="admin" [idtext]="datasolution.idproblem" [textView]="problemView" [(editAllowed)]="contentEditableProblem"></app-modif-texte>
+    <app-modif-texte [admin]="admin" [idtext]="datasolution.iddesc" [textView]="descView" [(editAllowed)]="contentEditableDesc"></app-modif-texte>
+  </div>
 </div>
 
 <div id="dashboard" style="width: 99vw; height: 60vh;">
-  <div id="divtext">
-    <p id="text" style="text-align: justify;">
+  <div id="divtext" #text>
+    <p id="text" style="text-align: justify;" [contentEditable]="contentEditableText">
       {{datasolution.text_db}}
-    </p>
+    </p>-
+    <div class="btnmodiftexte">
+      <app-modif-texte [admin]="admin" [idtext]="datasolution.idtext" [textView]="textView" [(editAllowed)]="contentEditableText"></app-modif-texte>
+    </div>
   </div>
   <div id="divimage" #divimage [style.background-image]="datasolution.picture_db">
     <div id="btnmodifimage">

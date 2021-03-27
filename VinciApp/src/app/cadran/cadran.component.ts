@@ -38,9 +38,11 @@ export class CadranComponent implements OnInit {
     this.backend.GET('/api/cadrans/'+this.idcadran, e=>{
       // Texts Banner
       this.databanner["name"] = e.data[0].included["text"][0].name;
+      this.databanner["idname"] = e.data[0].fields.name;
       this.databanner["circles"] = e.data[0].included["text"][0].circles;
       this.databanner["idcircles"] = e.data[0].fields.circles;
       this.databanner["problem"] = e.data[0].included["text"][0].problem;
+      this.databanner["idproblem"] = e.data[0].fields.problem;
 
       // Images Banner
       this.databanner["logo"] = e.data[0].fields.logo;
@@ -52,10 +54,12 @@ export class CadranComponent implements OnInit {
         for(var i=0; i<e.data.length; i++){
           if(e.data[i].included.cadran[0].id_cadran == this.idcadran){
             var data = {
-              "id": e.data[i].id,
+              "idoffre": e.data[i].id,
               "picture": "url("+e.data[i].fields.picture+")",
               "name": e.data[i].included["text"][0].name,
+              "idname": e.data[i].fields.name,
               "text": e.data[i].included["text"][0].text,
+              "idtext": e.data[i].fields.text,
               "solutions": []
             };
             this.nboffre += 1;
@@ -67,7 +71,7 @@ export class CadranComponent implements OnInit {
         this.backend.GET('/api/offres?include=solution', e=>{
           for(var i=0; i<e.data.length; i++){
             for(var j=0; j<this.offerList.length; j++){
-              if(e.data[i].id == this.offerList[j]["id"]){
+              if(e.data[i].id == this.offerList[j]["idoffre"]){
                 for(var s=0; s<e.data[i].included["solution"].length; s++){
                   var sol = {
                     "id": e.data[i].included["solution"][s].id_solution,

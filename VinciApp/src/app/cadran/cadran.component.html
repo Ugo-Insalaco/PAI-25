@@ -1,23 +1,14 @@
 <app-banner [admin]="admin"
-            [photo]="databanner.picture_back"
-            [logoURL]="databanner.logo"
-            [cerclesURL]="databanner.circles"
-            [idcercles]="databanner.idcircles"
             [couleur]="couleur"
-            [problematique]="databanner.problem"
-            [nomcadran]="databanner.name"
-            [idcadran]="databanner.idcadran">
+            [databanner]="databanner">
 </app-banner>
 
 <ul>
   <li *ngFor="let offer of offerList; let index = index; let isOdd = odd;">
       <app-offer [admin]="admin"
                  [num]="index"
-                 [idoffre]="offer.id"
-                 [photooffre]="offer.picture"
+                 [dataoffer]="offer"
                  [couleur]="couleur"
-                 [nomoffre]="offer.name"
-                 [texteoffre]="offer.text"
                  [solutions]="offer.solutions"
                  [configgauche]=isOdd>
       </app-offer>

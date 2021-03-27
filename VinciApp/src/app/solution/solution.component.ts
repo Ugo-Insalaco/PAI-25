@@ -8,10 +8,14 @@ import { BackendService } from '../services/backend.service';
   templateUrl: './solution.component.html',
   styleUrls: ['./solution.component.css']
 })
-export class SolutionComponent implements OnInit {
+export class SolutionComponent implements OnInit, AfterViewInit {
 
   @ViewChild('buttonproject') buttonprojectView: ElementRef;
   @ViewChild('divimage') imageView: ElementRef;
+
+  @ViewChild('problem') problemView: ElementRef;
+  @ViewChild('desc') descView: ElementRef;
+  @ViewChild('text') textView: ElementRef;
 
   admin: boolean = true;
 
@@ -26,6 +30,11 @@ export class SolutionComponent implements OnInit {
 
   // Paramètres pour solution
   datasolution: { [key: string]: string;} = {};
+
+  // Modification des textes
+  contentEditableProblem: boolean = false;
+  contentEditableDesc: boolean = false;
+  contentEditableText: boolean = false;
 
   constructor(private titleService: Title,
               private cd: ChangeDetectorRef,
@@ -44,8 +53,11 @@ export class SolutionComponent implements OnInit {
     this.backend.GET('/api/cadrans/'+this.idcadran, e=>{
       // Texts Banner
       this.databanner["name"] = e.data[0].included["text"][0].name;
+      this.databanner["idname"] = e.data[0].fields.name;
       this.databanner["circles"] = e.data[0].included["text"][0].circles;
+      this.databanner["idcircles"] = e.data[0].fields.circles;
       this.databanner["problem"] = e.data[0].included["text"][0].problem;
+      this.databanner["idproblem"] = e.data[0].fields.problem;
 
       // Images Banner
       this.databanner["logo"] = e.data[0].fields.logo;
@@ -55,12 +67,22 @@ export class SolutionComponent implements OnInit {
       // Récupération des données pour la solution
       this.backend.GET('/api/solutionContents/'+this.idsolution, e=>{
         this.datasolution["name"] = e.data[0].included["text"][0].name;
+        this.datasolution["idname"] = e.data[0].fields.name;
+
         this.datasolution["problem"] = e.data[0].included["text"][0].problem;
+        this.datasolution["idproblem"] = e.data[0].fields.problem;
+
         this.datasolution["desc"] = e.data[0].included["text"][0].arg;
+        this.datasolution["iddesc"] = e.data[0].fields.arg;
+
         this.datasolution["text_db"] = e.data[0].included["text"][0].text_db;
+        this.datasolution["idtext"] = e.data[0].fields.text_db;
         this.datasolution["picture_db"] = "url("+e.data[0].fields.picture_db+")";
       });
     });
+  }
+
+  ngAfterViewInit(){
     this.cd.detectChanges();
   }
 
