@@ -3,11 +3,11 @@
     "table" : "Cont_Solution",
     "fields": {
         "id":"",
-        "name":"mandatory, updatable",
-        "text_db":"optionnal, updatable",
-        "picture_db":"optionnal, updatable",
-        "problem":"optionnal, updatable",
-        "arg":"optionnal, updatable"
+        "name":"mandatory updatable",
+        "text_db":"optionnal updatable",
+        "picture_db":"optionnal updatable",
+        "problem":"optionnal updatable",
+        "arg":"optionnal updatable"
     },
     "primaryField": "id",
     "updatable" : [

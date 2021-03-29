@@ -20,7 +20,8 @@ export class OfferComponent implements OnInit, AfterViewInit{
     contentEditableText2 : boolean = false;
 
     @ViewChild('listesolutions') selectView: ElementRef;
-    @ViewChild('divtext') textView: ElementRef;
+    @ViewChild('sidetext') sideView: ElementRef;
+    @ViewChild('text') textView: ElementRef;
     @ViewChild('divimage') imageView: ElementRef;
     @ViewChild('input') input: ElementRef;
     @ViewChild('commimg') commimageView: ElementRef;
@@ -41,7 +42,7 @@ export class OfferComponent implements OnInit, AfterViewInit{
 
     ngAfterViewInit(){
       if(this.configgauche){
-        var text = this.textView.nativeElement;
+        var text = this.sideView.nativeElement;
         text.style.right=0;
         var img = this.imageView.nativeElement;
         img.style.left=0;
@@ -49,7 +50,7 @@ export class OfferComponent implements OnInit, AfterViewInit{
         commimg.style.right=0;
       }
       else{
-        var text = this.textView.nativeElement;
+        var text = this.sideView.nativeElement;
         text.style.left=0;
         var img = this.imageView.nativeElement;
         img.style.right=0;

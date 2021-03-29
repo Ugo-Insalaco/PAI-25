@@ -3,9 +3,9 @@
     "table": "cont_offre",
     "fields":{
         "id":"",
-        "name":"mandatory, updatable",
-        "text":"mandatory, updatable",
-        "picture":"optionnal, updatable"
+        "name":"mandatory updatable",
+        "text":"mandatory updatable",
+        "picture":"optionnal updatable"
     },
     "primaryField":"id",
     "updatable":[
