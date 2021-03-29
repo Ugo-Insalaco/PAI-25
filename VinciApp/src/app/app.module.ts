@@ -13,10 +13,10 @@ import { ConfigService } from './services/config.service'
 import { GlobalStorageService } from './services/globalStorage.service'
 import { HttpClientModule } from '@angular/common/http';
 import { BackendService } from './services/backend.service'
+import { AuthService } from './services/auth.service' 
 
 import {MatDialogModule} from '@angular/material/dialog';
 
-//import { BackendService } from './backend.service';
 import { HeaderComponent } from './header/header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -107,7 +107,8 @@ import { NewOfferFormComponent } from './new-offer-form/new-offer-form.component
   providers: [
     ConfigService,
     GlobalStorageService,
-    BackendService
+    BackendService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

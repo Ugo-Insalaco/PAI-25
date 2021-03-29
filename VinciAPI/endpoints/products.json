@@ -10,6 +10,13 @@
         "price":"mandatory"
     },
     "primaryField":"id",
+    "policies":{
+        "GET": "US",
+        "GET_ALL": "US",
+        "POST": "AD",
+        "PATCH": "AD",
+        "DELETE": "AD"
+    },
     "include":[
         {
             "name":"data",
@@ -88,6 +95,10 @@
             "key":"id_product",
             "fields":{
                 "id_data":"mandatory"
+            },
+            "policies":{
+                "POST": "AD",
+                "DELETE": "AD"
             }
         }
     ],

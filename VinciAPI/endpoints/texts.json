@@ -7,9 +7,13 @@
         "text":"mandatory updatable"
     },
     "primaryField":"id",
-    "updatable":[
-
-    ],
+    "policies":{
+        "GET": "US",
+        "GET_ALL": "US",
+        "POST": "AD",
+        "PATCH": "AD",
+        "DELETE": "AD"
+    },
     "include":[
 
     ],

@@ -7,5 +7,6 @@
 
     "iot": [
         {"reference": "", "quantite": ""}
-    ]
+    ],
+    "vinci_csrf_token": ""
 }

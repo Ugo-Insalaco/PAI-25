@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {Title} from '@angular/platform-browser';
+import { AuthService } from '../services/auth.service'
 
 @Component({
   selector: 'app-login',
@@ -16,8 +17,8 @@ export class LoginComponent implements OnInit {
   loginError: string;
   constructor(private fb: FormBuilder,
     private router: Router,
-    private titleService: Title
-    //private authService: AuthService
+    private titleService: Title,
+    private authService: AuthService
     ) { }
 
     ngOnInit() {
@@ -46,5 +47,14 @@ export class LoginComponent implements OnInit {
       error => this.error = error
     );
   }*/
-
+  onSubmit(){
+    this.authService.login(this.username.value, this.password.value,
+    res=>{
+      console.log(res)
+      this.router.navigate(['/']);
+    },
+    err=>{
+      console.log(err)
+    })
+  }
 }

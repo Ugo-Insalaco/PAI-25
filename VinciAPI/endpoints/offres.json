@@ -8,9 +8,13 @@
         "picture":"optionnal updatable"
     },
     "primaryField":"id",
-    "updatable":[
-
-    ],
+    "policies":{
+        "GET": "US",
+        "GET_ALL": "US",
+        "POST": "AD",
+        "PATCH": "AD",
+        "DELETE": "AD"
+    },
     "include":[
         {
             "name": "text",
@@ -135,6 +139,10 @@
             "key":"id_offre",
             "fields":{
                 "id_solution": "mandatory"
+            },
+            "policies":{
+                "POST": "AD",
+                "DELETE": "AD"
             }
         }
     ],

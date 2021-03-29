@@ -5,6 +5,7 @@ const parsers = require('./parsers')
 const responseParser = require('./responseParser')
 const Promise = require('bluebird')
 const bcrypt = require('bcrypt')
+const privileges = require('./privileges')
 
 const confs = config.endpoints
 const init = function(app){
@@ -12,7 +13,7 @@ const init = function(app){
     .map(key=>confs[key])
     .forEach(conf=>{
 
-        app.get(`/api/${conf.name}s/:id`, parsers.URL_parser, function(req, res){
+        app.get(`/api/${conf.name}s/:id`, parsers.URL_parser, privileges(conf.policies.GET), function(req, res){
             const id = parseInt(xss(req.params.id))
             console.log(`requête à GET ${xss(req.path)}`)
 
@@ -144,7 +145,7 @@ const init = function(app){
             }
         })
 
-        app.get(`/api/${conf.name}s/`, parsers.URL_parser, function(req, res){
+        app.get(`/api/${conf.name}s/`, parsers.URL_parser, privileges(conf.policies.GET_ALL), function(req, res){
             const id = parseInt(xss(req.params.id))
             console.log(`requête à GET ${req.path}`)
 
@@ -289,6 +290,7 @@ const init = function(app){
         })
         app.post(`/api/${conf.name}s`, 
         parsers.jsonBody_parser(postables), 
+        privileges(conf.policies.POST),
         function(req, res){
             console.log(`requête à POST ${xss(req.path)}`)
 
@@ -404,6 +406,7 @@ const init = function(app){
 
         app.patch(`/api/${conf.name}s/:id`,
         parsers.jsonBody_parser(updatables),
+        privileges(conf.policies.PATCH),
         function(req, res){
             console.log(`requête à PATCH ${xss(req.path)}`)
             //Vérification que l'id existe
@@ -469,6 +472,7 @@ const init = function(app){
 
 
         app.delete(`/api/${conf.name}s/:id`,
+        privileges(conf.policies.DELETE),
         function(req, res){
             console.log(`requête à DELETE ${xss(req.path)}`)
             pool.then(pool=>{
@@ -562,6 +566,7 @@ const init = function(app){
 
             app.post(`/api/${conf.name}s/:id/relationships/${relation.name}`,
             parsers.jsonBody_parser(postables), 
+            privileges(relation.policies.POST),
             function(req, res){
                 console.log(`requête à POST ${xss(req.path)}`)
 
@@ -649,6 +654,7 @@ const init = function(app){
 
             app.delete(`/api/${conf.name}s/:id/relationships/${relation.name}`,
             parsers.jsonBody_parser(relationDelete),
+            privileges(relation.policies.DELETE),
             function(req, res){
                 console.log(`requête à DELETE ${xss(req.path)}`)
                 pool.then(pool=>{

@@ -49,7 +49,7 @@ export class GlobalStorageService{
 
     public reset_default(key: string)
     {
-        if(localStorage.getItem(key)===null){
+        if(this.default[key]===null){
             return "La valeur n'existe pas par défaut"
         }
         else{

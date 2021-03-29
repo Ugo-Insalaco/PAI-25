@@ -10,10 +10,14 @@
         "circles":"mandatory updatable",
         "problem":"mandatory updatable"
     },
+    "policies":{
+        "GET": "US",
+        "GET_ALL": "US",
+        "POST": "AD",
+        "PATCH": "AD",
+        "DELETE": "AD"
+    },
     "primaryField":"id",
-    "updatable":[
-
-    ],
     "include":[
         {
             "name": "text",
@@ -70,6 +74,10 @@
             "key":"id_cadran",
             "fields":{
                 "id_offre": "mandatory"
+            },
+            "policies":{
+                "POST": "AD",
+                "DELETE": "AD"
             }
         }
     ],

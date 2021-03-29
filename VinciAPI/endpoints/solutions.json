@@ -6,9 +6,13 @@
         "name":"mandatory"
     },
     "primaryField": "id",
-    "updatable" : [
-        "name"
-    ],
+    "policies":{
+        "GET": "US",
+        "GET_ALL": "US",
+        "POST": "AD",
+        "PATCH": "AD",
+        "DELETE": "AD"
+    },
     "include": [
         {
             "name":"section_question",
@@ -76,6 +80,10 @@
             "fields":{
                 "id_question":"mandatory",
                 "id_section":"mandatory"
+            },
+            "policies":{
+                "POST": "AD",
+                "DELETE": "AD"
             }
         },
         {
@@ -84,6 +92,10 @@
             "key":"id_solution",
             "fields":{
                 "id_product":"mandatory"
+            },
+            "policies":{
+                "POST": "AD",
+                "DELETE": "AD"
             }
         }
     ],

@@ -7,6 +7,13 @@
         "points":"mandatory"
     },
     "primaryField":"id",
+    "policies":{
+        "GET": "US",
+        "GET_ALL": "US",
+        "POST": "AD",
+        "PATCH": "AD",
+        "DELETE": "AD"
+    },
     "include":[
 
     ],

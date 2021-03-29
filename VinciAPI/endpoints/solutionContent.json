@@ -10,9 +10,13 @@
         "arg":"optionnal updatable"
     },
     "primaryField": "id",
-    "updatable" : [
-        "name"
-    ],
+    "policies":{
+        "GET": "US",
+        "GET_ALL": "US",
+        "POST": "AD",
+        "PATCH": "AD",
+        "DELETE": "AD"
+    },
     "include": [
         {
             "name": "text",
