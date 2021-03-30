@@ -1,6 +1,8 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {Router} from '@angular/router';
+import { BackendService } from '../services/backend.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-cadran',
@@ -9,139 +11,99 @@ import {Router} from '@angular/router';
 })
 export class CadranComponent implements OnInit {
 
-  // A récupérer dans variables globales
-  admin: boolean = true;
+  admin: boolean = this.auth.isLoggedIn();
 
-  // Paramètres pour cadran
-    nomcadran: string = "";
-    couleur: string = "";
+  offerList: any[] = [];
+  couleur!: string;
+  idcadran!: number;
+  nomcadran!: string;
+  nboffre: number = 0;
 
-    // Banner
-    urlphotofond: string = "";
-    urllogo: string = "";
-    urlcercles: string = "";
-    problematiquecadran: string = "";
+  // Paramètres pour banner
+  databanner: { [key: string]: any;} = {};
 
-    // Offer 1
-    urlphotooffre1: string = "";
-    nomoffre1: string = "";
-    texteoffre1: string = "";
-    offre1solutions : string[] = [""];
-
-    // Offer 2
-    urlphotooffre2: string = "";
-    nomoffre2: string = "";
-    texteoffre2: string = "";
-    offre2solutions : string[] = [""];
-
-    // Offer 3
-    urlphotooffre3: string = "";
-    nomoffre3: string = "";
-    texteoffre3: string = "";
-    offre3solutions : string[] = [""];
-
-  constructor(private titleService: Title, private router: Router) {}
+  constructor(private backend: BackendService,
+              private auth: AuthService,
+              private titleService: Title,
+              private router: Router,
+              private cd: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.nomcadran = this.getNomCadran();
+    this.idcadran = this.getIdCadran();
     this.titleService.setTitle(`${this.nomcadran} - Vinci Facilities`);
+    this.databanner["idcadran"] = this.idcadran;
 
-    // Récupération des informations en fonction du nom du CadranComponent
-    // Données à récupérer dans la base de données en fonction du nom du cadran
-    if(this.nomcadran == "Actifs Techniques"){
-      this.couleur = "#062C6B";
-      // Banner
-      this.urlphotofond = "url(/assets/images/actifstechniques/exImageFond.png)";
-      this.urllogo = "/assets/images/actifstechniques/logo.png";
-      this.urlcercles = "/assets/images/actifstechniques/cerclesBandeau.png";
-      this.problematiquecadran = "Problématique du cadran Actifs Techniques";
+    // Récupération des données de la BDD
+    // Récupération des données du cadran
+    this.backend.GET('/api/cadrans/'+this.idcadran, e=>{
+      // Texts Banner
+      this.databanner["name"] = e.data[0].included["text"][0].name;
+      this.databanner["idname"] = e.data[0].fields.name;
+      this.databanner["circles"] = e.data[0].included["text"][0].circles;
+      this.databanner["idcircles"] = e.data[0].fields.circles;
+      this.databanner["problem"] = e.data[0].included["text"][0].problem;
+      this.databanner["idproblem"] = e.data[0].fields.problem;
 
-      // Offer 1
-      this.urlphotooffre1 = "url(/assets/images/actifstechniques/offre1.jpg)";
-      this.nomoffre1 = "Offre 1 : Supervision des équipements CVC";
-      this.texteoffre1 = 'Ceci est un texte pour la solution Supervision des équipements CVC du cadran actifs techniques.';
-      this.offre1solutions = ["Production de froid", "Production de chaud","Traitement de l'air"];
+      // Images Banner
+      this.databanner["logo"] = e.data[0].fields.logo;
+      this.couleur = e.data[0].fields.color;
+      this.databanner["picture_back"] = "url("+e.data[0].fields.picture_back+")";
 
-      // Offer 2
-      this.urlphotooffre2 = "url(/assets/images/actifstechniques/offre2.jpg)";
-      this.nomoffre2 = "Offre 2 : Rondes d'exploitation";
-      this.texteoffre2 = "Ceci est un texte pour la solution Rondes d'exploitation du cadran actifs techniques.";
-      this.offre2solutions = ["Rondes digitalisées"];
-    }
-    else if(this.nomcadran == "Bien Etre"){
-      this.couleur = "#CC2871";
-      // Banner
-      this.urlphotofond = "url(/assets/images/bienetre/exImageFond.jpg)";
-      this.urllogo = "/assets/images/bienetre/logo.png";
-      this.urlcercles = "/assets/images/bienetre/cerclesBandeau.png";
-      this.problematiquecadran = "Problématique du cadran Bien-Être";
+      // Récupération des données pour les offres
+      this.backend.GET('/api/offres?include=cadran', e=>{
+        for(var i=0; i<e.data.length; i++){
+          if(e.data[i].included.cadran[0].id_cadran == this.idcadran){
+            var data = {
+              "idoffre": e.data[i].id,
+              "picture": "url("+e.data[i].fields.picture+")",
+              "name": e.data[i].included["text"][0].name,
+              "idname": e.data[i].fields.name,
+              "text": e.data[i].included["text"][0].text,
+              "idtext": e.data[i].fields.text,
+              "solutions": []
+            };
+            this.nboffre += 1;
+            this.offerList.push(data);
+          }
+        }
 
-      // Offer 1
-      this.urlphotooffre1 = "url(/assets/images/bienetre/offre1.jpg)";
-      this.nomoffre1 = "Offre 1 : Qualité de vie au travail";
-      this.texteoffre1 = "Ceci est un texte pour la solution Qualité de vie au travail du cadran bien etre.";
-      this.offre1solutions = ["Santé et environnement de travail", "Satisfaction des usagers"];
-
-      // Offer 2
-      this.urlphotooffre2 = "url(/assets/images/bienetre/offre2.jpg)";
-      this.nomoffre2 = "Offre 2 : Sécurité";
-      this.texteoffre2 = "Ceci est un texte pour la solution Sécurité du cadran actifs techniques.";
-      this.offre2solutions = ["Détection incendie","Inondation"];
-
-      // Offer 3
-      this.urlphotooffre3 = "url(/assets/images/bienetre/offre3.jpg)";
-      this.nomoffre3 = "Offre 3 : Hygiène";
-      this.texteoffre3 = "Ceci est un texte pour la solution Hygiène du cadran actifs techniques.";
-      this.offre3solutions = ["Légionelle ECS","Nettoyage à l'usage"];
-    }
-    else if(this.nomcadran == "Confort Energie Environnement"){
-      this.couleur = "#03B0B4";
-      // Banner
-      this.urlphotofond = "url(/assets/images/confortenergieenvironnement/exImageFond.jpg)";
-      this.urllogo = "/assets/images/confortenergieenvironnement/logo.png";
-      this.urlcercles = "/assets/images/confortenergieenvironnement/cerclesBandeau.png";
-      this.problematiquecadran = "Problématique du cadran Confort Energie Environnement";
-
-      // Offer 1
-      this.urlphotooffre1 = "url(/assets/images/confortenergieenvironnement/offre1.jpg)";
-      this.nomoffre1 = "Offre 1 : Maîtrise des énergies";
-      this.texteoffre1 = "Ceci est un texte pour la solution Maîtrise des énergies du cadran Confort Energie Environnement.";
-      this.offre1solutions = ["Consommations énergétiques", "Décret tertiaire","CPE","CEE"];
-
-      // Offer 2
-      this.urlphotooffre2 = "url(/assets/images/confortenergieenvironnement/offre2.jpg)";
-      this.nomoffre2 = "Offre 2 : Maîtrise des déchets";
-      this.texteoffre2 = "Ceci est un texte pour la solution Maîtrise des déchets du cadran Confort Energie Environnement.";
-      this.offre2solutions = ["Ronde digitalisées", "Gestion des collectes"];
-    }
-    else if(this.nomcadran == "Espaces"){
-      this.couleur = "#0CAAEB";
-      // Banner
-      this.urlphotofond = "url(/assets/images/espaces/exImageFond.jpg)";
-      this.urllogo = "/assets/images/espaces/logo.png";
-      this.urlcercles = "/assets/images/espaces/cerclesBandeau.png";
-      this.problematiquecadran = "Problématique du cadran Espaces";
-
-      // Offer 1
-      this.urlphotooffre1 = "url(/assets/images/espaces/offre1.jpg)";
-      this.nomoffre1 = "Offre 1 : Gestion des espaces";
-      this.texteoffre1 = "Ceci est un texte pour la solution Gestion des espaces du cadran Espaces.";
-      this.offre1solutions = ["Disponibilité des espaces collaboratifs", "Disponibilité des places de parking","Fréquentation et affluence"];
-
-      // Offer 2
-      this.urlphotooffre2 = "url(/assets/images/espaces/offre2.jpg)";
-      this.nomoffre2 = "Offre 2 : Optimisation des espaces";
-      this.texteoffre2 = "Ceci est un texte pour la solution Optimisation des espaces du cadran Confort Energie Environnement.";
-      this.offre2solutions = ["Etude d'occupation"];
-    }
+        // Récupération des solutions pour chaque offre
+        this.backend.GET('/api/offres?include=solution', e=>{
+          for(var i=0; i<e.data.length; i++){
+            for(var j=0; j<this.offerList.length; j++){
+              if(e.data[i].id == this.offerList[j]["idoffre"]){
+                for(var s=0; s<e.data[i].included["solution"].length; s++){
+                  var sol = {
+                    "id": e.data[i].included["solution"][s].id_solution,
+                    "name": e.data[i].included["solution"][s].subincluded["text"].name
+                  }
+                  this.offerList[j]["solutions"].push(sol);
+                }
+              }
+            }
+          }
+        });
+      });
+      this.cd.detectChanges();
+    });
   }
 
   getNomCadran(){
     var nom = this.router.url.split('/').pop();
+    nom = nom.split('&').pop();
     nom = nom.replace(/-/gi, " ");
+    nom = nom.replace(/%C3%A9/gi, "é");
+    nom = nom.replace(/%C3%AA/gi, "ê");
     nom = nom.split(' ')
              .map(word => word.charAt(0).toUpperCase() + word.slice(1))
              .join(' ');
     return nom;
+  }
+
+  getIdCadran(){
+    var id = this.router.url.split('/').pop();
+    id = id.split('&')[0];
+    return Number(id);
   }
 }

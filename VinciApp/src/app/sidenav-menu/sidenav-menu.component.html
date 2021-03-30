@@ -2,79 +2,24 @@
   <a mat-list-item routerLink="/" (click)="onCloseSidenav()">
     <span class="nav-item">Accueil</span>
   </a>
-  <a mat-list-item routerLink="/cadran/actifs-techniques" id="cadran1" (click)="onCloseSidenav()">
-    <span class="nav-item nav-cadran">Actifs Techniques</span>
-  </a>
-  <mat-list-item><span class="nav-item nav-offre" id="c1-o1">Supervision des équipements CVC</span>
-    <ul>
-     <li><a href="/cadran/actifs-techniques/production-de-froid">Production de froid</a> </li>
-     <li><a href="/cadran/actifs-techniques/production-de-chaud">Production de chaud</a> </li>
-     <li><a href="/cadran/actifs-techniques/traitement-de-l_air">Centrale de traitement d'air</a> </li>
-    </ul>
-  </mat-list-item>
 
-  <mat-list-item><span class="nav-item nav-offre">Rondes d'exploitation</span>
-    <ul>
-      <li><a href="/cadran/actifs-techniques/rondes-digitalisées">Rondes d'exploitation digitalisées</a></li>  
-    </ul> 
-</mat-list-item>
+  <app-menu-list-item *ngFor="let cadran of cadranList;">
+    <!-- Parcours de la liste des cadrans -->
+    <a mat-list-item [routerLink]="cadran.url" class="cadran" [style.border-color]="cadran.color" (click)="onCloseSidenav()">
+      <span class="nav-item nav-cadran">{{cadran.name}}</span>
+    </a>
 
-  <mat-list-item><span class="nav-item nav-offre">Sécurité</span>
-    <ul>
-      <li><a href="#">Détection de fumée</a></li>
-      <li><a href="#">Inondation</a></li>
-    </ul>
-  </mat-list-item>
-
-  <a mat-list-item routerLink="/cadran/confort-energie-environnement" id="cadran2" (click)="onCloseSidenav()">
-    <span class="nav-item nav-cadran">Environnement</span>
-  </a>
-  <mat-list-item><span class="nav-item nav-offre">Maîtrise des énergies</span>
-    <ul>
-      <li><a href="#">Consommations énergétiques (décret tertiaire, CPE)</a></li>
-      <li><a href="#">Eau</a></li>
-      <li><a href="#">Monitoring des équipements industriels (financement CEE)</a></li>
-    </ul>
-  </mat-list-item>
-
-  <mat-list-item><span class="nav-item nav-offre">Maîtrise des déchets</span>
-    <ul>
-      <li><a href="#">Rondes digitalisées</a></li>
-    </ul>
-  </mat-list-item>
-  
-  <a mat-list-item routerLink="/cadran/bien-etre" id="cadran3" (click)="onCloseSidenav()">
-    <span class="nav-item nav-cadran">Santé et Bien-être</span>
-  </a>
-  <mat-list-item><span class="nav-item nav-offre">Qualité de vie au travail</span>
-    <ul>
-      <li><a href="/cadran/bien-etre/santé-et-environnement-de-travail">Santé et environnement de travail</a></li>
-      <li><a href="/cadran/bien-etre/satisfaction-des-usagers">Satisfaction des usagers</a></li>
-    </ul>
-  </mat-list-item>
-
-  <mat-list-item><span class="nav-item nav-offre">Hygiène</span>
-    <ul>
-      <li><a href="/cadran/bien-etre/légionelle-ecs">Légionelle ECS</a></li>
-      <li><a href="/cadran/bien-etre/nettoyage-à-l_usage">Nettoyage à l'usage</a></li>
-    </ul>
-  </mat-list-item>
-
-  <a mat-list-item routerLink="/cadran/espaces" id="cadran4" (click)="onCloseSidenav()">
-    <span class="nav-item nav-cadran">Espaces</span>
-  </a>
-  <mat-list-item><span class="nav-item nav-offre">Gestion des espaces</span>
-    <ul>
-      <li><a href="/cadran/espaces/disponibilité-des-espaces-collaboratifs">Disponibilité des espaces collaboratifs</a></li>
-      <li><a href="/cadran/espaces/disponibilité-des-places-de-parking">Disponibilité des places de parking</a></li>
-      <li><a href="/cadran/espaces/fréquentation-et-affluence">Fréquentation et affluence</a></li>
-    </ul>
-  </mat-list-item>
-
-  <mat-list-item><span class="nav-item nav-offre">Optimisation des espaces</span>
-    <ul>
-      <li><a href="/cadran/espaces/etude-d_occupation">Etude d'occupation</a></li>
-    </ul>
-  </mat-list-item>
-
+    <!-- Parcours de la liste des offres du cadran-->
+    <app-menu-list-item *ngFor="let offre of cadran.offres;">
+      <mat-list-item>
+        <span class="nav-item nav-offre">{{offre.name}}</span>
+        <!-- Parcours de la liste des solutions de l'offre-->
+        <div class="solutioncontainer">
+          <app-menu-list-item [routerLink]="cadran.url+solution.url" class="solution" *ngFor="let solution of offre.solutions;">
+            <span>{{solution.name}}</span>
+          </app-menu-list-item>
+        </div>
+      </mat-list-item>
+    </app-menu-list-item>
+  </app-menu-list-item>
 </mat-nav-list>

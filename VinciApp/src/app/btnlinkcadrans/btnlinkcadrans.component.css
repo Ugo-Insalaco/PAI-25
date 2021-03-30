@@ -1,17 +1,24 @@
-#buttonLinkCadran{
-  height: auto;
-  text-align: center;
+ul{
+  display: flex;
+  list-style-type: none;
+  justify-content: center;
   padding-top: 2vh;
   padding-bottom: 2vh;
 }
 
-button{
-  vertical-align: top;
+li{
   height: 8vh;
   width: 12vw;
-  opacity: 0.75;
   margin-left: 5px;
+}
+
+button{
+  vertical-align: top;
+  height: 100%;
+  width: 100%;
+  opacity: 0.75;
   border: none;
   font-size: 17px;
   border-radius: 3px;
+  color: #FFF;
 }

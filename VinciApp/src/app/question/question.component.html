@@ -28,10 +28,9 @@
 
   <div *ngIf="type=='select'">
     {{question}}
+    <br>
     <select multiple [(ngModel)]="answer" (change)="onAnswer()">
-      <ngcontainer *ngFor = "let r of reponses">
-        <option> {{r.reponse}} </option>
-      </ngcontainer>
+      <option *ngFor = "let r of reponses"> {{r.reponse}} </option>
     </select>
   </div>
 
@@ -67,12 +66,17 @@
   <br>
 
   <!-- Affichage de la question suivante -->
-  <div *ngIf="answer || id_answer || modif">
+  <div *ngIf="(answer || id_answer) && !modif">
     <app-question *ngIf="next" 
       [id_question]=next
       [tab]=tab
       [modif]=modif>
     </app-question>
+  </div>
+
+  <!-- Affichage de toutes les questions suivantes possibles en mode modif -->
+  <div *ngIf="modif && admin">
+    
   </div>
 
 </div>

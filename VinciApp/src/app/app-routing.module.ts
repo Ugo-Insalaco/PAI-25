@@ -17,19 +17,8 @@ const routes: Routes = [
   {path: 'project/:solution', component: ProjectComponent},
   {path: 'modif-project/:project', component: ModifProjectComponent},
   {path: 'new-project', component: NewProjectComponent},
-  {path: 'cadran', children: [
-    {path: 'actifs-techniques', component: CadranComponent},
-    {path: 'actifs-techniques/:solution', component: SolutionComponent},
-
-    {path: 'bien-etre', component: CadranComponent},
-    {path: 'bien-etre/:solution', component: SolutionComponent},
-
-    {path: 'confort-energie-environnement', component: CadranComponent},
-    {path: 'confort-energie-environnement/:solution', component: SolutionComponent},
-
-    {path: 'espaces', component: CadranComponent},
-    {path: 'espaces/:solution', component: SolutionComponent},
-  ]}
+  {path: 'cadran/:cadran', component: CadranComponent},
+  {path: 'cadran/:cadran/:solution', component: SolutionComponent}
 ];
 
 @NgModule({

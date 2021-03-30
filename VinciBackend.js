@@ -1,18 +1,21 @@
 const express = require('express')
 
 const bodyParser = require("body-parser")
+const cookieParser = require('cookie-parser')
+const token = require('./VinciAPI/token')
+const languageParser = require('./VinciAPI/text').languageParser
+
 const multer = require('multer')
 const storage = multer.diskStorage({
 	destination: (req, file, callBack) => {
-		callBack(null, `./VinciApp/src/assets/images/${file.originalname.split('-')[0]}`)
+		callBack(null, './VinciApp/src/assets/images')
 	},
 	filename: (req, file, callBack) => {
-		callBack(null, file.originalname.split('-')[1])
+		callBack(null, file.originalname)
 	}
 })
 var upload = multer({storage: storage})
 
-const languageParser = require('./VinciAPI/text').languageParser
 const endpoints = require('./VinciAPI/endpoints')
 const cors = require('cors')
 const mail = require('./VinciAPI/mail')
@@ -21,11 +24,14 @@ const fileupload = require('./VinciAPI/fileUpload')
 
 const app = express()
 
-app.use(cors())
+var corsOptions = {
+	origin: 'http://localhost:4200', // Changer pour l'adresse du serveur angular en mise en production
+	optionsSuccessStatus: 200,
+	credentials: true
+}
+app.use(cors(corsOptions))
 
-app.use('/',languageParser)
-
-//text(app)
+app.use('/api',languageParser,cookieParser(), token)
 
 endpoints(app)
 

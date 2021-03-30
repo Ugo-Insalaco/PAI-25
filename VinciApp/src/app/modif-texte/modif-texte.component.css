@@ -2,10 +2,11 @@
   height: 30px;
   vertical-align: center;
   margin-left: 1vh;
-}
-
-.pencil{
-  height: 100%;
+  border: 0;
+  border-radius: 3px;
+  text-align: center;
+  background-color: #DBDBDB;
+  box-shadow: 1px 1px 1px #646464;
 }
 
 #container-admin-controls{
@@ -13,4 +14,13 @@
   justify-content: center;
   height: 30px;
   margin-left: 1vh;
+}
+
+mat-icon{
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+span{
+  margin-right: 5px;
 }

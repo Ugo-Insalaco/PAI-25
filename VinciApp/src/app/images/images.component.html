@@ -1,42 +1,14 @@
-<div class="main"> <!--#134384-->
-  <div class="container" id="container1">
-    <div class="title">
-      <p>Actifs Techniques</p>
-    </div>
-    <a class="overlay" id="overlay1" href="/cadran/actifs-techniques">
-      <div>
-        Augmenter la performance et le potentiel de votre patrimoine
+<ul>
+  <li *ngFor="let cadran of cadranList;">
+    <div class="container">
+      <div class="title" [style.border-color]="cadran.color">
+        <p>{{cadran.name}}</p>
       </div>
-    </a>
-  </div>
-    <div class="container"  id="container2">
-      <div class="title">
-        <p>Environnement</p>
-      </div>
-      <a class="overlay" id="overlay2" href="/cadran/confort-energie-environnement">
+      <a class="overlay" [href]="cadran.url" [style.border-color]="cadran.color">
         <div>
-          Optimiser vos dépenses et renforcer votre responsabilité sociétale
+          {{cadran.problem}}
         </div>
       </a>
     </div>
-    <div class="container" id="container3">
-      <div class="title">
-        <p>Santé et Bien-être</p>
-      </div>
-      <a class="overlay" id="overlay3" href="/cadran/bien-etre">
-        <div>
-          Aider chacun à révéler son potentiel
-        </div>
-      </a>
-    </div>
-    <div class="container" id="container4">
-      <div class="title">
-        <p>Espaces</p>
-      </div>
-      <a class="overlay" id="overlay4" href="/cadran/espaces">
-        <div>
-          Rendre vos espaces plus performants et en lien avec votre identité
-        </div>
-      </a>
-    </div>
-</div>
+  </li>
+</ul>

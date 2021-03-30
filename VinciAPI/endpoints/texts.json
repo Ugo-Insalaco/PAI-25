@@ -4,12 +4,16 @@
     "all_tables":["cont_fra","cont_en"],
     "fields":{
         "id":"",
-        "text":"mandatory"
+        "text":"mandatory updatable"
     },
     "primaryField":"id",
-    "updatable":[
-
-    ],
+    "policies":{
+        "GET": "US",
+        "GET_ALL": "US",
+        "POST": "AD",
+        "PATCH": "AD",
+        "DELETE": "AD"
+    },
     "include":[
 
     ],

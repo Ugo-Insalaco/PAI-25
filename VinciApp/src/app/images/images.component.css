@@ -1,4 +1,5 @@
-.main{
+ul {
+  list-style-type: none;
   background-image: url(/assets/images/accueilcadrans.jpg);
   background-repeat: no-repeat;
   background-size: cover;
@@ -16,16 +17,16 @@
   overflow: hidden;
 }
 
+li{
+  border-left: 1px solid rgba(255,255,255,1);
+  width: 25%;
+}
+
 .container{
   display: inline;
-  flex-direction: column;
   position: relative;
-  width: 25%;
   padding: 0;
   margin: 0;
-  justify-content: center;
-  align-items: center;
-  border-left: 1px solid rgba(255,255,255,1);
   transition: border 0.8s;
 }
 
@@ -43,6 +44,7 @@
   text-shadow: 1px 1px 2px black;
   transition: height 0.8s;
   font-size: 210%;
+  border-bottom: solid 10px;
 }
 
 .overlay{
@@ -60,28 +62,10 @@
   text-align: center;
   justify-content: center;
   transition: transform 0.8s;
+  border-top: solid 10px;
 }
 
 .container:hover .title{
   height: 0%;
+  border-bottom: none;
 }
-
-#container1{ border-bottom: solid 10px #062C6B; }
-#container1:hover{ border-bottom: none; }
-
-#container2{ border-bottom: solid 10px #03B0B4; }
-#container2:hover{ border-bottom: none; }
-
-#container3{ border-bottom: solid 10px #CC2871; }
-#container3:hover{ border-bottom: none; }
-
-#container4{ border-bottom: solid 10px #0CAAEB; }
-#container4:hover{ border-bottom: none; }
-
-#overlay1{ border-top: solid 10px #062C6B; }
-
-#overlay2{ border-top: solid 10px #03B0B4; }
-
-#overlay3{ border-top: solid 10px #CC2871; }
-
-#overlay4{ border-top: solid 10px #0CAAEB; }

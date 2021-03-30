@@ -44,5 +44,15 @@
   width: inherit;
   height: 15%;
   padding-top: 1%;
-  padding-bottom: 5%; 
+  padding-bottom: 5%;
+}
+
+#btnmodifimage{
+  position: absolute;
+  bottom: 1vh;
+  right: 1vh;
+}
+
+#btnmodiftexte{
+  position: relative;
 }

@@ -4,9 +4,9 @@ mat-sidenav{
 
 mat-sidenav-content{
   height: 100%;
+  overflow-x: hidden;
 }
 
 mat-sidenav-container{
   height: 100%;
-  overflow: hidden;
 }

@@ -9,12 +9,13 @@
         "position":"mandatory"
     },
     "primaryField": "id",
-    "updatable" : [
-        "name",
-        "logo",
-        "sous_texte",
-        "position"
-    ],
+    "policies":{
+        "GET": "US",
+        "GET_ALL": "US",
+        "POST": "AD",
+        "PATCH": "AD",
+        "DELETE": "AD"
+    },
     "include": 
     [
         {

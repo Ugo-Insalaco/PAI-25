@@ -3,14 +3,18 @@
     "table": "cont_offre",
     "fields":{
         "id":"",
-        "name":"mandatory",
-        "text":"mandatory",
-        "picture":"optionnal"
+        "name":"mandatory updatable",
+        "text":"mandatory updatable",
+        "picture":"optionnal updatable"
     },
     "primaryField":"id",
-    "updatable":[
-
-    ],
+    "policies":{
+        "GET": "US",
+        "GET_ALL": "US",
+        "POST": "AD",
+        "PATCH": "AD",
+        "DELETE": "AD"
+    },
     "include":[
         {
             "name": "text",
@@ -80,7 +84,8 @@
             "id":"{{0::offre::id}}",
             "fields":{
                 "name":"{{0::offre::name}}",
-                "text":"{{0::offre::text}}"
+                "text":"{{0::offre::text}}",
+				"picture":"{{0::offre::picture}}"
             },
             "included":{
                 "text":{
@@ -134,6 +139,10 @@
             "key":"id_offre",
             "fields":{
                 "id_solution": "mandatory"
+            },
+            "policies":{
+                "POST": "AD",
+                "DELETE": "AD"
             }
         }
     ],

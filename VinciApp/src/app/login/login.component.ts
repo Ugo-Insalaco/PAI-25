@@ -34,11 +34,27 @@ export class LoginComponent implements OnInit {
   //this.authService.logout();
   get username() { return this.loginForm.get('username'); }
   get password() { return this.loginForm.get('password'); }
-  Submit() {
-    
-  this.authService.login(this.username.value, this.password.value)
-  
-    
-
-  }  
-} 
+  /*Submit() {
+    this.submitted = true;
+    this.authService.login(this.username.value, this.password.value).subscribe((data) => {
+       if (this.authService.isLoggedIn) {
+          const redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/admin';
+          this.router.navigate([redirect]);
+        } else {
+          this.loginError = 'Username or password is incorrect.';
+        }
+      },
+      error => this.error = error
+    );
+  }*/
+  onSubmit(){
+    this.authService.login(this.username.value, this.password.value,
+    res=>{
+      console.log(res)
+      this.router.navigate(['/']);
+    },
+    err=>{
+      console.log(err)
+    })
+  }
+}

@@ -8,11 +8,13 @@
         "data":"optionnal"
     },
     "primaryField": "id",
-    "updatable" : [
-        "content",
-        "question_suivante",
-        "data"
-    ],
+    "policies":{
+        "GET": "US",
+        "GET_ALL": "US",
+        "POST": "AD",
+        "PATCH": "AD",
+        "DELETE": "AD"
+    },
     "include": 
     [
         {

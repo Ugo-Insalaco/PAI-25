@@ -4,6 +4,7 @@
     max-height: 100%;
     height: 20%;
     margin-bottom: 1%;
+    min-height: 30%;
 }
 
 .control-label-required, .custom-select {
@@ -54,8 +55,9 @@ h2{
     line-height: 3;
     color:white;
     text-align: center;
-
+    min-height: 15%;
 }
+
 img {
     max-height: 50px;
     width: auto;

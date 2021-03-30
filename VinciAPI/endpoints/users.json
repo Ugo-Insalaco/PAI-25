@@ -10,17 +10,17 @@
         "status":"mandatory"
     },
     "primaryField": "id",
+    "policies":{
+        "GET": "AD",
+        "GET_ALL": "AD",
+        "POST": "AD",
+        "PATCH": "AD",
+        "DELETE": "AD"
+    },
     "connexionFields":{
         "username":"username",
         "password":"password"
     },
-    "updatable":[
-        "username",
-        "first_name",
-        "last_name",
-        "password",
-        "status"
-    ],
     "include":[
 
     ],

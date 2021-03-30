@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 import { ConfigService } from '../services/config.service';
 import { GlobalStorageService } from '../services/globalStorage.service';
@@ -24,11 +24,15 @@ export class QuestionComponent implements OnInit {
   reponses = [] //id et contenu des réponses à afficher
   id_answer: number; //id de la réponse de l'utilisateur
   answer: string; //contenu de la réponse de l'utilisateur 
-  next: number; //id de la question suivante
+  next = ""; //id de la question suivante
+  all_next =[]; //id de toutes les questions suivantes possibles (utile pour l'admin)
   all_iot: any;
   
   ngOnInit(): void {
-    console.log("Question bien reçue : id : "+this.id_question)
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.reponses=[];
     this.backend.GET(`/api/questions/${this.id_question}?include=reponse`, e=>{
       this.question = e.data[0].included["text"][0].content;
       this.type = e.data[0].fields.type;
@@ -37,15 +41,23 @@ export class QuestionComponent implements OnInit {
         this.backend.GET(`/api/reponses/${id_rep}`, e=>{
           const rep = e.data[0].included["text"][0].content;
           this.reponses = this.reponses.concat([{"id": id_rep, "reponse": rep}])
+          console.log(this.reponses)
           });
       }
-      });
+    });
 
       // //NE FONCTIONNE PAS
       // this.backend.GET(`/api/products`, e=>{
       //   this.all_iot = e.data[0]
       //   console.log("ici")
       // })
+    
+    if (changes.id_question.currentValue && changes.id_question.previousValue) {
+      if (changes.id_question.currentValue != changes.id_question.previousValue) {
+        this.answer = ""
+        this.next="";
+      }
+    }
   }
 
   onAnswer(){
@@ -96,7 +108,7 @@ export class QuestionComponent implements OnInit {
     }
   this.globalStorage.set("projet", project) //mise à jour de la variable globale projet
 
-  //renvoie une erreur si il y a pas de question suivante, mais c'est pas grave
+  //renvoie une erreur si il y a pas de question suivante, mais c'est pas graves
   this.backend.GET(`/api/reponses/${this.id_answer}?include=question_suivante`, e=>{
     this.next = e.data[0].fields.question_suivante;
     console.log(this.next)

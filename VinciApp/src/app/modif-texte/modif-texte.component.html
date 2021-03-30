@@ -2,7 +2,8 @@
         (click)="allowModifText()"
         *ngIf="admin===true && modifAllowed===false"
         title="Modification">
-        Texte <img class="pencil" src="/assets/images/pencil.png">
+        <mat-icon>create</mat-icon>
+        <span>Texte</span>
 </button>
 <div id="container-admin-controls"
      *ngIf="admin===true && modifAllowed==true">

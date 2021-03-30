@@ -2,7 +2,8 @@
         (click)="allowModifImage()"
         *ngIf="admin===true && modifAllowed===false"
         title="Modification">
-        {{imageType}} <img class="pencil" src="/assets/images/pencil.png">
+        <mat-icon>create</mat-icon>
+        <span>{{imageType}}</span>
 </button>
 <div id="container-admin-controls"
      *ngIf="admin===true && modifAllowed==true">
@@ -14,7 +15,7 @@
            title="Visualiser">
            Visualiser
    </button>
-   <button (click)="updateAssets()"
+   <button (click)="sendDatatoDB()"
            *ngIf="visualizationActivated==true"
            title="Valider">
            Valider

@@ -1,6 +1,13 @@
 .btnmodif{
   height: 30px;
+  width: auto;
   vertical-align: center;
+  border: 0;
+  border-radius: 3px;
+  text-align: center;
+  background-color: #DBDBDB;
+  box-shadow: 1px 1px 1px #646464;
+  margin-left: 1vh;
 }
 
 #container-admin-controls{
@@ -8,11 +15,15 @@
   justify-content: center;
   align-items: center;
   height: 30px;
-  margin-left: 1vh;
   background-color: white;
   border: solid 1px #f0f0f0;
 }
 
-.pencil{
-  height: 100%;
+mat-icon{
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+span{
+  margin-right: 5px;
 }

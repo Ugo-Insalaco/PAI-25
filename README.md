@@ -11,6 +11,7 @@ Installation et lancement du projet :
 - Une fois les commandes entrées, lancer un navigateur web et entrer l'adresse localhost:4200, la page par défaut de l'application apparaît
 
 Lancement de l'api en NodeJs
+- faire attention à bien sépecifier la bonne adresse du serveur Angular dans le fichier VinciBackend.js
 - se placer dans le dossier PAI-25
 - node VinciBackend.js
 

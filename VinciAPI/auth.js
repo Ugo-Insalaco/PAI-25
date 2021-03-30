@@ -66,7 +66,7 @@ const auth = function(app){
                             {username : req.body.username, id: row.id, csrf: csrf},
                             config.auth.privateKey
                         )
-                        res.cookie('VinciApp_authToken',token)
+                        res.cookie('vinci_auth_token',token)
                         res.send({
                             csrf:csrf,
                             cookie: token
@@ -91,8 +91,8 @@ const auth = function(app){
         })
     })
 
-    app.get('/auth/logout', cookieParser, function(req, res){
-        res.send('logout')
+    app.get('/auth/logout', function(req, res){
+        res.clearCookie('vinci_auth_token')
     })
 }
 

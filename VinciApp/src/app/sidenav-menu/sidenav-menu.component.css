@@ -11,12 +11,7 @@
   padding-bottom: 2%;
 }
 
-/*
-.mat-list-item:hover {
-  font-weight: bold;
-} */
-
-.mat-list-item:hover ul {
+.mat-list-item:hover .solutioncontainer {
   display: inline-block;
 }
 
@@ -29,41 +24,33 @@ a:hover {
   font-weight: bold;
 }
 
-#cadran1:hover {
-  border-left: solid 8px #062C6B;
+.cadran{
+  border-left: solid 0px;
 }
 
-#cadran2:hover {
-  border-left: solid 8px #03B0B4;
+.cadran:hover{
+  border-left: solid 8px;
 }
 
-#cadran3:hover {
-  border-left: solid 8px #CC2871;
-}
-
-#cadran4:hover {
-  border-left: solid 8px #0CAAEB;
-}
-
-li{
+.solution{
+  display: inline-block;
   font-size: 15px;
-  width: 230px;
-  padding: 8%;
+  width: 100%;
+  padding: 7%;
   min-height: 30px;
 }
 
-li:hover {
+.solution:hover {
   background-color: BUTTONFACE;
   font-weight: bold;
 }
 
-ul {
+.solutioncontainer{
   display: none;
   position: absolute;
   top: 0%;
-  left: 92%;
+  left: 100%;
   color: #00438a;
   list-style: none;
   width: 200px;
 }
-
