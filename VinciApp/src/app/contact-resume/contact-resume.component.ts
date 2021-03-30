@@ -1,9 +1,5 @@
 import { Component,Inject, OnInit,ViewChild,ElementRef  } from '@angular/core';
-<<<<<<< HEAD
-import {EmailService} from 'src/app/services/email.service'
-=======
 import {EmailService} from '../services/email.service'
->>>>>>> 8f6290b830cbfb3738e2bcf2adcd9e28fcf4a87f
  import  jsPDF from 'jspdf';
  import html2canvas from 'html2canvas';
 

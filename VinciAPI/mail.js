@@ -1,10 +1,7 @@
 const nodemailer = require("nodemailer");
-<<<<<<< HEAD
-=======
 //const details = require("./endpoints/details.json");
 
-const log = console.log;
->>>>>>> 8f6290b830cbfb3738e2bcf2adcd9e28fcf4a87f
+//const log = console.log;
 const mail = function(app){
   app.post("/sendmail", (req, res) => {
     console.log("request came");

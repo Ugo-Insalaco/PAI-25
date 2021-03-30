@@ -103,9 +103,9 @@ import { NewSolutionFormComponent } from './new-solution-form/new-solution-form.
     ProjectModule
   ],
   providers: [
-    ConfigService,
+    /*ConfigService,
     GlobalStorageService,
-    BackendService
+    BackendService*/
   ],
   bootstrap: [AppComponent]
 })

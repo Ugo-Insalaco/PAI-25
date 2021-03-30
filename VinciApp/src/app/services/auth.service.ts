@@ -4,7 +4,6 @@ import { Observable, throwError } from 'rxjs';
 
 import { retry, catchError } from 'rxjs/operators';
 
-
 import { BackendService } from '/home/sirine/Desktop/PAI-25/VinciApp/src/app/services/backend.service';
 import { TransitiveCompileNgModuleMetadata } from '@angular/compiler';
 
@@ -44,11 +43,15 @@ logout() {
 
 login(username: string, password: string) {
   
-  const http$= this.back.POST('/auth/login',{ username:username, password:password },res=>{
+  /*const http$= this.back.POST('/auth/login',{ username:username, password:password },res=>{
+   console.log(res)},e=>{console.log(e)}
+   )}*/
+  }   
    
+
       
-  })
+  
 
 
-}
+
 }

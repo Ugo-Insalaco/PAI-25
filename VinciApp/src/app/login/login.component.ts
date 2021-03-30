@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {Title} from '@angular/platform-browser';
 import {AuthService} from '/home/sirine/Desktop/PAI-25/VinciApp/src/app/services/auth.service';
+import {BackendService} from '/home/sirine/Desktop/PAI-25/VinciApp/src/app/services/backend.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,7 +19,8 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private router: Router,
     private titleService: Title,
-    private authService: AuthService
+    private authService: AuthService,
+    private back:BackendService
     ) { }
 
     ngOnInit() {
@@ -34,6 +37,8 @@ export class LoginComponent implements OnInit {
   Submit() {
     
   this.authService.login(this.username.value, this.password.value)
+  
     
+
   }  
 } 

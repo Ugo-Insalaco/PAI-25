@@ -6,7 +6,9 @@ import { ConfigService } from './config.service';
 import { GlobalStorageService } from './globalStorage.service'
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+  })
 export class BackendService {
     private message: String
     constructor(private http: HttpClient, private config: ConfigService, private globalStorage: GlobalStorageService){
