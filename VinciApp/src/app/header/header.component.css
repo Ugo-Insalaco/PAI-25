@@ -41,10 +41,9 @@ button{
 #connectbtn{
   background-color: #00438a;
 }
-::ng-deep .mat-icon{
-    height:35px !important;
-    width:35px !important;
-    font-size:35px !important;
+.mat-icon{
+    transform: scale(1.2);
+    margin-right: 5px;
 }
  img {
     height: 60px;

@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ElementRef, ViewChild, AfterViewInit, ChangeD
 import {Title} from '@angular/platform-browser';
 import {Router} from '@angular/router';
 import { BackendService } from '../services/backend.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-solution',
@@ -17,7 +18,7 @@ export class SolutionComponent implements OnInit, AfterViewInit {
   @ViewChild('desc') descView: ElementRef;
   @ViewChild('text') textView: ElementRef;
 
-  admin: boolean = true;
+  admin: boolean = this.auth.isLoggedIn();
 
   // Données récupérées dans l'url
   idcadran!: number;
@@ -37,6 +38,7 @@ export class SolutionComponent implements OnInit, AfterViewInit {
   contentEditableText: boolean = false;
 
   constructor(private titleService: Title,
+              private auth: AuthService,
               private cd: ChangeDetectorRef,
               private router: Router,
               private backend: BackendService) { }

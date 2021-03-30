@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {Router} from '@angular/router';
 import { BackendService } from '../services/backend.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-cadran',
@@ -10,8 +11,7 @@ import { BackendService } from '../services/backend.service';
 })
 export class CadranComponent implements OnInit {
 
-  // A récupérer dans variables globales
-  admin: boolean = true;
+  admin: boolean = this.auth.isLoggedIn();
 
   offerList: any[] = [];
   couleur!: string;
@@ -23,6 +23,7 @@ export class CadranComponent implements OnInit {
   databanner: { [key: string]: any;} = {};
 
   constructor(private backend: BackendService,
+              private auth: AuthService,
               private titleService: Title,
               private router: Router,
               private cd: ChangeDetectorRef) {}
