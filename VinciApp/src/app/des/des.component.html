@@ -1,9 +1,12 @@
 <mat-card>
-    <mat-card-content>
-
-     <h1>Bienvenue au E-catalogue des solutions digitales</h1>
-     <br>
-     <h3>Nous vous proposons la solution IOT adaptée à vos besoins</h3>
-
-     </mat-card-content>
-   </mat-card>
+  <mat-card-content>
+    <div #main [contentEditable]="contentEditableMain">
+      <p class="h1">{{data1}}</p>
+      <br>
+      <p class="h3">{{data2}}</p>
+    </div>
+    <div id="btnmodiftexte">
+      <app-modif-texte [admin]="admin" idtext="1" [textView]="maintextView" [(editAllowed)]="contentEditableMain"></app-modif-texte>
+    </div>
+  </mat-card-content>
+</mat-card>

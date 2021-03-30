@@ -99,24 +99,6 @@ export class SolutionComponent implements OnInit, AfterViewInit {
     return nom;
   }
 
-  /*getNomCadran(){
-    var nom = this.router.url.split('/').pop();
-    nom = nom.split('&').pop();
-    nom = nom.replace(/-/gi, " ");
-    nom = nom.replace(/%C3%A9/gi, "é");
-    nom = nom.replace(/%C3%AA/gi, "ê");
-    nom = nom.split(' ')
-             .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-             .join(' ');
-    return nom;
-  }
-
-  getIdCadran(){
-    var id = this.router.url.split('/').pop();
-    id = id.split('&')[0];
-    return Number(id);
-  }*/
-
   getNomCadran(){
     var nom = this.router.url.split('/')[2];
     nom = nom.split('&').pop();

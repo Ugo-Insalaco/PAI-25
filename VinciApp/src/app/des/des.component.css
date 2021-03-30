@@ -5,7 +5,8 @@ mat-card {
     margin-left: auto;
     margin-right: auto;
   }
-  h1{
+  .h1{
+      font-size: 2em;
       color:#00438a;
       display: block;
       margin-left: auto;
@@ -13,18 +14,25 @@ mat-card {
       text-align: center;
       padding-top: 2vh;
   }
-  h3{
+  .h3{
+      font-size: 1.17em;
       position: center;
       color:#777777;
       text-align: center;
       padding-bottom: 2vh;
   }
 
-h1::after {
+.h1::after {
     content: "";
     display: block;
     width: 40px;
     height: 2px;
     background-color: #009FE3;
     margin: 10px auto;
+}
+
+#btnmodiftexte{
+  position: absolute;
+  bottom: 1vh;
+  right: 1vh;
 }
