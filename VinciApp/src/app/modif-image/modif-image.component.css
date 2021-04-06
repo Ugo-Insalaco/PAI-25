@@ -17,6 +17,7 @@
   height: 30px;
   background-color: white;
   border: solid 1px #f0f0f0;
+  margin-left: 1vh;
 }
 
 mat-icon{
