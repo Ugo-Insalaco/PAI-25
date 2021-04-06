@@ -2,7 +2,7 @@
   position: relative;
   width: 99vw;
   height: auto;
-  padding: 5vh;
+  padding: 3%;
 }
 
 #divtext{
@@ -10,7 +10,7 @@
   height: 60vh;
   padding: 1%;
   left: 0;
-  padding-left: 5%;
+  padding-left: 3%;
   padding-top: 2%;
   position: absolute;
   text-align: center;
@@ -59,4 +59,10 @@
   position: absolute;
   bottom: 1vh;
   right: 1vh;
+}
+
+#problem{
+  text-align: center;
+  font-size: 30px;
+  padding-bottom: 1%;
 }
