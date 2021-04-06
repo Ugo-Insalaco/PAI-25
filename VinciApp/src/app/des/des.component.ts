@@ -15,11 +15,15 @@ export class DesComponent implements OnInit, AfterViewInit {
   data1!: string;
   data2!: string;
 
-  admin: boolean = this.auth.isLoggedIn();
+  admin!: boolean;
 
   constructor(private cd: ChangeDetectorRef,
               private auth: AuthService,
-              private backend: BackendService) { }
+              private backend: BackendService) {
+    this.auth.isLoggedIn(res => {
+      this.admin = res;
+    });
+  }
 
   ngOnInit(): void {
     this.backend.GET('/api/texts/1', e=>{

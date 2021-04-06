@@ -11,7 +11,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class CadranComponent implements OnInit {
 
-  admin: boolean = this.auth.isLoggedIn();
+  admin!: boolean;
 
   offerList: any[] = [];
   couleur!: string;
@@ -26,7 +26,11 @@ export class CadranComponent implements OnInit {
               private auth: AuthService,
               private titleService: Title,
               private router: Router,
-              private cd: ChangeDetectorRef) {}
+              private cd: ChangeDetectorRef) {
+    this.auth.isLoggedIn(res => {
+      this.admin = res;
+    });
+  }
 
   ngOnInit(): void {
     this.nomcadran = this.getNomCadran();
