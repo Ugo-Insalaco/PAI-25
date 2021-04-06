@@ -43,7 +43,6 @@ import { CadranComponent } from './cadran/cadran.component';
 import { SolutionComponent } from './solution/solution.component';
 import { BtnlinkcadransComponent } from './btnlinkcadrans/btnlinkcadrans.component';
 import { NewProjectComponent } from './new-project/new-project.component';
-import { ModifProjectComponent } from './modif-project/modif-project.component';
 import { ModifTexteComponent } from './modif-texte/modif-texte.component';
 import { ModifImageComponent } from './modif-image/modif-image.component';
 import { SidenavMenuComponent } from './sidenav-menu/sidenav-menu.component';
@@ -73,7 +72,6 @@ import { NewOfferFormComponent } from './new-offer-form/new-offer-form.component
     SolutionComponent,
     BtnlinkcadransComponent,
     NewProjectComponent,
-    ModifProjectComponent,
     ModifTexteComponent,
     ModifImageComponent,
     SidenavMenuComponent,

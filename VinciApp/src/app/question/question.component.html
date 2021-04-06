@@ -2,19 +2,19 @@
 
   <!-- Affichage de la question -->
 
-  <div *ngIf="type=='radio'" [contentEditable]="modif && admin">
+  <div *ngIf="type=='radio'">
     {{question}}
     <ngcontainer *ngFor="let r of reponses">
       <br><input type="radio" name="{{id_question}}" value="{{r.id}}" [(ngModel)]="id_answer" (change)="onAnswer()"> {{r.reponse}}
     </ngcontainer>
   </div>
 
-  <div *ngIf="type=='text'" [contentEditable]="modif && admin">
+  <div *ngIf="type=='text'">
     {{question}}
     <br><textarea [(ngModel)]="answer" (change)="onAnswer()"></textarea>
   </div>
 
-  <div *ngIf="type=='number'" [contentEditable]="modif && admin">
+  <div *ngIf="type=='number'">
     {{question}}    
     <br><input type="number" [(ngModel)]="answer" (change)="onAnswer()">
   </div>
@@ -43,11 +43,17 @@
     </select>
   </div>
 
+  <div *ngIf="info">
+    Info : {{info}}
+  </div>
+
+  <br> 
+
   <!-- Modification de la question en mode admin -->
-  <div *ngIf="modif && admin">
+  <!-- <div *ngIf="modif && admin">
     <button>Supprimer cette question</button>
     <div *ngIf="type=='number' || type=='text'">
-      <br> Question suivante : <!-- faire une requete au serveur dans le .ts-->
+      <br> Question suivante :
       <select>
         <option selected> Question a </option> 
         <option> Question b </option>
@@ -63,7 +69,7 @@
       </ngcontainer>
     </div>
   </div>
-  <br>
+  <br> -->
 
   <!-- Affichage de la question suivante -->
   <div *ngIf="(answer || id_answer) && !modif">
@@ -73,10 +79,3 @@
       [modif]=modif>
     </app-question>
   </div>
-
-  <!-- Affichage de toutes les questions suivantes possibles en mode modif -->
-  <div *ngIf="modif && admin">
-    
-  </div>
-
-</div>

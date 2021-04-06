@@ -1,10 +1,10 @@
-import { componentFactoryName } from '@angular/compiler';
-import { Component, Input, OnInit } from '@angular/core';
-import { ConfigService } from '../services/config.service'
-import { GlobalStorageService } from '../services/globalStorage.service'
-import { BackendService } from '../services/backend.service';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 
-import {Router} from '@angular/router';
+import { ConfigService } from '../services/config.service';
+import { GlobalStorageService } from '../services/globalStorage.service';
+import { BackendService } from '../services/backend.service';
+import { ProjectComponent } from '../project/project.component';
+
 
 @Component({
   selector: 'app-modif-project',
@@ -12,66 +12,85 @@ import {Router} from '@angular/router';
   styleUrls: ['./modif-project.component.css']
 })
 export class ModifProjectComponent implements OnInit {
-
-  nomsolution: string;
   
-  //à récupérer dans la BDD (à voir comment gérer pour l'attribut modif qui indique que la question est en cours de modification):
-  cadran = "Actifs techniques";
-  offre = "Sécurité";
-  questions = [
-    {"id_question":1,"modif":false,"type":"number","partie":0,"question":"Combien de détecteurs de fumée ?","reponses": [
-      {"text":"", "question_suivante":2}]
-    },
-    {"id_question":3,"modif":false,"type":"QCM","partie":1,"question":"Quelle application souhaitez-vous utiliser ?","reponses": [
-      {"text":"IoThink", "question_suivante":2},
-      {"text": "Autre", "question_suivante":2}]
-    },
-    {"id_question":5,"modif":false,"type":"QCM","partie":2,"question":"Souhaitez-vous internaliser ou externaliser l installation des IoT ?","reponses": [
-      {"text":"Internaliser", "question_suivante":2},
-      {"text": "Externaliser", "question_suivante":2}]
-    },
-    {"id_question":2,"modif":false,"type":"text","partie":0,"question": "Ajouter un commentaire","reponses": [
-      {"text":"", "question_suivante":2}]
-    }
-  ]
+  constructor(private backend: BackendService, private config: ConfigService, private globalStorage: GlobalStorageService){}
+  @Input() tab; //numero de la page (donc de la section)
+  @Input() id_question;
 
-
-
-  constructor(private router: Router, private backend: BackendService, private config: ConfigService, private globalStorage: GlobalStorageService){
-  }
-
+  //type: string;
+  //question: string; //contenu de la question
+  //reponses = [] //id et contenu des réponses à afficher
+  //id_answer: number; //id de la réponse de l'utilisateur
+  //answer: string; //contenu de la réponse de l'utilisateur
+  all_questions =[]; //id de toutes les questions possibles de la section
+  
   ngOnInit(): void {
-    this.nomsolution = this.getNomSolution();
-    //for (let i = 0; i < this.questions.length; i++) {
-    //  this.questions[i].push("");
-    //  }
+    this.all_questions = [this.id_question];
+    this.backend.GET(`/api/questions/${this.id_question}?include=reponse`, e=>{
+      for (let i = 0; i < e.data[0].included["reponse"].length; i++) {
+        const id_rep = e.data[0].included["reponse"][i].id_reponse;
+        this.backend.GET(`/api/reponses/${id_rep}?include=question_suivante`, e2=>{
+          const next = e2.data[0].fields.question_suivante;
+          this.all_questions = this.all_questions.concat([next]);
+          this.all_questions = Array.from(new Set(this.all_questions)); //suppression des redondances
+        });
+      }
+    });
   }
 
-  getNomSolution(){
-    var nom = this.router.url.split('/').pop();
-    nom = nom.replace(/-/gi, " "); // Remplace - par espace
-    nom = nom.replace(/_/gi, "'"); // Remplace _ par '
-    nom = nom.charAt(0).toUpperCase() + nom.slice(1); // Majuscule pour 1er mot
-    nom = nom.replace(/%C3%A9/gi, "é");
-    return nom;
-  }
+  // onAnswer(){
+  //   if (this.type == "radio") {
+  //     // this.backend.GET(`/api/reponses/${this.id_answer}`, e=>{
+  //     //   this.answer = e.data[0].included["text"][0].content;
+  //     // })
+  //     for (let i = 0; i < this.reponses.length; i++) {
+  //       if (this.reponses[i].id == this.id_answer) {
+  //         this.answer = this.reponses[i].reponse
+  //       }        
+  //     }
+  //   }
+  //   if (this.type == "number" || this.type == "text" || this.type=="select_all_iot") {
+  //     for (let i = 0; i < this.reponses.length; i++) {
+  //       if (this.reponses[i].reponse == this.answer) {
+  //         this.id_answer = this.reponses[i].id
+  //       }
+  //     }
+  //   }
+  //   if (this.type == "select") { //gestion des cas où il peut y avoir plusieurs réponses -> on prend l'id de la première
+  //     for (let i = 0; i < this.reponses.length; i++) {
+  //       if (this.reponses[i].reponse == this.answer[0]) {
+  //         this.id_answer = this.reponses[i].id
+  //       }
+  //     }
+  //   }
 
-  onModif(q){
-    q.modif = true
-  }
+  //   var projectJSON = this.globalStorage.get("projet");
+  //   var project = JSON.parse(projectJSON);
+  //   var exists = false;
+  //   for(var i= 0; i < project.length; i++){
+  //     if (project[i].id_question == this.id_question) {
+  //       exists = true;
+  //       project[i].id_reponse = this.id_answer
+  //       project[i].reponse = this.answer
+  //     }
+  //   }
+  //   if (exists == false) {
+  //     var reponse = {
+  //       "partie": this.tab,
+  //       "id_question": this.id_question, 
+  //       "question": this.question,
+  //       "id_reponse": this.id_answer, 
+  //       "reponse": this.answer
+  //     };
+  //     project.push(reponse);
+  //   }
+  // this.globalStorage.set("projet", project) //mise à jour de la variable globale projet
 
-  onValide(q){
-    //modifier le contenu de la bdd
-    q.modif = false
-  }
+  // //renvoie une erreur si il y a pas de question suivante, mais c'est pas grave
+  // this.backend.GET(`/api/reponses/${this.id_answer}?include=question_suivante`, e=>{
+  //   this.next = e.data[0].fields.question_suivante;
+  //   console.log(this.next)
+  //   })
+  // }
 
-  onTermine(){
-    // Get selected solution and redirect to solution's page
-    var solution = this.nomsolution;
-    solution = solution.replace(/ /gi, "-"); // Remplace - par espace
-    solution = solution.replace(/'/gi, "_"); // Remplace _ par '
-    solution = solution.toLowerCase()
-    this.router.navigate(["project/",solution]);
-  }
-
-}
+ }

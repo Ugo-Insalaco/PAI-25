@@ -1,0 +1,16 @@
+<div style="text-align: center;">
+
+    <strong>Question</strong> (id {{id_question}}) : <input type="text" [(ngModel)]="question">
+    <br> Type de question : {{type}}
+    <div *ngFor="let r of reponses">
+        <ngcontainer *ngIf="type != number || type != text || type != select_iot">
+            <strong> Réponse </strong> (id {{r.id}}) : <input type="text" [(ngModel)]="r.reponse">
+        </ngcontainer>
+        <br>
+        <ngcontainer *ngIf="r.question_suivante != 0">
+            Identifiant de la question suivante : <input type="number" [(ngModel)]="r.question_suivante">
+        </ngcontainer> 
+    </div>
+    <button (click)=onValiderModif()>Valider les modifications</button>
+    <br>-------------------
+</div>

@@ -21,28 +21,30 @@ export class QuestionComponent implements OnInit {
   admin = true;
   type: string;
   question: string; //contenu de la question
+  info: string;
   reponses = [] //id et contenu des réponses à afficher
   id_answer: number; //id de la réponse de l'utilisateur
   answer: string; //contenu de la réponse de l'utilisateur 
   next = ""; //id de la question suivante
-  all_next =[]; //id de toutes les questions suivantes possibles (utile pour l'admin)
   all_iot: any;
   
   ngOnInit(): void {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    console.log("question reçue d'id "+this.id_question)
     this.reponses=[];
     this.backend.GET(`/api/questions/${this.id_question}?include=reponse`, e=>{
       this.question = e.data[0].included["text"][0].content;
+      this.info = e.data[0].fields.info;
       this.type = e.data[0].fields.type;
       for (let i = 0; i < e.data[0].included["reponse"].length; i++) {
         const id_rep = e.data[0].included["reponse"][i].id_reponse;
-        this.backend.GET(`/api/reponses/${id_rep}`, e=>{
-          const rep = e.data[0].included["text"][0].content;
+        this.backend.GET(`/api/reponses/${id_rep}`, e2=>{
+          const rep = e2.data[0].included["text"][0].content;
           this.reponses = this.reponses.concat([{"id": id_rep, "reponse": rep}])
           console.log(this.reponses)
-          });
+        });
       }
     });
 
@@ -54,7 +56,7 @@ export class QuestionComponent implements OnInit {
     
     if (changes.id_question.currentValue && changes.id_question.previousValue) {
       if (changes.id_question.currentValue != changes.id_question.previousValue) {
-        this.answer = ""
+        this.answer = "";
         this.next="";
       }
     }
@@ -108,11 +110,17 @@ export class QuestionComponent implements OnInit {
     }
   this.globalStorage.set("projet", project) //mise à jour de la variable globale projet
 
-  //renvoie une erreur si il y a pas de question suivante, mais c'est pas graves
-  this.backend.GET(`/api/reponses/${this.id_answer}?include=question_suivante`, e=>{
+  this.backend.GET(`/api/reponses/${this.id_answer}`, e=>{
     this.next = e.data[0].fields.question_suivante;
     console.log(this.next)
     })
   }
+
+  // this.backend.GET(`/api/reponses/${this.id_answer}`, e=>{
+  //   this.next = e.data[0].included["question_suivante"][0].id[0];
+  //   console.log(e.data[0])
+  //   console.log("next:"+this.next)
+  //   })
+  // }
 
 }
