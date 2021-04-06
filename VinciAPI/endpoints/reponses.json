@@ -19,7 +19,7 @@
     [
         {
             "name": "question_suivante",
-            "default_inclusion": false,
+            "default_inclusion": true,
             "bind":[
                 {
                     "id": 8,
