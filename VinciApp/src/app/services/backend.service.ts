@@ -10,7 +10,7 @@ export class BackendService {
         this.config = config
         
     }
-    
+
     public GET(url: string, success: Function, error: Function=function(e){console.log(e)}) {
         this.http.get(this.config.backend.url_api+url, {
             headers: new HttpHeaders({
@@ -19,7 +19,7 @@ export class BackendService {
             }),
             responseType: 'json',
             withCredentials: true
-        }) 
+        })
         .subscribe(e=>{
             console.log('requête GET effectuée')
             success(e)
@@ -27,7 +27,7 @@ export class BackendService {
         err=>{
             error(err)
         })
-        
+
     }
 
     public POST(url: string, body: Object, success: Function, error: Function=function(e){console.log(e)}){

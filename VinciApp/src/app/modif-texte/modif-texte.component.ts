@@ -12,6 +12,7 @@ export class ModifTexteComponent implements OnInit {
 
   @Input() textView : ElementRef;
   @Input() idtext : number;
+  @Input() buttonName !: string;
 
   @Input() editAllowed: boolean;
   @Output() editAllowedChange = new EventEmitter<boolean>();
@@ -46,7 +47,7 @@ export class ModifTexteComponent implements OnInit {
     // Reprise du texte initial
     var paragraphs = this.textView.nativeElement.querySelectorAll("p");
     for(var i=0; i<paragraphs.length;i++){
-      paragraphs[i].textContent = this.initialText.split('/')[i];
+      paragraphs[i].textContent = this.initialText.split('&/&')[i];
     }
 
     this.editAllowed = false;
@@ -58,9 +59,9 @@ export class ModifTexteComponent implements OnInit {
     var paragraphs = this.textView.nativeElement.querySelectorAll("p");
     var text = "";
     for(var i=0; i<paragraphs.length;i++){
-      text += paragraphs[i].textContent + "/";
+      text += paragraphs[i].textContent + "&/&";
     }
-    text = text.slice(0,-1);
+    text = text.slice(0,-3);
     return text;
   }
 

@@ -20,7 +20,7 @@ export class AuthService {
         })
     }
 
-    public login(username: string, password: string, success: Function, error: Function=null){     
+    public login(username: string, password: string, success: Function, error: Function=null){
         this.backend.POST(
             '/auth/login',
             {username: username, password:password},

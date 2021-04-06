@@ -28,7 +28,7 @@ export class OfferComponent implements OnInit, AfterViewInit{
 
     // To get the selected option in the select
     selectedOption!: string;
-    selectedText!: string;
+    selectedText: string = "";
 
     constructor(private backend: BackendService,
                 private cd: ChangeDetectorRef,

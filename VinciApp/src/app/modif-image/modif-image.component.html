@@ -2,7 +2,8 @@
         (click)="allowModifImage()"
         *ngIf="admin===true && modifAllowed===false"
         title="Modification">
-        {{imageType}} <img class="pencil" src="/assets/images/pencil.png">
+        <mat-icon>create</mat-icon>
+        <span>{{buttonName}}</span>
 </button>
 <div id="container-admin-controls"
      *ngIf="admin===true && modifAllowed==true">

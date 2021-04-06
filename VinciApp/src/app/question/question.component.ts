@@ -54,6 +54,7 @@ export class QuestionComponent implements OnInit {
     
     if (changes.id_question.currentValue && changes.id_question.previousValue) {
       if (changes.id_question.currentValue != changes.id_question.previousValue) {
+        this.answer = ""
         this.next="";
       }
     }

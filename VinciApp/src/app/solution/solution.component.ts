@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ElementRef, ViewChild, AfterViewInit, ChangeD
 import {Title} from '@angular/platform-browser';
 import {Router} from '@angular/router';
 import { BackendService } from '../services/backend.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-solution',
@@ -17,7 +18,7 @@ export class SolutionComponent implements OnInit, AfterViewInit {
   @ViewChild('desc') descView: ElementRef;
   @ViewChild('text') textView: ElementRef;
 
-  admin: boolean = true;
+  admin: boolean = this.auth.isLoggedIn();
 
   // Données récupérées dans l'url
   idcadran!: number;
@@ -37,6 +38,7 @@ export class SolutionComponent implements OnInit, AfterViewInit {
   contentEditableText: boolean = false;
 
   constructor(private titleService: Title,
+              private auth: AuthService,
               private cd: ChangeDetectorRef,
               private router: Router,
               private backend: BackendService) { }
@@ -96,24 +98,6 @@ export class SolutionComponent implements OnInit, AfterViewInit {
     nom = nom.replace(/%C3%A0/gi, "à");
     return nom;
   }
-
-  /*getNomCadran(){
-    var nom = this.router.url.split('/').pop();
-    nom = nom.split('&').pop();
-    nom = nom.replace(/-/gi, " ");
-    nom = nom.replace(/%C3%A9/gi, "é");
-    nom = nom.replace(/%C3%AA/gi, "ê");
-    nom = nom.split(' ')
-             .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-             .join(' ');
-    return nom;
-  }
-
-  getIdCadran(){
-    var id = this.router.url.split('/').pop();
-    id = id.split('&')[0];
-    return Number(id);
-  }*/
 
   getNomCadran(){
     var nom = this.router.url.split('/')[2];

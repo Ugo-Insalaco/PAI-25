@@ -1,5 +1,5 @@
 import { componentFactoryName } from '@angular/compiler';
-import { Input, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Input, OnInit } from '@angular/core';
 
 import { Component } from '@angular/core';
 import { ConfigService } from '../services/config.service'
@@ -29,7 +29,7 @@ export class ProjectComponent implements OnInit{
     id_question_2: number //1ere question de la troisième section
     id_question_3: number //1ere question de la quatrième section (ajouter un commentaire)
 
-    constructor(private router: Router, private backend: BackendService, private config: ConfigService, private globalStorage: GlobalStorageService, private cd: ChangeDetectorRef){
+    constructor(private router: Router, private backend: BackendService, private config: ConfigService, private globalStorage: GlobalStorageService){
     }
 
 
@@ -83,8 +83,6 @@ export class ProjectComponent implements OnInit{
             }
             
         })
-
-        this.cd.detectChanges()
     }
 
     changeHandler(e){
