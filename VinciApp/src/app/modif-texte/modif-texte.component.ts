@@ -12,6 +12,7 @@ export class ModifTexteComponent implements OnInit {
 
   @Input() textView : ElementRef;
   @Input() idtext : number;
+  @Input() buttonName !: string;
 
   @Input() editAllowed: boolean;
   @Output() editAllowedChange = new EventEmitter<boolean>();

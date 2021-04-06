@@ -17,8 +17,8 @@
     </p>
   </div>
   <div class="btnmodiftexte">
-    <app-modif-texte [admin]="admin" [idtext]="datasolution.idproblem" [textView]="problemView" [(editAllowed)]="contentEditableProblem"></app-modif-texte>
-    <app-modif-texte [admin]="admin" [idtext]="datasolution.iddesc" [textView]="descView" [(editAllowed)]="contentEditableDesc"></app-modif-texte>
+    <app-modif-texte [admin]="admin" buttonName="Problématique" [idtext]="datasolution.idproblem" [textView]="problemView" [(editAllowed)]="contentEditableProblem"></app-modif-texte>
+    <app-modif-texte [admin]="admin" buttonName="Description" [idtext]="datasolution.iddesc" [textView]="descView" [(editAllowed)]="contentEditableDesc"></app-modif-texte>
   </div>
 </div>
 
@@ -28,13 +28,14 @@
       {{datasolution.text_db}}
     </p>
     <div class="btnmodiftexte">
-      <app-modif-texte [admin]="admin" [idtext]="datasolution.idtext" [textView]="textView" [(editAllowed)]="contentEditableText"></app-modif-texte>
+      <app-modif-texte [admin]="admin" buttonName="Texte" [idtext]="datasolution.idtext" [textView]="textView" [(editAllowed)]="contentEditableText"></app-modif-texte>
     </div>
   </div>
   <div id="divimage" #divimage [style.background-image]="datasolution.picture_db">
     <div id="btnmodifimage">
       <app-modif-image [admin]="admin"
                        [containerId]="idsolution"
+                       buttonName="Image"
                        containerType="solutionContents"
                        imageType="picture_db"
                        [imageView]="imageView"

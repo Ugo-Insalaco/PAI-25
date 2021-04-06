@@ -1,4 +1,5 @@
 #argumentscommerciaux{
+  position: relative;
   width: 99vw;
   height: auto;
   padding: 5vh;
@@ -48,6 +49,13 @@
 }
 
 #btnmodifimage{
+  position: absolute;
+  bottom: 1vh;
+  right: 1vh;
+}
+
+.btnmodiftexte{
+  display: flex;
   position: absolute;
   bottom: 1vh;
   right: 1vh;

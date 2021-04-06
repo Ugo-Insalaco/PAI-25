@@ -5,8 +5,8 @@
       <br>
       <p class="h3">{{data2}}</p>
     </div>
-    <div id="btnmodiftexte">
-      <app-modif-texte [admin]="admin" idtext="1" [textView]="maintextView" [(editAllowed)]="contentEditableMain"></app-modif-texte>
+    <div id="btnmodiftexte" *ngIf="admin===true">
+      <app-modif-texte [admin]="admin" buttonName="Textes" idtext="1" [textView]="maintextView" [(editAllowed)]="contentEditableMain"></app-modif-texte>
     </div>
   </mat-card-content>
 </mat-card>

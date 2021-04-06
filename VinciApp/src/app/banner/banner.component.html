@@ -6,9 +6,9 @@
     <div #problem class="h2"><p [contentEditable]="contentEditableProblem"> {{databanner.problem}}</p></div>
     <div #sol class="h2" id="solution"><p *ngIf="nomsolution!==''" [contentEditable]="contentEditableSolution"> {{nomsolution}} </p></div>
     <div id="btnmodiftexte">
-      <app-modif-texte [admin]="admin" [idtext]="databanner.idname" [textView]="nomView" [(editAllowed)]="contentEditableNom"></app-modif-texte>
-      <app-modif-texte [admin]="admin" [idtext]="databanner.idproblem" [textView]="problemView" [(editAllowed)]="contentEditableProblem"></app-modif-texte>
-      <app-modif-texte [admin]="admin" [idtext]="idnamesolution" [textView]="solutionView" [(editAllowed)]="contentEditableSolution" *ngIf="nomsolution!==''"></app-modif-texte>
+      <app-modif-texte [admin]="admin" buttonName="NOM" [idtext]="databanner.idname" [textView]="nomView" [(editAllowed)]="contentEditableNom"></app-modif-texte>
+      <app-modif-texte [admin]="admin" buttonName="Problématique" [idtext]="databanner.idproblem" [textView]="problemView" [(editAllowed)]="contentEditableProblem"></app-modif-texte>
+      <app-modif-texte [admin]="admin" buttonName="Solution" [idtext]="idnamesolution" [textView]="solutionView" [(editAllowed)]="contentEditableSolution" *ngIf="nomsolution!==''"></app-modif-texte>
     </div>
   </div>
   <div id="right">
@@ -16,14 +16,15 @@
       <img #logo id="logoCadran" [src]="databanner.logo">
       <app-modif-image [admin]="admin"
                        [containerId]="databanner.idcadran"
+                       buttonName="Logo"
                        containerType="cadrans"
                        imageType="logo"
                        [imageView]="logoView"></app-modif-image>
     </div>
     <img #cercles id="cercles" [src]="databanner.circles">
     <div id="btnmodifimage">
-      <app-modif-image [admin]="admin" [containerId]="databanner.idcircles" containerType="texts" imageType="text" [imageView]="cerclesView"></app-modif-image>
-      <app-modif-image [admin]="admin" [containerId]="databanner.idcadran" containerType="cadrans" imageType="picture_back" [imageView]="fondView"></app-modif-image>
+      <app-modif-image [admin]="admin" buttonName="Image en bas à droite" [containerId]="databanner.idcircles" containerType="texts" imageType="text" [imageView]="cerclesView"></app-modif-image>
+      <app-modif-image [admin]="admin" buttonName="Image de fond" [containerId]="databanner.idcadran" containerType="cadrans" imageType="picture_back" [imageView]="fondView"></app-modif-image>
     </div>
   </div>
 </div>

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { BackendService } from '../services/backend.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-images',
@@ -8,9 +9,16 @@ import { BackendService } from '../services/backend.service';
 })
 export class ImagesComponent implements OnInit {
 
-  cadranList: any[] = [];
+  admin: boolean = this.auth.isLoggedIn();
 
-  constructor(private backend: BackendService) { }
+  cadranList: any[] = [];
+  urlImage!: string;
+
+  @ViewChild('image') imageView: ElementRef;
+
+  constructor(private cd: ChangeDetectorRef,
+              private auth: AuthService,
+              private backend: BackendService) { }
 
   ngOnInit(): void {
     this.backend.GET('/api/cadrans', e=>{
@@ -25,6 +33,15 @@ export class ImagesComponent implements OnInit {
         };
         this.cadranList.push(data);
       }
+
+      // Image de fond
+      this.backend.GET('/api/texts/2', e=>{
+        this.urlImage = "url("+e.data[0].fields.text+")";
+      });
     });
+  }
+
+  ngAfterViewInit() {
+      this.cd.detectChanges();
   }
 }

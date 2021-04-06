@@ -10,6 +10,7 @@ import { BackendService } from '../services/backend.service';
 export class ModifImageComponent implements OnInit {
 
   @Input() admin!: boolean;
+  @Input() buttonName!: string;
   @Input() numoffer: number = 0;
   @Input() nomSolution!: string;
   @Input() imageView!: ElementRef;
@@ -82,9 +83,14 @@ export class ModifImageComponent implements OnInit {
     }
     else if(this.containerType == "texts"){
       complementnomimage = this.imageType;
-      if(this.nomSolution!=""){
+      if(this.nomSolution!=undefined){
         // Page solution
         nomcadran = this.router.url.split('/')[2].split("&").pop().replace(/-/gi, "");
+      }
+      else if(this.router.url=="/"){
+        // Page d'accueil
+        nomcadran = "accueil";
+        complementnomimage = "image";
       }
       else{
         // Page cadran
