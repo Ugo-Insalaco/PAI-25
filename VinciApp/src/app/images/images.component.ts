@@ -9,7 +9,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class ImagesComponent implements OnInit {
 
-  admin: boolean = this.auth.isLoggedIn();
+  admin!: boolean;
 
   cadranList: any[] = [];
   urlImage!: string;
@@ -18,7 +18,11 @@ export class ImagesComponent implements OnInit {
 
   constructor(private cd: ChangeDetectorRef,
               private auth: AuthService,
-              private backend: BackendService) { }
+              private backend: BackendService) {
+    this.auth.isLoggedIn(res => {
+      this.admin = res;
+    });
+  }
 
   ngOnInit(): void {
     this.backend.GET('/api/cadrans', e=>{

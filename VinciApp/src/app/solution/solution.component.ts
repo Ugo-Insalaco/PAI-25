@@ -18,7 +18,7 @@ export class SolutionComponent implements OnInit, AfterViewInit {
   @ViewChild('desc') descView: ElementRef;
   @ViewChild('text') textView: ElementRef;
 
-  admin: boolean = this.auth.isLoggedIn();
+  admin!: boolean;
 
   // Données récupérées dans l'url
   idcadran!: number;
@@ -41,7 +41,11 @@ export class SolutionComponent implements OnInit, AfterViewInit {
               private auth: AuthService,
               private cd: ChangeDetectorRef,
               private router: Router,
-              private backend: BackendService) { }
+              private backend: BackendService) {
+    this.auth.isLoggedIn(res => {
+      this.admin = res;
+    });
+  }
 
   ngOnInit(): void {
     this.nomcadran = this.getNomCadran();
