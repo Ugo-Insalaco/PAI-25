@@ -40,13 +40,13 @@ export class CadranComponent implements OnInit {
       // Texts Banner
       this.databanner["name"] = e.data[0].included["text"][0].name;
       this.databanner["idname"] = e.data[0].fields.name;
-      this.databanner["circles"] = e.data[0].included["text"][0].circles;
+      this.databanner["circles"] = "url("+e.data[0].included["text"][0].circles+")";
       this.databanner["idcircles"] = e.data[0].fields.circles;
       this.databanner["problem"] = e.data[0].included["text"][0].problem;
       this.databanner["idproblem"] = e.data[0].fields.problem;
 
       // Images Banner
-      this.databanner["logo"] = e.data[0].fields.logo;
+      this.databanner["logo"] = "url("+e.data[0].fields.logo+")";
       this.couleur = e.data[0].fields.color;
       this.databanner["picture_back"] = "url("+e.data[0].fields.picture_back+")";
 

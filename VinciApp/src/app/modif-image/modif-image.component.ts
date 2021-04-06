@@ -98,7 +98,7 @@ export class ModifImageComponent implements OnInit {
       }
     }
 
-    var fileName = nomcadran+"_"+complementnomimage+(this.numoffer!=0? this.numoffer : "")+(file.type=="image/jpeg"? ".jpg":".png");
+    var fileName = nomcadran+"_"+complementnomimage+(this.numoffer!=0? this.numoffer : "")+"."+file.name.split(".")[1];
     var renamedFile = new File([file],fileName,{type:file.type});
 
     let formData = new FormData();

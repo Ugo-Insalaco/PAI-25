@@ -13,15 +13,17 @@
   </div>
   <div id="right">
     <div id="topright">
-      <img #logo id="logoCadran" [src]="databanner.logo">
-      <app-modif-image [admin]="admin"
+      <div #logo id="logoCadran" [style.background-image]="databanner.logo"></div>
+      <div id="btnmodiflogo">
+        <app-modif-image [admin]="admin"
                        [containerId]="databanner.idcadran"
                        buttonName="Logo"
                        containerType="cadrans"
                        imageType="logo"
                        [imageView]="logoView"></app-modif-image>
+      </div>
     </div>
-    <img #cercles id="cercles" [src]="databanner.circles">
+    <div #cercles id="cercles" [style.background-image]="databanner.circles"></div>
     <div id="btnmodifimage">
       <app-modif-image [admin]="admin" buttonName="Image en bas à droite" [containerId]="databanner.idcircles" containerType="texts" imageType="text" [imageView]="cerclesView"></app-modif-image>
       <app-modif-image [admin]="admin" buttonName="Image de fond" [containerId]="databanner.idcadran" containerType="cadrans" imageType="picture_back" [imageView]="fondView"></app-modif-image>
