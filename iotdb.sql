@@ -1,8 +1,8 @@
--- MariaDB dump 10.18  Distrib 10.5.7-MariaDB, for Win64 (AMD64)
+-- MariaDB dump 10.18  Distrib 10.5.8-MariaDB, for osx10.12 (x86_64)
 --
--- Host: localhost    Database: iotdb
+-- Host: localhost    Database: iot
 -- ------------------------------------------------------
--- Server version	10.5.7-MariaDB
+-- Server version	10.5.8-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -438,7 +438,7 @@ CREATE TABLE `solution_binding` (
   KEY `id_solution` (`id_solution`),
   CONSTRAINT `solution_binding_ibfk_1` FOREIGN KEY (`id_product`) REFERENCES `products` (`id`),
   CONSTRAINT `solution_binding_ibfk_2` FOREIGN KEY (`id_solution`) REFERENCES `solutions` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -447,7 +447,7 @@ CREATE TABLE `solution_binding` (
 
 LOCK TABLES `solution_binding` WRITE;
 /*!40000 ALTER TABLE `solution_binding` DISABLE KEYS */;
-INSERT INTO `solution_binding` VALUES (1,1,16),(2,5,15),(3,6,15),(4,7,15),(5,9,14),(6,9,16),(7,11,13),(8,11,11),(9,11,15),(10,12,1),(11,12,4),(12,12,8),(13,18,7),(14,18,14),(15,20,18),(16,27,18),(17,28,1),(18,31,5),(19,39,2),(20,46,2),(21,46,12),(22,47,10),(23,62,6),(24,62,8),(25,65,8),(26,67,8),(27,82,3),(28,84,5),(29,85,17);
+INSERT INTO `solution_binding` VALUES (1,1,16),(2,5,15),(3,6,15),(4,7,15),(5,9,14),(6,9,16),(7,11,13),(8,11,11),(9,11,15),(10,12,1),(11,12,4),(12,12,8),(13,18,7),(14,18,14),(15,20,18),(16,27,18),(17,28,1),(18,31,5),(19,39,2),(20,46,2),(21,46,12),(22,47,10),(23,62,6),(24,62,8),(25,65,8),(26,67,8),(27,82,3),(28,84,5),(29,85,17),(32,86,10);
 /*!40000 ALTER TABLE `solution_binding` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -544,4 +544,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-07 10:37:09
+-- Dump completed on 2021-04-07 14:25:41
