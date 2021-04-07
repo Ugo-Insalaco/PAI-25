@@ -2,12 +2,13 @@
 
     <strong>Question</strong> (id {{id_question}}) : <input type="text" [(ngModel)]="question">
     <br> Type de question : {{type}}
+    <br> <ngcontainer *ngIf="info">Commentaire : <input type="text" [(ngModel)]="info"></ngcontainer>
     <div *ngFor="let r of reponses;let index=index;trackBy:trackByIndex;">
         <ngcontainer *ngIf="type != number && type != text && type != select">
             <strong> Réponse </strong> (id {{id_reponses[index]}}) : <input type="text" name=a{{index}} [(ngModel)]="reponses[index]" placeholder="r">
         </ngcontainer>
         <br>
-        Identifiant de la question suivante : <input type="number" [(ngModel)]="next[index]">
+        Identifiant de la question suivante : <input type="text" [(ngModel)]="next[index]">
         <!-- <small>Si vide, il s'agit de la dernière question de la partie</small> -->
     </div>
     <button (click)=onValiderModif()>Valider les modifications</button>
