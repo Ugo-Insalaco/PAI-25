@@ -35,7 +35,7 @@ export class QuestionComponent implements OnInit {
     console.log("question reçue d'id "+this.id_question)
     this.reponses=[];
     this.backend.GET(`/api/questions/${this.id_question}?include=reponse`, e=>{
-      var message = JSON.stringify(e.data[0])
+      //var message = JSON.stringify(e.data[0])
       //console.log("reponse du backend : "+message)
       this.question = e.data[0].included["text"][0].content;
       this.type = e.data[0].fields.type;
@@ -72,7 +72,8 @@ export class QuestionComponent implements OnInit {
   }
 
   onAnswer(){
-    if (this.type == "radio") {
+    //Pour les questions type radio, on récupère la réponse correspondant à l'id sélectionné :
+    if (this.type == "radio") { 
       // this.backend.GET(`/api/reponses/${this.id_answer}`, e=>{
       //   this.answer = e.data[0].included["text"][0].content;
       // })
@@ -82,20 +83,32 @@ export class QuestionComponent implements OnInit {
         }        
       }
     }
-    if (this.type == "number" || this.type == "text" || this.type=="select_all_iot") {
-      for (let i = 0; i < this.reponses.length; i++) {
-        if (this.reponses[i].reponse == this.answer) {
-          this.id_answer = this.reponses[i].id
-        }
-      }
+    // if (this.type == "number" || this.type == "text" || this.type=="select_all_iot") {
+    //   console.log("ON EST LA")
+    //   for (let i = 0; i < this.reponses.length; i++) {
+    //     console.log("on cherche correspondance entre "+this.reponses[i].reponse+" et "+this.answer)
+    //     if (this.reponses[i].reponse == this.answer) {
+    //       this.id_answer = this.reponses[i].id
+    //       console.log("on devrait tenter une requete à la réponse d'id "+this.id_answer)
+    //     }
+    //   }
+    // }
+
+    //Pour les questions type number et text, on récupère l'id de la réponse (une seule réponse pour ce type de question)
+    //On ajoute les question de type select si on considère que toutes les réponses qu'on peut sélectionner ont la même question_suivante (donc peu importe de quelle réponse on prend l'id -> on prend arbitrairement la premiere)
+    if (this.type == "number" || this.type == "text" || this.type == "select" || this.type == "select_all_iot") { 
+      this.id_answer = this.reponses[0].id
     }
-    if (this.type == "select") { //gestion des cas où il peut y avoir plusieurs réponses -> on prend l'id de la première
-      for (let i = 0; i < this.reponses.length; i++) {
-        if (this.reponses[i].reponse == this.answer[0]) {
-          this.id_answer = this.reponses[i].id
-        }
-      }
-    }
+
+
+    // //Pour les questions type select, on récupère l'id de la première réponse (plusieurs réponses possibles pour ce type de question)
+    // if (this.type == "select") {
+    //   for (let i = 0; i < this.reponses.length; i++) {
+    //     if (this.reponses[i].reponse == this.answer[0]) {
+    //       this.id_answer = this.reponses[i].id
+    //     }
+    //   }
+    // }
 
     var projectJSON = this.globalStorage.get("projet");
     var project = JSON.parse(projectJSON);
@@ -121,7 +134,6 @@ export class QuestionComponent implements OnInit {
 
   this.backend.GET(`/api/reponses/${this.id_answer}`, e=>{
     this.next = e.data[0].fields.question_suivante;
-    console.log(this.next)
     })
   }
 
