@@ -29,12 +29,16 @@ export class ModifTexteComponent implements OnInit {
     // Conservation du texte si annulation de la modification
     this.initialText = this.getTextContent();
 
+    this.textView.nativeElement.style.border = 'solid 1px red';
+
     this.editAllowed = true;
     this.modifAllowed = true;
     this.editAllowedChange.emit(this.editAllowed);
   }
 
   confirmText(): void {
+    this.textView.nativeElement.style.border = 'none';
+
     var data = {
       "text": this.getTextContent()
     };
@@ -50,6 +54,8 @@ export class ModifTexteComponent implements OnInit {
       paragraphs[i].textContent = this.initialText.split('&/&')[i];
     }
 
+    this.textView.nativeElement.style.border = 'none';
+    
     this.editAllowed = false;
     this.modifAllowed = false;
     this.editAllowedChange.emit(this.editAllowed);

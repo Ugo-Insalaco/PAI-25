@@ -32,12 +32,14 @@
   <div id="divimage" #divimage [style.background-image]="dataoffer.picture">
     <div id="commimg" #commimg [style.background-color]="couleur">
       <p [contentEditable]="contentEditableText2">{{dataoffer.name}}</p>
-      <app-modif-texte [admin]="admin" [idtext]="dataoffer.idname" [textView]="commimageView" [(editAllowed)]="contentEditableText2"></app-modif-texte>
     </div>
 
-    <div id="btnmodifimage"><app-modif-image [admin]="admin" buttonName="Image" [containerId]="dataoffer.idoffre" containerType="offres" imageType="picture" [imageView]="imageView" [numoffer]="num"></app-modif-image></div>
+    <div id="btnmodif">
+      <app-modif-texte [admin]="admin" buttonName="Nom offre" [idtext]="dataoffer.idname" [textView]="commimageView" [(editAllowed)]="contentEditableText2"></app-modif-texte>
+      <app-modif-image [admin]="admin" buttonName="Image" [containerId]="dataoffer.idoffre" containerType="offres" imageType="picture" [imageView]="imageView" [numoffer]="num"></app-modif-image>
+    </div>
   </div>
 
-  <button type="button" class="btn btn-sm" id="buttondeleteoffer" (click)="onDeleteOffer()" *ngIf="admin===true"><mat-icon>clear</mat-icon></button>
+  <button type="button" class="btn btn-sm" id="buttondeleteoffer" (click)="onDeleteOffer()" *ngIf="admin===true"><mat-icon>clear</mat-icon>Supprimer cette offre</button>
 
 </div>
