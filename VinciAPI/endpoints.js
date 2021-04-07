@@ -46,39 +46,35 @@ const init = function(app){
                 })
                 included = included.map(inclusion=>conf.include.find(confInclude=>confInclude.name==inclusion))
 
-                let binds = []
                 // Ajout des champs des inclusions (lorsque c'est des endpoints)
-                const addInclusionFields = function(bind){
-                    if (!binds.includes(bind.id)){
-                        binds.push(bind.id)
-                        if(bind.hasOwnProperty('endpoint')){
-                            for(let key in confs[bind.endpoint].fields){
-                                querrystring+='?? AS ??, '
-                                sqlvalues.push(`${bind.id}::${bind.endpoint}.${key}`,`${bind.id}::${bind.endpoint}::${key}`)
-                            }
-                            confs[bind.endpoint].include
-                                .forEach(inclusion=>{
-                                    if(inclusion.default_inclusion===true){
-                                        inclusion.bind.forEach(nextBind=>{
-                                            addInclusionFields(nextBind)
-                                        })
-                                    }
-                                })
-                        }
-                        else if(bind.hasOwnProperty('bindTable')){
+                const addInclusionFields = function(bind, id){
+                    if(bind.hasOwnProperty('endpoint')){
+                        for(let key in confs[bind.endpoint].fields){
                             querrystring+='?? AS ??, '
-                            sqlvalues.push(`${bind.id}::${bind.bindTable}.id`, `${bind.id}::${bind.bindTable}::id`)
-                            bind.proxy.forEach(proxy=>{
-                                addInclusionFields(proxy)
-                            })
+                            sqlvalues.push(`${id}::${bind.endpoint}.${key}`,`${id}::${bind.endpoint}::${key}`)
                         }
-                        return
+                        confs[bind.endpoint].include
+                            .forEach(inclusion=>{
+                                if(inclusion.default_inclusion===true){
+                                    inclusion.bind.forEach(nextBind=>{
+                                        addInclusionFields(nextBind, `${id}:${nextBind.id}`)
+                                    })
+                                }
+                            })
                     }
+                    else if(bind.hasOwnProperty('bindTable')){
+                        querrystring+='?? AS ??, '
+                        sqlvalues.push(`${id}::${bind.bindTable}.id`, `${id}::${bind.bindTable}::id`)
+                        bind.proxy.forEach(proxy=>{
+                            addInclusionFields(proxy, proxy.id)
+                        })
+                    }
+                    return
                 }
 
                 included.forEach(inclusion=>{
                     inclusion.bind.forEach(bind=>{
-                        addInclusionFields(bind)
+                        addInclusionFields(bind, bind.id)
                     })
                 })
                 querrystring = querrystring.slice(0,-2) // On retire la dernière virgule
@@ -89,34 +85,31 @@ const init = function(app){
 
                 binds =[]
                 // Ajout des tables d'inclusion
-                const addInclusionTables= function(bind, currentTable, currentId){
-                    if(!binds.includes(bind.id)){
-                        binds.push(bind.id)
-                        if(bind.hasOwnProperty('endpoint')){
-                            sqlstring+= `LEFT JOIN ?? AS ?? ON ?? = ?? `
-                            sqlvalues.push(confs[bind.endpoint].table, `${bind.id}::${confs[bind.endpoint].name}`, `${currentId}::${currentTable}.${bind.local_key}`, `${bind.id}::${confs[bind.endpoint].name}.${bind.foreign_key}`)
-                            confs[bind.endpoint].include
-                            .forEach(inclusion=>{
-                                if(inclusion.default_inclusion===true){
-                                    inclusion.bind.forEach(nextBind=>{
-                                        addInclusionTables(nextBind, bind.endpoint, bind.id)
-                                    })
-                                }
-                            })
-                        }
-                        else if(bind.hasOwnProperty('bindTable')){
-                            sqlstring+= `LEFT JOIN ?? AS ?? ON ?? = ?? `
-                            sqlvalues.push(config.bindTables[bind.bindTable], `${bind.id}::${bind.bindTable}`, `${currentId}::${currentTable}.${bind.local_key}`,`${bind.id}::${bind.bindTable}.${bind.foreign_key}`)
-                            bind.proxy.forEach(nextBind=>{
-                                addInclusionTables(nextBind, bind.hasOwnProperty('bindTable') ? bind.bindTable : bind.endpoint, bind.id)
-                            })
-                        }
+                const addInclusionTables= function(bind, currentTable, currentId, id){
+                    if(bind.hasOwnProperty('endpoint')){
+                        sqlstring+= `LEFT JOIN ?? AS ?? ON ?? = ?? `
+                        sqlvalues.push(confs[bind.endpoint].table, `${id}::${confs[bind.endpoint].name}`, `${currentId}::${currentTable}.${bind.local_key}`, `${id}::${confs[bind.endpoint].name}.${bind.foreign_key}`)
+                        confs[bind.endpoint].include
+                        .forEach(inclusion=>{
+                            if(inclusion.default_inclusion===true){
+                                inclusion.bind.forEach(nextBind=>{
+                                    addInclusionTables(nextBind, bind.endpoint, id, `${id}:${nextBind.id}`)
+                                })
+                            }
+                        })
+                    }
+                    else if(bind.hasOwnProperty('bindTable')){
+                        sqlstring+= `LEFT JOIN ?? AS ?? ON ?? = ?? `
+                        sqlvalues.push(config.bindTables[bind.bindTable], `${bind.id}::${bind.bindTable}`, `${currentId}::${currentTable}.${bind.local_key}`,`${bind.id}::${bind.bindTable}.${bind.foreign_key}`)
+                        bind.proxy.forEach(nextBind=>{
+                            addInclusionTables(nextBind, bind.hasOwnProperty('bindTable') ? bind.bindTable : bind.endpoint, id, `${nextBind.id}`)
+                        })
                     }
                 }
                 // Ajout des tables d'inclusion
                 included.forEach(inclusion=>{
                     inclusion.bind.forEach(bind=>{
-                        addInclusionTables(bind, conf.name, 0)
+                        addInclusionTables(bind, conf.name, 0, bind.id)
                     })
                 })
 
@@ -249,7 +242,6 @@ const init = function(app){
                         addInclusionTables(bind, conf.name, 0, bind.id)
                     })
                 })
-                console.log(sqlstring, sqlvalues)
                 // Requête à la base de données
                 pool.then(pool=>{
                     pool

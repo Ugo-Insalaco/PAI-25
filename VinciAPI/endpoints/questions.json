@@ -59,7 +59,8 @@
             "id":"{{0::question::id}}",
             "fields":{
                 "content": "{{0::question::content}}",
-                "type": "{{0::question::type}}"
+                "type": "{{0::question::type}}",
+                "info": "{{0::question::info}}"
             },
             "included":{
                 "text":{
