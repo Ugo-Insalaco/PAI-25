@@ -72,7 +72,7 @@ export class OfferComponent implements OnInit, AfterViewInit{
       if(textsolution!=""){
         textsolution = textsolution.replace(/ /gi, "-");
         textsolution = textsolution.replace(/'/gi, "_").toLowerCase();
-        this.router.navigate([this.router.url,idsolution+"&"+textsolution]);
+        this.router.navigate([this.router.url,idsolution+"&"+textsolution.normalize("NFD").replace(/[\u0300-\u036f]/g, "")]);
       }
     }
 

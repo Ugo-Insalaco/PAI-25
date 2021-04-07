@@ -15,10 +15,12 @@ mat-card {
       padding-top: 2vh;
   }
   .h3{
-      font-size: 1.17em;
-      position: center;
-      color:#777777;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
       text-align: center;
+      font-size: 1.17em;
+      color:#777777;
       padding-bottom: 2vh;
   }
 

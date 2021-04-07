@@ -85,7 +85,8 @@ export class ModifImageComponent implements OnInit {
       complementnomimage = this.imageType;
       if(this.nomSolution!=undefined){
         // Page solution
-        nomcadran = this.router.url.split('/')[2].split("&").pop().replace(/-/gi, "");
+        nomcadran = this.router.url.split('/')[1].split("&").pop().replace(/-/gi, "");
+        complementnomimage = this.router.url.split('/')[2].split("&").pop().replace(/[-'(),]/gi, "");
       }
       else if(this.router.url=="/"){
         // Page d'accueil

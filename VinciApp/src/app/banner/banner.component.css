@@ -11,8 +11,8 @@
 }
 
 #logoCadran{
-  height: 100%;
-  width: 100%;
+  height: 6vh;
+  width: 6vw;
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
@@ -24,18 +24,17 @@
 
 #topright{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   position: absolute;
-  right: 30%;
+  left: 60%;
   top: 10%;
-  height: 12%;
-  width: 12%;
 }
 
 #left{
   position: absolute;
-  left: 8%;
-  top: 40%;
+  left: 5%;
+  bottom: 25%;
+  width: 42%;
   color: white;
   display: flex;
   flex-direction: column;
@@ -65,12 +64,30 @@
 }
 
 .h4{
-  font-size: 25px;
+  font-size: 28px;
   text-transform:uppercase;
+  color: white;
+  margin: auto;
+}
+
+.h4 p{
+  padding: 0;
+  margin: 0;
 }
 
 .h2{
-  font-size: 30px;
+  text-align: justify;
+}
+
+#problem1{
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 3vh;
+}
+
+#problem2{
+  font-size: 23px;
+  font-weight: lighter;
 }
 
 #filter{
@@ -82,27 +99,12 @@
   filter: opacity(0.8);
 }
 
-#btnmodifimage{
+#btnmodif{
   display: flex;
+  flex-direction: row;
   position: absolute;
   bottom: 1vh;
   right: 1vh;
-}
-
-#btnmodiflogo{
-  display: flex;
-  position: absolute;
-  min-width: 100px;
-  bottom: -4vh;
-  right: 1vh;
-}
-
-#btnmodiftexte{
-  position: absolute;
-  bottom: -3vh;
-  right: -2vh;
-  display: flex;
-  flex-direction: row;
 }
 
 #btnvalid{

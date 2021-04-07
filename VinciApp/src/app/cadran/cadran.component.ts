@@ -46,7 +46,8 @@ export class CadranComponent implements OnInit {
       this.databanner["idname"] = e.data[0].fields.name;
       this.databanner["circles"] = "url("+e.data[0].included["text"][0].circles+")";
       this.databanner["idcircles"] = e.data[0].fields.circles;
-      this.databanner["problem"] = e.data[0].included["text"][0].problem;
+      this.databanner["problem1"] = e.data[0].included["text"][0].problem.split("&/&")[0];
+      this.databanner["problem2"] = e.data[0].included["text"][0].problem.split("&/&")[1];
       this.databanner["idproblem"] = e.data[0].fields.problem;
 
       // Images Banner
