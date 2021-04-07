@@ -2,14 +2,13 @@
 
     <strong>Question</strong> (id {{id_question}}) : <input type="text" [(ngModel)]="question">
     <br> Type de question : {{type}}
-    <div *ngFor="let r of reponses">
-        <ngcontainer *ngIf="type != number || type != text || type != select_iot">
-            <strong> Réponse </strong> (id {{r.id}}) : <input type="text" [(ngModel)]="r.reponse">
+    <div *ngFor="let r of reponses;let index=index;trackBy:trackByIndex;">
+        <ngcontainer *ngIf="type != number && type != text && type != select">
+            <strong> Réponse </strong> (id {{id_reponses[index]}}) : <input type="text" name=a{{index}} [(ngModel)]="reponses[index]" placeholder="r">
         </ngcontainer>
         <br>
-        <ngcontainer *ngIf="r.question_suivante != 0">
-            Identifiant de la question suivante : <input type="number" [(ngModel)]="r.question_suivante">
-        </ngcontainer> 
+        Identifiant de la question suivante : <input type="number" [(ngModel)]="next[index]">
+        <!-- <small>Si vide, il s'agit de la dernière question de la partie</small> -->
     </div>
     <button (click)=onValiderModif()>Valider les modifications</button>
     <br>-------------------

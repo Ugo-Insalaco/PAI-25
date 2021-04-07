@@ -35,8 +35,9 @@ export class QuestionComponent implements OnInit {
     console.log("question reçue d'id "+this.id_question)
     this.reponses=[];
     this.backend.GET(`/api/questions/${this.id_question}?include=reponse`, e=>{
+      var message = JSON.stringify(e.data[0])
+      //console.log("reponse du backend : "+message)
       this.question = e.data[0].included["text"][0].content;
-      this.info = e.data[0].fields.info;
       this.type = e.data[0].fields.type;
       for (let i = 0; i < e.data[0].included["reponse"].length; i++) {
         const id_rep = e.data[0].included["reponse"][i].id_reponse;
@@ -45,14 +46,15 @@ export class QuestionComponent implements OnInit {
           this.reponses = this.reponses.concat([{"id": id_rep, "reponse": rep}])
           console.log(this.reponses)
         });
+      }      
+      this.info = e.data[0].fields.info;
+      if (this.info) {
+        this.backend.GET(`/api/texts/${this.info}`, e=>{
+          this.info=e.data[0].fields.text
+        })
+        
       }
     });
-
-      // //NE FONCTIONNE PAS
-      // this.backend.GET(`/api/products`, e=>{
-      //   this.all_iot = e.data[0]
-      //   console.log("ici")
-      // })
     
     if (changes.id_question.currentValue && changes.id_question.previousValue) {
       if (changes.id_question.currentValue != changes.id_question.previousValue) {
@@ -60,6 +62,13 @@ export class QuestionComponent implements OnInit {
         this.next="";
       }
     }
+
+      // //NE FONCTIONNE PAS
+      // this.backend.GET(`/api/products`, e=>{
+      //   this.all_iot = e.data[0]
+      //   console.log("ici")
+      // })
+
   }
 
   onAnswer(){

@@ -2,7 +2,7 @@
 
   <!-- Affichage de la question -->
 
-  <div *ngIf="type=='radio'">
+  <div *ngIf="type=='radio'"> <!--QM avec une seule réponse possible-->
     {{question}}
     <ngcontainer *ngFor="let r of reponses">
       <br><input type="radio" name="{{id_question}}" value="{{r.id}}" [(ngModel)]="id_answer" (change)="onAnswer()"> {{r.reponse}}
@@ -32,6 +32,7 @@
     <select multiple [(ngModel)]="answer" (change)="onAnswer()">
       <option *ngFor = "let r of reponses"> {{r.reponse}} </option>
     </select>
+    <br><small>(Utilisez CTRL pour sélectionner plusieurs)</small> <!--Mettre ça dans "info" plutôt (pour la langue)-->
   </div>
 
   <div *ngIf="type=='select_all_iot'">
@@ -43,9 +44,7 @@
     </select>
   </div>
 
-  <div *ngIf="info">
-    Info : {{info}}
-  </div>
+  <small>{{info}}</small>
 
   <br> 
 
