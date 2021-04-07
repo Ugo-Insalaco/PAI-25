@@ -16,6 +16,8 @@ export class ModifQuestionComponent implements OnInit {
   @Input() id_question;
   type: string;
   question: string; //contenu de la question
+  id_text_info: any //id du contenu de l'info dans la table cont_fra
+  info: string //contenu du commentaire (attribut info)
   //reponses = [] //id, contenu et question suivante des réponses à afficher
   id_reponses =[];
   reponses = [];
@@ -30,13 +32,19 @@ export class ModifQuestionComponent implements OnInit {
       this.type = e.data[0].fields.type;
       for (let i = 0; i < e.data[0].included["reponse"].length; i++) {
         const id_rep = e.data[0].included["reponse"][i].id_reponse;
-        this.backend.GET(`/api/reponses/${id_rep}?include=question_suivante`, e2=>{
+        this.backend.GET(`/api/reponses/${id_rep}`, e2=>{
           const rep = e2.data[0].included["text"][0].content;
           const next = e2.data[0].fields.question_suivante;
           this.reponses = this.reponses.concat([rep])
           this.id_reponses = this.id_reponses.concat([id_rep]);
           this.next = this.next.concat([next])
         });
+      }
+      this.id_text_info = e.data[0].fields.info;
+      if (this.id_text_info) {
+        this.backend.GET(`/api/texts/${this.id_text_info}`, e=>{
+          this.info=e.data[0].fields.text
+        })
       }
     });
   }
@@ -73,6 +81,10 @@ export class ModifQuestionComponent implements OnInit {
       })
     }
 
+    //Modification du commentaire
+    this.ModifTexte(this.id_text_info, this.info)
+    //si la question n'a pas d'info, il faut créer un texte dans la table des contenus ect, ce n'est pas si simple.
+    // => pour l'instant, juste modification d'infos déjà existantes
 
     // console.log(this.text)
     // var data={
