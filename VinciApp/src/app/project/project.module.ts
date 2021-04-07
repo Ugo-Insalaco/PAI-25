@@ -12,14 +12,18 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { BackendService } from '../services/backend.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { QuestionComponent } from '../question/question.component'
+import { ModifProjectComponent } from '../modif-project/modif-project.component'
+import { ModifQuestionComponent } from '../modif-question/modif-question.component'
 
 @NgModule({
     declarations: [
       ProjectComponent,
       QuestionComponent,
+      ModifProjectComponent,
+      ModifQuestionComponent
     ],
     imports: [
        CommonModule,
@@ -30,7 +34,8 @@ import { QuestionComponent } from '../question/question.component'
        MatCardModule,
        MatButtonModule,
        MatGridListModule,
-       FormsModule
+       FormsModule,
+       ReactiveFormsModule
     ],
     providers: [
       BackendService

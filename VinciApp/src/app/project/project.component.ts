@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 
 @Component({
     selector: 'project',
-    templateUrl: './project.component.html'  ,
+    templateUrl: './project.component.html',
     styleUrls: ['./project.component.css']
 })
 
@@ -65,19 +65,19 @@ export class ProjectComponent implements OnInit{
                 this.backend.GET(`/api/sections/${id_section}`, e2=>{
                     if (e2.data[0].fields.position==0) {
                         this.id_question_0 = e.data[0].included["section_question"][i].id_question
-                        console.log(this.id_question_0)                
+                        //console.log(this.id_question_0)                
                     }
                     if (e2.data[0].fields.position==1) {
                         this.id_question_1 = e.data[0].included["section_question"][i].id_question 
-                        console.log(this.id_question_1)               
+                        //console.log(this.id_question_1)               
                     }
                     if (e2.data[0].fields.position==2) {
                         this.id_question_2 = e.data[0].included["section_question"][i].id_question
-                        console.log(this.id_question_2)                
+                        //console.log(this.id_question_2)                
                     }
                     if (e2.data[0].fields.position==3) {
                         this.id_question_3 = e.data[0].included["section_question"][i].id_question  
-                        console.log(this.id_question_3)              
+                        //console.log(this.id_question_3)              
                     }
                 })
             }
@@ -116,7 +116,7 @@ export class ProjectComponent implements OnInit{
         this.modif = true;
     }
 
-    onValiderModif(){
+    onQuit(){
         this.modif = false;
     }
 
