@@ -37,38 +37,16 @@
 
   <div *ngIf="type=='select_all_iot'">
     {{question}}
-    <select [(ngModel)]="answer" (change)="onAnswer()">
-      <ngcontainer *ngFor = "let iot of all_iot">
-        <option> {{iot.name}} </option>
-      </ngcontainer>
+    <br>
+    <select multiple [(ngModel)]="answer" (change)="onAnswer()">
+      <option *ngFor = "let iot of all_iot"> {{iot.name}} - {{iot.brand}}</option>
     </select>
+    <br><small>(Utilisez CTRL pour sélectionner plusieurs)</small> <!--Mettre ça dans "info" plutôt (pour la langue)-->
   </div>
 
   <small>{{info}}</small>
 
-  <br> 
-
-  <!-- Modification de la question en mode admin -->
-  <!-- <div *ngIf="modif && admin">
-    <button>Supprimer cette question</button>
-    <div *ngIf="type=='number' || type=='text'">
-      <br> Question suivante :
-      <select>
-        <option selected> Question a </option> 
-        <option> Question b </option>
-      </select>
-    </div>
-    <div *ngIf="type=='QCM'">
-      <ngcontainer *ngFor="let r of reponses">
-        <br> Question suivante si la réponse est {{r.reponse}} :
-        <select>
-          <option selected> Question a </option>
-          <option> Question b </option>
-        </select>
-      </ngcontainer>
-    </div>
-  </div>
-  <br> -->
+  <br>
 
   <!-- Affichage de la question suivante -->
   <div *ngIf="(answer || id_answer) && !modif">

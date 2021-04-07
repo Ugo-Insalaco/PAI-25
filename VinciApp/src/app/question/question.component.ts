@@ -26,13 +26,13 @@ export class QuestionComponent implements OnInit {
   id_answer: number; //id de la réponse de l'utilisateur
   answer: string; //contenu de la réponse de l'utilisateur 
   next = ""; //id de la question suivante
-  all_iot: any;
+  all_iot = [];
   
   ngOnInit(): void {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log("question reçue d'id "+this.id_question)
+    //console.log("question reçue d'id "+this.id_question)
     this.reponses=[];
     this.backend.GET(`/api/questions/${this.id_question}?include=reponse`, e=>{
       //var message = JSON.stringify(e.data[0])
@@ -44,15 +44,23 @@ export class QuestionComponent implements OnInit {
         this.backend.GET(`/api/reponses/${id_rep}`, e2=>{
           const rep = e2.data[0].included["text"][0].content;
           this.reponses = this.reponses.concat([{"id": id_rep, "reponse": rep}])
-          console.log(this.reponses)
+          //console.log(this.reponses)
         });
       }      
+
       this.info = e.data[0].fields.info;
       if (this.info) {
         this.backend.GET(`/api/texts/${this.info}`, e=>{
           this.info=e.data[0].fields.text
+        })        
+      }
+
+      if (this.type == "select_all_iot") {
+        this.backend.GET(`/api/products`, e=>{
+          for (let i = 0; i < e.data.length; i++) {
+            this.all_iot = this.all_iot.concat([e.data[i].fields]) 
+          }
         })
-        
       }
     });
     
@@ -63,11 +71,8 @@ export class QuestionComponent implements OnInit {
       }
     }
 
-      // //NE FONCTIONNE PAS
-      // this.backend.GET(`/api/products`, e=>{
-      //   this.all_iot = e.data[0]
-      //   console.log("ici")
-      // })
+
+     
 
   }
 
