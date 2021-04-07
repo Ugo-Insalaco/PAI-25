@@ -74,7 +74,14 @@
                     "data":"{{6::reponse::data}}",
                     "subIncluded":{
                         "text":{
-                            "content":"{{7::text::text}}"
+                            "content":"{{6:7::text::text}}"
+                        },
+                        "question_suivante":{
+                            "id_question": "{{6:8::question::id}}",
+                            "content_question": "{{6:8::question::content}}",
+                            "type_question": "{{6:8::question::type}}",
+                            "info_question": "{{6:8::question::info}}",
+                            "content_question_text": "{{6:8:4::text::text}}"
                         }
                     }
                 }

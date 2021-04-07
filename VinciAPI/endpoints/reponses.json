@@ -58,7 +58,7 @@
                     "content": "{{8::question::content}}",
                     "type":"{{8::question::type}}",
                     "subIncluded":{
-                        "content":"{{4::text::text}}"
+                        "content":"{{8:4::text::text}}"
                     }
                 },
                 "text":{
