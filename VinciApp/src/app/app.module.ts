@@ -13,7 +13,7 @@ import { ConfigService } from './services/config.service'
 import { GlobalStorageService } from './services/globalStorage.service'
 import { HttpClientModule } from '@angular/common/http';
 import { BackendService } from './services/backend.service'
-import { AuthService } from './services/auth.service' 
+import { AuthService } from './services/auth.service'
 
 import {MatDialogModule} from '@angular/material/dialog';
 
