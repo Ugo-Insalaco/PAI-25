@@ -27,22 +27,6 @@ export class ModifProjectComponent implements OnInit {
   
   ngOnInit(): void {
     this.all_questions = [this.id_question];
-    // this.backend.GET(`/api/questions/${this.id_question}?include=reponse`, e=>{
-    //   for (let i = 0; i < e.data[0].included["reponse"].length; i++) {
-    //     var next = JSON.stringify(e.data[0].included["reponse"][i].question_suivante)
-    //     console.log("On trouve la question : "+next)
-    //     //const id_rep = e.data[0].included["reponse"][i].id_reponse;
-    //     //this.backend.GET(`/api/reponses/${id_rep}`, e2=>{
-    //       //const next = e2.data[0].fields.question_suivante;
-    //     if (next) {
-    //       console.log("on ajoute la question d'id "+next)
-    //       this.all_questions = this.all_questions.concat([next]);
-    //       this.all_questions = Array.from(new Set(this.all_questions)); //suppression des redondances
-    //       console.log("au final, on veut afficher : "+this.all_questions)
-    //     }
-    //     //});
-    //   }
-    // });
     this.addQuestionsAfter(this.id_question)
   }
 
@@ -70,7 +54,6 @@ export class ModifProjectComponent implements OnInit {
             this.addQuestionsAfter(next)
             //console.log("on lance une nouvelle requete pour la question "+next+", actuellement la liste est "+this.all_questions)
           }
-          //this.addQuestionsAfter(next)
         }
         //});
       }

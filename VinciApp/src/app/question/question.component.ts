@@ -27,12 +27,13 @@ export class QuestionComponent implements OnInit {
   answer: string; //contenu de la réponse de l'utilisateur 
   next = ""; //id de la question suivante
   all_iot = [];
+  add_question = false //activation/désactivation de l'outil pour ajouter une question
   
   ngOnInit(): void {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    //console.log("question reçue d'id "+this.id_question)
+    console.log("question reçue d'id "+this.id_question)
     this.reponses=[];
     this.backend.GET(`/api/questions/${this.id_question}?include=reponse`, e=>{
       //var message = JSON.stringify(e.data[0])
@@ -148,5 +149,9 @@ export class QuestionComponent implements OnInit {
   //   console.log("next:"+this.next)
   //   })
   // }
+
+  onAddQuestion() {
+    this.add_question=true;
+  }
 
 }

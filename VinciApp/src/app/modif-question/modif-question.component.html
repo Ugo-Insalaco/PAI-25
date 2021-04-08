@@ -7,8 +7,15 @@
         <ngcontainer *ngIf="type != number && type != text && type != select">
             <strong> Réponse </strong> (id {{id_reponses[index]}}) : <input type="text" name=a{{index}} [(ngModel)]="reponses[index]" placeholder="r">
         </ngcontainer>
-        <br>
-        Identifiant de la question suivante : <input type="text" [(ngModel)]="next[index]">
+        <!-- Identifiant de la question suivante : <input type="text" [(ngModel)]="next[index]"> -->
+        <br> Question suivante :
+        <select [(ngModel)]="next[index]">
+            <option value="null">Aucune</option>
+            <option *ngFor = "let q of questions_existantes"
+                [value]="q.id">
+                id {{q.id}}: "{{q.included.text[0].content}}"
+            </option>
+        </select>
         <!-- <small>Si vide, il s'agit de la dernière question de la partie</small> -->
     </div>
     <button (click)=onValiderModif()>Valider les modifications</button>

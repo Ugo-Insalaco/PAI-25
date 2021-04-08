@@ -52,6 +52,7 @@ import { NewOfferComponent } from './new-offer/new-offer.component';
 import { NewSolutionComponent } from './new-solution/new-solution.component';
 import { NewSolutionFormComponent } from './new-solution-form/new-solution-form.component';
 import { NewOfferFormComponent } from './new-offer-form/new-offer-form.component';
+import { NewQuestionComponent } from './new-question/new-question.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { NewOfferFormComponent } from './new-offer-form/new-offer-form.component
     NewOfferComponent,
     NewSolutionComponent,
     NewSolutionFormComponent,
-    NewOfferFormComponent
+    NewOfferFormComponent,
+    NewQuestionComponent
   ],
   imports: [
     BrowserModule,

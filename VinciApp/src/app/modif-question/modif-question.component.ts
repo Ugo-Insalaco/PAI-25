@@ -21,11 +21,16 @@ export class ModifQuestionComponent implements OnInit {
   //reponses = [] //id, contenu et question suivante des réponses à afficher
   id_reponses =[];
   reponses = [];
-  next = []
+  next = [];
+  questions_existantes: any //toutes les questions existantes pour le choix de la question suivante
 
   constructor(private backend: BackendService, private config: ConfigService, private globalStorage: GlobalStorageService) { }
   
   ngOnInit(): void {
+    this.backend.GET(`/api/questions`, e=>{
+      this.questions_existantes=e.data
+    })
+
     //this.all_next = [];
     this.backend.GET(`/api/questions/${this.id_question}?include=reponse`, e=>{
       this.question = e.data[0].included["text"][0].content;
