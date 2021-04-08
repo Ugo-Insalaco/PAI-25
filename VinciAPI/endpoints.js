@@ -116,12 +116,13 @@ const init = function(app){
                 // Ajout des conditions
                 sqlstring+=  `WHERE ??=?`
                 sqlvalues.push(`0::${conf.name}.${conf.primaryField}`, id)
-
+                console.log(sqlstring, sqlvalues)
                 // Requête à la base de données
                 pool.then(pool=>{
                     pool
                     .query(sqlstring, sqlvalues)
                     .then(rows => {
+                        console.log(rows)
                         Promise.try(()=>{
                             jsonResponse = responseParser.get_response(rows, conf.name, included)
                             res.send(jsonResponse)
@@ -435,8 +436,15 @@ const init = function(app){
                         let sqlValues = [conf.table]
                         Object.keys(req.body)
                         .forEach(key=>{
-                            sqlString += "??=? "
-                            sqlValues.push(key, req.body[key])
+                            console.log(req.bodkey)
+                            if(req.body[key]==='NULL'){
+                                sqlString += "??= NULL "
+                                sqlValues.push(key)
+                            }
+                            else{
+                                sqlString += "??=? "
+                                sqlValues.push(key, req.body[key])
+                            }
                         })
 
                         sqlString+="WHERE ??=?"
@@ -464,6 +472,13 @@ const init = function(app){
 
                         
                     }
+                })
+                .catch(err=>{
+                    res.status(500).send(JSON.stringify({
+                        message: 'Erreur interne base de données',
+                        route: req.path,
+                        erreur: err
+                    }))
                 })
             })
         })
