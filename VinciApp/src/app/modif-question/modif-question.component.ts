@@ -75,15 +75,31 @@ export class ModifQuestionComponent implements OnInit {
     //Modification de la question suivante
     for (let i = 0; i < this.id_reponses.length; i++) {
       var id_rep = this.id_reponses[i]
-      this.backend.GET(`/api/reponses/${id_rep}`, e=>{
-        id_rep = e.data[0].id;
-        var data = {
-          "question_suivante": this.next[i]
-        }
+      if (this.next[i]=="null") {
+        this.next[i]="NULL"        
+      }
+      //var data:any;
+      // if (this.next[i] != "null") {
+      //   console.log("question suivante != null")
+      //   data = {
+      //     "question_suivante": this.next[i]
+      //   }
+      // } else {
+      //   console.log("question suivante = null")
+      //   data = {
+      //     "question_suivante": "NULL"
+      //   }
+      // }
+      var data = {
+        "question_suivante": this.next[i]
+      }
+      //this.backend.GET(`/api/reponses/${id_rep}`, e=>{
+        //id_rep = e.data[0].id;
+        
         this.backend.PATCH(`/api/reponses/${id_rep}`, data, res=>{
           console.log(res)
         })
-      })
+      //})
     }
 
     //Modification du commentaire
@@ -99,6 +115,8 @@ export class ModifQuestionComponent implements OnInit {
     // this.backend.PATCH(`/api/texts/${this.content}`, data, res=>{
     //   console.log(res);
     // });
+
+    alert(`Question d'id ${this.id_question} bien modifiée`)
     
   }
 

@@ -1,9 +1,69 @@
 <div style="text-align: center;"> 
-    <font size="+2.5"> Ajout d'un nouveau projet </font><br>
-    Cadran : 
-    <select>
-        <Option> Actifs techniques </Option>
-    </select>
-    
+
+    <strong> Création d'un nouveau questionnaire </strong>
+    <br>
+    Remarque : la création d'un projet se fait à partir d'une solution et de questions existantes ; veuillez d'abord créer la solution et les questions. <!--mettre un lien ici ce serait sympa-->
+
+    <div>
+        Solution à laquelle se rattache le nouveau questionnaire :
+        <br> 
+        <select [(ngModel)]="id_solution">
+            <option *ngFor="let solution of solutions_existantes"
+                [value]="solution.id">
+                {{solution.id}}: {{solution.fields.name}}
+            </option>
+        </select>
+    </div>
+
+    <div>
+        Première question de la première section :
+        <br>
+        <select [(ngModel)]="id_question_sec1">
+            <option *ngFor="let question of questions_existantes"
+                [value]="question.id">
+                id {{question.id}}: "{{question.included.text[0].content}}"
+            </option>
+        </select>
+    </div>
+
+    <div>
+        Première question de la deuxième section :
+        <br>
+        <select [(ngModel)]="id_question_sec2">
+            <option *ngFor="let question of questions_existantes"
+                [value]="question.id">
+                id {{question.id}}: "{{question.included.text[0].content}}"
+            </option>
+        </select>
+    </div>
+
+    <div>
+        Première question de la troisième section :
+        <br>
+        <select [(ngModel)]="id_question_sec3">
+            <option *ngFor="let question of questions_existantes"
+                [value]="question.id">
+                id {{question.id}}: "{{question.included.text[0].content}}"
+            </option>
+        </select>
+    </div>
+
+    <div>
+        Première question de la quatrième section :
+        <br>
+        <select [(ngModel)]="id_question_sec4">
+            <option *ngFor="let question of questions_existantes"
+                [value]="question.id">
+                id {{question.id}}: "{{question.included.text[0].content}}"
+            </option>
+        </select>
+    </div>
+
+    <div>
+        Votre questionnaire est entièrement défini par ces 4 questions !
+    </div>
+
+    <br>
+    <button (click)=onPost()>Créer le questionnaire</button>
 
 </div>
