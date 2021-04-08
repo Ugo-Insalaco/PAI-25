@@ -51,7 +51,7 @@ export class NewOfferFormComponent implements OnInit {
 
       // Enregistrement de l'image dans assets
       var file = this.imgInput.nativeElement.files[0];
-      var nomcadran = this.router.url.split('/').pop().split("&").pop().replace(/-/gi, "");
+      var nomcadran = this.router.url.split('/').pop().split("$").pop().replace(/-/gi, "");
       var nomoffre = "offre"+this.numoffer;
       var fileName = nomcadran+"_"+nomoffre+(file.type=="image/jpeg"? ".jpg":".png");
       var renamedFile = new File([file],fileName,{type:file.type});
@@ -97,10 +97,6 @@ export class NewOfferFormComponent implements OnInit {
           });
         });
       });
-
-      // Récupération des id des solutions créées
-      // Création offre → récup id de l'offre + celle du cadran
-      // Création binding entre cadran et offre
       this.resetForm();
     }
   }

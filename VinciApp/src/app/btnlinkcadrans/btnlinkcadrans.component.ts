@@ -19,7 +19,7 @@ export class BtnlinkcadransComponent implements OnInit {
         var data = {
           "color": e.data[i].fields.color,
           "name": e.data[i].included["text"][0].name,
-          "url": "/cadran/"+e.data[i].id+"&"+name
+          "url": "/cadran/"+e.data[i].id+"$"+name.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
         };
         this.cadranList.push(data);
       }

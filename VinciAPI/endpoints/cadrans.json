@@ -8,7 +8,8 @@
         "picture_back":"mandatory updatable",
         "logo":"mandatory updatable",
         "circles":"mandatory updatable",
-        "problem":"mandatory updatable"
+        "problem":"mandatory updatable",
+        "overlay":"mandatory updatable"
     },
     "policies":{
         "GET": "US",
@@ -40,6 +41,12 @@
                     "endpoint": "text",
                     "local_key":"problem",
                     "foreign_key":"id"
+                },
+                {
+                    "id":31,
+                    "endpoint": "text",
+                    "local_key":"overlay",
+                    "foreign_key":"id"
                 }
             ]
         }
@@ -55,14 +62,16 @@
                 "picture_back":"{{0::cadran::picture_back}}",
                 "logo":"{{0::cadran::logo}}",
                 "circles":"{{0::cadran::circles}}",
-                "problem":"{{0::cadran::problem}}"
+                "problem":"{{0::cadran::problem}}",
+                "overlay":"{{0::cadran::overlay}}"
             },
             "included":{
                 "text":{
-                    "id":["{{14::text::id}}","{{15::text::id}}","{{16::text::id}}"],
+                    "id":["{{14::text::id}}","{{15::text::id}}","{{16::text::id}}","{{31::text::id}}"],
                     "name": "{{14::text::text}}",
                     "circles": "{{15::text::text}}",
-                    "problem": "{{16::text::text}}"
+                    "problem": "{{16::text::text}}",
+                    "overlay": "{{31::text::text}}"
                 }
             }
         }

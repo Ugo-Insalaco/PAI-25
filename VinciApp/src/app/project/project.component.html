@@ -15,17 +15,18 @@
         <mat-horizontal-stepper linear="true" selectedIndex = 0 labelPosition="bottom" (selectionChange)="changeHandler($event)">
             <mat-step completed= {{complete}}>
                 <mat-grid-list cols="2">
-                    <div style="text-align: center;">
-                        <font size="+2.5">Capteurs et connectivité</font><br>
-                        <button *ngIf="!modif && admin" (click)=onModifier()>Modifier les questions</button>
-                        <button *ngIf="modif && admin" (click)=onQuit()>Quitter l'outil de modification</button>
+                    <div class="intitule-qt">
+                        <span class="qt-title">Capteurs et connectivité</span><br>
+                        <button class="btnadmin" *ngIf="!modif && admin" (click)=onModifier()>Modifier les questions</button>
+                        <button class="btnadmin" *ngIf="modif && admin" (click)=onQuit()>Quitter l'outil de modification</button>
                     </div>
-                    <br><app-question *ngIf="id_question_0 && !modif"
+                    <br>
+                    <app-question *ngIf="id_question_0 && !modif"
                         [tab]=selectedTab
                         [id_question]=id_question_0
                         [modif]=modif>
                     </app-question>
-                    <app-modif-project *ngIf="id_question_0 && modif"
+                    <app-modif-project *ngIf="id_question_0 && modif && selectedTab==0"
                         [tab]=selectedTab
                         [id_question]=id_question_0>
                     </app-modif-project>
@@ -34,17 +35,17 @@
             </mat-step>
             <mat-step>
                 <mat-grid-list cols="2">
-                    <div style="text-align: center;">
-                        <font size="+2.5">Application et fonctionnalités</font><br>
-                        <button *ngIf="!modif && admin" (click)=onModifier()>Modifier les questions</button>
-                        <button *ngIf="modif && admin" (click)=onQuit()>Quitter l'outil de modification</button>
+                    <div class="intitule-qt">
+                        <span class="qt-title">Application et fonctionnalités</span><br>
+                        <button class="btnadmin" *ngIf="!modif && admin" (click)=onModifier()>Modifier les questions</button>
+                        <button class="btnadmin" *ngIf="modif && admin" (click)=onQuit()>Quitter l'outil de modification</button>
                     </div>
                     <br><app-question *ngIf="id_question_1 && !modif"
                         [tab]="selectedTab" 
                         [id_question]=id_question_1
                         [modif]=modif>
                     </app-question>
-                    <app-modif-project *ngIf="id_question_1 && modif" 
+                    <app-modif-project *ngIf="id_question_1 && modif  && selectedTab==1" 
                         [tab]=selectedTab
                         [id_question]=id_question_1>
                     </app-modif-project>
@@ -54,17 +55,17 @@
             </mat-step>
             <mat-step>
                 <mat-grid-list cols="2">
-                    <div style="text-align: center;">
-                        <font size="+2.5">Installation physique des IoT et création du dashbord</font><br>
-                        <button *ngIf="!modif && admin" (click)=onModifier()>Modifier les questions</button>
-                        <button *ngIf="modif && admin" (click)=onQuit()>Quitter l'outil de modification</button>
+                    <div class="intitule-qt">
+                        <span class="qt-title">Installation physique des IoT et création du dashbord</span><br>
+                        <button class="btnadmin" *ngIf="!modif && admin" (click)=onModifier()>Modifier les questions</button>
+                        <button class="btnadmin" *ngIf="modif && admin" (click)=onQuit()>Quitter l'outil de modification</button>
                     </div>
                     <br><app-question *ngIf="id_question_2 && !modif"
                         [tab]="selectedTab" 
                         [id_question]=id_question_2
                         [modif]=modif>
                     </app-question>
-                    <app-modif-project *ngIf="id_question_2 && modif" 
+                    <app-modif-project *ngIf="id_question_2 && modif  && selectedTab==2" 
                         [tab]=selectedTab
                         [id_question]=id_question_2>
                     </app-modif-project>
@@ -74,13 +75,13 @@
             </mat-step>
             <mat-step>
                 <mat-grid-list cols="2">
-                    <div style="text-align: center;">
-                        <font size="+2.5">Récapitulatif et validation</font><br>
-                        <button *ngIf="!modif && admin" (click)=onModifier()>Modifier les questions</button>
-                        <button *ngIf="modif && admin" (click)=onQuit()>Quitter l'outil de modification</button>
+                    <div class="intitule-qt">
+                        <div class="qt-title">Récapitulatif et validation</div><br>
+                        <button class="btnadmin" *ngIf="!modif && admin" (click)=onModifier()>Modifier les questions</button>
+                        <button class="btnadmin" *ngIf="modif && admin" (click)=onQuit()>Quitter l'outil de modification</button>
                         <br>
                         <div>
-                            <font size="+1.5">Capteurs et connectivité</font><br>
+                            <span class="ss-titre-recap">Capteurs et connectivité</span><br>
                             <div *ngFor="let q of questions">
                                <div *ngIf="q.partie==0">
                                     {{q.question}} {{q.reponse}}
@@ -109,7 +110,7 @@
                         [id_question]=id_question_3
                         [modif]=modif>
                     </app-question>
-                    <app-modif-project *ngIf="id_question_3 && modif" 
+                    <app-modif-project *ngIf="id_question_3 && modif && selectedTab==3" 
                         [tab]=selectedTab
                         [id_question]=id_question_3>
                     </app-modif-project>

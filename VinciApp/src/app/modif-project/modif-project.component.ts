@@ -23,17 +23,39 @@ export class ModifProjectComponent implements OnInit {
   //id_answer: number; //id de la réponse de l'utilisateur
   //answer: string; //contenu de la réponse de l'utilisateur
   all_questions =[]; //id de toutes les questions possibles de la section
+  seen = [] //liste des questions qu'on a déjà traité, pour éviter les boucles infines
   
   ngOnInit(): void {
     this.all_questions = [this.id_question];
-    this.backend.GET(`/api/questions/${this.id_question}?include=reponse`, e=>{
+    this.addQuestionsAfter(this.id_question)
+  }
+
+  addQuestionsAfter(id) {
+    //console.log("on traire pour id "+id)
+    this.seen = this.seen.concat([id])
+    //console.log("on l'a donc rajouté à "+this.seen)
+
+    this.backend.GET(`/api/questions/${id}?include=reponse`, e=>{
+      //console.log("Juste après la requête, la liste des quetsions à afficher est :"+this.all_questions)
       for (let i = 0; i < e.data[0].included["reponse"].length; i++) {
-        const id_rep = e.data[0].included["reponse"][i].id_reponse;
-        this.backend.GET(`/api/reponses/${id_rep}?include=question_suivante`, e2=>{
-          const next = e2.data[0].fields.question_suivante;
+        var next = JSON.stringify(e.data[0].included["reponse"][i].question_suivante)
+        //console.log("On trouve la question : "+next)
+        //const id_rep = e.data[0].included["reponse"][i].id_reponse;
+        //this.backend.GET(`/api/reponses/${id_rep}`, e2=>{
+          //const next = e2.data[0].fields.question_suivante;
+        if (next != 'null' && this.all_questions.indexOf(next)==-1) {
+          ///console.log("on ajoute la question d'id "+next+", qui n'y est pas déjà")
           this.all_questions = this.all_questions.concat([next]);
-          this.all_questions = Array.from(new Set(this.all_questions)); //suppression des redondances
-        });
+          //this.all_questions = Array.from(new Set(this.all_questions)); //suppression des redondances
+          //console.log("au final, on veut afficher : "+this.all_questions)
+          //console.log("On regarde si "+next+" est dans "+this.seen+", aka a deja été traitée")
+          if (this.seen.indexOf(next) == -1) {
+            //console.log("La réponse est non")
+            this.addQuestionsAfter(next)
+            //console.log("on lance une nouvelle requete pour la question "+next+", actuellement la liste est "+this.all_questions)
+          }
+        }
+        //});
       }
     });
   }

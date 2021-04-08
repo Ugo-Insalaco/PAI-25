@@ -1,3 +1,13 @@
+
+.btnadmin {
+  border: 0;
+  border-radius: 3px;
+  text-align: center;
+  background-color: #DBDBDB;
+  box-shadow: 1px 1px 1px #646464;
+  margin-left: 1vh;
+}
+
 .btnmodif{
   height: 30px;
   width: auto;

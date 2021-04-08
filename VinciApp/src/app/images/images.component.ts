@@ -32,8 +32,8 @@ export class ImagesComponent implements OnInit {
           "id": e.data[i].id,
           "color": e.data[i].fields.color,
           "name": e.data[i].included["text"][0].name,
-          "url": "/cadran/"+e.data[i].id+"&"+name,
-          "problem": e.data[i].included["text"][0].problem
+          "url": "/cadran/"+e.data[i].id+"$"+name.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+          "overlay": e.data[i].included["text"][0].overlay
         };
         this.cadranList.push(data);
       }

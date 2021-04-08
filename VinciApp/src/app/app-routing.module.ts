@@ -8,6 +8,7 @@ import { CadranComponent} from './cadran/cadran.component';
 import { SolutionComponent} from './solution/solution.component';
 import { ProjectComponent} from './project/project.component';
 import { NewProjectComponent } from './new-project/new-project.component';
+import { NewQuestionComponent } from './new-question/new-question.component'
 
 const routes: Routes = [
   {path: '', redirectTo: '', pathMatch: 'full'},
@@ -16,7 +17,8 @@ const routes: Routes = [
   {path: 'project/:solution', component: ProjectComponent},
   {path: 'new-project', component: NewProjectComponent},
   {path: 'cadran/:cadran', component: CadranComponent},
-  {path: 'cadran/:cadran/:solution', component: SolutionComponent}
+  {path: 'cadran/:cadran/:solution', component: SolutionComponent},
+  {path: 'new-question', component: NewQuestionComponent}
 ];
 
 @NgModule({

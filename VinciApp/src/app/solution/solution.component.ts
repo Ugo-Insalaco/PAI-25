@@ -60,13 +60,14 @@ export class SolutionComponent implements OnInit, AfterViewInit {
       // Texts Banner
       this.databanner["name"] = e.data[0].included["text"][0].name;
       this.databanner["idname"] = e.data[0].fields.name;
-      this.databanner["circles"] = e.data[0].included["text"][0].circles;
+      this.databanner["circles"] = "url("+e.data[0].included["text"][0].circles+")";
       this.databanner["idcircles"] = e.data[0].fields.circles;
-      this.databanner["problem"] = e.data[0].included["text"][0].problem;
+      this.databanner["problem1"] = e.data[0].included["text"][0].problem.split("&/&")[0];
+      this.databanner["problem2"] = e.data[0].included["text"][0].problem.split("&/&")[1];
       this.databanner["idproblem"] = e.data[0].fields.problem;
 
       // Images Banner
-      this.databanner["logo"] = e.data[0].fields.logo;
+      this.databanner["logo"] = "url("+e.data[0].fields.logo+")";
       this.databanner["color"] = e.data[0].fields.color;
       this.databanner["picture_back"] = "url("+e.data[0].fields.picture_back+")";
 
@@ -94,7 +95,7 @@ export class SolutionComponent implements OnInit, AfterViewInit {
 
   getNomSolution(){
     var nom = this.router.url.split('/').pop();
-    nom = nom.split('&').pop();
+    nom = nom.split('$').pop();
     nom = nom.replace(/-/gi, " "); // Remplace - par espace
     nom = nom.replace(/_/gi, "'"); // Remplace _ par '
     nom = nom.charAt(0).toUpperCase() + nom.slice(1); // Majuscule pour 1er mot
@@ -105,7 +106,7 @@ export class SolutionComponent implements OnInit, AfterViewInit {
 
   getNomCadran(){
     var nom = this.router.url.split('/')[2];
-    nom = nom.split('&').pop();
+    nom = nom.split('$').pop();
     nom = nom.replace(/-/gi, " "); // Remplace - par espace
     nom = nom.replace(/%C3%A9/gi, "é");
     nom = nom.replace(/%C3%AA/gi, "ê");
@@ -117,13 +118,13 @@ export class SolutionComponent implements OnInit, AfterViewInit {
 
   getIdCadran(){
     var id = this.router.url.split('/')[2];
-    id = id.split('&')[0];
+    id = id.split('$')[0];
     return Number(id);
   }
 
   getIdSolution(){
     var id = this.router.url.split('/').pop();
-    id = id.split('&')[0];
+    id = id.split('$')[0];
     return Number(id);
   }
 

@@ -1,0 +1,53 @@
+<div style="text-align: center;">
+    
+    <strong>Création d'une nouvelle question</strong>
+    <br>
+
+    <!-- <div>
+        Type de question : <input type="text" [(ngModel)]="type">
+    </div> -->
+
+    <div>
+        Type de question :
+        <select [(ngModel)]="type">
+            <option value="radio">QCM avec une seule réponse possible</option>
+            <option value="select">QCM avec plusieurs réponses possibles</option>
+            <option value="text">Texte</option>
+            <option value="number">Nombre</option>
+            <option value="select_all_iot">Sélection parmi tous les IoT disponibles</option>
+        </select>
+    </div>
+
+
+    <div>
+        Enoncé de la question : <input type="text" [(ngModel)]="question">
+    </div>
+
+    <!-- <div>
+        Commentaire à ajouter en dessous de la question (facultatif) : <input type="text" [(ngModel)]="info">
+    </div> -->
+
+    <div>
+        Nombre de réponses : <input type="number" [(ngModel)]="nb_reponses">
+    </div>
+
+    <div>
+        <div *ngFor="let reponse of reponses(nb_reponses);let index=index;">
+            Enoncé de la réponse n° {{index+1}} : <input type="text" [(ngModel)]="reponses[index]">
+            <!-- <br>Identifiant de la question suivante : <input type="number" [(ngModel)]="questions_suivantes[index]"> -->
+            <br> Question suivante :
+            <select [(ngModel)]="questions_suivantes[index]">
+                <option value="null">Aucune</option>
+                <option *ngFor = "let q of questions_existantes"
+                    [value]="q.id">
+                    id {{q.id}}: "{{q.included.text[0].content}}"
+                </option>
+            </select>
+        </div>
+    </div>
+
+    <br>
+    <button (click)=onPost()>Créer la question</button>
+
+
+</div>
