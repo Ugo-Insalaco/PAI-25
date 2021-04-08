@@ -2,11 +2,11 @@
 
     <strong>Question</strong> (id {{id_question}}) : <input type="text" [(ngModel)]="question">
     <br> Type de question : {{type}}
-    <br> <ngcontainer *ngIf="info">Commentaire : <input type="text" [(ngModel)]="info"></ngcontainer>
+    <br> <ng-container *ngIf="info">Commentaire : <input type="text" [(ngModel)]="info"></ng-container>
     <div *ngFor="let r of reponses;let index=index;trackBy:trackByIndex;">
-        <ngcontainer *ngIf="type != number && type != text && type != select">
+        <ng-container *ngIf="type != number && type != text && type != select">
             <strong> Réponse </strong> (id {{id_reponses[index]}}) : <input type="text" name=a{{index}} [(ngModel)]="reponses[index]" placeholder="r">
-        </ngcontainer>
+        </ng-container>
         <!-- Identifiant de la question suivante : <input type="text" [(ngModel)]="next[index]"> -->
         <br> Question suivante :
         <select [(ngModel)]="next[index]">

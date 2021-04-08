@@ -99,7 +99,7 @@ export class OfferComponent implements OnInit, AfterViewInit{
     onDeleteSolution(){
       var idsolution = this.selectedOption;
       var textsolution = this.selectedText;
-      if(textsolution!=undefined){
+      if(textsolution!=undefined && textsolution!=""){
         var input = confirm('Voulez-vous vraiment supprimer la solution : "'+textsolution+'" ? \n\nATTENTION : Opération irréversible');
         if(input){
           this.backend.DELETE('/api/solutionContents/'+idsolution, e=>{
