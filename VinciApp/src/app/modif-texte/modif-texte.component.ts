@@ -55,7 +55,7 @@ export class ModifTexteComponent implements OnInit {
     }
 
     this.textView.nativeElement.style.border = 'none';
-    
+
     this.editAllowed = false;
     this.modifAllowed = false;
     this.editAllowedChange.emit(this.editAllowed);

@@ -43,7 +43,7 @@ export class NewSolutionFormComponent implements OnInit {
 
       // Enregistrement de l'image dans assets
       var file = this.imgInput.nativeElement.files[0];
-      var nomcadran = this.router.url.split('/').pop().split("&").pop();
+      var nomcadran = this.router.url.split('/').pop().split("$").pop();
       var nomsolution = input["nom"].toLowerCase();
       var fileName = nomcadran+"_"+nomsolution+(file.type=="image/jpeg"? ".jpg":".png");
       fileName.replace(/[ -'(),]/gi, "");

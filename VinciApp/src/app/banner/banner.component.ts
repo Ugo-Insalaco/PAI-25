@@ -20,11 +20,13 @@ export class BannerComponent implements OnInit, AfterViewInit {
   @ViewChild('fond') fondView: ElementRef;
   @ViewChild('nom') nomView: ElementRef;
   @ViewChild('problem') problemView: ElementRef;
+  @ViewChild('overlay') overlayView: ElementRef;
   @ViewChild('sol') solutionView: ElementRef;
 
   contentEditableNom:boolean = false;
   contentEditableProblem:boolean = false;
   contentEditableSolution:boolean = false;
+  contentEditableOverlay:boolean = false;
 
   constructor(private cd: ChangeDetectorRef, private backend: BackendService) { }
 

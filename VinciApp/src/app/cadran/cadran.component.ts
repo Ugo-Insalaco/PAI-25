@@ -49,6 +49,8 @@ export class CadranComponent implements OnInit {
       this.databanner["problem1"] = e.data[0].included["text"][0].problem.split("&/&")[0];
       this.databanner["problem2"] = e.data[0].included["text"][0].problem.split("&/&")[1];
       this.databanner["idproblem"] = e.data[0].fields.problem;
+      this.databanner["overlay"] = e.data[0].included["text"][0].overlay;
+      this.databanner["idoverlay"] = e.data[0].fields.overlay;
 
       // Images Banner
       this.databanner["logo"] = "url("+e.data[0].fields.logo+")";
@@ -96,7 +98,7 @@ export class CadranComponent implements OnInit {
 
   getNomCadran(){
     var nom = this.router.url.split('/').pop();
-    nom = nom.split('&').pop();
+    nom = nom.split('$').pop();
     nom = nom.replace(/-/gi, " ");
     nom = nom.replace(/%C3%A9/gi, "é");
     nom = nom.replace(/%C3%AA/gi, "ê");
@@ -108,7 +110,7 @@ export class CadranComponent implements OnInit {
 
   getIdCadran(){
     var id = this.router.url.split('/').pop();
-    id = id.split('&')[0];
+    id = id.split('$')[0];
     return Number(id);
   }
 }
