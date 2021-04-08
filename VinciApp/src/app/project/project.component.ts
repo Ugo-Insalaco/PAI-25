@@ -120,4 +120,12 @@ export class ProjectComponent implements OnInit{
         this.modif = false;
     }
 
+    onCreerQuestion(){
+        this.router.navigate(["new-question"]);
+    }
+
+    onCreerProjet(){
+        this.router.navigate(["new-project"]);
+    }
+
 }

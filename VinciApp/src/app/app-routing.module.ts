@@ -18,7 +18,8 @@ const routes: Routes = [
   {path: 'new-project', component: NewProjectComponent},
   {path: 'cadran/:cadran', component: CadranComponent},
   {path: 'cadran/:cadran/:solution', component: SolutionComponent},
-  {path: 'new-question', component: NewQuestionComponent}
+  {path: 'new-question', component: NewQuestionComponent},
+  {path: 'new-project', component: NewProjectComponent}
 ];
 
 @NgModule({

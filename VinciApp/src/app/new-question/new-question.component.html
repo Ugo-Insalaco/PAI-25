@@ -1,14 +1,17 @@
 <div style="text-align: center;">
     
     <strong>Création d'une nouvelle question</strong>
-    <br>
+    
+    <div>
+        Cet outil permet de créer une question, qui apparaîtra ensuite dans la liste des questions possibles lors de la modification ou de la création des questionnaires.
+    </div>
 
     <!-- <div>
         Type de question : <input type="text" [(ngModel)]="type">
     </div> -->
 
     <div>
-        Type de question :
+        Type de réponse attendue :
         <select [(ngModel)]="type">
             <option value="radio">QCM avec une seule réponse possible</option>
             <option value="select">QCM avec plusieurs réponses possibles</option>
