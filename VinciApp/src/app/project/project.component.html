@@ -120,7 +120,7 @@
 
     </mat-card-content>
 
-    <button class="btnadmin" type="button" (click)="onCreerQuestion()">Créer une nouvelle question</button>
-    <button class="btnadmin" type="button" (click)="onCreerProjet()">Créer un nouveau questionnaire</button>
+    <button class="btnadmin" type="button" *ngIf="admin" (click)="onCreerQuestion()">Créer une nouvelle question</button>
+    <button class="btnadmin" type="button" *ngIf="admin" (click)="onCreerProjet()">Créer un nouveau questionnaire</button>
 </mat-card>
 

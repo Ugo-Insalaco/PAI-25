@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
 import { ConfigService } from '../services/config.service'
 import { GlobalStorageService } from '../services/globalStorage.service'
 import { BackendService } from '../services/backend.service';
+import { AuthService } from '../services/auth.service';
 
 import {Router} from '@angular/router';
 
@@ -22,14 +23,21 @@ export class ProjectComponent implements OnInit{
     nomsolution: string;
     questions = [];
     modif = false;
-    admin = true;
+    admin!: boolean;
     id_solution = 14; // voir comment récupérer cet id !
     id_question_0: number //1ere question de la première section
     id_question_1: number //1ere question de la deuxième section
     id_question_2: number //1ere question de la troisième section
     id_question_3: number //1ere question de la quatrième section (ajouter un commentaire)
 
-    constructor(private router: Router, private backend: BackendService, private config: ConfigService, private globalStorage: GlobalStorageService){
+    constructor(private router: Router,
+                private backend: BackendService, 
+                private config: ConfigService, 
+                private globalStorage: GlobalStorageService,
+                private auth: AuthService){
+        this.auth.isLoggedIn(res => {
+            this.admin = res;
+        });
     }
 
 
