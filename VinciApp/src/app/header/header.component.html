@@ -15,7 +15,8 @@
     <span></span>
     <span class="example-spacer"></span>
     <span></span>
-    <button  mat-raised-button id="connectbtn" color="primary" class="space" routerLink="/login"> <mat-icon  >perm_identity</mat-icon> <strong>Se Connecter</strong>  </button>
+    <button  mat-raised-button id="connectbtn" color="primary" class="space" routerLink="/login" *ngIf="isConnected===false"> <mat-icon>perm_identity</mat-icon> <strong>Se Connecter</strong>  </button>
+    <button  mat-raised-button id="disconnectbtn" color="primary" class="space" (click)="OnDisconnect()" *ngIf="isConnected===true"> <mat-icon>perm_identity</mat-icon> <strong>Se Deconnecter</strong>  </button>
     <span></span>
     <span class="example-spacer"></span>
     <span></span>

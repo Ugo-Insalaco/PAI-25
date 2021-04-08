@@ -15,10 +15,11 @@
     </div>
 
     <div #cercles id="cercles" [style.background-image]="databanner.circles"></div>
-    <div id="btnmodif">
+    <div id="btnmodif" *ngIf="admin===true">
       <app-modif-texte [admin]="admin" buttonName="NOM" [idtext]="databanner.idname" [textView]="nomView" [(editAllowed)]="contentEditableNom"></app-modif-texte>
       <app-modif-texte [admin]="admin" buttonName="Problématique" [idtext]="databanner.idproblem" [textView]="problemView" [(editAllowed)]="contentEditableProblem"></app-modif-texte>
       <app-modif-texte [admin]="admin" buttonName="Solution" [idtext]="idnamesolution" [textView]="solutionView" [(editAllowed)]="contentEditableSolution" *ngIf="nomsolution!==''"></app-modif-texte>
+      <input type="color" [value]="couleur" id="colorSelector" (input)="colorPreview($event)" (change)="colorChange($event)">
       <app-modif-image [admin]="admin" [containerId]="databanner.idcadran" buttonName="Logo" containerType="cadrans" imageType="logo" [imageView]="logoView"></app-modif-image>
       <app-modif-image [admin]="admin" buttonName="Image en bas à droite" [containerId]="databanner.idcircles" containerType="texts" imageType="text" [imageView]="cerclesView"></app-modif-image>
       <app-modif-image [admin]="admin" buttonName="Image de fond" [containerId]="databanner.idcadran" containerType="cadrans" imageType="picture_back" [imageView]="fondView"></app-modif-image>

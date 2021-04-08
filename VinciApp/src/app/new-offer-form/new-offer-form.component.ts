@@ -97,10 +97,6 @@ export class NewOfferFormComponent implements OnInit {
           });
         });
       });
-
-      // Récupération des id des solutions créées
-      // Création offre → récup id de l'offre + celle du cadran
-      // Création binding entre cadran et offre
       this.resetForm();
     }
   }

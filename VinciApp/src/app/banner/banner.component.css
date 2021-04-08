@@ -112,3 +112,11 @@
   bottom: 2vh;
   left: 2vh;
 }
+
+#colorSelector{
+  border: 0;
+  height: 30px;
+  margin-left: 1vh;
+  border-radius: 3px;
+  padding: 5px;
+}

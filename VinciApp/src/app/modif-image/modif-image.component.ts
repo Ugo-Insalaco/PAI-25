@@ -67,7 +67,8 @@ export class ModifImageComponent implements OnInit {
       nomcadran = this.router.url.split('/').pop().split("&").pop().replace(/-/gi, "");
     }
     else if(this.containerType == "solutionContents"){
-      complementnomimage = this.nomSolution.replace(/ /gi, "").toLowerCase();
+      complementnomimage = this.nomSolution.replace(/[ -'(),]/gi, "").toLowerCase();
+      complementnomimage = complementnomimage.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
       nomcadran = this.router.url.split('/')[2].split("&").pop().replace(/-/gi, "");
     }
     else if(this.containerType == "cadrans"){
@@ -86,7 +87,8 @@ export class ModifImageComponent implements OnInit {
       if(this.nomSolution!=undefined){
         // Page solution
         nomcadran = this.router.url.split('/')[1].split("&").pop().replace(/-/gi, "");
-        complementnomimage = this.router.url.split('/')[2].split("&").pop().replace(/[-'(),]/gi, "");
+        complementnomimage = this.nomSolution.replace(/[ -'(),]/gi, "").toLowerCase();
+        complementnomimage = complementnomimage.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
       }
       else if(this.router.url=="/"){
         // Page d'accueil
