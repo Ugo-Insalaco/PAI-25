@@ -1,32 +1,37 @@
-<div style="text-align: center;">
+<div id="question">
 
   <!-- Affichage de la question -->
 
-  <div *ngIf="type=='radio'"> <!--QM avec une seule réponse possible-->
+  <div class="qt" *ngIf="type=='radio'"> <!--QM avec une seule réponse possible-->
     {{question}}
+    <div class="reponse">
     <ngcontainer *ngFor="let r of reponses">
-      <br><input type="radio" name="{{id_question}}" value="{{r.id}}" [(ngModel)]="id_answer" (change)="onAnswer()"> {{r.reponse}}
+      <input type="radio" name="{{id_question}}" value="{{r.id}}" [(ngModel)]="id_answer" (change)="onAnswer()"> {{r.reponse}} <br>
     </ngcontainer>
+    </div>
   </div>
 
-  <div *ngIf="type=='text'">
+  <div class="qt" *ngIf="type=='text'">
     {{question}}
-    <br><textarea [(ngModel)]="answer" (change)="onAnswer()"></textarea>
+    <br>
+    <textarea [(ngModel)]="answer" (change)="onAnswer()"></textarea>
   </div>
 
-  <div *ngIf="type=='number'">
-    {{question}}    
-    <br><input type="number" [(ngModel)]="answer" (change)="onAnswer()">
+  <div class="qt" *ngIf="type=='number'">
+    {{question}} <br>   
+    <div class="reponse">
+      <input type="number" [(ngModel)]="answer" (change)="onAnswer()">
+    </div>
   </div>
   
-  <!-- <div *ngIf="type=='checkbox'">
+  <!-- <div class="qt" *ngIf="type=='checkbox'">
     {{question}}
     <ngcontainer *ngFor = "let r of reponses">
       <br><input type="checkbox" (change)="onAnswer2(r[0])"> {{r[1]}}
     </ngcontainer>
   </div> -->
 
-  <div *ngIf="type=='select'">
+  <div class="qt" *ngIf="type=='select'">
     {{question}}
     <br>
     <select multiple [(ngModel)]="answer" (change)="onAnswer()">
@@ -35,7 +40,7 @@
     <br><small>(Utilisez CTRL pour sélectionner plusieurs)</small> <!--Mettre ça dans "info" plutôt (pour la langue)-->
   </div>
 
-  <div *ngIf="type=='select_all_iot'">
+  <div class="qt" *ngIf="type=='select_all_iot'">
     {{question}}
     <br>
     <select multiple [(ngModel)]="answer" (change)="onAnswer()">
@@ -44,9 +49,9 @@
     <br><small>(Utilisez CTRL pour sélectionner plusieurs)</small> <!--Mettre ça dans "info" plutôt (pour la langue)-->
   </div>
 
-  <small>{{info}}</small>
-
-  <br>
+  <ngcontainer class="qt">
+    <small>{{info}}</small> <br>
+  </ngcontainer>
 
   <!-- Affichage de la question suivante -->
   <div *ngIf="(answer || id_answer) && !modif">
@@ -56,3 +61,4 @@
       [modif]=modif>
     </app-question>
   </div>
+

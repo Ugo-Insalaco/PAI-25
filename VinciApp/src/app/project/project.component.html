@@ -76,12 +76,12 @@
             <mat-step>
                 <mat-grid-list cols="2">
                     <div class="intitule-qt">
-                        <span class="qt-title">Récapitulatif et validation</span><br>
+                        <div class="qt-title">Récapitulatif et validation</div><br>
                         <button class="btnadmin" *ngIf="!modif && admin" (click)=onModifier()>Modifier les questions</button>
                         <button class="btnadmin" *ngIf="modif && admin" (click)=onQuit()>Quitter l'outil de modification</button>
                         <br>
                         <div>
-                            <font size="+1.5">Capteurs et connectivité</font><br>
+                            <span class="ss-titre-recap">Capteurs et connectivité</span><br>
                             <div *ngFor="let q of questions">
                                <div *ngIf="q.partie==0">
                                     {{q.question}} {{q.reponse}}

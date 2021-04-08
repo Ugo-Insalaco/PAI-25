@@ -23,6 +23,11 @@
 	font-size: 1.8em;
 }
 
+.ss-titre-recap {
+	font-size: 1.5em;
+
+}
+
 ::ng-deep .mat-step-header .mat-step-icon-selected {
     background-color: #00438a;
  }
