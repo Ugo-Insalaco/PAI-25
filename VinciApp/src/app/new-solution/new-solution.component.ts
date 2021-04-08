@@ -18,11 +18,11 @@ export class NewSolutionComponent implements OnInit {
   }
 
   openPopup(): void {
-    const dialogConfig = new MatDialogConfig();
+    var dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;  // The user can't close the dialog by clicking outside its body
     dialogConfig.id = "new-solution-form-component";
     dialogConfig.width = "70%";
     dialogConfig.data = {id: this.idOffer};
-    const modalDialog = this.matDialog.open(NewSolutionFormComponent, dialogConfig);
+    var modalDialog = this.matDialog.open(NewSolutionFormComponent, dialogConfig);
   }
 }
