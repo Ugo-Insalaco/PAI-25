@@ -15,12 +15,13 @@
         <mat-horizontal-stepper linear="true" selectedIndex = 0 labelPosition="bottom" (selectionChange)="changeHandler($event)">
             <mat-step completed= {{complete}}>
                 <mat-grid-list cols="2">
-                    <div style="text-align: center;">
-                        <font size="+2.5">Capteurs et connectivité</font><br>
-                        <button *ngIf="!modif && admin" (click)=onModifier()>Modifier les questions</button>
-                        <button *ngIf="modif && admin" (click)=onQuit()>Quitter l'outil de modification</button>
+                    <div class="intitule-qt">
+                        <span class="qt-title">Capteurs et connectivité</span><br>
+                        <button class="btnadmin" *ngIf="!modif && admin" (click)=onModifier()>Modifier les questions</button>
+                        <button class="btnadmin" *ngIf="modif && admin" (click)=onQuit()>Quitter l'outil de modification</button>
                     </div>
-                    <br><app-question *ngIf="id_question_0 && !modif"
+                    <br>
+                    <app-question *ngIf="id_question_0 && !modif"
                         [tab]=selectedTab
                         [id_question]=id_question_0
                         [modif]=modif>
@@ -34,10 +35,10 @@
             </mat-step>
             <mat-step>
                 <mat-grid-list cols="2">
-                    <div style="text-align: center;">
-                        <font size="+2.5">Application et fonctionnalités</font><br>
-                        <button *ngIf="!modif && admin" (click)=onModifier()>Modifier les questions</button>
-                        <button *ngIf="modif && admin" (click)=onQuit()>Quitter l'outil de modification</button>
+                    <div class="intitule-qt">
+                        <span class="qt-title">Application et fonctionnalités</span><br>
+                        <button class="btnadmin" *ngIf="!modif && admin" (click)=onModifier()>Modifier les questions</button>
+                        <button class="btnadmin" *ngIf="modif && admin" (click)=onQuit()>Quitter l'outil de modification</button>
                     </div>
                     <br><app-question *ngIf="id_question_1 && !modif"
                         [tab]="selectedTab" 
@@ -54,10 +55,10 @@
             </mat-step>
             <mat-step>
                 <mat-grid-list cols="2">
-                    <div style="text-align: center;">
-                        <font size="+2.5">Installation physique des IoT et création du dashbord</font><br>
-                        <button *ngIf="!modif && admin" (click)=onModifier()>Modifier les questions</button>
-                        <button *ngIf="modif && admin" (click)=onQuit()>Quitter l'outil de modification</button>
+                    <div class="intitule-qt">
+                        <span class="qt-title">Installation physique des IoT et création du dashbord</span><br>
+                        <button class="btnadmin" *ngIf="!modif && admin" (click)=onModifier()>Modifier les questions</button>
+                        <button class="btnadmin" *ngIf="modif && admin" (click)=onQuit()>Quitter l'outil de modification</button>
                     </div>
                     <br><app-question *ngIf="id_question_2 && !modif"
                         [tab]="selectedTab" 
@@ -74,10 +75,10 @@
             </mat-step>
             <mat-step>
                 <mat-grid-list cols="2">
-                    <div style="text-align: center;">
-                        <font size="+2.5">Récapitulatif et validation</font><br>
-                        <button *ngIf="!modif && admin" (click)=onModifier()>Modifier les questions</button>
-                        <button *ngIf="modif && admin" (click)=onQuit()>Quitter l'outil de modification</button>
+                    <div class="intitule-qt">
+                        <span class="qt-title">Récapitulatif et validation</span><br>
+                        <button class="btnadmin" *ngIf="!modif && admin" (click)=onModifier()>Modifier les questions</button>
+                        <button class="btnadmin" *ngIf="modif && admin" (click)=onQuit()>Quitter l'outil de modification</button>
                         <br>
                         <div>
                             <font size="+1.5">Capteurs et connectivité</font><br>

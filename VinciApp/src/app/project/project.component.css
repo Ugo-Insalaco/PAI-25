@@ -1,9 +1,26 @@
+.btnadmin {
+  margin-left: 1vh;
+  border: 0;
+  border-radius: 3px;
+  text-align: center;
+  background-color: #DBDBDB;
+  box-shadow: 1px 1px 1px #646464;
+}
+
 #outil{
     max-width: 800px;
     display: block;
     margin-left: auto;
     margin-right: auto;
     
+}
+
+.intitule-qt {
+	text-align: center;
+}
+
+.qt-title {
+	font-size: 1.8em;
 }
 
 ::ng-deep .mat-step-header .mat-step-icon-selected {
