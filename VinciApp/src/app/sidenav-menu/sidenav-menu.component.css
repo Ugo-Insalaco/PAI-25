@@ -1,5 +1,5 @@
 .nav-item{
-  color: #00438a;
+  color: #fff;
 }
 
 .nav-offre{
@@ -9,6 +9,10 @@
 .nav-cadran{
   padding-top: 2%;
   padding-bottom: 2%;
+}
+
+.mat-list-item:hover .nav-offre {
+  text-decoration: underline;
 }
 
 .mat-list-item:hover .solutioncontainer {
@@ -25,11 +29,12 @@ a:hover {
 }
 
 .cadran{
-  border-left: solid 0px;
+  border-left: solid 10px;
 }
 
 .cadran:hover{
   border-left: solid 8px;
+  border-right: solid 8px;
 }
 
 .solution{
@@ -41,7 +46,6 @@ a:hover {
 }
 
 .solution:hover {
-  background-color: BUTTONFACE;
   font-weight: bold;
 }
 
@@ -50,7 +54,7 @@ a:hover {
   position: absolute;
   top: 0%;
   left: 100%;
-  color: #00438a;
+  color: #fff;
   list-style: none;
   width: 200px;
 }
