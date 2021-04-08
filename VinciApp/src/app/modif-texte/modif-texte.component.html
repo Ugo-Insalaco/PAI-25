@@ -7,12 +7,12 @@
 </button>
 <div id="container-admin-controls"
      *ngIf="admin===true && modifAllowed==true">
-  <button class="btnvalid"
+  <button class="btnvalid btnmodif"
           (click)="confirmText()"
           title="Valider">
           Valider
   </button>
-  <button (click)="closeTextModifPanel()"
+  <button class="btnmodif" (click)="closeTextModifPanel()"
           title="Annuler">
           Annuler
   </button>

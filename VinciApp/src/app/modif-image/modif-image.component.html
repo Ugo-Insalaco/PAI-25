@@ -11,16 +11,16 @@
          id="inputImgSolution"
          #input
          accept="image/*">
-   <button (click)="updateImageDisplay()"
+   <button class="btnadmin" (click)="updateImageDisplay()"
            title="Visualiser">
            Visualiser
    </button>
-   <button (click)="sendDatatoDB()"
+   <button class="btnadmin" (click)="sendDatatoDB()"
            *ngIf="visualizationActivated==true"
            title="Valider">
            Valider
    </button>
-   <button (click)="closeImageModifPanel()"
+   <button class="btnadmin" (click)="closeImageModifPanel()"
            title="Annuler">
            Annuler
    </button>
