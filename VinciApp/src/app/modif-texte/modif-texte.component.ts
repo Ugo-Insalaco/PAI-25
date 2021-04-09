@@ -56,7 +56,9 @@ export class ModifTexteComponent implements OnInit {
     }
 
     this.textView.nativeElement.style.border = 'none';
-    window.location.reload();
+    if(this.allowNewParagraph){
+      window.location.reload();
+    }
 
     this.editAllowed = false;
     this.modifAllowed = false;
