@@ -13,7 +13,7 @@ export class DesComponent implements OnInit, AfterViewInit {
 
   contentEditableMain: boolean = false;
   data1!: string;
-  data2!: string;
+  data!: string[];
 
   admin!: boolean;
 
@@ -27,9 +27,8 @@ export class DesComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.backend.GET('/api/texts/1', e=>{
-        var text = e.data[0].fields.text;
-        this.data1 = text.split('&/&')[0];
-        this.data2 = text.split('&/&')[1];
+        this.data = e.data[0].fields.text.split('&/&');
+        this.data1 = this.data.shift();
     });
   }
 

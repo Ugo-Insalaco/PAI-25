@@ -3,10 +3,12 @@
     <div #main [contentEditable]="contentEditableMain">
       <p class="h1">{{data1}}</p>
       <br>
-      <p class="h3">{{data2}}</p>
+      <p class="h3" *ngFor="let paragraph of data">
+        {{paragraph}}
+      </p>
     </div>
     <div id="btnmodiftexte" *ngIf="admin===true">
-      <app-modif-texte [admin]="admin" buttonName="Textes" idtext="1" [textView]="maintextView" [(editAllowed)]="contentEditableMain"></app-modif-texte>
+      <app-modif-texte [admin]="admin" buttonName="Textes" [allowNewParagraph]="true" idtext="1" [textView]="maintextView" [(editAllowed)]="contentEditableMain"></app-modif-texte>
     </div>
   </mat-card-content>
 </mat-card>
