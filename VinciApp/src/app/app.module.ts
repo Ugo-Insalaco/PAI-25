@@ -13,7 +13,7 @@ import { ConfigService } from './services/config.service'
 import { GlobalStorageService } from './services/globalStorage.service'
 import { HttpClientModule } from '@angular/common/http';
 import { BackendService } from './services/backend.service'
-import { AuthService } from './services/auth.service' 
+import { AuthService } from './services/auth.service'
 
 import {MatDialogModule} from '@angular/material/dialog';
 
@@ -43,7 +43,6 @@ import { CadranComponent } from './cadran/cadran.component';
 import { SolutionComponent } from './solution/solution.component';
 import { BtnlinkcadransComponent } from './btnlinkcadrans/btnlinkcadrans.component';
 import { NewProjectComponent } from './new-project/new-project.component';
-import { ModifProjectComponent } from './modif-project/modif-project.component';
 import { ModifTexteComponent } from './modif-texte/modif-texte.component';
 import { ModifImageComponent } from './modif-image/modif-image.component';
 import { SidenavMenuComponent } from './sidenav-menu/sidenav-menu.component';
@@ -53,6 +52,7 @@ import { NewOfferComponent } from './new-offer/new-offer.component';
 import { NewSolutionComponent } from './new-solution/new-solution.component';
 import { NewSolutionFormComponent } from './new-solution-form/new-solution-form.component';
 import { NewOfferFormComponent } from './new-offer-form/new-offer-form.component';
+import { NewQuestionComponent } from './new-question/new-question.component';
 
 @NgModule({
   declarations: [
@@ -73,14 +73,14 @@ import { NewOfferFormComponent } from './new-offer-form/new-offer-form.component
     SolutionComponent,
     BtnlinkcadransComponent,
     NewProjectComponent,
-    ModifProjectComponent,
     ModifTexteComponent,
     ModifImageComponent,
     SidenavMenuComponent,
     NewOfferComponent,
     NewSolutionComponent,
     NewSolutionFormComponent,
-    NewOfferFormComponent
+    NewOfferFormComponent,
+    NewQuestionComponent
   ],
   imports: [
     BrowserModule,
@@ -109,6 +109,10 @@ import { NewOfferFormComponent } from './new-offer-form/new-offer-form.component
     GlobalStorageService,
     BackendService,
     AuthService
+  ],
+  entryComponents: [
+    NewSolutionFormComponent,
+    NewOfferFormComponent
   ],
   bootstrap: [AppComponent]
 })

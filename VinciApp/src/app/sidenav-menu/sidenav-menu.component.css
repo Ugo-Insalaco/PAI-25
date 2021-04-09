@@ -1,5 +1,8 @@
 .nav-item{
-  color: #00438a;
+  height: 40px;
+  color: #fff;
+  display: flex;
+  align-items: center;
 }
 
 .nav-offre{
@@ -11,7 +14,24 @@
   padding-bottom: 2%;
 }
 
-.mat-list-item:hover .solutioncontainer {
+.offreContainer{
+  height: 40px;
+}
+
+mat-icon{
+  padding-left: 5%;
+  display: none;
+}
+
+.offreContainer:hover .nav-offre span {
+  text-decoration: underline;
+}
+
+.offreContainer:hover .nav-offre mat-icon {
+  display: block;
+}
+
+.offreContainer:hover .solutioncontainer {
   display: inline-block;
 }
 
@@ -25,11 +45,12 @@ a:hover {
 }
 
 .cadran{
-  border-left: solid 0px;
+  border-left: solid 10px;
 }
 
 .cadran:hover{
   border-left: solid 8px;
+  border-right: solid 8px;
 }
 
 .solution{
@@ -41,16 +62,15 @@ a:hover {
 }
 
 .solution:hover {
-  background-color: BUTTONFACE;
   font-weight: bold;
 }
 
 .solutioncontainer{
   display: none;
-  position: absolute;
-  top: 0%;
+  position: relative;
+  top: -40px;
   left: 100%;
-  color: #00438a;
+  color: #fff;
   list-style: none;
   width: 200px;
 }

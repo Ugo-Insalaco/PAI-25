@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { BackendService } from '../services/backend.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-images',
@@ -8,9 +9,20 @@ import { BackendService } from '../services/backend.service';
 })
 export class ImagesComponent implements OnInit {
 
-  cadranList: any[] = [];
+  admin!: boolean;
 
-  constructor(private backend: BackendService) { }
+  cadranList: any[] = [];
+  urlImage!: string;
+
+  @ViewChild('image') imageView: ElementRef;
+
+  constructor(private cd: ChangeDetectorRef,
+              private auth: AuthService,
+              private backend: BackendService) {
+    this.auth.isLoggedIn(res => {
+      this.admin = res;
+    });
+  }
 
   ngOnInit(): void {
     this.backend.GET('/api/cadrans', e=>{
@@ -20,11 +32,20 @@ export class ImagesComponent implements OnInit {
           "id": e.data[i].id,
           "color": e.data[i].fields.color,
           "name": e.data[i].included["text"][0].name,
-          "url": "/cadran/"+e.data[i].id+"&"+name,
-          "problem": e.data[i].included["text"][0].problem
+          "url": "/cadran/"+e.data[i].id+"$"+name.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+          "overlay": e.data[i].included["text"][0].overlay
         };
         this.cadranList.push(data);
       }
+
+      // Image de fond
+      this.backend.GET('/api/texts/2', e=>{
+        this.urlImage = "url("+e.data[0].fields.text+")";
+      });
     });
+  }
+
+  ngAfterViewInit() {
+      this.cd.detectChanges();
   }
 }

@@ -24,7 +24,7 @@ export class SidenavMenuComponent implements OnInit {
         var datacadran = {
           "id": id,
           "name": e.data[i].included["text"][0].name,
-          "url": "/cadran/"+id+"&"+name,
+          "url": "/cadran/"+id+"$"+name,
           "color": e.data[i].fields.color,
           "offres": []
         };
@@ -51,7 +51,7 @@ export class SidenavMenuComponent implements OnInit {
               var datasol = {
                 "id": idsol,
                 "name": name,
-                "url": "/"+idsol+"&"+name.replace(/ /gi, "-").toLowerCase()
+                "url": "/"+idsol+"$"+name.replace(/ /gi, "-").toLowerCase()
               };
               dataoffre.solutions.push(datasol);
             }

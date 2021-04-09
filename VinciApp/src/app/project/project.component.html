@@ -4,9 +4,6 @@
     <mat-card-header>
         <mat-card-title id="outil_title">
             Dimensionnement de votre projet : {{nomsolution}}
-            <!--
-            <button mat-raised-button *ngIf="isAuth" (click)="onModifProjet()">Admin : modifier ce projet</button>                
-            -->
 
         </mat-card-title>
     </mat-card-header>
@@ -15,83 +12,90 @@
         <mat-horizontal-stepper linear="true" selectedIndex = 0 labelPosition="bottom" (selectionChange)="changeHandler($event)">
             <mat-step completed= {{complete}}>
                 <mat-grid-list cols="2">
-                    <div style="text-align: center;">
-                        <font size="+2.5">Capteurs et connectivité</font><br>
-                        <button *ngIf="!modif && admin" (click)=onModifier()>Modifier</button>
-                        <button *ngIf="modif && admin" (click)=onValiderModif()>Valider les modifications</button>
+                    <div class="intitule-qt">
+                        <span class="qt-title">{{nom_sec1}}</span><br>
+                        <button class="btnadmin" *ngIf="!modif && admin" (click)=onModifier()>Modifier les questions</button>
+                        <button class="btnadmin" *ngIf="modif && admin" (click)=onQuit()>Quitter l'outil de modification</button>
                     </div>
-                    <br><app-question *ngIf="id_question_0"
-                        [tab]="selectedTab" 
+                    <br>
+                    <app-question *ngIf="id_question_0 && !modif"
+                        [tab]=selectedTab
                         [id_question]=id_question_0
                         [modif]=modif>
                     </app-question>
-                    <div style="text-align: center;" *ngIf="modif && admin">
-                        <button>Ajouter une question</button>
-                    </div>
+                    <app-modif-project *ngIf="id_question_0 && modif && selectedTab==0"
+                        [tab]=selectedTab
+                        [id_question]=id_question_0
+                        [id_solution]=id_solution>
+                    </app-modif-project>
                 </mat-grid-list>
                 <button mat-raised-button style="float:right;" matStepperNext>Page suivante</button>
             </mat-step>
             <mat-step>
                 <mat-grid-list cols="2">
-                    <div style="text-align: center;">
-                        <font size="+2.5">Application et fonctionnalités</font><br>
-                        <button *ngIf="!modif && admin" (click)=onModifier()>Modifier</button>
-                        <button *ngIf="modif && admin" (click)=onValiderModif()>Valider les modifications</button>
+                    <div class="intitule-qt">
+                        <span class="qt-title">{{nom_sec2}}</span><br>
+                        <button class="btnadmin" *ngIf="!modif && admin" (click)=onModifier()>Modifier les questions</button>
+                        <button class="btnadmin" *ngIf="modif && admin" (click)=onQuit()>Quitter l'outil de modification</button>
                     </div>
-                    <br><app-question *ngIf="id_question_1"
+                    <br><app-question *ngIf="id_question_1 && !modif"
                         [tab]="selectedTab" 
                         [id_question]=id_question_1
                         [modif]=modif>
                     </app-question>
-                    <div style="text-align: center;" *ngIf="modif && admin">
-                        <button>Ajouter une question</button>
-                    </div>
+                    <app-modif-project *ngIf="id_question_1 && modif  && selectedTab==1" 
+                        [tab]=selectedTab
+                        [id_question]=id_question_1
+                        [id_solution]=id_solution>
+                    </app-modif-project>
                 </mat-grid-list>
                 <button mat-raised-button matStepperPrevious>Page précédente</button>
                 <button mat-raised-button style="float:right;" matStepperNext>Page suivante</button>
             </mat-step>
             <mat-step>
                 <mat-grid-list cols="2">
-                    <div style="text-align: center;">
-                        <font size="+2.5">Installation physique des IoT et création du dashbord</font><br>
-                        <button *ngIf="!modif && admin" (click)=onModifier()>Modifier</button>
-                        <button *ngIf="modif && admin" (click)=onValiderModif()>Valider les modifications</button>
+                    <div class="intitule-qt">
+                        <span class="qt-title">{{nom_sec3}}</span><br>
+                        <button class="btnadmin" *ngIf="!modif && admin" (click)=onModifier()>Modifier les questions</button>
+                        <button class="btnadmin" *ngIf="modif && admin" (click)=onQuit()>Quitter l'outil de modification</button>
                     </div>
-                    <br><app-question *ngIf="id_question_2"
+                    <br><app-question *ngIf="id_question_2 && !modif"
                         [tab]="selectedTab" 
                         [id_question]=id_question_2
                         [modif]=modif>
                     </app-question>
-                    <div style="text-align: center;" *ngIf="modif && admin">
-                        <button>Ajouter une question</button>
-                    </div>
+                    <app-modif-project *ngIf="id_question_2 && modif  && selectedTab==2" 
+                        [tab]=selectedTab
+                        [id_question]=id_question_2
+                        [id_solution]=id_solution>
+                    </app-modif-project>
                 </mat-grid-list>
                 <button mat-raised-button matStepperPrevious>Page précédente</button>
                 <button mat-raised-button style="float:right;" matStepperNext>Page suivante</button>
             </mat-step>
             <mat-step>
                 <mat-grid-list cols="2">
-                    <div style="text-align: center;">
-                        <font size="+2.5">Récapitulatif et validation</font><br>
-                        <button *ngIf="!modif && admin" (click)=onModifier()>Modifier</button>
-                        <button *ngIf="modif && admin" (click)=onValiderModif()>Valider les modifications</button>
+                    <div class="intitule-qt">
+                        <div class="qt-title">{{nom_sec4}}</div><br>
+                        <button class="btnadmin" *ngIf="!modif && admin" (click)=onModifier()>Modifier les questions</button>
+                        <button class="btnadmin" *ngIf="modif && admin" (click)=onQuit()>Quitter l'outil de modification</button>
                         <br>
-                        <div [contentEditable]="modif && modif">
-                            <font size="+1.5">Capteurs et connectivité</font><br>
+                        <div>
+                            <span class="ss-titre-recap">{{nom_sec1}}</span><br>
                             <div *ngFor="let q of questions">
                                <div *ngIf="q.partie==0">
                                     {{q.question}} {{q.reponse}}
                                 </div>
                             </div>
                             <br>
-                            <font size="+1.5">Application et fonctionnalités</font><br>
+                            <span class="ss-titre-recap">{{nom_sec2}}</span><br>
                             <div *ngFor="let q of questions">
                                 <div *ngIf="q.partie==1">
                                     {{q.question}} {{q.reponse}}
                                 </div>
                             </div>
                             <br>
-                            <font size="+1.5">Installation physique des IoT et création du dashbord</font><br>
+                            <span class="ss-titre-recap">{{nom_sec3}}</span><br>
                           <div *ngFor="let q of questions">
                                 <div *ngIf="q.partie==2">
                                     {{q.question}} {{q.reponse}}
@@ -101,11 +105,16 @@
                     </div>
                     <br>
                     <div style="text-align: center;">
-                    <app-question *ngIf="id_question_3"
+                    <app-question *ngIf="id_question_3 && !modif"
                         [tab]="selectedTab" 
                         [id_question]=id_question_3
                         [modif]=modif>
                     </app-question>
+                    <app-modif-project *ngIf="id_question_3 && modif && selectedTab==3" 
+                        [tab]=selectedTab
+                        [id_question]=id_question_3
+                        [id_solution]=id_solution>
+                    </app-modif-project>
                         <button mat-raised-button>Valider</button>
                     </div>
                 </mat-grid-list>
@@ -114,4 +123,8 @@
         </mat-horizontal-stepper>
 
     </mat-card-content>
+
+    <button class="btnadmin" type="button" *ngIf="admin" (click)="onCreerQuestion()">Créer une nouvelle question</button>
+    <button class="btnadmin" type="button" *ngIf="admin" (click)="onCreerProjet()">Créer un nouveau questionnaire</button>
 </mat-card>
+

@@ -1,69 +1,60 @@
-<div style="text-align: center;">
+<div id="question">
 
   <!-- Affichage de la question -->
 
-  <div *ngIf="type=='radio'" [contentEditable]="modif && admin">
+  <div class="qt" *ngIf="type=='radio'"> <!--QM avec une seule réponse possible-->
     {{question}}
-    <ngcontainer *ngFor="let r of reponses">
-      <br><input type="radio" name="{{id_question}}" value="{{r.id}}" [(ngModel)]="id_answer" (change)="onAnswer()"> {{r.reponse}}
-    </ngcontainer>
+    <div class="reponse">
+    <ng-container *ngFor="let r of reponses">
+      <input type="radio" name="{{id_question}}" value="{{r.id}}" [(ngModel)]="id_answer" (change)="onAnswer()"> {{r.reponse}} <br>
+    </ng-container>
+    </div>
   </div>
 
-  <div *ngIf="type=='text'" [contentEditable]="modif && admin">
+  <div class="qt" *ngIf="type=='text'">
     {{question}}
-    <br><textarea [(ngModel)]="answer" (change)="onAnswer()"></textarea>
+    <br>
+    <textarea [(ngModel)]="answer" (change)="onAnswer()"></textarea>
   </div>
 
-  <div *ngIf="type=='number'" [contentEditable]="modif && admin">
-    {{question}}    
-    <br><input type="number" [(ngModel)]="answer" (change)="onAnswer()">
+  <div class="qt" *ngIf="type=='number'">
+    {{question}} <br>   
+    <div class="reponse">
+      <input type="number" [(ngModel)]="answer" (change)="onAnswer()">
+    </div>
   </div>
   
-  <!-- <div *ngIf="type=='checkbox'">
+  <!-- <div class="qt" *ngIf="type=='checkbox'">
     {{question}}
-    <ngcontainer *ngFor = "let r of reponses">
+    <ng-container *ngFor = "let r of reponses">
       <br><input type="checkbox" (change)="onAnswer2(r[0])"> {{r[1]}}
-    </ngcontainer>
+    </ng-container>
   </div> -->
 
-  <div *ngIf="type=='select'">
+  <div class="qt" *ngIf="type=='select'">
     {{question}}
     <br>
     <select multiple [(ngModel)]="answer" (change)="onAnswer()">
       <option *ngFor = "let r of reponses"> {{r.reponse}} </option>
     </select>
+    <br><small>(Utilisez CTRL pour sélectionner plusieurs)</small> <!--Mettre ça dans "info" plutôt (pour la langue)-->
   </div>
 
-  <div *ngIf="type=='select_all_iot'">
+  <div class="qt" *ngIf="type=='select_all_iot'">
     {{question}}
-    <select [(ngModel)]="answer" (change)="onAnswer()">
-      <ngcontainer *ngFor = "let iot of all_iot">
-        <option> {{iot.name}} </option>
-      </ngcontainer>
+    <br>
+    <select multiple [(ngModel)]="answer" (change)="onAnswer()">
+      <option *ngFor = "let iot of all_iot"> {{iot.name}} - {{iot.brand}}</option>
     </select>
-  </div>
-
-  <!-- Modification de la question en mode admin -->
-  <div *ngIf="modif && admin">
-    <button>Supprimer cette question</button>
-    <div *ngIf="type=='number' || type=='text'">
-      <br> Question suivante : <!-- faire une requete au serveur dans le .ts-->
-      <select>
-        <option selected> Question a </option> 
-        <option> Question b </option>
-      </select>
-    </div>
-    <div *ngIf="type=='QCM'">
-      <ngcontainer *ngFor="let r of reponses">
-        <br> Question suivante si la réponse est {{r.reponse}} :
-        <select>
-          <option selected> Question a </option>
-          <option> Question b </option>
-        </select>
-      </ngcontainer>
-    </div>
+    <br><small>(Utilisez CTRL pour sélectionner plusieurs)</small> <!--Mettre ça dans "info" plutôt (pour la langue)-->
   </div>
   <br>
+
+  <!-- <ng-container class="qt" *ngIf="info">
+    <small>{{info}}</small> <br>
+  </ng-container> -->
+
+  <!-- "Info" laissé de côté pour le moment car contraignant et apporte pas grand chose finalement -->
 
   <!-- Affichage de la question suivante -->
   <div *ngIf="(answer || id_answer) && !modif">
@@ -74,9 +65,3 @@
     </app-question>
   </div>
 
-  <!-- Affichage de toutes les questions suivantes possibles en mode modif -->
-  <div *ngIf="modif && admin">
-    
-  </div>
-
-</div>

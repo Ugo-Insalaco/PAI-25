@@ -8,11 +8,19 @@ export class AuthService {
     constructor(private backend: BackendService, private globalStorage: GlobalStorageService){
         
     }
-    public isLoggedIn(){
-        return this.logged
+    public isLoggedIn(callback: Function){
+        this.backend.GET(
+        '/auth/isConnected', 
+        function(res){
+            callback(res.reponse)
+        },
+        function(err){
+            console.log(err)
+            callback(false)
+        })
     }
 
-    public login(username: string, password: string, success: Function, error: Function=null){     
+    public login(username: string, password: string, success: Function, error: Function=null){
         this.backend.POST(
             '/auth/login',
             {username: username, password:password},

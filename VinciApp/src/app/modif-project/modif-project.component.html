@@ -1,64 +1,43 @@
-<div style="text-align: center;"> 
+<div style="text-align: center;">
 
-    <font size="+2.5">Modification du questionnaire de dimensionnement du projet {{nomsolution}} </font><br>
+  <div>
+    Première question de la section :
+    <br>
+    <select *ngIf="tab == 0" [(ngModel)]="id_question_0">
+      <option *ngFor="let question of questions_existantes"
+          [value]="question.id">
+          id {{question.id}}: "{{question.included.text[0].content}}"
+      </option>
+    </select>
 
-    <br> Cadran : {{cadran}}
-    <br> Offre : {{offre}}
-    <br> Liste des questions :
-    <br> Partie Capteurs et connectivité :
-    <div *ngFor= "let q of questions">
-        <div *ngIf="q.partie==0">
-        {{q.question}} <button mat-raised-button (click)="onModif(q)"> Modifier cette question </button>
-            <div *ngIf="q.modif">
-                Enoncé de la question : <br><textarea [(ngModel)]="q.question"></textarea>
-                <div *ngIf="q.type=='QCM'">
-                    Réponses possibles :
-                    <div *ngFor="let r of q.reponses">
-                        <br><textarea [(ngModel)]="r.text">{{r.text}}</textarea> => question suivante :
-                    </div>
-                </div>
-                <br><button mat-raised-button (click)="onValide(q)"> Valider la modification </button>
-            </div>
-        </div>
-    </div>
+    <select *ngIf="tab == 1" [(ngModel)]="id_question_1">
+      <option *ngFor="let question of questions_existantes"
+          [value]="question.id">
+          id {{question.id}}: "{{question.included.text[0].content}}"
+      </option>
+    </select>
 
-    <br> Partie Application et fonctionnalités :
-    <div *ngFor= "let q of questions">
-        <div *ngIf="q.partie==1">
-        {{q.question}} <button mat-raised-button (click)="onModif(q)"> Modifier cette question </button>
-            <div *ngIf="q.modif">
-                Enoncé de la question : <br><textarea [(ngModel)]="q.question"></textarea>
-                <div *ngIf="q.type=='QCM'">
-                    Réponses possibles :
-                    <div *ngFor="let r of q.reponses">
-                        <br><textarea [(ngModel)]="r.text">{{r.text}}</textarea> => question suivante :
-                    </div>
-                </div>
-                <br><button mat-raised-button (click)="onValide(q)"> Valider la modification </button>
-            </div>
-        </div>
-    </div>
+    <select *ngIf="tab == 2" [(ngModel)]="id_question_2">
+      <option *ngFor="let question of questions_existantes"
+          [value]="question.id">
+          id {{question.id}}: "{{question.included.text[0].content}}"
+      </option>
+    </select>
 
-    <br> Partie Installation physique des IoT et création du dashboard :
-    <div *ngFor= "let q of questions">
-        <div *ngIf="q.partie==2">
-        {{q.question}} <button mat-raised-button (click)="onModif(q)"> Modifier cette question </button>
-            <div *ngIf="q.modif">
-                Enoncé de la question : <br><textarea [(ngModel)]="q.question"></textarea>
-                <div *ngIf="q.type=='QCM'">
-                    Réponses possibles :
-                    <div *ngFor="let r of q.reponses">
-                        <br><textarea [(ngModel)]="r.text">{{r.text}}</textarea> => question suivante :
-                    </div>
-                </div>
-                <div *ngIf="q.type=='text' || q.type=='number'">
-                    Question suivante :
-                </div>
-                <br><button mat-raised-button (click)="onValide(q)"> Valider la modification </button>
-            </div>
-        </div>
-    </div>
+    <select *ngIf="tab == 3" [(ngModel)]="id_question_3">
+      <option *ngFor="let question of questions_existantes"
+          [value]="question.id">
+          id {{question.id}}: "{{question.included.text[0].content}}"
+      </option>
+    </select>
 
-    <button mat-raised-button (click)="onTermine()"> Terminé </button>
+    <button (click)="onModifProject()">Valider le changement de la première question</button>
+    <br>----------------
+    <br>
+  </div>
+
+  <app-modif-question *ngFor="let question of all_questions"
+      [id_question]=question>
+  </app-modif-question>
 
 </div>

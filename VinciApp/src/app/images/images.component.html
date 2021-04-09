@@ -1,4 +1,4 @@
-<ul>
+<ul #image [style.background-image]="urlImage">
   <li *ngFor="let cadran of cadranList;">
     <div class="container">
       <div class="title" [style.border-color]="cadran.color">
@@ -6,9 +6,12 @@
       </div>
       <a class="overlay" [href]="cadran.url" [style.border-color]="cadran.color">
         <div>
-          {{cadran.problem}}
+          {{cadran.overlay}}
         </div>
       </a>
     </div>
   </li>
+  <div id="btnmodifimage" *ngIf="admin===true">
+    <app-modif-image [admin]="admin" buttonName="Image de fond" containerId="2" containerType="texts" imageType="text" [imageView]="imageView"></app-modif-image>
+  </div>
 </ul>

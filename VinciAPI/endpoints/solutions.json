@@ -61,11 +61,11 @@
                     "position_section":"{{11::section::position}}",
                     "subIncluded":{
                         "text_question":{
-                            "content":"{{4::text::text}}"
+                            "content":"{{11:4::text::text}}"
                         },
                         "text_section":{
-                            "name": "{{12::text::text}}",
-                            "sous_texte": "{{13::text::text}}"
+                            "name": "{{11:12::text::text}}",
+                            "sous_texte": "{{11:13::text::text}}"
                         }
                     }
                 }

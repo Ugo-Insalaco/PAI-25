@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken')
 const uuid = require('uuid')
 const cookieParser = require('cookie-parser')
 const bcrypt = require('bcrypt')
+const token = require('./token')
 
 const auth = function(app){
     app.post('/auth/login', parsers.jsonBody_parser({username:"mandatory",password:"mandatory"}), function(req,res){
@@ -93,6 +94,20 @@ const auth = function(app){
 
     app.get('/auth/logout', function(req, res){
         res.clearCookie('vinci_auth_token')
+    })
+
+    app.get('/auth/isConnected',cookieParser(), token, function(req, res){
+        if(req.privileges==="admin")
+        {
+            res.status(200).send({
+                reponse: true
+            })
+        }
+        else{
+            res.status(200).send({
+                reponse: false
+            })
+        }
     })
 }
 

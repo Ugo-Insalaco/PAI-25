@@ -59,7 +59,8 @@
             "id":"{{0::question::id}}",
             "fields":{
                 "content": "{{0::question::content}}",
-                "type": "{{0::question::type}}"
+                "type": "{{0::question::type}}",
+                "info": "{{0::question::info}}"
             },
             "included":{
                 "text":{
@@ -74,7 +75,14 @@
                     "data":"{{6::reponse::data}}",
                     "subIncluded":{
                         "text":{
-                            "content":"{{7::text::text}}"
+                            "content":"{{6:7::text::text}}"
+                        },
+                        "question_suivante":{
+                            "id_question": "{{6:8::question::id}}",
+                            "content_question": "{{6:8::question::content}}",
+                            "type_question": "{{6:8::question::type}}",
+                            "info_question": "{{6:8::question::info}}",
+                            "content_question_text": "{{6:8:4::text::text}}"
                         }
                     }
                 }

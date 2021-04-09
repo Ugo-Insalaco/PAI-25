@@ -72,7 +72,7 @@ export class OfferComponent implements OnInit, AfterViewInit{
       if(textsolution!=""){
         textsolution = textsolution.replace(/ /gi, "-");
         textsolution = textsolution.replace(/'/gi, "_").toLowerCase();
-        this.router.navigate([this.router.url,idsolution+"&"+textsolution]);
+        this.router.navigate([this.router.url,idsolution+"$"+textsolution.normalize("NFD").replace(/[\u0300-\u036f]/g, "")]);
       }
     }
 
@@ -99,7 +99,7 @@ export class OfferComponent implements OnInit, AfterViewInit{
     onDeleteSolution(){
       var idsolution = this.selectedOption;
       var textsolution = this.selectedText;
-      if(textsolution!=undefined){
+      if(textsolution!=undefined && textsolution!=""){
         var input = confirm('Voulez-vous vraiment supprimer la solution : "'+textsolution+'" ? \n\nATTENTION : Opération irréversible');
         if(input){
           this.backend.DELETE('/api/solutionContents/'+idsolution, e=>{

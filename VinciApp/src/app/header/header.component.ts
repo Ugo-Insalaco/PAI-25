@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -7,10 +8,16 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
+  selected = 'FR';
+  isConnected!: boolean;
+
   @Output() public sidenavToggle = new EventEmitter();
 
-  constructor() { }
-  selected = 'FR';
+  constructor(private auth: AuthService){
+    this.auth.isLoggedIn(res => {
+      this.isConnected = res;
+    });
+  }
 
   ngOnInit(): void {
   }
@@ -19,4 +26,8 @@ export class HeaderComponent implements OnInit {
     this.sidenavToggle.emit();
   }
 
+  OnDisconnect(){
+    this.auth.logout();
+    window.location.reload();
+  }
 }

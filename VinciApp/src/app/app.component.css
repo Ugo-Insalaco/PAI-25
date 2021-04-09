@@ -1,10 +1,12 @@
 mat-sidenav{
+  background-color: #00438a;
   width: 550px;
 }
 
 mat-sidenav-content{
   height: 100%;
   overflow-x: hidden;
+  font-family: "Roboto", Arial, sans-serif;
 }
 
 mat-sidenav-container{

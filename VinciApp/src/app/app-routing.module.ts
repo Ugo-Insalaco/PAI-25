@@ -7,18 +7,19 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
 import { CadranComponent} from './cadran/cadran.component';
 import { SolutionComponent} from './solution/solution.component';
 import { ProjectComponent} from './project/project.component';
-import { ModifProjectComponent} from './modif-project/modif-project.component';
 import { NewProjectComponent } from './new-project/new-project.component';
+import { NewQuestionComponent } from './new-question/new-question.component'
 
 const routes: Routes = [
   {path: '', redirectTo: '', pathMatch: 'full'},
   {path: 'login', component: LoginComponent },
   {path: 'contact', component: ContactFormComponent},
   {path: 'project/:solution', component: ProjectComponent},
-  {path: 'modif-project/:project', component: ModifProjectComponent},
   {path: 'new-project', component: NewProjectComponent},
   {path: 'cadran/:cadran', component: CadranComponent},
-  {path: 'cadran/:cadran/:solution', component: SolutionComponent}
+  {path: 'cadran/:cadran/:solution', component: SolutionComponent},
+  {path: 'new-question', component: NewQuestionComponent},
+  {path: 'new-project', component: NewProjectComponent}
 ];
 
 @NgModule({

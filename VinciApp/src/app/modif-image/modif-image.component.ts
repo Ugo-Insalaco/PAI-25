@@ -10,6 +10,7 @@ import { BackendService } from '../services/backend.service';
 export class ModifImageComponent implements OnInit {
 
   @Input() admin!: boolean;
+  @Input() buttonName!: string;
   @Input() numoffer: number = 0;
   @Input() nomSolution!: string;
   @Input() imageView!: ElementRef;
@@ -63,36 +64,44 @@ export class ModifImageComponent implements OnInit {
     var complementnomimage = "";
     if(this.containerType == "offres"){
       complementnomimage = "offre";
-      nomcadran = this.router.url.split('/').pop().split("&").pop().replace(/-/gi, "");
+      nomcadran = this.router.url.split('/').pop().split("$").pop().replace(/-/gi, "");
     }
     else if(this.containerType == "solutionContents"){
-      complementnomimage = this.nomSolution.replace(/ /gi, "").toLowerCase();
-      nomcadran = this.router.url.split('/')[2].split("&").pop().replace(/-/gi, "");
+      complementnomimage = this.nomSolution.replace(/[ -'(),]/gi, "").toLowerCase();
+      complementnomimage = complementnomimage.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      nomcadran = this.router.url.split('/')[2].split("$").pop().replace(/-/gi, "");
     }
     else if(this.containerType == "cadrans"){
       complementnomimage = this.imageType;
       if(this.nomSolution!=""){
         // Page solution
-        nomcadran = this.router.url.split('/')[2].split("&").pop().replace(/-/gi, "");
+        nomcadran = this.router.url.split('/')[2].split("$").pop().replace(/-/gi, "");
       }
       else{
         // Page cadran
-        nomcadran = this.router.url.split('/').pop().split("&").pop().replace(/-/gi, "");
+        nomcadran = this.router.url.split('/').pop().split("$").pop().replace(/-/gi, "");
       }
     }
     else if(this.containerType == "texts"){
       complementnomimage = this.imageType;
-      if(this.nomSolution!=""){
+      if(this.nomSolution!=undefined){
         // Page solution
-        nomcadran = this.router.url.split('/')[2].split("&").pop().replace(/-/gi, "");
+        nomcadran = this.router.url.split('/')[1].split("$").pop().replace(/-/gi, "");
+        complementnomimage = this.nomSolution.replace(/[ -'(),]/gi, "").toLowerCase();
+        complementnomimage = complementnomimage.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      }
+      else if(this.router.url=="/"){
+        // Page d'accueil
+        nomcadran = "accueil";
+        complementnomimage = "image";
       }
       else{
         // Page cadran
-        nomcadran = this.router.url.split('/').pop().split("&").pop().replace(/-/gi, "");
+        nomcadran = this.router.url.split('/').pop().split("$").pop().replace(/-/gi, "");
       }
     }
 
-    var fileName = nomcadran+"_"+complementnomimage+(this.numoffer!=0? this.numoffer : "")+(file.type=="image/jpeg"? ".jpg":".png");
+    var fileName = nomcadran+"_"+complementnomimage+(this.numoffer!=0? this.numoffer : "")+"."+file.name.split(".")[1];
     var renamedFile = new File([file],fileName,{type:file.type});
 
     let formData = new FormData();

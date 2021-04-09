@@ -7,9 +7,6 @@
     font-size: 0.6em;
     float: left;
 }
-.at-icon{
-    width : 20px;
-}
 .header-align-right{
     display: flex;
     padding: 21px ;
@@ -38,7 +35,7 @@ mat-form-field{
 button{
     color: #00438a;
 }
-#connectbtn{
+#connectbtn,#disconnectbtn{
   background-color: #00438a;
 }
 .mat-icon{

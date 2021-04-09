@@ -1,29 +1,34 @@
-<div id="container"> <!--#134384-->
+<div id="container">
   <div #fond id="fond" [style.background-image]="databanner.picture_back"></div>
   <div id="filter" [style.background-color]="couleur"></div>
   <div id="left">
-    <div #nom class="h4"><p [contentEditable]="contentEditableNom"> {{databanner.name}} </p></div>
-    <div #problem class="h2"><p [contentEditable]="contentEditableProblem"> {{databanner.problem}}</p></div>
-    <div #sol class="h2" id="solution"><p *ngIf="nomsolution!==''" [contentEditable]="contentEditableSolution"> {{nomsolution}} </p></div>
-    <div id="btnmodiftexte">
-      <app-modif-texte [admin]="admin" [idtext]="databanner.idname" [textView]="nomView" [(editAllowed)]="contentEditableNom"></app-modif-texte>
-      <app-modif-texte [admin]="admin" [idtext]="databanner.idproblem" [textView]="problemView" [(editAllowed)]="contentEditableProblem"></app-modif-texte>
-      <app-modif-texte [admin]="admin" [idtext]="idnamesolution" [textView]="solutionView" [(editAllowed)]="contentEditableSolution" *ngIf="nomsolution!==''"></app-modif-texte>
+    <div #sol class="h2" id="solution" *ngIf="nomsolution!==''">
+      <p [contentEditable]="contentEditableSolution"> {{nomsolution}} </p>
+    </div>
+    <div #problem class="h2" [contentEditable]="contentEditableProblem">
+      <p id="problem1"> {{databanner.problem1}}</p>
+      <p id="problem2"> {{databanner.problem2}}</p>
+    </div>
+    <div #overlay id="overlay">
+      <span *ngIf="contentEditableOverlay===true">Overlay :&nbsp;</span><p *ngIf="contentEditableOverlay===true" [contentEditable]="contentEditableOverlay"> {{databanner.overlay}} </p>
     </div>
   </div>
   <div id="right">
     <div id="topright">
-      <img #logo id="logoCadran" [src]="databanner.logo">
-      <app-modif-image [admin]="admin"
-                       [containerId]="databanner.idcadran"
-                       containerType="cadrans"
-                       imageType="logo"
-                       [imageView]="logoView"></app-modif-image>
+      <div #logo id="logoCadran" [style.background-image]="databanner.logo"></div>
+      <div #nom class="h4"><p [contentEditable]="contentEditableNom"> {{databanner.name}} </p></div>
     </div>
-    <img #cercles id="cercles" [src]="databanner.circles">
-    <div id="btnmodifimage">
-      <app-modif-image [admin]="admin" [containerId]="databanner.idcircles" containerType="texts" imageType="text" [imageView]="cerclesView"></app-modif-image>
-      <app-modif-image [admin]="admin" [containerId]="databanner.idcadran" containerType="cadrans" imageType="picture_back" [imageView]="fondView"></app-modif-image>
+
+    <div #cercles id="cercles" [style.background-image]="databanner.circles"></div>
+    <div id="btnmodif" *ngIf="admin===true">
+      <app-modif-texte [admin]="admin" buttonName="NOM" [allowNewParagraph]="false" [idtext]="databanner.idname" [textView]="nomView" [(editAllowed)]="contentEditableNom"></app-modif-texte>
+      <app-modif-texte [admin]="admin" buttonName="Problématique" [allowNewParagraph]="false" [idtext]="databanner.idproblem" [textView]="problemView" [(editAllowed)]="contentEditableProblem"></app-modif-texte>
+      <app-modif-texte [admin]="admin" buttonName="Overlay accueil" [allowNewParagraph]="false" [idtext]="databanner.idoverlay" [textView]="overlayView" [(editAllowed)]="contentEditableOverlay"></app-modif-texte>
+      <app-modif-texte [admin]="admin" buttonName="Solution" [allowNewParagraph]="false" [idtext]="idnamesolution" [textView]="solutionView" [(editAllowed)]="contentEditableSolution" *ngIf="nomsolution!==''"></app-modif-texte>
+      <input type="color" [value]="couleur" id="colorSelector" (input)="colorPreview($event)" (change)="colorChange($event)">
+      <app-modif-image [admin]="admin" [containerId]="databanner.idcadran" buttonName="Logo" containerType="cadrans" imageType="logo" [imageView]="logoView"></app-modif-image>
+      <app-modif-image [admin]="admin" buttonName="Image en bas à droite" [containerId]="databanner.idcircles" containerType="texts" imageType="text" [imageView]="cerclesView"></app-modif-image>
+      <app-modif-image [admin]="admin" buttonName="Image de fond" [containerId]="databanner.idcadran" containerType="cadrans" imageType="picture_back" [imageView]="fondView"></app-modif-image>
     </div>
   </div>
 </div>

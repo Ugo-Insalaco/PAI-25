@@ -3,7 +3,19 @@
   right: 0;
   bottom: 0;
   height: 60%;
+  width: 30%;
+  background-size: contain;
+  background-position: bottom right;
+  background-repeat: no-repeat;
   transition: transform 0.5s;
+}
+
+#logoCadran{
+  height: 6vh;
+  width: 6vw;
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
 #container:hover #cercles{
@@ -11,16 +23,18 @@
 }
 
 #topright{
+  display: flex;
+  flex-direction: row;
   position: absolute;
-  right: 30%;
+  left: 60%;
   top: 10%;
-  height: 11%;
 }
 
 #left{
   position: absolute;
-  left: 8%;
-  top: 40%;
+  left: 5%;
+  bottom: 25%;
+  width: 42%;
   color: white;
   display: flex;
   flex-direction: column;
@@ -50,12 +64,30 @@
 }
 
 .h4{
-  font-size: 25px;
+  font-size: 28px;
   text-transform:uppercase;
+  color: white;
+  margin: auto;
+}
+
+.h4 p{
+  padding: 0;
+  margin: 0;
 }
 
 .h2{
-  font-size: 30px;
+  text-align: justify;
+}
+
+#problem1{
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 3vh;
+}
+
+#problem2{
+  font-size: 23px;
+  font-weight: lighter;
 }
 
 #filter{
@@ -67,23 +99,34 @@
   filter: opacity(0.8);
 }
 
-#btnmodifimage{
+#btnmodif{
   display: flex;
+  flex-direction: row;
   position: absolute;
   bottom: 1vh;
   right: 1vh;
-}
-
-#btnmodiftexte{
-  position: absolute;
-  bottom: -3vh;
-  right: -2vh;
-  display: flex;
-  flex-direction: row;
 }
 
 #btnvalid{
   position: absolute;
   bottom: 2vh;
   left: 2vh;
+}
+
+#colorSelector{
+  border: 0;
+  height: 30px;
+  margin-left: 1vh;
+  border-radius: 3px;
+  padding: 5px;
+}
+
+#overlay{
+  display: flex;
+  flex-direction: row;
+}
+
+#overlay p{
+  margin: 0;
+  padding: 0;
 }

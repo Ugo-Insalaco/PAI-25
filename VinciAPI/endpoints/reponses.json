@@ -4,7 +4,7 @@
     "fields": {
         "id": "",
         "content":"mandatory",
-        "question_suivante":"mandatory",
+        "question_suivante":"optionnal updatable",
         "data":"optionnal"
     },
     "primaryField": "id",
@@ -19,7 +19,7 @@
     [
         {
             "name": "question_suivante",
-            "default_inclusion": false,
+            "default_inclusion": true,
             "bind":[
                 {
                     "id": 8,
@@ -58,7 +58,7 @@
                     "content": "{{8::question::content}}",
                     "type":"{{8::question::type}}",
                     "subIncluded":{
-                        "content":"{{4::text::text}}"
+                        "content":"{{8:4::text::text}}"
                     }
                 },
                 "text":{

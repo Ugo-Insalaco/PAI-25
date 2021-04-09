@@ -1,6 +1,5 @@
 ul {
   list-style-type: none;
-  background-image: url(/assets/images/accueilcadrans.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -10,7 +9,7 @@ ul {
   flex-direction: row;
   position: relative;
   width: 100%;
-  height: 65vh;
+  height: 70vh;
   margin: 0;
   margin-bottom: 2vh;
   padding: 0;
@@ -68,4 +67,10 @@ li{
 .container:hover .title{
   height: 0%;
   border-bottom: none;
+}
+
+#btnmodifimage{
+  position: absolute;
+  bottom: 1vh;
+  right: 1vh;
 }

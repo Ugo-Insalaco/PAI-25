@@ -3,23 +3,21 @@
     <span class="nav-item">Accueil</span>
   </a>
 
-  <app-menu-list-item *ngFor="let cadran of cadranList;">
+  <div menu-list-item *ngFor="let cadran of cadranList;">
     <!-- Parcours de la liste des cadrans -->
     <a mat-list-item [routerLink]="cadran.url" class="cadran" [style.border-color]="cadran.color" (click)="onCloseSidenav()">
       <span class="nav-item nav-cadran">{{cadran.name}}</span>
     </a>
 
     <!-- Parcours de la liste des offres du cadran-->
-    <app-menu-list-item *ngFor="let offre of cadran.offres;">
-      <mat-list-item>
-        <span class="nav-item nav-offre">{{offre.name}}</span>
-        <!-- Parcours de la liste des solutions de l'offre-->
-        <div class="solutioncontainer">
-          <app-menu-list-item [routerLink]="cadran.url+solution.url" class="solution" *ngFor="let solution of offre.solutions;">
-            <span>{{solution.name}}</span>
-          </app-menu-list-item>
-        </div>
-      </mat-list-item>
-    </app-menu-list-item>
-  </app-menu-list-item>
+    <div *ngFor="let offre of cadran.offres;" class="offreContainer">
+      <div mat-list-item class="nav-item nav-offre"><span>{{offre.name}}</span><mat-icon>chevron_right</mat-icon></div>
+      <!-- Parcours de la liste des solutions de l'offre-->
+      <div class="solutioncontainer">
+        <a app-menu-list-item [routerLink]="cadran.url+solution.url" class="solution nav-item" *ngFor="let solution of offre.solutions;">
+          <span>{{solution.name}}</span>
+        </a>
+      </div>
+    </div>
+  </div>
 </mat-nav-list>
