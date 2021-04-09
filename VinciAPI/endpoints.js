@@ -661,8 +661,8 @@ const init = function(app){
                     relationDelete[key]= "mandatory"
                 }
             })
-
-            app.delete(`/api/${conf.name}s/:id/relationships/${relation.name}`,
+            // Vraie requête DELETE
+            app.post(`/api/${conf.name}s/:id/relationships/${relation.name}/delete`,
             parsers.jsonBody_parser(relationDelete),
             privileges(relation.policies.DELETE),
             function(req, res){

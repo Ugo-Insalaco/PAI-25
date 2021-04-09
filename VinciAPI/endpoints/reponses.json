@@ -12,7 +12,7 @@
         "GET": "US",
         "GET_ALL": "US",
         "POST": "AD",
-        "PATCH": "US",
+        "PATCH": "AD",
         "DELETE": "AD"
     },
     "include": 
