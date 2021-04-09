@@ -144,11 +144,11 @@ export class ModifProjectComponent implements OnInit {
       })
 
       //création de la nouvelle relation
-      // let body_new = {
-      //   id_question: new_id_question,
-      //   id_section: this.tab+1
-      // }
-      // this.backend.POST(`/api/solutions/${this.id_solution}/relationships/section_question`, body_new, res=>{})
+      let body_new = {
+        id_question: new_id_question,
+        id_section: this.tab+1
+      }
+      this.backend.POST(`/api/solutions/${this.id_solution}/relationships/section_question`, body_new, res=>{})
 
     }
 
