@@ -4,7 +4,6 @@ import { ConfigService } from '../services/config.service';
 import { GlobalStorageService } from '../services/globalStorage.service';
 import { BackendService } from '../services/backend.service';
 import { ProjectComponent } from '../project/project.component';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 @Component({
   selector: 'app-modif-question',
@@ -14,11 +13,11 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 export class ModifQuestionComponent implements OnInit {
 
   @Input() id_question;
-  type: string;
+  type: string; //type dans la bdd (par exemple : 'radio')
+  type_explicite: string; //type pour l'utilisateur (par exemple : QCM)
   question: string; //contenu de la question
   id_text_info: any //id du contenu de l'info dans la table cont_fra
   info: string //contenu du commentaire (attribut info)
-  //reponses = [] //id, contenu et question suivante des réponses à afficher
   id_reponses =[];
   reponses = [];
   next = [];
@@ -27,11 +26,12 @@ export class ModifQuestionComponent implements OnInit {
   constructor(private backend: BackendService, private config: ConfigService, private globalStorage: GlobalStorageService) { }
   
   ngOnInit(): void {
+    //Récupération de toutes les questions existantes
     this.backend.GET(`/api/questions`, e=>{
       this.questions_existantes=e.data
     })
 
-    //this.all_next = [];
+    //Récupération de toutes les données de la question
     this.backend.GET(`/api/questions/${this.id_question}?include=reponse`, e=>{
       this.question = e.data[0].included["text"][0].content;
       this.type = e.data[0].fields.type;
@@ -51,11 +51,28 @@ export class ModifQuestionComponent implements OnInit {
           this.info=e.data[0].fields.text
         })
       }
+      
+      //Définition du type explicite (à afficher pour l'utilisateur)
+      if (this.type=='radio') {
+        this.type_explicite = 'QCM avec une seule réponse possible'
+      }
+      if (this.type=='select'){
+        this.type_explicite = 'QCM avec plusieurs réponses possibles'
+      }
+      if (this.type=='text') {
+        this.type_explicite = 'Texte'        
+      }
+      if (this.type=='number') {
+        this.type_explicite = 'Nombre'
+      }
+      if (this.type=='select_all_iot') {
+        this.type_explicite = 'Sélection parmi tous les IoT disponibles'
+      }
     });
   }
 
-  onValiderModif(){
 
+  onValiderModif(){
     //Modification du contenu de la question
     this.backend.GET(`/api/questions/${this.id_question}`, e=>{
       var idtext = e.data[0].fields.content;
@@ -75,31 +92,40 @@ export class ModifQuestionComponent implements OnInit {
     //Modification de la question suivante
     for (let i = 0; i < this.id_reponses.length; i++) {
       var id_rep = this.id_reponses[i]
-      this.backend.GET(`/api/reponses/${id_rep}`, e=>{
-        id_rep = e.data[0].id;
-        var data = {
-          "question_suivante": this.next[i]
-        }
+      if (this.next[i]=="null") {
+        this.next[i]="NULL"        
+      }
+      //var data:any;
+      // if (this.next[i] != "null") {
+      //   console.log("question suivante != null")
+      //   data = {
+      //     "question_suivante": this.next[i]
+      //   }
+      // } else {
+      //   console.log("question suivante = null")
+      //   data = {
+      //     "question_suivante": "NULL"
+      //   }
+      // }
+      var data = {
+        "question_suivante": this.next[i]
+      }
+      //this.backend.GET(`/api/reponses/${id_rep}`, e=>{
+        //id_rep = e.data[0].id;
+        
         this.backend.PATCH(`/api/reponses/${id_rep}`, data, res=>{
           console.log(res)
         })
-      })
+      //})
     }
 
-    //Modification du commentaire
-    this.ModifTexte(this.id_text_info, this.info)
-    //si la question n'a pas d'info, il faut créer un texte dans la table des contenus ect, ce n'est pas si simple.
-    // => pour l'instant, juste modification d'infos déjà existantes
+    //Modification du commentaire -> laissé de côté pour le moment
 
-    // console.log(this.text)
-    // var data={
-    //   "text": this.text
-    // };
-    
-    // this.backend.PATCH(`/api/texts/${this.content}`, data, res=>{
-    //   console.log(res);
-    // });
-    
+    // this.ModifTexte(this.id_text_info, this.info)
+    // //si la question n'a pas d'info, il faut créer un texte dans la table des contenus ect, ce n'est pas si simple.
+    // // => pour l'instant, juste modification d'infos déjà existantes
+
+    alert(`Question d'id ${this.id_question} bien modifiée`)
   }
 
 
@@ -112,7 +138,7 @@ export class ModifQuestionComponent implements OnInit {
     })
   }
 
-  
+
   trackByIndex(index: number, obj: any): any {
     return index;
   }

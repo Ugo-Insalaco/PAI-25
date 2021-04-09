@@ -12,24 +12,26 @@
       {{datasolution.problem}}
     </p>
   </div>
-  <div id="description" #desc>
-    <p [contentEditable]="contentEditableDesc">
-      {{datasolution.desc}}
+  <div id="description" #desc [contentEditable]="contentEditableDesc">
+    <p *ngFor="let paragraph of datasolution.desc">
+      {{paragraph}}
     </p>
   </div>
   <div class="btnmodiftexte">
-    <app-modif-texte [admin]="admin" buttonName="Problématique" [idtext]="datasolution.idproblem" [textView]="problemView" [(editAllowed)]="contentEditableProblem"></app-modif-texte>
-    <app-modif-texte [admin]="admin" buttonName="Description" [idtext]="datasolution.iddesc" [textView]="descView" [(editAllowed)]="contentEditableDesc"></app-modif-texte>
+    <app-modif-texte [admin]="admin" buttonName="Problématique" [allowNewParagraph]="false" [idtext]="datasolution.idproblem" [textView]="problemView" [(editAllowed)]="contentEditableProblem"></app-modif-texte>
+    <app-modif-texte [admin]="admin" buttonName="Description" [allowNewParagraph]="true" [idtext]="datasolution.iddesc" [textView]="descView" [(editAllowed)]="contentEditableDesc"></app-modif-texte>
   </div>
 </div>
 
 <div id="dashboard" style="width: 99vw; height: 60vh;">
-  <div id="divtext" #text>
-    <p id="text" style="text-align: justify;" [contentEditable]="contentEditableText">
-      {{datasolution.text_db}}
-    </p>
+  <div id="divtext">
+    <div  #text id="text" [contentEditable]="contentEditableText">
+      <p *ngFor="let paragraph of datasolution.text_db">
+        {{paragraph}}
+      </p>
+    </div>
     <div class="btnmodiftexte">
-      <app-modif-texte [admin]="admin" buttonName="Texte" [idtext]="datasolution.idtext" [textView]="textView" [(editAllowed)]="contentEditableText"></app-modif-texte>
+      <app-modif-texte [admin]="admin" buttonName="Texte" [allowNewParagraph]="true" [idtext]="datasolution.idtext" [textView]="textView" [(editAllowed)]="contentEditableText"></app-modif-texte>
     </div>
   </div>
   <div id="divimage" #divimage [style.background-image]="datasolution.picture_db">

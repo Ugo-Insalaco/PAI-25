@@ -5,9 +5,9 @@
   <div class="qt" *ngIf="type=='radio'"> <!--QM avec une seule réponse possible-->
     {{question}}
     <div class="reponse">
-    <ngcontainer *ngFor="let r of reponses">
+    <ng-container *ngFor="let r of reponses">
       <input type="radio" name="{{id_question}}" value="{{r.id}}" [(ngModel)]="id_answer" (change)="onAnswer()"> {{r.reponse}} <br>
-    </ngcontainer>
+    </ng-container>
     </div>
   </div>
 
@@ -26,9 +26,9 @@
   
   <!-- <div class="qt" *ngIf="type=='checkbox'">
     {{question}}
-    <ngcontainer *ngFor = "let r of reponses">
+    <ng-container *ngFor = "let r of reponses">
       <br><input type="checkbox" (change)="onAnswer2(r[0])"> {{r[1]}}
-    </ngcontainer>
+    </ng-container>
   </div> -->
 
   <div class="qt" *ngIf="type=='select'">
@@ -48,10 +48,13 @@
     </select>
     <br><small>(Utilisez CTRL pour sélectionner plusieurs)</small> <!--Mettre ça dans "info" plutôt (pour la langue)-->
   </div>
+  <br>
 
-  <ngcontainer class="qt" *ngIf="info">
+  <!-- <ng-container class="qt" *ngIf="info">
     <small>{{info}}</small> <br>
-  </ngcontainer>
+  </ng-container> -->
+
+  <!-- "Info" laissé de côté pour le moment car contraignant et apporte pas grand chose finalement -->
 
   <!-- Affichage de la question suivante -->
   <div *ngIf="(answer || id_answer) && !modif">

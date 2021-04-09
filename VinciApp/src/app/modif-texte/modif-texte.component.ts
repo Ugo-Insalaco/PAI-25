@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ElementRef, Renderer2 } from '@angular/core';
 import { BackendService } from '../services/backend.service';
 
 @Component({
@@ -13,6 +13,7 @@ export class ModifTexteComponent implements OnInit {
   @Input() textView : ElementRef;
   @Input() idtext : number;
   @Input() buttonName !: string;
+  @Input() allowNewParagraph: boolean;
 
   @Input() editAllowed: boolean;
   @Output() editAllowedChange = new EventEmitter<boolean>();
@@ -20,7 +21,7 @@ export class ModifTexteComponent implements OnInit {
   initialText: string = "";
   modifAllowed: boolean = false;
 
-  constructor(private backend: BackendService) { }
+  constructor(private backend: BackendService, private renderer: Renderer2) { }
 
   ngOnInit(): void {
   }
@@ -55,6 +56,9 @@ export class ModifTexteComponent implements OnInit {
     }
 
     this.textView.nativeElement.style.border = 'none';
+    if(this.allowNewParagraph){
+      window.location.reload();
+    }
 
     this.editAllowed = false;
     this.modifAllowed = false;
@@ -71,4 +75,16 @@ export class ModifTexteComponent implements OnInit {
     return text;
   }
 
+  addParagraph(){
+    var newparagraph = document.createElement('p');
+    newparagraph.textContent = "Nouveau paragraphe";
+    this.renderer.appendChild(this.textView.nativeElement,newparagraph);
+    this.initialText = this.getTextContent();
+  }
+
+  deleteParagraph(){
+    var lastpar = this.textView.nativeElement.lastChild;
+    this.renderer.removeChild(this.textView.nativeElement,lastpar);
+    this.initialText = this.getTextContent();
+  }
 }

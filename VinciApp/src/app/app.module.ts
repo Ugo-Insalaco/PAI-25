@@ -110,6 +110,10 @@ import { NewQuestionComponent } from './new-question/new-question.component';
     BackendService,
     AuthService
   ],
+  entryComponents: [
+    NewSolutionFormComponent,
+    NewOfferFormComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

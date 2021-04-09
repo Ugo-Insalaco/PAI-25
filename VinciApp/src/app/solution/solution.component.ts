@@ -79,10 +79,10 @@ export class SolutionComponent implements OnInit, AfterViewInit {
         this.datasolution["problem"] = e.data[0].included["text"][0].problem;
         this.datasolution["idproblem"] = e.data[0].fields.problem;
 
-        this.datasolution["desc"] = e.data[0].included["text"][0].arg;
+        this.datasolution["desc"] = e.data[0].included["text"][0].arg.split('&/&');
         this.datasolution["iddesc"] = e.data[0].fields.arg;
 
-        this.datasolution["text_db"] = e.data[0].included["text"][0].text_db;
+        this.datasolution["text_db"] = e.data[0].included["text"][0].text_db.split('&/&');
         this.datasolution["idtext"] = e.data[0].fields.text_db;
         this.datasolution["picture_db"] = "url("+e.data[0].fields.picture_db+")";
       });

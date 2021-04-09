@@ -12,6 +12,18 @@
           title="Valider">
           Valider
   </button>
+  <button class="btnmodif"
+          (click)="addParagraph()"
+          title="Ajouter"
+          *ngIf="allowNewParagraph===true">
+          Ajouter paragraphe
+  </button>
+  <button class="btnmodif"
+          (click)="deleteParagraph()"
+          title="Supprimer"
+          *ngIf="allowNewParagraph===true">
+          Supprimer dernier paragraphe
+  </button>
   <button class="btnmodif" (click)="closeTextModifPanel()"
           title="Annuler">
           Annuler
