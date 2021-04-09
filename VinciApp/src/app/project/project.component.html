@@ -13,7 +13,7 @@
             <mat-step completed= {{complete}}>
                 <mat-grid-list cols="2">
                     <div class="intitule-qt">
-                        <span class="qt-title">Capteurs et connectivité</span><br>
+                        <span class="qt-title">{{nom_sec1}}</span><br>
                         <button class="btnadmin" *ngIf="!modif && admin" (click)=onModifier()>Modifier les questions</button>
                         <button class="btnadmin" *ngIf="modif && admin" (click)=onQuit()>Quitter l'outil de modification</button>
                     </div>
@@ -33,7 +33,7 @@
             <mat-step>
                 <mat-grid-list cols="2">
                     <div class="intitule-qt">
-                        <span class="qt-title">Application et fonctionnalités</span><br>
+                        <span class="qt-title">{{nom_sec2}}</span><br>
                         <button class="btnadmin" *ngIf="!modif && admin" (click)=onModifier()>Modifier les questions</button>
                         <button class="btnadmin" *ngIf="modif && admin" (click)=onQuit()>Quitter l'outil de modification</button>
                     </div>
@@ -53,7 +53,7 @@
             <mat-step>
                 <mat-grid-list cols="2">
                     <div class="intitule-qt">
-                        <span class="qt-title">Installation physique des IoT et création du dashbord</span><br>
+                        <span class="qt-title">{{nom_sec3}}</span><br>
                         <button class="btnadmin" *ngIf="!modif && admin" (click)=onModifier()>Modifier les questions</button>
                         <button class="btnadmin" *ngIf="modif && admin" (click)=onQuit()>Quitter l'outil de modification</button>
                     </div>
@@ -73,26 +73,26 @@
             <mat-step>
                 <mat-grid-list cols="2">
                     <div class="intitule-qt">
-                        <div class="qt-title">Récapitulatif et validation</div><br>
+                        <div class="qt-title">{{nom_sec4}}</div><br>
                         <button class="btnadmin" *ngIf="!modif && admin" (click)=onModifier()>Modifier les questions</button>
                         <button class="btnadmin" *ngIf="modif && admin" (click)=onQuit()>Quitter l'outil de modification</button>
                         <br>
                         <div>
-                            <span class="ss-titre-recap">Capteurs et connectivité</span><br>
+                            <span class="ss-titre-recap">{{nom_sec1}}</span><br>
                             <div *ngFor="let q of questions">
                                <div *ngIf="q.partie==0">
                                     {{q.question}} {{q.reponse}}
                                 </div>
                             </div>
                             <br>
-                            <font size="+1.5">Application et fonctionnalités</font><br>
+                            <span class="ss-titre-recap">{{nom_sec2}}</span><br>
                             <div *ngFor="let q of questions">
                                 <div *ngIf="q.partie==1">
                                     {{q.question}} {{q.reponse}}
                                 </div>
                             </div>
                             <br>
-                            <font size="+1.5">Installation physique des IoT et création du dashbord</font><br>
+                            <span class="ss-titre-recap">{{nom_sec3}}</span><br>
                           <div *ngFor="let q of questions">
                                 <div *ngIf="q.partie==2">
                                     {{q.question}} {{q.reponse}}

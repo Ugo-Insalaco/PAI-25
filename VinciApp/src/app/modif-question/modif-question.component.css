@@ -6,3 +6,7 @@ button {
   box-shadow: 1px 1px 1px #646464;
   margin-left: 1vh;
 }
+
+input {
+  width:60%
+}

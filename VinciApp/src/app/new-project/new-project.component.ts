@@ -20,35 +20,10 @@ export class NewProjectComponent implements OnInit {
   id_question_sec4: any;
   solutions_existantes: any;
   questions_existantes: any;
-  
-  // nomsolution: string;
-  // question: any;
-  // reponse: any;
-  // reponses = [];
-  // type: any;
-  // solutions: any;
-  // section_question = [];
-  // id_question = 1;
-  // next: number;
-  // test = "";
-  // id_solution = 2;
-  // test_1: any;
-  // test_2: any;
-  // test_3: any;
-  // test_4: any;
-  // id_answer: number;
-  // answer: string;
-  // id_test = 3;
-  // topics = [
-  //   { value: 'game', rep: 'Gaming' },
-  //   { value: 'tech', rep: 'Technology' },
-  //   { value: 'life', rep: 'Lifestyle' },
-  // ];
-  // tada: any;
-  // text = "le texte"
-  // content: any
-  // next2 = "2";
-
+  nom_sec1: string //nom de la première section
+  nom_sec2: string;
+  nom_sec3: string;
+  nom_sec4: string;
 
   constructor(private router: Router, private backend: BackendService, private config: ConfigService, private globalStorage: GlobalStorageService){
   }
@@ -57,12 +32,26 @@ export class NewProjectComponent implements OnInit {
 
     this.backend.GET(`/api/questions`, e=>{
       this.questions_existantes=e.data
-      console.log(this.questions_existantes)
     })
 
     this.backend.GET(`/api/solutions`, e=>{
       this.solutions_existantes=e.data
     })
+
+    //Récupération des noms des parties
+    this.backend.GET(`/api/sections/1`, e=>{
+      this.nom_sec1 = e.data[0].included.text[0].name
+    })
+    this.backend.GET(`/api/sections/2`, e=>{
+      this.nom_sec2 = e.data[0].included.text[0].name
+    })
+    this.backend.GET(`/api/sections/3`, e=>{
+      this.nom_sec3 = e.data[0].included.text[0].name
+    })
+    this.backend.GET(`/api/sections/4`, e=>{
+      this.nom_sec4 = e.data[0].included.text[0].name
+    })
+
   }
 
   onPost(){
@@ -90,7 +79,7 @@ export class NewProjectComponent implements OnInit {
     }
     this.backend.POST(`/api/solutions/${this.id_solution}/relationships/section_question`, body_4, res=>{})
 
-    alert("Le questionnaire a bien été créé")
+    alert("Questionnaire créé.")
 
   } 
 }

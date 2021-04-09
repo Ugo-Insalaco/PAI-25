@@ -33,11 +33,8 @@ export class QuestionComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log("question reçue d'id "+this.id_question)
     this.reponses=[];
     this.backend.GET(`/api/questions/${this.id_question}?include=reponse`, e=>{
-      //var message = JSON.stringify(e.data[0])
-      //console.log("reponse du backend : "+message)
       this.question = e.data[0].included["text"][0].content;
       this.type = e.data[0].fields.type;
       for (let i = 0; i < e.data[0].included["reponse"].length; i++) {
@@ -45,10 +42,10 @@ export class QuestionComponent implements OnInit {
         this.backend.GET(`/api/reponses/${id_rep}`, e2=>{
           const rep = e2.data[0].included["text"][0].content;
           this.reponses = this.reponses.concat([{"id": id_rep, "reponse": rep}])
-          //console.log(this.reponses)
         });
       }      
 
+      //pas utile pour le moment car "info" laissé de côté
       this.info = e.data[0].fields.info;
       if (this.info) {
         this.backend.GET(`/api/texts/${this.info}`, e=>{
@@ -65,7 +62,7 @@ export class QuestionComponent implements OnInit {
       }
     });
     
-    if (changes.id_question.currentValue && changes.id_question.previousValue) {
+    if (this.id_question && changes.id_question) {
       if (changes.id_question.currentValue != changes.id_question.previousValue) {
         this.answer = "";
         this.next="";

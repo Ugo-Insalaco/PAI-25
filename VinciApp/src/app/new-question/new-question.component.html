@@ -6,12 +6,14 @@
         Cet outil permet de créer une question, qui apparaîtra ensuite dans la liste des questions possibles lors de la modification ou de la création des questionnaires.
     </div>
 
+    <br>
+
     <!-- <div>
         Type de question : <input type="text" [(ngModel)]="type">
     </div> -->
 
     <div>
-        Type de réponse attendue :
+        Type :
         <select [(ngModel)]="type">
             <option value="radio">QCM avec une seule réponse possible</option>
             <option value="select">QCM avec plusieurs réponses possibles</option>
@@ -23,20 +25,22 @@
 
 
     <div>
-        Enoncé de la question : <input type="text" [(ngModel)]="question">
+        Enoncé de la question : <input class="saisie" type="text" [(ngModel)]="question">
     </div>
 
     <!-- <div>
         Commentaire à ajouter en dessous de la question (facultatif) : <input type="text" [(ngModel)]="info">
     </div> -->
+    <!--Attribut "info" laissé de côté pour le moment car contraignant et apporte pas grand chose-->
 
     <div>
         Nombre de réponses : <input type="number" [(ngModel)]="nb_reponses">
     </div>
+    <small>Remarque : même si la question n'est pas un QCM, mettre une réponse avec un énoncé arbitraire (pour pouvoir choisir une question suivante).</small>
 
     <div>
         <div *ngFor="let reponse of reponses(nb_reponses);let index=index;">
-            Enoncé de la réponse n° {{index+1}} : <input type="text" [(ngModel)]="reponses[index]">
+            Enoncé de la réponse n° {{index+1}} : <input class="saisie" type="text" [(ngModel)]="reponses[index]">
             <!-- <br>Identifiant de la question suivante : <input type="number" [(ngModel)]="questions_suivantes[index]"> -->
             <br> Question suivante :
             <select [(ngModel)]="questions_suivantes[index]">

@@ -5,7 +5,6 @@ import { GlobalStorageService } from '../services/globalStorage.service'
 import { BackendService } from '../services/backend.service';
 
 import {Router} from '@angular/router';
-import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-new-question',
@@ -35,20 +34,19 @@ export class NewQuestionComponent implements OnInit {
 
   }
 
-  onPost() {
-  
+  onPost() {  
     //création de la question
     let body_text_question ={
       text: String(this.question),
     }
 
     this.backend.POST('/api/texts', body_text_question, res=>{
-      const id_new_text = res.id
+      var id_new_text = res.id
       let body_question = {
         content: id_new_text,
         type: String(this.type),
-        //info: String(this.info),
       }
+      //si on veut en + prendre en compte "info", il faut une étape pour créer le texte puis créer l'objet info ect (contraignant pour pas grand chose ?) (voir un début ci dessous en commentaire)
       this.backend.POST(`/api/questions`, body_question, res2=>{
         this.id_question = res2.id
 
@@ -73,9 +71,7 @@ export class NewQuestionComponent implements OnInit {
                 content: id_new_text,
                 question_suivante: this.questions_suivantes[i]
               }
-            }   
-            var message=JSON.stringify(body_reponse)
-            console.log("j'essaie de faire une requête reponse ayant pour body :"+message)
+            }
             this.backend.POST(`/api/reponses`, body_reponse, res4=>{
               const id_new_reponse = res4.id
 
@@ -89,11 +85,82 @@ export class NewQuestionComponent implements OnInit {
             });
           });
         }
-        alert(`Question bien créée. Identifiant de la question créée : ${this.id_question}`)
+        alert(`Question créée.`)
       });
     });  
     
   }
 
 
+  //un début pour prendre en compte "info" :
+
+  //     //création de la question
+  //     let body_text_question ={
+  //       text: String(this.question),
+  //     }
+  
+  //     this.backend.POST('/api/texts', body_text_question, res=>{
+  //       var id_text_question = res.id
+  
+  //       //création du commentaire ('info')
+  //       if (typeof this.info == undefined) {
+  //         this.info = ""
+  //       }
+  //       let body_text_info = {
+  //         text: String(this.info)
+  //       }
+  //       this.backend.POST(`/api/texts`, body_text_info, res6=>{
+  //         var id_text_info = res6.id
+  //         let body_question = {
+  //           content: id_text_question,
+  //           type: String(this.type),
+  //           info: id_text_info,
+  //         }
+  //         this.backend.POST(`/api/questions`, body_question, res2=>{
+  //           this.id_question = res2.id
+  
+  //           //creation des réponses
+  //           for (let i = 0; i < this.questions_suivantes.length; i++) {
+  //             let body_text_reponse = {
+  //               text: String(this.reponses[i])
+  //             }
+  //             this.backend.POST('/api/texts', body_text_reponse, res3=>{
+  //               const id_new_text = res3.id
+  //               // let body_reponse = {
+  //               //   content: id_new_text,
+  //               //   question_suivante: this.questions_suivantes[i]
+  //               // }
+  //               var body_reponse: any;
+  //              if (this.questions_suivantes[i] == "null") {
+  //                 body_reponse = {
+  //                   content: id_new_text,
+  //                 }              
+  //               } else {
+  //                 body_reponse = {
+  //                   content: id_new_text,
+  //                   question_suivante: this.questions_suivantes[i]
+  //                 }
+  //               }
+  //               var message=JSON.stringify(body_reponse)
+  //               //console.log("j'essaie de faire une requête reponse ayant pour body :"+message)
+  //               this.backend.POST(`/api/reponses`, body_reponse, res4=>{
+  //               const id_new_reponse = res4.id
+  
+  //               //création du bind question/reponse
+  //               let body_binding ={
+  //                 "id_reponse": id_new_reponse,
+  //               }
+  //               this.backend.POST(`/api/questions/${this.id_question}/relationships/reponse`, body_binding, res5=>{
+  //                 console.log(res5)})
+                
+  //             });
+  //           });
+  //         }
+  //         alert(`Question bien créée. Identifiant de la question créée : ${this.id_question}`)
+  //       });
+  //       })
+  //     });  
+
+
 }
+

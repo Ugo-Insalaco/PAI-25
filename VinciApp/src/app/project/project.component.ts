@@ -29,6 +29,10 @@ export class ProjectComponent implements OnInit{
     id_question_1: number //1ere question de la deuxième section
     id_question_2: number //1ere question de la troisième section
     id_question_3: number //1ere question de la quatrième section (ajouter un commentaire)
+    nom_sec1: string //nom de la première section
+    nom_sec2: string;
+    nom_sec3: string;
+    nom_sec4: string;
 
     constructor(private router: Router,
                 private backend: BackendService, 
@@ -90,6 +94,20 @@ export class ProjectComponent implements OnInit{
                 })
             }
             
+        })
+
+        //Récupération des noms des parties
+        this.backend.GET(`/api/sections/1`, e=>{
+            this.nom_sec1 = e.data[0].included.text[0].name
+        })
+        this.backend.GET(`/api/sections/2`, e=>{
+            this.nom_sec2 = e.data[0].included.text[0].name
+        })
+        this.backend.GET(`/api/sections/3`, e=>{
+            this.nom_sec3 = e.data[0].included.text[0].name
+        })
+        this.backend.GET(`/api/sections/4`, e=>{
+            this.nom_sec4 = e.data[0].included.text[0].name
         })
     }
 

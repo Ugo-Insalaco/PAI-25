@@ -1,14 +1,16 @@
 <div style="text-align: center;">
 
     <strong>Question</strong> (id {{id_question}}) : <input type="text" [(ngModel)]="question">
-    <br> Type de question : {{type}}
-    <br> <ng-container *ngIf="info">Commentaire : <input type="text" [(ngModel)]="info"></ng-container>
+    <br> Type : {{type_explicite}}
+    <!-- <br> Commentaire (facultatif): <input type="text" [(ngModel)]="info"> -->
+    <!--Commentaire (attribut "info") laissé de côté pour le moment car contraignant et apporte pas grand chose-->
     <div *ngFor="let r of reponses;let index=index;trackBy:trackByIndex;">
-        <ng-container *ngIf="type != number && type != text && type != select">
+        <br><ng-container *ngIf="type != 'number' && type != 'text' && type != 'select_all_iot'">
             <strong> Réponse </strong> (id {{id_reponses[index]}}) : <input type="text" name=a{{index}} [(ngModel)]="reponses[index]" placeholder="r">
+            <br>
         </ng-container>
         <!-- Identifiant de la question suivante : <input type="text" [(ngModel)]="next[index]"> -->
-        <br> Question suivante :
+        Question suivante :
         <select [(ngModel)]="next[index]">
             <option value="null">Aucune</option>
             <option *ngFor = "let q of questions_existantes"
@@ -16,8 +18,7 @@
                 id {{q.id}}: "{{q.included.text[0].content}}"
             </option>
         </select>
-        <!-- <small>Si vide, il s'agit de la dernière question de la partie</small> -->
     </div>
-    <button (click)=onValiderModif()>Valider les modifications</button>
+    <button (click)=onValiderModif()>Valider les modifications pour cette question</button>
     <br>-------------------
 </div>

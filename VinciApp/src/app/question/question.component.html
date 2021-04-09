@@ -48,10 +48,13 @@
     </select>
     <br><small>(Utilisez CTRL pour sélectionner plusieurs)</small> <!--Mettre ça dans "info" plutôt (pour la langue)-->
   </div>
+  <br>
 
-  <ng-container class="qt" *ngIf="info">
+  <!-- <ng-container class="qt" *ngIf="info">
     <small>{{info}}</small> <br>
-  </ng-container>
+  </ng-container> -->
+
+  <!-- "Info" laissé de côté pour le moment car contraignant et apporte pas grand chose finalement -->
 
   <!-- Affichage de la question suivante -->
   <div *ngIf="(answer || id_answer) && !modif">

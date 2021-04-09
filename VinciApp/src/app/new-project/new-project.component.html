@@ -2,7 +2,7 @@
 
     <strong> Création d'un nouveau questionnaire </strong>
     <br>
-    Remarque : la création d'un projet se fait à partir d'une solution et de questions existantes ; veuillez d'abord créer la solution et les questions. <!--mettre un lien ici ce serait sympa-->
+    Remarque : la création d'un projet se fait à partir d'une solution et de questions existantes ; veuillez d'abord créer la solution et les questions nécessaires. <!--mettre un lien ici ce serait sympa-->
 
     <div>
         Solution à laquelle se rattache le nouveau questionnaire :
@@ -16,7 +16,7 @@
     </div>
 
     <div>
-        Première question de la première section :
+        Première question de section {{nom_sec1}} :
         <br>
         <select [(ngModel)]="id_question_sec1">
             <option *ngFor="let question of questions_existantes"
@@ -27,7 +27,7 @@
     </div>
 
     <div>
-        Première question de la deuxième section :
+        Première question de la section {{nom_sec2}} :
         <br>
         <select [(ngModel)]="id_question_sec2">
             <option *ngFor="let question of questions_existantes"
@@ -38,7 +38,7 @@
     </div>
 
     <div>
-        Première question de la troisième section :
+        Première question de la section {{nom_sec3}} :
         <br>
         <select [(ngModel)]="id_question_sec3">
             <option *ngFor="let question of questions_existantes"
@@ -49,7 +49,7 @@
     </div>
 
     <div>
-        Première question de la quatrième section :
+        Première question de la section {{nom_sec4}} :
         <br>
         <select [(ngModel)]="id_question_sec4">
             <option *ngFor="let question of questions_existantes"
@@ -58,6 +58,8 @@
             </option>
         </select>
     </div>
+
+    <br>
 
     <div>
         Votre questionnaire est entièrement défini par ces 4 questions !
