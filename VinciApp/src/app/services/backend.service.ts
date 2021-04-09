@@ -49,7 +49,7 @@ export class BackendService {
     }
 
     public DELETE(url: string, success: Function, error: Function= function(e){console.log(e)}){
-        this.http.post(this.config.backend.url_api+url,{
+        this.http.delete(this.config.backend.url_api+url,{
             headers: new HttpHeaders({
                 "langage": this.globalStorage.get('langage'),
                 "X-Csrf-Token": this.globalStorage.get("vinci_csrf_token").slice(1,-1)
@@ -67,7 +67,7 @@ export class BackendService {
     }
 
     public DELETE_RELATION(url: string,body: Object, success: Function, error: Function= function(e){console.log(e)}){
-        this.http.post(this.config.backend.url_api+url+'delete', body,{
+        this.http.post(this.config.backend.url_api+url+'/delete', body,{
             headers: new HttpHeaders({
                 "langage": this.globalStorage.get('langage'),
                 "X-Csrf-Token": this.globalStorage.get("vinci_csrf_token").slice(1,-1)

@@ -1,5 +1,41 @@
 <div style="text-align: center;">
 
+  <div>
+    Première question de la section :
+    <br>
+    <select *ngIf="tab == 0" [(ngModel)]="id_question_0">
+      <option *ngFor="let question of questions_existantes"
+          [value]="question.id">
+          id {{question.id}}: "{{question.included.text[0].content}}"
+      </option>
+    </select>
+
+    <select *ngIf="tab == 1" [(ngModel)]="id_question_1">
+      <option *ngFor="let question of questions_existantes"
+          [value]="question.id">
+          id {{question.id}}: "{{question.included.text[0].content}}"
+      </option>
+    </select>
+
+    <select *ngIf="tab == 2" [(ngModel)]="id_question_2">
+      <option *ngFor="let question of questions_existantes"
+          [value]="question.id">
+          id {{question.id}}: "{{question.included.text[0].content}}"
+      </option>
+    </select>
+
+    <select *ngIf="tab == 3" [(ngModel)]="id_question_3">
+      <option *ngFor="let question of questions_existantes"
+          [value]="question.id">
+          id {{question.id}}: "{{question.included.text[0].content}}"
+      </option>
+    </select>
+
+    <button (click)="onModifProject()">Valider le changement de la première question</button>
+    <br>----------------
+    <br>
+  </div>
+
   <app-modif-question *ngFor="let question of all_questions"
       [id_question]=question>
   </app-modif-question>

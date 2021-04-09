@@ -25,7 +25,8 @@
                     </app-question>
                     <app-modif-project *ngIf="id_question_0 && modif && selectedTab==0"
                         [tab]=selectedTab
-                        [id_question]=id_question_0>
+                        [id_question]=id_question_0
+                        [id_solution]=id_solution>
                     </app-modif-project>
                 </mat-grid-list>
                 <button mat-raised-button style="float:right;" matStepperNext>Page suivante</button>
@@ -44,7 +45,8 @@
                     </app-question>
                     <app-modif-project *ngIf="id_question_1 && modif  && selectedTab==1" 
                         [tab]=selectedTab
-                        [id_question]=id_question_1>
+                        [id_question]=id_question_1
+                        [id_solution]=id_solution>
                     </app-modif-project>
                 </mat-grid-list>
                 <button mat-raised-button matStepperPrevious>Page précédente</button>
@@ -64,7 +66,8 @@
                     </app-question>
                     <app-modif-project *ngIf="id_question_2 && modif  && selectedTab==2" 
                         [tab]=selectedTab
-                        [id_question]=id_question_2>
+                        [id_question]=id_question_2
+                        [id_solution]=id_solution>
                     </app-modif-project>
                 </mat-grid-list>
                 <button mat-raised-button matStepperPrevious>Page précédente</button>
@@ -109,7 +112,8 @@
                     </app-question>
                     <app-modif-project *ngIf="id_question_3 && modif && selectedTab==3" 
                         [tab]=selectedTab
-                        [id_question]=id_question_3>
+                        [id_question]=id_question_3
+                        [id_solution]=id_solution>
                     </app-modif-project>
                         <button mat-raised-button>Valider</button>
                     </div>
