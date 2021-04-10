@@ -56,7 +56,8 @@ export class QuestionComponent implements OnInit {
       if (this.type == "select_all_iot") {
         this.backend.GET(`/api/products`, e=>{
           for (let i = 0; i < e.data.length; i++) {
-            this.all_iot = this.all_iot.concat([e.data[i].fields]) 
+            this.all_iot = this.all_iot.concat([e.data[i]]) 
+            console.log(this.all_iot)
           }
         })
       }

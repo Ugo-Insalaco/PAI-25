@@ -20,7 +20,7 @@
     "include":[
         {
             "name":"data",
-            "default_inclusion":false,
+            "default_inclusion":true,
             "bind":[
                 {
                     "id":17,
