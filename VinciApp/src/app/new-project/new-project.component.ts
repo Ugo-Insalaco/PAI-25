@@ -36,7 +36,6 @@ export class NewProjectComponent implements OnInit {
 
     this.backend.GET(`/api/solutions`, e=>{
       this.solutions_existantes=e.data
-      console.log(this.solutions_existantes)
     })
 
     //Récupération des noms des parties

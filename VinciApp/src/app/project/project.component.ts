@@ -24,7 +24,7 @@ export class ProjectComponent implements OnInit{
     questions = [];
     modif = false;
     admin!: boolean;
-    id_solution; number; // voir comment récupérer cet id !
+    id_solution: number;
     id_question_0: number //1ere question de la première section
     id_question_1: number //1ere question de la deuxième section
     id_question_2: number //1ere question de la troisième section
@@ -126,6 +126,8 @@ export class ProjectComponent implements OnInit{
         nom = nom.split('$').pop();
         nom = nom.replace(/-/gi, " "); // Remplace - par espace
         nom = nom.replace(/_/gi, "'"); // Remplace _ par '
+        nom = nom.replace(/%2528/gi, "(")
+        nom = nom.replace(/%2529/gi, ")")
         nom = nom.charAt(0).toUpperCase() + nom.slice(1); // Majuscule pour 1er mot
         nom = nom.replace(/%C3%A9/gi, "é");
         return nom;
