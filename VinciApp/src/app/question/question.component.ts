@@ -147,8 +147,4 @@ export class QuestionComponent implements OnInit {
   //   })
   // }
 
-  onAddQuestion() {
-    this.add_question=true;
-  }
-
 }

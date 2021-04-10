@@ -10,13 +10,13 @@
         <select [(ngModel)]="id_solution">
             <option *ngFor="let solution of solutions_existantes"
                 [value]="solution.id">
-                {{solution.id}}: {{solution.fields.name}}
+                {{solution.included.text[0].name}}
             </option>
         </select>
     </div>
 
     <div>
-        Première question de section {{nom_sec1}} :
+        Première question de la section {{nom_sec1}} :
         <br>
         <select [(ngModel)]="id_question_sec1">
             <option *ngFor="let question of questions_existantes"

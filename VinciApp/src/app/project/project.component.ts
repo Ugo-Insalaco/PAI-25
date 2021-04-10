@@ -24,7 +24,7 @@ export class ProjectComponent implements OnInit{
     questions = [];
     modif = false;
     admin!: boolean;
-    id_solution = 14; // voir comment récupérer cet id !
+    id_solution; number; // voir comment récupérer cet id !
     id_question_0: number //1ere question de la première section
     id_question_1: number //1ere question de la deuxième section
     id_question_2: number //1ere question de la troisième section
@@ -61,6 +61,7 @@ export class ProjectComponent implements OnInit{
         // })
 
         this.nomsolution = this.getNomSolution();
+        this.id_solution = this.getIdSolution();
 
         // this.backend.POST('/auth/login', body, res=>{
         //     console.log(res)
@@ -122,12 +123,19 @@ export class ProjectComponent implements OnInit{
 
     getNomSolution(){
         var nom = this.router.url.split('/').pop();
+        nom = nom.split('$').pop();
         nom = nom.replace(/-/gi, " "); // Remplace - par espace
         nom = nom.replace(/_/gi, "'"); // Remplace _ par '
         nom = nom.charAt(0).toUpperCase() + nom.slice(1); // Majuscule pour 1er mot
         nom = nom.replace(/%C3%A9/gi, "é");
         return nom;
     }
+
+    getIdSolution(){
+        var id = this.router.url.split('/').pop();
+        id = id.split('$')[0];
+        return Number(id);
+      }
 
     //onModifProjet(){
         // Get selected solution and redirect to solution's page

@@ -131,10 +131,11 @@ export class SolutionComponent implements OnInit, AfterViewInit {
   onSimulerProjet(){
     // Get selected solution and redirect to solution's page
     var solution = this.nomsolution;
+    var idsolution = this.getIdSolution()
     solution = solution.replace(/ /gi, "-"); // Remplace - par espace
     solution = solution.replace(/'/gi, "_"); // Remplace _ par '
     solution = solution.toLowerCase()
     var button = this.buttonprojectView.nativeElement;
-    this.router.navigate(["project/",solution]);
+    this.router.navigate(["project/",idsolution+"$"+solution]);
   }
 }
