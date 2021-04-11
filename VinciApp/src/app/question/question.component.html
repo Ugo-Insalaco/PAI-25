@@ -43,7 +43,7 @@
   <div class="qt" *ngIf="type=='select_all_iot'">
     {{question}}
     <br>
-    <select multiple [(ngModel)]="answer" (change)="onAnswer()">
+    <select [(ngModel)]="answer" (change)="onAnswer()">
       <option *ngFor = "let iot of all_iot" value=" {{iot.fields.brand}} - {{iot.fields.name}} (ref {{iot.fields.ref_dataprint}})"> 
         {{iot.fields.brand}} - {{iot.fields.name}} (données mesurées : {{iot.included.data[0].name_data}})
       </option>
@@ -63,7 +63,8 @@
     <app-question *ngIf="next" 
       [id_question]=next
       [tab]=tab
-      [modif]=modif>
+      [modif]=modif
+      [niveau]=niveau+1>
     </app-question>
   </div>
 

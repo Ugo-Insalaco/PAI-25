@@ -21,7 +21,8 @@
                     <app-question *ngIf="id_question_0 && !modif"
                         [tab]=selectedTab
                         [id_question]=id_question_0
-                        [modif]=modif>
+                        [modif]=modif
+                        [niveau]=0>
                     </app-question>
                     <app-modif-project *ngIf="id_question_0 && modif && selectedTab==0"
                         [tab]=selectedTab
@@ -41,7 +42,8 @@
                     <br><app-question *ngIf="id_question_1 && !modif"
                         [tab]="selectedTab" 
                         [id_question]=id_question_1
-                        [modif]=modif>
+                        [modif]=modif
+                        [niveau]=0>
                     </app-question>
                     <app-modif-project *ngIf="id_question_1 && modif  && selectedTab==1" 
                         [tab]=selectedTab
@@ -62,7 +64,8 @@
                     <br><app-question *ngIf="id_question_2 && !modif"
                         [tab]="selectedTab" 
                         [id_question]=id_question_2
-                        [modif]=modif>
+                        [modif]=modif
+                        [niveau]=0>
                     </app-question>
                     <app-modif-project *ngIf="id_question_2 && modif  && selectedTab==2" 
                         [tab]=selectedTab
@@ -108,7 +111,8 @@
                     <app-question *ngIf="id_question_3 && !modif"
                         [tab]="selectedTab" 
                         [id_question]=id_question_3
-                        [modif]=modif>
+                        [modif]=modif
+                        [niveau]=0>
                     </app-question>
                     <app-modif-project *ngIf="id_question_3 && modif && selectedTab==3" 
                         [tab]=selectedTab

@@ -17,6 +17,7 @@ export class QuestionComponent implements OnInit {
   @Input() tab; //numero de la page (donc de la section)
   @Input() id_question;
   @Input() modif //pour savoir si on est en mode modif ou pas
+  @Input() niveau //indique de la combientième question il s'agit dans la section (utile pour la gestion des modifications des réponses par l'utilisateur)
 
   admin = true;
   type: string;
@@ -56,8 +57,7 @@ export class QuestionComponent implements OnInit {
       if (this.type == "select_all_iot") {
         this.backend.GET(`/api/products`, e=>{
           for (let i = 0; i < e.data.length; i++) {
-            this.all_iot = this.all_iot.concat([e.data[i]]) 
-            console.log(this.all_iot)
+            this.all_iot = this.all_iot.concat([e.data[i]])
           }
         })
       }
@@ -114,31 +114,49 @@ export class QuestionComponent implements OnInit {
     //   }
     // }
 
+  this.backend.GET(`/api/reponses/${this.id_answer}`, e=>{
+    this.next = e.data[0].fields.question_suivante;
+
     var projectJSON = this.globalStorage.get("projet");
     var project = JSON.parse(projectJSON);
-    var exists = false;
+    var exists = false //indique si la question a déjà été répondue (donc s'il s'agit d'une modification)
+
     for(var i= 0; i < project.length; i++){
-      if (project[i].id_question == this.id_question) {
-        exists = true;
+      if (project[i].id_question == this.id_question && project[i].partie == this.tab && project[i].niveau == this.niveau) {
+        //si cette question existe déjà dans "projet" à ce niveau dans la section 
+        //Alors il s'agit d'une MODIFICATION de la part de l'utilisateur
+        exists = true
+        //Donc on met donc à jour la réponse :
         project[i].id_reponse = this.id_answer
         project[i].reponse = this.answer
-      }
+        for (let j = 0; j < project.length; j++) {
+          if (project[j].partie == this.tab && project[j].niveau == this.niveau+1 && project[j].id_question != this.next) {
+            //Si la question au niveau d'en dessous n'est pas la même que la nouvelle question suivante
+            //Alors la question suivante va changer
+            //Donc toutes les réponses déjà existantes qui suivaient la question modifiée (càd niveau en dessous) doivent être supprimées :
+            for (let k = 0; k < project.length; k++) {
+              if (project[k].partie == this.tab && project[k].niveau > this.niveau) {
+                project.splice(k)
+              }     
+            }            
+          }
+        }
+      } 
     }
-    if (exists == false) {
+    if (!exists) {
+      //s'il ne s'agit pas d'une modification, on ajoute la reponse dans "projet"
       var reponse = {
         "partie": this.tab,
         "id_question": this.id_question, 
         "question": this.question,
         "id_reponse": this.id_answer, 
-        "reponse": this.answer
+        "reponse": this.answer,
+        "niveau": this.niveau
       };
       project.push(reponse);
     }
-  this.globalStorage.set("projet", project) //mise à jour de la variable globale projet
-
-  this.backend.GET(`/api/reponses/${this.id_answer}`, e=>{
-    this.next = e.data[0].fields.question_suivante;
-    })
+    this.globalStorage.set("projet", project) //mise à jour de la variable globale projet
+  })
   }
 
   // this.backend.GET(`/api/reponses/${this.id_answer}`, e=>{
