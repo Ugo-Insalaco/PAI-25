@@ -164,4 +164,8 @@ export class ProjectComponent implements OnInit{
         this.router.navigate(["new-project"]);
     }
 
+    onSupprimerQuestion(){
+        this.router.navigate(["delete-question"]);
+    }
+
 }

@@ -1,0 +1,16 @@
+<div style="text-align: center;">
+    <strong>Outil de suppression d'une question</strong>
+    <br>Question à supprimer :
+    <br>
+    <select [(ngModel)]="id_question">
+        <option *ngFor="let question of questions_existantes"
+            [value]="question.id">
+            id {{question.id}}: "{{question.included.text[0].content}}"
+        </option>
+    </select>
+
+    
+<br>
+<button (click)="onDelete()">Supprimer la question</button>
+
+</div>

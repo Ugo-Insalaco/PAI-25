@@ -36,23 +36,21 @@ export class QuestionComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
     this.reponses=[];
     this.backend.GET(`/api/questions/${this.id_question}?include=reponse`, e=>{
-      this.question = e.data[0].included["text"][0].content;
+      this.question = e.data[0].included.text[0].content;
       this.type = e.data[0].fields.type;
-      for (let i = 0; i < e.data[0].included["reponse"].length; i++) {
-        const id_rep = e.data[0].included["reponse"][i].id_reponse;
-        this.backend.GET(`/api/reponses/${id_rep}`, e2=>{
-          const rep = e2.data[0].included["text"][0].content;
-          this.reponses = this.reponses.concat([{"id": id_rep, "reponse": rep}])
-        });
-      }      
-
-      //pas utile pour le moment car "info" laissé de côté
-      this.info = e.data[0].fields.info;
-      if (this.info) {
-        this.backend.GET(`/api/texts/${this.info}`, e=>{
-          this.info=e.data[0].fields.text
-        })        
+      for (let i = 0; i < e.data[0].included.reponse.length; i++) {
+        const id_rep = e.data[0].included.reponse[i].id_reponse;
+        const rep = e.data[0].included.reponse[i].subIncluded.text.content
+        this.reponses = this.reponses.concat([{"id": id_rep, "reponse": rep}])
       }
+
+      //pas utile pour le moment car "info" pas utilisée
+      // this.info = e.data[0].fields.info;
+      // if (this.info) {
+      //   this.backend.GET(`/api/texts/${this.info}`, e=>{
+      //     this.info=e.data[0].fields.text
+      //   })        
+      // }
 
       if (this.type == "select_all_iot") {
         this.backend.GET(`/api/products`, e=>{
