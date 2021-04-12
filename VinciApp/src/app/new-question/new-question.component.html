@@ -1,4 +1,4 @@
-<div style="text-align: center;">
+<div style="text-align: center;" *ngIf="admin">
     
     <strong>Création d'une nouvelle question</strong>
     
@@ -33,16 +33,18 @@
     </div> -->
     <!--Attribut "info" laissé de côté pour le moment car contraignant et apporte pas grand chose-->
 
-    <div>
+    <div *ngIf="type == 'radio' || type == 'select'">
         Nombre de réponses : <input type="number" [(ngModel)]="nb_reponses">
     </div>
-    <small>Remarque : même si la question n'est pas un QCM, mettre une réponse avec un énoncé arbitraire (pour pouvoir choisir une question suivante).</small>
-
+    -------------
     <div>
         <div *ngFor="let reponse of reponses(nb_reponses);let index=index;">
-            Enoncé de la réponse n° {{index+1}} : <input class="saisie" type="text" [(ngModel)]="reponses[index]">
-            <!-- <br>Identifiant de la question suivante : <input type="number" [(ngModel)]="questions_suivantes[index]"> -->
-            <br> Question suivante :
+            <div *ngIf="type == 'radio' || type == 'select'">
+                Enoncé de la réponse n° {{index+1}} : <input class="saisie" type="text" [(ngModel)]="reponses[index]">
+            </div>
+                <!-- <br>Identifiant de la question suivante : <input type="number" [(ngModel)]="questions_suivantes[index]"> -->
+            <ng-container *ngIf="type">
+                Question suivante :
             <select [(ngModel)]="questions_suivantes[index]">
                 <option value="null">Aucune</option>
                 <option *ngFor = "let q of questions_existantes"
@@ -50,8 +52,10 @@
                     id {{q.id}}: "{{q.included.text[0].content}}"
                 </option>
             </select>
+            
             <small>Si aucune, sélectionnez "Aucune" dans le menu déroulant</small>
             <br>-------------
+            </ng-container>
         </div>
     </div>
 
@@ -59,4 +63,9 @@
     <button (click)=onPost()>Créer la question</button>
 
 
+</div>
+
+
+<div style="text-align: center;" *ngIf="!admin">
+    <br> Veuillez vous connecter pour accéder à cette page.
 </div>

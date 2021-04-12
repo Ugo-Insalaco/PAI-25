@@ -154,6 +154,7 @@ export class ProjectComponent implements OnInit{
 
     onQuit(){
         this.modif = false;
+        location.reload()
     }
 
     onCreerQuestion(){

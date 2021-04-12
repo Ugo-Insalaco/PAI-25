@@ -1,4 +1,4 @@
-<div style="text-align: center;"> 
+<div style="text-align: center;" *ngIf="admin"> 
 
     <strong> Création d'un nouveau questionnaire </strong>
     <br>
@@ -68,4 +68,8 @@
     <br>
     <button (click)=onPost()>Créer le questionnaire</button>
 
+</div>
+
+<div style="text-align: center;" *ngIf="!admin">
+    <br> Veuillez vous connecter pour accéder à cette page.
 </div>

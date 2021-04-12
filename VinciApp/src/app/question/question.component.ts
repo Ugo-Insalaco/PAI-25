@@ -145,9 +145,9 @@ export class QuestionComponent implements OnInit {
       //s'il ne s'agit pas d'une modification, on ajoute la reponse dans "projet"
       var reponse = {
         "partie": this.tab,
-        "id_question": this.id_question, 
+        "id_question": Number(this.id_question), 
         "question": this.question,
-        "id_reponse": this.id_answer, 
+        "id_reponse": Number(this.id_answer), 
         "reponse": this.answer,
         "niveau": this.niveau
       };

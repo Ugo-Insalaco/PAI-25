@@ -4,6 +4,7 @@ import { ConfigService } from '../services/config.service';
 import { GlobalStorageService } from '../services/globalStorage.service';
 import { BackendService } from '../services/backend.service';
 import { ProjectComponent } from '../project/project.component';
+import { AuthService } from '../services/auth.service';
 
 
 @Component({
@@ -13,7 +14,15 @@ import { ProjectComponent } from '../project/project.component';
 })
 export class ModifProjectComponent implements OnInit {
   
-  constructor(private backend: BackendService, private config: ConfigService, private globalStorage: GlobalStorageService){}
+  constructor(private backend: BackendService, 
+    private config: ConfigService, 
+    private globalStorage: GlobalStorageService,
+    private auth: AuthService){
+      this.auth.isLoggedIn(res => {
+          this.admin = res;
+      });
+  }
+
   @Input() tab; //numero de la page (donc de la section)
   @Input() id_question;
   @Input() id_solution;
@@ -34,6 +43,7 @@ export class ModifProjectComponent implements OnInit {
   id_question_1: number 
   id_question_2: number 
   id_question_3: number 
+  admin!: boolean;
 
   ngOnInit(): void {
     //Récupération de toutes les questions de la section
@@ -149,7 +159,7 @@ export class ModifProjectComponent implements OnInit {
         id_section: this.tab+1
       }
       this.backend.POST(`/api/solutions/${this.id_solution}/relationships/section_question`, body_new, res=>{})
-
+      alert("1ere question bien modifiée")
     }
 
   }

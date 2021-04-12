@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ConfigService } from '../services/config.service'
 import { GlobalStorageService } from '../services/globalStorage.service'
 import { BackendService } from '../services/backend.service';
+import { AuthService } from '../services/auth.service';
 
 import {Router} from '@angular/router';
 
@@ -24,8 +25,16 @@ export class NewProjectComponent implements OnInit {
   nom_sec2: string;
   nom_sec3: string;
   nom_sec4: string;
+  admin!: boolean;
 
-  constructor(private router: Router, private backend: BackendService, private config: ConfigService, private globalStorage: GlobalStorageService){
+  constructor(private router: Router, 
+    private backend: BackendService, 
+    private config: ConfigService, 
+    private globalStorage: GlobalStorageService,
+    private auth: AuthService){
+      this.auth.isLoggedIn(res => {
+          this.admin = res;
+      });
   }
 
   ngOnInit(): void {
@@ -55,31 +64,38 @@ export class NewProjectComponent implements OnInit {
   }
 
   onPost(){
-    let body_1 = {
-      id_section: 1,
-      id_question: this.id_question_sec1
-    }
-    this.backend.POST(`/api/solutions/${this.id_solution}/relationships/section_question`, body_1, res=>{})
-
-    let body_2 = {
-      id_section: 2,
-      id_question: this.id_question_sec2
-    }
-    this.backend.POST(`/api/solutions/${this.id_solution}/relationships/section_question`, body_2, res=>{})
-
-    let body_3 = {
-      id_section: 3,
-      id_question: this.id_question_sec3
-    }
-    this.backend.POST(`/api/solutions/${this.id_solution}/relationships/section_question`, body_3, res=>{})
-
-    let body_4 = {
-      id_section: 4,
-      id_question: this.id_question_sec4
-    }
-    this.backend.POST(`/api/solutions/${this.id_solution}/relationships/section_question`, body_4, res=>{})
-
-    alert("Questionnaire créé.")
-
+    this.backend.GET(`/api/solutions/${this.id_solution}?include=section_question`, e=>{
+      //on teste si un questionnaire existe déjà pour cette solution
+      if (e.data[0].included.section_question[0].id[0] == null) {
+        let body_1 = {
+          id_section: 1,
+          id_question: this.id_question_sec1
+        }
+        this.backend.POST(`/api/solutions/${this.id_solution}/relationships/section_question`, body_1, res=>{})
+    
+        let body_2 = {
+          id_section: 2,
+          id_question: this.id_question_sec2
+        }
+        this.backend.POST(`/api/solutions/${this.id_solution}/relationships/section_question`, body_2, res=>{})
+    
+        let body_3 = {
+          id_section: 3,
+          id_question: this.id_question_sec3
+        }
+        this.backend.POST(`/api/solutions/${this.id_solution}/relationships/section_question`, body_3, res=>{})
+    
+        let body_4 = {
+          id_section: 4,
+          id_question: this.id_question_sec4
+        }
+        this.backend.POST(`/api/solutions/${this.id_solution}/relationships/section_question`, body_4, res=>{
+          alert("Questionnaire créé.")
+        })
+        
+      } else {
+        alert("Un questionnaire existe déjà pour cette solution. Vous pouvez le modifier entièrement à partir de l'outil 'Modifier les questions' sur la page questionnaire correspondante.")
+      }
+    })
   } 
 }
