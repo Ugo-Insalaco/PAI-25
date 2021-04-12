@@ -18,6 +18,7 @@ export class QuestionComponent implements OnInit {
   @Input() id_question;
   @Input() modif //pour savoir si on est en mode modif ou pas
   @Input() niveau //indique de la combientième question il s'agit dans la section (utile pour la gestion des modifications des réponses par l'utilisateur)
+  @Input() solution
 
   admin = true;
   type: string;
@@ -149,11 +150,13 @@ export class QuestionComponent implements OnInit {
         "question": this.question,
         "id_reponse": Number(this.id_answer), 
         "reponse": this.answer,
-        "niveau": this.niveau
+        "niveau": this.niveau,
+        "solution": this.solution
       };
       project.push(reponse);
     }
     this.globalStorage.set("projet", project) //mise à jour de la variable globale projet
+    console.log(project)
   })
   }
 

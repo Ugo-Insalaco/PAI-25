@@ -2,7 +2,6 @@
     "langage": "FRA",
 
     "projet": [
-        {"partie": "", "id_question": "", "question": "", "id_reponse": "", "reponse": ""}
     ],
 
     "vinci_csrf_token": ""
