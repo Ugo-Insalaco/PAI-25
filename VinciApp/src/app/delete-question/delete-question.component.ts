@@ -35,26 +35,20 @@ export class DeleteQuestionComponent implements OnInit {
   }
 
   onDelete() {
-    console.log("yo")
-    var input = confirm("Etes-vous sûr de vouloir supprimer cette question ? Cela entraînera ausssi la suppression de toutes les réponses associées.")
+    var input = confirm("Etes-vous sûr de vouloir supprimer cette question ? Cela entraînera aussi la suppression de toutes les réponses associées.")
     if (input) {
       this.backend.GET(`/api/questions/${this.id_question}?include=reponse`, e=>{
         this.reponses = e.data[0].included.reponse
-        console.log(e)
-        console.log(e.data[0].included.reponse)
-        console.log(e.data[0].included.reponse[0].id_reponse)
-        //this.id_reponses = this.id_reponses.concat([e])
         this.backend.DELETE(`/api/questions/${this.id_question}`, e2=>{
-          console.log("Question supprimée, d'id"+this.id_question);
+          console.log("Question supprimée")
           for (let i = 0; i < this.reponses.length; i++) {
             this.backend.DELETE(`/api/reponses/${this.reponses[i].id_reponse}`, e=>{
-              console.log("réponse"+this.reponses[i].subIncluded.text.content+"supprimée, d'id"+this.reponses[i].id_reponse)
+              console.log("réponse '"+this.reponses[i].subIncluded.text.content+"' supprimée")
               if (i == this.reponses.length-1) {
                 alert("Question et réponses bien supprimées.")
                 location.reload()
               }
-            })
-            
+            })            
           }
         });
       })
