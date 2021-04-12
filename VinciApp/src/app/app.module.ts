@@ -114,7 +114,8 @@ import { DeleteQuestionComponent } from './delete-question/delete-question.compo
   ],
   entryComponents: [
     NewSolutionFormComponent,
-    NewOfferFormComponent
+    NewOfferFormComponent, 
+    ContactResumeComponent,
   ],
   bootstrap: [AppComponent]
 })
