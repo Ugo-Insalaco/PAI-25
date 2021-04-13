@@ -7,6 +7,10 @@ import { GlobalStorageService } from '../services/globalStorage.service'
 import { BackendService } from '../services/backend.service';
 import { AuthService } from '../services/auth.service';
 
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { ProjectResumeComponent } from '../project-resume/project-resume.component';
+import {Title} from '@angular/platform-browser';
+
 import {Router} from '@angular/router';
 
 @Component({
@@ -37,6 +41,7 @@ export class ProjectComponent implements OnInit{
     constructor(private router: Router,
                 private backend: BackendService, 
                 private config: ConfigService, 
+                public dialog: MatDialog,
                 private globalStorage: GlobalStorageService,
                 private auth: AuthService){
         this.auth.isLoggedIn(res => {
@@ -117,6 +122,7 @@ export class ProjectComponent implements OnInit{
         if (this.selectedTab == 3) {
             var questions_string = this.globalStorage.get("projet")
             this.questions = JSON.parse(questions_string)
+            console.log(this.questions)
         }
         this.modif=false
     }
@@ -167,6 +173,10 @@ export class ProjectComponent implements OnInit{
 
     onSupprimerQuestion(){
         this.router.navigate(["delete-question"]);
+    }
+
+    onSubmit(){
+        const dialogRef = this.dialog.open(ProjectResumeComponent,{data:JSON.parse(this.globalStorage.get("projet"))});
     }
 
 }

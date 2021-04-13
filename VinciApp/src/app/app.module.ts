@@ -54,6 +54,7 @@ import { NewSolutionFormComponent } from './new-solution-form/new-solution-form.
 import { NewOfferFormComponent } from './new-offer-form/new-offer-form.component';
 import { NewQuestionComponent } from './new-question/new-question.component';
 import { DeleteQuestionComponent } from './delete-question/delete-question.component';
+import { ProjectResumeComponent } from './project-resume/project-resume.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { DeleteQuestionComponent } from './delete-question/delete-question.compo
     NewSolutionFormComponent,
     NewOfferFormComponent,
     NewQuestionComponent,
-    DeleteQuestionComponent
+    DeleteQuestionComponent,
+    ProjectResumeComponent
   ],
   imports: [
     BrowserModule,
@@ -116,6 +118,7 @@ import { DeleteQuestionComponent } from './delete-question/delete-question.compo
     NewSolutionFormComponent,
     NewOfferFormComponent, 
     ContactResumeComponent,
+    ProjectResumeComponent
   ],
   bootstrap: [AppComponent]
 })
