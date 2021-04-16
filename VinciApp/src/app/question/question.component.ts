@@ -17,6 +17,8 @@ export class QuestionComponent implements OnInit {
   @Input() tab; //numero de la page (donc de la section)
   @Input() id_question;
   @Input() modif //pour savoir si on est en mode modif ou pas
+  @Input() niveau //indique de la combientième question il s'agit dans la section (utile pour la gestion des modifications des réponses par l'utilisateur)
+  @Input() solution
 
   admin = true;
   type: string;
@@ -35,28 +37,26 @@ export class QuestionComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
     this.reponses=[];
     this.backend.GET(`/api/questions/${this.id_question}?include=reponse`, e=>{
-      this.question = e.data[0].included["text"][0].content;
+      this.question = e.data[0].included.text[0].content;
       this.type = e.data[0].fields.type;
-      for (let i = 0; i < e.data[0].included["reponse"].length; i++) {
-        const id_rep = e.data[0].included["reponse"][i].id_reponse;
-        this.backend.GET(`/api/reponses/${id_rep}`, e2=>{
-          const rep = e2.data[0].included["text"][0].content;
-          this.reponses = this.reponses.concat([{"id": id_rep, "reponse": rep}])
-        });
-      }      
-
-      //pas utile pour le moment car "info" laissé de côté
-      this.info = e.data[0].fields.info;
-      if (this.info) {
-        this.backend.GET(`/api/texts/${this.info}`, e=>{
-          this.info=e.data[0].fields.text
-        })        
+      for (let i = 0; i < e.data[0].included.reponse.length; i++) {
+        const id_rep = e.data[0].included.reponse[i].id_reponse;
+        const rep = e.data[0].included.reponse[i].subIncluded.text.content
+        this.reponses = this.reponses.concat([{"id": id_rep, "reponse": rep}])
       }
+
+      //pas utile pour le moment car "info" pas utilisée
+      // this.info = e.data[0].fields.info;
+      // if (this.info) {
+      //   this.backend.GET(`/api/texts/${this.info}`, e=>{
+      //     this.info=e.data[0].fields.text
+      //   })        
+      // }
 
       if (this.type == "select_all_iot") {
         this.backend.GET(`/api/products`, e=>{
           for (let i = 0; i < e.data.length; i++) {
-            this.all_iot = this.all_iot.concat([e.data[i].fields]) 
+            this.all_iot = this.all_iot.concat([e.data[i]])
           }
         })
       }
@@ -113,31 +113,51 @@ export class QuestionComponent implements OnInit {
     //   }
     // }
 
+  this.backend.GET(`/api/reponses/${this.id_answer}`, e=>{
+    this.next = e.data[0].fields.question_suivante;
+
     var projectJSON = this.globalStorage.get("projet");
     var project = JSON.parse(projectJSON);
-    var exists = false;
+    var exists = false //indique si la question a déjà été répondue (donc s'il s'agit d'une modification)
+
     for(var i= 0; i < project.length; i++){
-      if (project[i].id_question == this.id_question) {
-        exists = true;
+      if (project[i].id_question == this.id_question && project[i].partie == this.tab && project[i].niveau == this.niveau) {
+        //si cette question existe déjà dans "projet" à ce niveau dans la section 
+        //Alors il s'agit d'une MODIFICATION de la part de l'utilisateur
+        exists = true
+        //Donc on met donc à jour la réponse :
         project[i].id_reponse = this.id_answer
         project[i].reponse = this.answer
-      }
+        for (let j = 0; j < project.length; j++) {
+          if (project[j].partie == this.tab && project[j].niveau == this.niveau+1 && project[j].id_question != this.next) {
+            //Si la question au niveau d'en dessous n'est pas la même que la nouvelle question suivante
+            //Alors la question suivante va changer
+            //Donc toutes les réponses déjà existantes qui suivaient la question modifiée (càd niveau en dessous) doivent être supprimées :
+            for (let k = 0; k < project.length; k++) {
+              if (project[k].partie == this.tab && project[k].niveau > this.niveau) {
+                project.splice(k)
+              }     
+            }            
+          }
+        }
+      } 
     }
-    if (exists == false) {
+    if (!exists) {
+      //s'il ne s'agit pas d'une modification, on ajoute la reponse dans "projet"
       var reponse = {
         "partie": this.tab,
-        "id_question": this.id_question, 
+        "id_question": Number(this.id_question), 
         "question": this.question,
-        "id_reponse": this.id_answer, 
-        "reponse": this.answer
+        "id_reponse": Number(this.id_answer), 
+        "reponse": this.answer,
+        "niveau": this.niveau,
+        "solution": this.solution
       };
       project.push(reponse);
     }
-  this.globalStorage.set("projet", project) //mise à jour de la variable globale projet
-
-  this.backend.GET(`/api/reponses/${this.id_answer}`, e=>{
-    this.next = e.data[0].fields.question_suivante;
-    })
+    this.globalStorage.set("projet", project) //mise à jour de la variable globale projet
+    console.log(project)
+  })
   }
 
   // this.backend.GET(`/api/reponses/${this.id_answer}`, e=>{
@@ -146,9 +166,5 @@ export class QuestionComponent implements OnInit {
   //   console.log("next:"+this.next)
   //   })
   // }
-
-  onAddQuestion() {
-    this.add_question=true;
-  }
 
 }

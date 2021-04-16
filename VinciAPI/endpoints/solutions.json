@@ -1,9 +1,13 @@
 {
     "name": "solution",
-    "table" : "solutions",
+    "table" : "Cont_Solution",
     "fields": {
         "id":"",
-        "name":"mandatory"
+        "name":"mandatory updatable",
+        "text_db":"optionnal updatable",
+        "picture_db":"optionnal updatable",
+        "problem":"optionnal updatable",
+        "arg":"optionnal updatable"
     },
     "primaryField": "id",
     "policies":{
@@ -39,6 +43,37 @@
                     ]
                 }
             ]
+        },
+        
+        {
+            "name": "text",
+            "default_inclusion": true,
+            "bind":[
+                {
+                    "id":27,
+                    "endpoint": "text",
+                    "local_key":"name",
+                    "foreign_key":"id"
+                },
+                {
+                    "id":28,
+                    "endpoint": "text",
+                    "local_key":"text_db",
+                    "foreign_key":"id"
+                },
+                {
+                    "id":29,
+                    "endpoint": "text",
+                    "local_key":"problem",
+                    "foreign_key":"id"
+                },
+                {
+                    "id":30,
+                    "endpoint": "text",
+                    "local_key":"arg",
+                    "foreign_key":"id"
+                }
+            ]
         }
     ],
     "get_response":{
@@ -68,6 +103,13 @@
                             "sous_texte": "{{11:13::text::text}}"
                         }
                     }
+                },
+                "text":{
+                    "id": ["{{27::text::id}}","{{28::text::id}}","{{29::text::id}}","{{30::text::id}}"],
+                    "name": "{{27::text::text}}",
+                    "text_db":"{{28::text::text}}",
+                    "problem":"{{29::text::text}}",
+                    "arg":"{{30::text::text}}"
                 }
             }
         }

@@ -1,0 +1,66 @@
+  <div id="container">
+    <div class="row">
+      <div id="titre">
+        <h1>Votre projet IoT</h1>
+      </div>
+      <div id="conteneur-btn">
+        <button class="btn btn-success btn-block" (click)="openPDF()">Télécharger PDF</button>
+        <br>
+        <!-- <button class="btn btn-success btn-block" >Confirmer la demande</button> -->
+      </div>
+
+      <div id="htmlData" #htmlData>
+
+        <h1>Projet : {{data[0].solution}}</h1>
+
+        <h2>{{nom_sec1}}</h2>
+        <table class="table table-bordered">
+            <ng-container *ngFor="let d of data">
+                <ng-container *ngIf="d.partie==0">
+                    <tr class="table-primary">
+                        <td>{{d.question}}</td>
+                        <td>{{d.reponse}}</td>
+                    </tr>
+                </ng-container>
+              </ng-container>
+        </table>
+
+        <h2>{{nom_sec2}}</h2>
+        <table class="table table-bordered">
+              <ng-container *ngFor="let d of data">
+                <ng-container *ngIf="d.partie==1">
+                    <tr class="table-primary">
+                        <td>{{d.question}}</td>
+                        <td>{{d.reponse}}</td>
+                    </tr>
+                </ng-container>
+              </ng-container>              
+        </table>
+
+        <h2>{{nom_sec3}}</h2>
+        <table class="table table-bordered">
+            <ng-container *ngFor="let d of data">
+                <ng-container *ngIf="d.partie==2">
+                    <tr class="table-primary">
+                        <td>{{d.question}}</td>
+                        <td>{{d.reponse}}</td>
+                    </tr>
+                </ng-container>
+              </ng-container>
+        </table>
+
+        <h2>{{nom_sec4}}</h2>
+        <table class="table table-bordered">
+            <ng-container *ngFor="let d of data">
+                <ng-container *ngIf="d.partie==3">
+                    <tr class="table-primary">
+                        <td>{{d.question}}</td>
+                        <td>{{d.reponse}}</td>
+                    </tr>
+                </ng-container>
+              </ng-container>
+        </table>
+        </div>
+  
+    </div>
+  </div>

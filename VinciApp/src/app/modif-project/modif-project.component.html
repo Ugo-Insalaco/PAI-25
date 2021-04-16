@@ -1,7 +1,7 @@
-<div style="text-align: center;">
+<div style="text-align: center;" *ngIf="admin">
 
   <div>
-    Première question de la section :
+    <strong>Première question de la section :</strong>
     <br>
     <select *ngIf="tab == 0" [(ngModel)]="id_question_0">
       <option *ngFor="let question of questions_existantes"
@@ -32,12 +32,17 @@
     </select>
 
     <button (click)="onModifProject()">Valider le changement de la première question</button>
-    <br>----------------
+    <br>
     <br>
   </div>
+  <strong>Liste des questions de la section :</strong>
 
   <app-modif-question *ngFor="let question of all_questions"
       [id_question]=question>
   </app-modif-question>
 
+</div>
+
+<div style="text-align: center;" *ngIf="!admin">
+  <br> Veuillez vous connecter pour accéder à cette page.
 </div>

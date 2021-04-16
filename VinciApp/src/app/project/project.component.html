@@ -21,7 +21,9 @@
                     <app-question *ngIf="id_question_0 && !modif"
                         [tab]=selectedTab
                         [id_question]=id_question_0
-                        [modif]=modif>
+                        [modif]=modif
+                        [niveau]=0
+                        [solution]=nomsolution>
                     </app-question>
                     <app-modif-project *ngIf="id_question_0 && modif && selectedTab==0"
                         [tab]=selectedTab
@@ -41,7 +43,9 @@
                     <br><app-question *ngIf="id_question_1 && !modif"
                         [tab]="selectedTab" 
                         [id_question]=id_question_1
-                        [modif]=modif>
+                        [modif]=modif
+                        [niveau]=0
+                        [solution]=nomsolution>
                     </app-question>
                     <app-modif-project *ngIf="id_question_1 && modif  && selectedTab==1" 
                         [tab]=selectedTab
@@ -62,7 +66,9 @@
                     <br><app-question *ngIf="id_question_2 && !modif"
                         [tab]="selectedTab" 
                         [id_question]=id_question_2
-                        [modif]=modif>
+                        [modif]=modif
+                        [niveau]=0
+                        [solution]=nomsolution>
                     </app-question>
                     <app-modif-project *ngIf="id_question_2 && modif  && selectedTab==2" 
                         [tab]=selectedTab
@@ -108,7 +114,9 @@
                     <app-question *ngIf="id_question_3 && !modif"
                         [tab]="selectedTab" 
                         [id_question]=id_question_3
-                        [modif]=modif>
+                        [modif]=modif
+                        [niveau]=0
+                        [solution]=nomsolution>
                     </app-question>
                     <app-modif-project *ngIf="id_question_3 && modif && selectedTab==3" 
                         [tab]=selectedTab
@@ -116,6 +124,7 @@
                         [id_solution]=id_solution>
                     </app-modif-project>
                         <button mat-raised-button>Valider</button>
+                        <!-- <button mat-raised-button (click)="onSubmit()">Valider</button> -->
                     </div>
                 </mat-grid-list>
                 <button mat-raised-button matStepperPrevious>Page précédente</button>
@@ -125,6 +134,7 @@
     </mat-card-content>
 
     <button class="btnadmin" type="button" *ngIf="admin" (click)="onCreerQuestion()">Créer une nouvelle question</button>
+    <button class="btnadmin" type="button" *ngIf="admin" (click)="onSupprimerQuestion()">Supprimer une question</button>
     <button class="btnadmin" type="button" *ngIf="admin" (click)="onCreerProjet()">Créer un nouveau questionnaire</button>
 </mat-card>
 

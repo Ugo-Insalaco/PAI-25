@@ -7,6 +7,10 @@ import { GlobalStorageService } from '../services/globalStorage.service'
 import { BackendService } from '../services/backend.service';
 import { AuthService } from '../services/auth.service';
 
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { ProjectResumeComponent } from '../project-resume/project-resume.component';
+import {Title} from '@angular/platform-browser';
+
 import {Router} from '@angular/router';
 
 @Component({
@@ -24,7 +28,7 @@ export class ProjectComponent implements OnInit{
     questions = [];
     modif = false;
     admin!: boolean;
-    id_solution = 14; // voir comment récupérer cet id !
+    id_solution: number;
     id_question_0: number //1ere question de la première section
     id_question_1: number //1ere question de la deuxième section
     id_question_2: number //1ere question de la troisième section
@@ -37,6 +41,7 @@ export class ProjectComponent implements OnInit{
     constructor(private router: Router,
                 private backend: BackendService, 
                 private config: ConfigService, 
+                public dialog: MatDialog,
                 private globalStorage: GlobalStorageService,
                 private auth: AuthService){
         this.auth.isLoggedIn(res => {
@@ -61,6 +66,7 @@ export class ProjectComponent implements OnInit{
         // })
 
         this.nomsolution = this.getNomSolution();
+        this.id_solution = this.getIdSolution();
 
         // this.backend.POST('/auth/login', body, res=>{
         //     console.log(res)
@@ -116,18 +122,28 @@ export class ProjectComponent implements OnInit{
         if (this.selectedTab == 3) {
             var questions_string = this.globalStorage.get("projet")
             this.questions = JSON.parse(questions_string)
+            console.log(this.questions)
         }
         this.modif=false
     }
 
     getNomSolution(){
         var nom = this.router.url.split('/').pop();
+        nom = nom.split('$').pop();
         nom = nom.replace(/-/gi, " "); // Remplace - par espace
         nom = nom.replace(/_/gi, "'"); // Remplace _ par '
+        nom = nom.replace(/%2528/gi, "(")
+        nom = nom.replace(/%2529/gi, ")")
         nom = nom.charAt(0).toUpperCase() + nom.slice(1); // Majuscule pour 1er mot
         nom = nom.replace(/%C3%A9/gi, "é");
         return nom;
     }
+
+    getIdSolution(){
+        var id = this.router.url.split('/').pop();
+        id = id.split('$')[0];
+        return Number(id);
+      }
 
     //onModifProjet(){
         // Get selected solution and redirect to solution's page
@@ -144,6 +160,7 @@ export class ProjectComponent implements OnInit{
 
     onQuit(){
         this.modif = false;
+        location.reload()
     }
 
     onCreerQuestion(){
@@ -152,6 +169,14 @@ export class ProjectComponent implements OnInit{
 
     onCreerProjet(){
         this.router.navigate(["new-project"]);
+    }
+
+    onSupprimerQuestion(){
+        this.router.navigate(["delete-question"]);
+    }
+
+    onSubmit(){
+        const dialogRef = this.dialog.open(ProjectResumeComponent,{data:JSON.parse(this.globalStorage.get("projet"))});
     }
 
 }
