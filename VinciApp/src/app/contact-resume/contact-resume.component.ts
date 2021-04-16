@@ -1,4 +1,4 @@
-import { Component,Inject, OnInit,ViewChild,ElementRef  } from '@angular/core';
+import { Component,Inject, OnInit,ViewChild,ElementRef, ɵConsole  } from '@angular/core';
 import {EmailService} from '../services/email.service'
  import  jsPDF from 'jspdf';
  import html2canvas from 'html2canvas';
@@ -10,15 +10,18 @@ import {MAT_DIALOG_DATA} from '@angular/material/dialog';
   styleUrls: ['./contact-resume.component.css']
 })
 export class ContactResumeComponent implements OnInit {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any,public http: EmailService) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any   ,     private email: EmailService,
+  ){ }
   @ViewChild('htmlData',{static: true}) htmlData:ElementRef;
 
   ngOnInit(): void {
+
   }
 
 
       public openPDF():void {
-        //génération pdf
+
+        //génération pdf pour lathh partie front end 
         let DATA = document.getElementById('htmlData') as HTMLDataElement;
 
         html2canvas(DATA).then(canvas => {
@@ -33,21 +36,16 @@ export class ContactResumeComponent implements OnInit {
 
             PDF.save('Demande.pdf');
 
-            //envoi email
-            let contactUser = {
-              name: this.data.object,
-              email: this.data.Email,
-              doc: PDF,
-            }
-            this.http.sendEmail("/sendmail", contactUser).subscribe(
-            data => {
-             let res:any = data;
-              console.log("mail envoyée correctement");},
-             err => {
-            console.log(err);
-        });
+            
       })
       }
+      sendEmail(){
+        this.email.sendEmail(this.data,
+          res=>{
+            console.log(res)}
+
+        )
+    }
 
 
 

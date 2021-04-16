@@ -66,7 +66,6 @@ import { NewQuestionComponent } from './new-question/new-question.component';
     ContactFormComponent,
     SearchComponent,
     FieldErrorDisplayComponent,
-    ContactResumeComponent,
     BannerComponent,
     OfferComponent,
     CadranComponent,
@@ -80,8 +79,12 @@ import { NewQuestionComponent } from './new-question/new-question.component';
     NewSolutionComponent,
     NewSolutionFormComponent,
     NewOfferFormComponent,
-    NewQuestionComponent
+    NewQuestionComponent,
+    ContactResumeComponent,
+
   ],
+  
+
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -112,7 +115,9 @@ import { NewQuestionComponent } from './new-question/new-question.component';
   ],
   entryComponents: [
     NewSolutionFormComponent,
-    NewOfferFormComponent
+    NewOfferFormComponent,
+    ContactResumeComponent,
+
   ],
   bootstrap: [AppComponent]
 })

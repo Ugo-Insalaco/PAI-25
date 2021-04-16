@@ -13,7 +13,7 @@
                   <div class="alert alert-danger" *ngIf="loginError">
                      {{loginError}}
                   </div>
-                  <form [formGroup]="loginForm" (ngSubmit)="Submit()">
+                  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                       <div class="form-group">
                           <input type="text" formControlName="username" class="form-control" placeholder="Identifiant" required>
                           <div *ngIf="username.invalid && (username.dirty || username.touched)" class="error">
