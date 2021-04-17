@@ -123,8 +123,11 @@
                         [id_question]=id_question_3
                         [id_solution]=id_solution>
                     </app-modif-project>
-                        <button mat-raised-button>Valider</button>
-                        <!-- <button mat-raised-button (click)="onSubmit()">Valider</button> -->
+                        <!-- Bouton pour avoir une boîte de dialogue et possibilité de télécharger le pdf comme le formulaire de contact -->
+                        <!-- <button mat-raised-button (click)="onSubmit_resume()">Valider</button> -->
+
+                        <!--Bouton pour envoyer directement un mail-->
+                        <button mat-raised-button (click)="onSubmit_mail()">Valider</button>
                     </div>
                 </mat-grid-list>
                 <button mat-raised-button matStepperPrevious>Page précédente</button>

@@ -15,23 +15,49 @@ const mail = function(app){
         var doc = new PDFDocument;
         doc.pipe(fs.createWriteStream('demande.pdf'));
         generateHeader(doc)
-        generateCustomerInformation(doc, data)
+
+        if (typeof data.Name != 'undefined') {
+          //alors la demande provient du formulaire de contact
+          generateCustomerInformation(doc, data)
+        }
+        else {
+          //alors la demande provient de l'outil de dimensionnement de projet
+          generateCustomerProject(doc, data)        
+        }
         
         let buffers = [];
         doc.on('data', buffers.push.bind(buffers));
         doc.on('end', () => {
 
         let pdfData = Buffer.concat(buffers);
-        var mailOptions = {
-          from: "vinciwebapp@gmail.com",
-          to: "karim.nanaa@vinci-facilities.com", 
-          subject: 'Demande',
-          text: 'la demande est en pdf !',
-          attachments: [{
-             filename: 'demande.pdf',
-             content: pdfData,
-          }],
-        };
+
+        if (typeof data.Name != 'undefined') {
+          //alors la demande provient du formulaire de contact
+          var mailOptions = {
+            from: "vinciwebapp@gmail.com",
+            to: "karim.nanaa@vinci-facilities.com",
+            subject: 'Demande',
+            text: 'la demande est en pdf !',
+            attachments: [{
+               filename: 'demande.pdf',
+               content: pdfData,
+            }],
+          };
+        }
+        else {
+          //alors la demande provient de l'outil de dimensionnement de projet
+          var mailOptions = {
+            from: "vinciwebapp@gmail.com",
+            to: "karim.nanaa@vinci-facilities.com", 
+            subject: 'Nouveau projet IoT',
+            text: 'Un utilisateur a soumis un projet IoT. Vous trouverez le récapitulatif PDF en pièces jointes.',
+            attachments: [{
+               filename: 'demande.pdf',
+               content: pdfData,
+            }],
+          };         
+        }
+        
         var transporter = nodemailer.createTransport({
             service: 'gmail',
             host: 'smtp.gmail.com', 
@@ -52,11 +78,6 @@ const mail = function(app){
 
 
 });
-
-
-
-
-
 
 
 doc.end();
@@ -150,6 +171,66 @@ doc
 generateHr(doc,480);
 
 }
+
+
+function generateCustomerProject(doc, data) {
+  
+  doc
+    .fillColor("#444444")
+    .fontSize(20)
+    .text("Récapitulatif du projet IoT", 50, 160);
+  generateHr(doc, 185);
+
+  doc.moveDown()
+  doc.fontSize(12)
+  doc.text(`Solution : ${data[0].solution}`)
+
+  doc.moveDown()
+  
+  doc.fontSize(18)
+  doc.text("Capteurs et connectivités")
+
+  for (let i = 0; i < data.length; i++) {
+    if (data[i].partie == 0) {
+      doc.fontSize(12)
+      doc.text(`${data[i].question} ${data[i].reponse}`)
+    }      
+  }
+
+  doc.moveDown()
+  doc.fontSize(18)
+  doc.text("Application et fonctionalités")
+
+  for (let i = 0; i < data.length; i++) {
+    if (data[i].partie == 1) {
+      doc.fontSize(12)
+      doc.text(`${data[i].question} ${data[i].reponse}`)
+    }      
+  }
+
+  doc.moveDown()
+  doc.fontSize(18)
+  doc.text("Installation physique des IoT et création du dashboard")
+
+  for (let i = 0; i < data.length; i++) {
+    if (data[i].partie == 2) {
+      doc.fontSize(12)
+      doc.text(`${data[i].question} ${data[i].reponse}`)
+    }      
+  }
+
+  doc.moveDown()
+  doc.fontSize(18)
+  doc.text("Récapitulatif et validation")
+
+  for (let i = 0; i < data.length; i++) {
+    if (data[i].partie == 3) {
+      doc.fontSize(12)
+      doc.text(`${data[i].question} ${data[i].reponse}`)
+    }      
+  }
+}
+
 //line dans le PDF
 function generateHr(doc, y) {
   doc

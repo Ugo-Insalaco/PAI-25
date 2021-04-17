@@ -45,7 +45,6 @@ export class QuestionComponent implements OnInit {
         this.reponses = this.reponses.concat([{"id": id_rep, "reponse": rep}])
       }
 
-      //pas utile pour le moment car "info" pas utilisée
       // this.info = e.data[0].fields.info;
       // if (this.info) {
       //   this.backend.GET(`/api/texts/${this.info}`, e=>{
@@ -156,7 +155,6 @@ export class QuestionComponent implements OnInit {
       project.push(reponse);
     }
     this.globalStorage.set("projet", project) //mise à jour de la variable globale projet
-    console.log(project)
   })
   }
 
