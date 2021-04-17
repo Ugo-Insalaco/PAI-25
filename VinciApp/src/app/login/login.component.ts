@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {Title} from '@angular/platform-browser';
-import {AuthService} from '/home/sirine/Desktop/PAI-25/VinciApp/src/app/services/auth.service';
-import {BackendService} from '/home/sirine/Desktop/PAI-25/VinciApp/src/app/services/backend.service';
+import {AuthService} from '../services/auth.service';
+import {BackendService} from '../services/backend.service';
 
 @Component({
   selector: 'app-login',

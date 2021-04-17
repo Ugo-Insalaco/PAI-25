@@ -17,11 +17,6 @@ const mail = function(app){
         generateHeader(doc)
         generateCustomerInformation(doc, data)
         
-        
-
-        
-       
-
         let buffers = [];
         doc.on('data', buffers.push.bind(buffers));
         doc.on('end', () => {
@@ -72,7 +67,7 @@ doc.end();
 //Header du PDF
 function generateHeader(doc) {
   doc
-    .image("/home/sirine/pdfkit-project/logo.png", 50, 45, { width: 150})
+    .image("VinciApp/src/assets/images/VF_CMYK_C.png", 50, 45, { width: 150})
     .fillColor("#444444")
     .moveDown();
   doc.moveDown();
