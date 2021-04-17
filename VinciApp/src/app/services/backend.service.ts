@@ -3,7 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ConfigService } from './config.service';
 import { GlobalStorageService } from './globalStorage.service';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+  })
 export class BackendService {
     private message: String
     constructor(private http: HttpClient, private config: ConfigService, private globalStorage: GlobalStorageService){
@@ -41,6 +43,8 @@ export class BackendService {
         })
         .subscribe(e=>{
             console.log('requête POST effectuée')
+            console.log(e)
+            //callback(e)
             success(e)
         },
         err=>{

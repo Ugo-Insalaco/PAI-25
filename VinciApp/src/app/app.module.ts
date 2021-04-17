@@ -68,7 +68,6 @@ import { ProjectResumeComponent } from './project-resume/project-resume.componen
     ContactFormComponent,
     SearchComponent,
     FieldErrorDisplayComponent,
-    ContactResumeComponent,
     BannerComponent,
     OfferComponent,
     CadranComponent,
@@ -83,9 +82,13 @@ import { ProjectResumeComponent } from './project-resume/project-resume.componen
     NewSolutionFormComponent,
     NewOfferFormComponent,
     NewQuestionComponent,
+    ContactResumeComponent,
+
     DeleteQuestionComponent,
     ProjectResumeComponent
   ],
+  
+
   imports: [
     BrowserModule,
     HttpClientModule,

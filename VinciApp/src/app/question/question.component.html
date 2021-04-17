@@ -20,7 +20,7 @@
   <div class="qt" *ngIf="type=='number'">
     {{question}} <br>   
     <div class="reponse">
-      <input type="number" [(ngModel)]="answer" (change)="onAnswer()">
+      <input type="number" min="0" [(ngModel)]="answer" (change)="onAnswer()">
     </div>
   </div>
   

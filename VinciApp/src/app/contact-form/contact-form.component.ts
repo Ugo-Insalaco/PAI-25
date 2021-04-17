@@ -81,7 +81,7 @@ export class ContactFormComponent implements OnInit {
   onSubmit() {
     //console.log(this.form);
     if (this.form.valid) {
-     console.log( this.email)
+     //console.log( this.email)
     const dialogRef = this.dialog.open(ContactResumeComponent,{data:{Name:this.name.value,
       Surname:this.surname.value,Civilite:this.civility.value,Entreprise:this.entreprise.value,Telephone:this.mobile.value
       ,Email:this.email.value,Street:this.street.value,city:this.city.value,zip:this.zipCode.value,object:this.object.value,
