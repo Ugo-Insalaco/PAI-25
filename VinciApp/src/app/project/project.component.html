@@ -2,10 +2,14 @@
 <br>
 <mat-card id="outil">
     <mat-card-header>
+        <div id="dim-solution-title">
         <mat-card-title id="outil_title">
-            Dimensionnement de votre projet : {{nomsolution}}
+            
+                Dimensionnement de votre projet : {{nomsolution}}
+            
 
         </mat-card-title>
+        </div>
     </mat-card-header>
     <hr>
     <mat-card-content>
@@ -86,29 +90,41 @@
                         <button class="btnadmin" *ngIf="!modif && admin" (click)=onModifier()>Modifier les questions</button>
                         <button class="btnadmin" *ngIf="modif && admin" (click)=onQuit()>Quitter l'outil de modification</button>
                         <br>
-                        <div>
-                            <span class="ss-titre-recap">{{nom_sec1}}</span><br>
-                            <div *ngFor="let q of questions">
-                               <div *ngIf="q.partie==0">
-                                    {{q.question}} {{q.reponse}}
-                                </div>
-                            </div>
-                            <br>
-                            <span class="ss-titre-recap">{{nom_sec2}}</span><br>
-                            <div *ngFor="let q of questions">
-                                <div *ngIf="q.partie==1">
-                                    {{q.question}} {{q.reponse}}
-                                </div>
-                            </div>
-                            <br>
-                            <span class="ss-titre-recap">{{nom_sec3}}</span><br>
-                          <div *ngFor="let q of questions">
-                                <div *ngIf="q.partie==2">
-                                    {{q.question}} {{q.reponse}}
-                                </div>
-                            </div>
-                        </div>                        
                     </div>
+                    <div id="recap-dim">
+                        <span class="ss-titre-recap">
+                            {{nom_sec1}}
+                        </span>
+                        <hr>
+                        <div *ngFor="let q of questions">
+                            <div class="recap" *ngIf="q.partie==0">
+                                {{q.question}} {{q.reponse}}
+                                
+                            </div>
+                            <hr>
+                        </div>
+                        <br>
+                        <span class="ss-titre-recap">{{nom_sec2}}</span>
+                        <br>
+                        <div *ngFor="let q of questions">
+                            <div class="recap" *ngIf="q.partie==1">
+                                {{q.question}} {{q.reponse}}
+                                
+                            </div>
+                            <hr>
+                        </div>
+                        <br>
+                        <span class="ss-titre-recap">{{nom_sec3}}</span>
+                        <br>
+                        <div class="recap" *ngFor="let q of questions">
+                            <div *ngIf="q.partie==2">
+                                {{q.question}} {{q.reponse}}
+                                
+                            </div>
+                            <hr>
+                        </div>
+                    </div>                        
+                    
                     <br>
                     <div style="text-align: center;">
                     <app-question *ngIf="id_question_3 && !modif"

@@ -15,6 +15,10 @@
     
 }
 
+#dim-solution-title {
+  text-align: center;
+}
+
 .intitule-qt {
 	text-align: center;
 }
@@ -25,7 +29,22 @@
 
 .ss-titre-recap {
 	font-size: 1.5em;
+  padding: 5% 0% 1% 0%;
 
+}
+
+#recap-dim {
+  text-align: left;
+  padding-left: 17%;
+  padding-right: 17%;
+}
+
+.recap {
+  padding: 1% 0% 1% 5%;
+}
+
+hr {
+  margin: 0;
 }
 
 ::ng-deep .mat-step-header .mat-step-icon-selected {
