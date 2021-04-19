@@ -3,7 +3,7 @@ import {EmailService} from '../services/email.service'
 import  jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { BackendService } from '../services/backend.service';
+import {BackendService} from '../services/backend.service'
 
 @Component({
   selector: 'app-project-resume',
@@ -17,8 +17,11 @@ export class ProjectResumeComponent implements OnInit {
   nom_sec3: string;
   nom_sec4: string;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private backend: BackendService,public http: EmailService) { }
-  @ViewChild('htmlData',{static: true}) htmlData:ElementRef;
+  constructor(@Inject(MAT_DIALOG_DATA) 
+    public data: any, 
+    private backend: BackendService, 
+    private email: EmailService,
+  ){ }
 
   ngOnInit(): void {
     //Récupération des noms des parties
@@ -50,22 +53,17 @@ export class ProjectResumeComponent implements OnInit {
         let position = 0;
         PDF.addImage(FILEURI, 'PNG', 0, position,fileWidth, fileHeight)
 
-        PDF.save('Projet_IoT.pdf');
-
-        // //envoi email
-        // let contactUser = {
-        //   name: this.data.object,
-        //   email: this.data.Email,
-        //   doc: PDF,
-        // }
-        // this.http.sendEmail("http://localhost:3000/sendmail", contactUser).subscribe(
-        // data => {
-        //  let res:any = data;
-        //   console.log("mail envoyé correctement");},
-        //  err => {
-        // console.log(err);
-    // });
-  })
+        PDF.save('Projet_IoT.pdf');                
+      })
   }
+  
+  
+  sendEmail(){
+    this.email.sendEmail(this.data,
+      res=>{
+        console.log(res)}
+      )
+  }
+
 
 }

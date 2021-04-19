@@ -2,7 +2,7 @@
 
   <!-- Affichage de la question -->
 
-  <div class="qt" *ngIf="type=='radio'"> <!--QM avec une seule réponse possible-->
+  <div class="qt" *ngIf="type=='radio'">
     {{question}}
     <div class="reponse">
     <ng-container *ngFor="let r of reponses">
@@ -37,7 +37,7 @@
     <select multiple [(ngModel)]="answer" (change)="onAnswer()">
       <option *ngFor = "let r of reponses"> {{r.reponse}} </option>
     </select>
-    <br><small>(Utilisez CTRL pour sélectionner plusieurs)</small> <!--Mettre ça dans "info" plutôt (pour la langue)-->
+    <br><small>(Utilisez CTRL pour sélectionner plusieurs)</small>
   </div>
 
   <div class="qt" *ngIf="type=='select_all_iot'">
@@ -48,7 +48,6 @@
         {{iot.fields.brand}} - {{iot.fields.name}} (données mesurées : {{iot.included.data[0].name_data}})
       </option>
     </select>
-    <br><small>(Utilisez CTRL pour sélectionner plusieurs)</small> <!--Mettre ça dans "info" plutôt (pour la langue)-->
   </div>
   <br>
 

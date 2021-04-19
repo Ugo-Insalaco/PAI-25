@@ -6,6 +6,7 @@ import { ConfigService } from '../services/config.service'
 import { GlobalStorageService } from '../services/globalStorage.service'
 import { BackendService } from '../services/backend.service';
 import { AuthService } from '../services/auth.service';
+import {EmailService} from '../services/email.service'
 
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { ProjectResumeComponent } from '../project-resume/project-resume.component';
@@ -43,6 +44,7 @@ export class ProjectComponent implements OnInit{
                 private config: ConfigService, 
                 public dialog: MatDialog,
                 private globalStorage: GlobalStorageService,
+                private email: EmailService,
                 private auth: AuthService){
         this.auth.isLoggedIn(res => {
             this.admin = res;
@@ -144,15 +146,6 @@ export class ProjectComponent implements OnInit{
         id = id.split('$')[0];
         return Number(id);
       }
-
-    //onModifProjet(){
-        // Get selected solution and redirect to solution's page
-        //var solution = this.nomsolution;
-        //solution = solution.replace(/ /gi, "-"); // Remplace - par espace
-        //solution = solution.replace(/'/gi, "_"); // Remplace _ par '
-        //solution = solution.toLowerCase()
-        //this.router.navigate(["modif-project/",solution]);
-      //}
     
     onModifier(){
         this.modif = true;
@@ -175,8 +168,21 @@ export class ProjectComponent implements OnInit{
         this.router.navigate(["delete-question"]);
     }
 
-    onSubmit(){
+    // Boîte de dialogue + téléchargement PDF comme pour le formulaire de contact :
+    onSubmit_resume(){
         const dialogRef = this.dialog.open(ProjectResumeComponent,{data:JSON.parse(this.globalStorage.get("projet"))});
+    }
+
+    // Juste envoi d'un mail lors de la validation :
+    onSubmit_mail(){
+        var input = confirm("Les informations renseignées vont être envoyées à Vinci Facilities.")
+        if (input) {
+            var data = JSON.parse(this.globalStorage.get("projet"))
+            this.email.sendEmail(data,
+                res=>{
+                  console.log(res)}
+            )
+        }
     }
 
 }
