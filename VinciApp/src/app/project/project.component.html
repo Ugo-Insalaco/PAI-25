@@ -98,27 +98,31 @@
                         <hr>
                         <div *ngFor="let q of questions">
                             <div class="recap" *ngIf="q.partie==0">
-                                {{q.question}} {{q.reponse}}
+                                {{q.question}} <strong>{{q.reponse}}</strong>
                                 
                             </div>
                             <hr>
                         </div>
                         <br>
-                        <span class="ss-titre-recap">{{nom_sec2}}</span>
-                        <br>
+                        <span class="ss-titre-recap">
+                            {{nom_sec2}}
+                        </span>
+                        <hr>
                         <div *ngFor="let q of questions">
                             <div class="recap" *ngIf="q.partie==1">
-                                {{q.question}} {{q.reponse}}
+                                {{q.question}} <strong>{{q.reponse}}</strong>
                                 
                             </div>
                             <hr>
                         </div>
                         <br>
-                        <span class="ss-titre-recap">{{nom_sec3}}</span>
-                        <br>
-                        <div class="recap" *ngFor="let q of questions">
-                            <div *ngIf="q.partie==2">
-                                {{q.question}} {{q.reponse}}
+                        <span class="ss-titre-recap">
+                            {{nom_sec3}}
+                        </span>
+                        <hr>
+                        <div  *ngFor="let q of questions">
+                            <div class="recap" *ngIf="q.partie==2">
+                                {{q.question}} <strong>{{q.reponse}}</strong>
                                 
                             </div>
                             <hr>
@@ -126,19 +130,19 @@
                     </div>                        
                     
                     <br>
-                    <div style="text-align: center;">
-                    <app-question *ngIf="id_question_3 && !modif"
-                        [tab]="selectedTab" 
-                        [id_question]=id_question_3
-                        [modif]=modif
-                        [niveau]=0
-                        [solution]=nomsolution>
-                    </app-question>
-                    <app-modif-project *ngIf="id_question_3 && modif && selectedTab==3" 
-                        [tab]=selectedTab
-                        [id_question]=id_question_3
-                        [id_solution]=id_solution>
-                    </app-modif-project>
+                    <div class="modif-projet">
+                        <app-question *ngIf="id_question_3 && !modif"
+                            [tab]="selectedTab" 
+                            [id_question]=id_question_3
+                            [modif]=modif
+                            [niveau]=0
+                            [solution]=nomsolution>
+                        </app-question>
+                        <app-modif-project *ngIf="id_question_3 && modif && selectedTab==3" 
+                            [tab]=selectedTab
+                            [id_question]=id_question_3
+                            [id_solution]=id_solution>
+                        </app-modif-project>
                         <!-- Bouton pour avoir une boîte de dialogue et possibilité de télécharger le pdf comme le formulaire de contact -->
                         <!-- <button mat-raised-button (click)="onSubmit_resume()">Valider</button> -->
 
