@@ -58,11 +58,10 @@
   <!-- "Info" laissé de côté pour le moment car contraignant et apporte pas grand chose finalement -->
 
   <!-- Affichage de la question suivante -->
-  <div *ngIf="(answer || id_answer) && !modif">
+  <div *ngIf="(answer || id_answer)">
     <app-question *ngIf="next" 
       [id_question]=next
       [tab]=tab
-      [modif]=modif
       [niveau]=niveau+1
       [solution]=nomsolution>
     </app-question>

@@ -23,14 +23,13 @@
                     </div>
                     <br>
                     <app-question *ngIf="id_question_0 && !modif"
-                        [tab]=selectedTab
+                        [tab]=0
                         [id_question]=id_question_0
-                        [modif]=modif
                         [niveau]=0
                         [solution]=nomsolution>
                     </app-question>
                     <app-modif-project *ngIf="id_question_0 && modif && selectedTab==0"
-                        [tab]=selectedTab
+                        [tab]=0
                         [id_question]=id_question_0
                         [id_solution]=id_solution>
                     </app-modif-project>
@@ -45,14 +44,13 @@
                         <button class="btnadmin" *ngIf="modif && admin" (click)=onQuit()>Quitter l'outil de modification</button>
                     </div>
                     <br><app-question *ngIf="id_question_1 && !modif"
-                        [tab]="selectedTab" 
+                        [tab]=1
                         [id_question]=id_question_1
-                        [modif]=modif
                         [niveau]=0
                         [solution]=nomsolution>
                     </app-question>
                     <app-modif-project *ngIf="id_question_1 && modif  && selectedTab==1" 
-                        [tab]=selectedTab
+                        [tab]=1
                         [id_question]=id_question_1
                         [id_solution]=id_solution>
                     </app-modif-project>
@@ -68,14 +66,13 @@
                         <button class="btnadmin" *ngIf="modif && admin" (click)=onQuit()>Quitter l'outil de modification</button>
                     </div>
                     <br><app-question *ngIf="id_question_2 && !modif"
-                        [tab]="selectedTab" 
+                        [tab]=2
                         [id_question]=id_question_2
-                        [modif]=modif
                         [niveau]=0
                         [solution]=nomsolution>
                     </app-question>
                     <app-modif-project *ngIf="id_question_2 && modif  && selectedTab==2" 
-                        [tab]=selectedTab
+                        [tab]=2
                         [id_question]=id_question_2
                         [id_solution]=id_solution>
                     </app-modif-project>
@@ -132,14 +129,13 @@
                     <br>
                     <div class="modif-projet">
                         <app-question *ngIf="id_question_3 && !modif"
-                            [tab]="selectedTab" 
+                            [tab]=3
                             [id_question]=id_question_3
-                            [modif]=modif
                             [niveau]=0
                             [solution]=nomsolution>
                         </app-question>
                         <app-modif-project *ngIf="id_question_3 && modif && selectedTab==3" 
-                            [tab]=selectedTab
+                            [tab]=3
                             [id_question]=id_question_3
                             [id_solution]=id_solution>
                         </app-modif-project>

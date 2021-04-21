@@ -16,7 +16,6 @@ export class QuestionComponent implements OnInit {
   constructor(private backend: BackendService, private config: ConfigService, private globalStorage: GlobalStorageService){}
   @Input() tab; //numero de la page (donc de la section)
   @Input() id_question;
-  @Input() modif //pour savoir si on est en mode modif ou pas
   @Input() niveau //indique de la combientième question il s'agit dans la section (utile pour la gestion des modifications des réponses par l'utilisateur)
   @Input() solution
 
@@ -29,7 +28,6 @@ export class QuestionComponent implements OnInit {
   answer: string; //contenu de la réponse de l'utilisateur 
   next = ""; //id de la question suivante
   all_iot = [];
-  add_question = false //activation/désactivation de l'outil pour ajouter une question
   
   ngOnInit(): void {
   }
@@ -75,10 +73,7 @@ export class QuestionComponent implements OnInit {
 
   onAnswer(){
     //Pour les questions type radio, on récupère la réponse correspondant à l'id sélectionné :
-    if (this.type == "radio") { 
-      // this.backend.GET(`/api/reponses/${this.id_answer}`, e=>{
-      //   this.answer = e.data[0].included["text"][0].content;
-      // })
+    if (this.type == "radio") {
       for (let i = 0; i < this.reponses.length; i++) {
         if (this.reponses[i].id == this.id_answer) {
           this.answer = this.reponses[i].reponse
@@ -157,12 +152,5 @@ export class QuestionComponent implements OnInit {
     this.globalStorage.set("projet", project) //mise à jour de la variable globale projet
   })
   }
-
-  // this.backend.GET(`/api/reponses/${this.id_answer}`, e=>{
-  //   this.next = e.data[0].included["question_suivante"][0].id[0];
-  //   console.log(e.data[0])
-  //   console.log("next:"+this.next)
-  //   })
-  // }
 
 }

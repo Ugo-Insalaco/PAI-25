@@ -24,7 +24,6 @@ import {Router} from '@angular/router';
 export class ProjectComponent implements OnInit{
     complete: boolean
     selectedTab: any
-    backendMessage: String
     nomsolution: string;
     questions = [];
     modif = false;
@@ -55,28 +54,12 @@ export class ProjectComponent implements OnInit{
     ngOnInit(){
         this.complete=true
         this.selectedTab=0
-        // let body={
-        //     username: "le dieu",
-        //     password:'je suis intelligent',
-        // }
 
         this.globalStorage.set("projet", []) //initialisation de la variable globale projet
         this.globalStorage.set("iot", []) //initialisation de la variable globale iot (quantité et ref des iot)
 
-        // this.backend.GET('/api/text/1', e=>{
-        //     this.backendMessage = JSON.stringify(e)
-        // })
-
         this.nomsolution = this.getNomSolution();
         this.id_solution = this.getIdSolution();
-
-        // this.backend.POST('/auth/login', body, res=>{
-        //     console.log(res)
-        // })
-
-        // this.backend.GET(`/api/solutions/${this.id_solution}?include=section_question`, e=>{
-        //     e.data[0].included["section_question"][0].id_question
-        // });
 
         //Récupération des premières questions de chaque section :
         this.backend.GET(`/api/solutions/${this.id_solution}?include=section_question`, e=>{
