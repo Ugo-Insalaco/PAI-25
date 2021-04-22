@@ -90,39 +90,42 @@
                     </div>
                     <div id="recap-dim">
                         <span class="ss-titre-recap">
-                            {{nom_sec1}}
+                            <strong>{{nom_sec1}}</strong>
                         </span>
-                        <hr>
+                        <hr class="ligne-ss-section">
                         <div *ngFor="let q of questions">
                             <div class="recap" *ngIf="q.partie==0">
-                                {{q.question}} <strong>{{q.reponse}}</strong>
-                                
+                                <div class="question-reponse">
+                                    {{q.question}} <strong>{{q.reponse}}</strong>
+                                </div>
+                                <hr>
                             </div>
-                            <hr>
                         </div>
                         <br>
                         <span class="ss-titre-recap">
-                            {{nom_sec2}}
+                            <strong>{{nom_sec2}}</strong>
                         </span>
-                        <hr>
+                        <hr class="ligne-ss-section">
                         <div *ngFor="let q of questions">
                             <div class="recap" *ngIf="q.partie==1">
-                                {{q.question}} <strong>{{q.reponse}}</strong>
-                                
+                                <div class="question-reponse">
+                                    {{q.question}} <strong>{{q.reponse}}</strong>
+                                </div>
+                                <hr>
                             </div>
-                            <hr>
                         </div>
                         <br>
                         <span class="ss-titre-recap">
-                            {{nom_sec3}}
+                            <strong>{{nom_sec3}}</strong>
                         </span>
-                        <hr>
+                        <hr class="ligne-ss-section">
                         <div  *ngFor="let q of questions">
                             <div class="recap" *ngIf="q.partie==2">
-                                {{q.question}} <strong>{{q.reponse}}</strong>
-                                
+                                <div class="question-reponse">
+                                    {{q.question}} <strong>{{q.reponse}}</strong>
+                                </div>
+                                <hr>
                             </div>
-                            <hr>
                         </div>
                     </div>                        
                     

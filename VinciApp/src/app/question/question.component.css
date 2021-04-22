@@ -16,3 +16,7 @@ textarea {
 	height:2em;
 	width:70%
    }
+
+select {
+	max-width: 100%;
+}
