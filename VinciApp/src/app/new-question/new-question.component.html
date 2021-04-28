@@ -1,6 +1,7 @@
-<div style="text-align: center;" *ngIf="admin">
-    
-    <strong>Création d'une nouvelle question</strong>
+<div id="body" *ngIf="admin">
+    <div id="titre">
+        <strong>Création d'une nouvelle question</strong>
+    </div>
     
     <div>
         Cet outil permet de créer une question, qui apparaîtra ensuite dans la liste des questions possibles lors de la modification ou de la création des questionnaires.
@@ -12,7 +13,7 @@
         Type de question : <input type="text" [(ngModel)]="type">
     </div> -->
 
-    <div>
+    <div class="item">
         Type :
         <select [(ngModel)]="type">
             <option value="radio">QCM avec une seule réponse possible</option>
@@ -24,7 +25,7 @@
     </div>
 
 
-    <div>
+    <div class="item">
         Enoncé de la question : <input class="saisie" type="text" [(ngModel)]="question">
     </div>
 
@@ -33,17 +34,17 @@
     </div> -->
     <!--Attribut "info" laissé de côté pour le moment car contraignant et apporte pas grand chose-->
 
-    <div *ngIf="type == 'radio' || type == 'select'">
-        Nombre de réponses : <input type="number" [(ngModel)]="nb_reponses">
+    <div class="item" *ngIf="type == 'radio' || type == 'select'">
+        Nombre de réponses : <input type="number" min="1" [(ngModel)]="nb_reponses">
     </div>
-    -------------
+    <hr>
     <div>
-        <div *ngFor="let reponse of reponses(nb_reponses);let index=index;">
+        <div class="item" *ngFor="let reponse of reponses(nb_reponses);let index=index;">
             <div *ngIf="type == 'radio' || type == 'select'">
                 Enoncé de la réponse n° {{index+1}} : <input class="saisie" type="text" [(ngModel)]="reponses[index]">
             </div>
                 <!-- <br>Identifiant de la question suivante : <input type="number" [(ngModel)]="questions_suivantes[index]"> -->
-            <ng-container *ngIf="type">
+            <ng-container class="item" *ngIf="type">
                 Question suivante :
             <select [(ngModel)]="questions_suivantes[index]">
                 <option value="null">Aucune</option>
@@ -54,13 +55,16 @@
             </select>
             
             <small>Si aucune, sélectionnez "Aucune" dans le menu déroulant</small>
-            <br>-------------
+            <br>
+            <hr>
             </ng-container>
         </div>
     </div>
 
     <br>
-    <button (click)=onPost()>Créer la question</button>
+    <div id="btn-valider">
+        <button (click)=onPost()>Créer la question</button>
+    </div>
 
 
 </div>

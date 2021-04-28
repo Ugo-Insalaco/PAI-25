@@ -1,6 +1,7 @@
-<div style="text-align: center;" *ngIf="admin"> 
-
-    <strong> Création d'un nouveau questionnaire </strong>
+<div id="body" *ngIf="admin"> 
+    <div id="titre">
+        <strong> Création d'un nouveau questionnaire </strong>
+    </div>
     <br>
     Remarque : la création d'un projet se fait à partir d'une solution et de questions existantes ; veuillez d'abord créer la solution et les questions nécessaires. <!--mettre un lien ici ce serait sympa-->
 
@@ -66,7 +67,9 @@
     </div>
 
     <br>
-    <button (click)=onPost()>Créer le questionnaire</button>
+    <div id="btn-valider">
+        <button (click)=onPost()>Créer le questionnaire</button>
+    </div>
 
 </div>
 

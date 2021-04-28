@@ -1,3 +1,38 @@
+#body {
+	padding: 5% 20% 2% 20%;
+	text-align: left;
+}
+
+#titre {
+	text-align: center;
+	font-size: 1.5em;
+	padding: 1%;
+	margin-bottom: 2%;
+}
+
 .saisie {
     width: 60%;
+}
+
+button {
+  border: 0;
+  border-radius: 3px;
+  text-align: center;
+  background-color: #DBDBDB;
+  box-shadow: 1px 1px 1px #646464;
+  margin-left: 1vh;
+}
+
+.item {
+	padding-bottom: 1%;
+}
+
+select {
+	max-width: 100%;
+	margin-top: 1%;
+	margin-bottom: 3%;
+}
+
+#btn-valider {
+	text-align: center;
 }
