@@ -16,8 +16,8 @@ export class ContactResumeComponent implements OnInit {
   @ViewChild('htmlData',{static: true}) htmlData:ElementRef;
 
   dictFR = {
-    'title': 'Résumé de demande',
-    'title2': 'Information personnelles',
+    'title': 'Résumé de la demande',
+    'title2': 'Informations personnelles',
     'title3': 'Détails de la demande',
     'titlecivility': 'Civilité',
     'name': 'Nom',
