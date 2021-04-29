@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser')
 const URL_parser = function(req, res, next){
     let params = {
         include: [
-            
+
         ]
     }
     if(req.url.split('?').length>1){
@@ -69,7 +69,7 @@ const jsonBodyParser = function(data){
             })
         })
         .then(()=>{
-            if(Object.keys(req.body).every(key=>data[xss(key)]!==undefined) && 
+            if(Object.keys(req.body).every(key=>data[xss(key)]!==undefined) &&
             Object.keys(data).filter(key=>data[key].split(' ').includes("mandatory")).every(key=>req.body[xss(key)]!==undefined)
             ){
                 next()

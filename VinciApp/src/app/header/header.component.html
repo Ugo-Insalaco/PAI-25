@@ -4,19 +4,16 @@
       <img src="assets/images/VF_RGB_C.png" alt="Angular Project" />
     </a>
     <span class="fill-space" ></span>
-    <mat-form-field   appearance="fill" class="mat-form-field">
-      <mat-select [(value)]="selected"  >
-        <mat-option value="FR"  >FR</mat-option>
-        <mat-option value="ENG"  >ENG</mat-option>
+    <mat-form-field appearance="none" class="mat-form-field">
+      <mat-select [(value)]="selected" (selectionChange)="changeLanguage($event.value)">
+        <mat-option value="FRA">FRA</mat-option>
+        <mat-option value="EN">EN</mat-option>
       </mat-select>
     </mat-form-field>
-    <span></span>
     <span class="example-spacer"></span>
     <span></span>
-    <span class="example-spacer"></span>
-    <span></span>
-    <button  mat-raised-button id="connectbtn" color="primary" class="space" routerLink="/login" *ngIf="isConnected===false"> <mat-icon>perm_identity</mat-icon> <strong>Se Connecter</strong>  </button>
-    <button  mat-raised-button id="disconnectbtn" color="primary" class="space" (click)="OnDisconnect()" *ngIf="isConnected===true"> <mat-icon>perm_identity</mat-icon> <strong>Se Deconnecter</strong>  </button>
+    <button  mat-raised-button id="connectbtn" color="primary" class="space" routerLink="/login" *ngIf="isConnected===false"> <mat-icon>perm_identity</mat-icon><strong>{{dictTexts['login']}}</strong></button>
+    <button  mat-raised-button id="disconnectbtn" color="primary" class="space" (click)="OnDisconnect()" *ngIf="isConnected===true"> <mat-icon>perm_identity</mat-icon><strong>{{dictTexts['logout']}}</strong></button>
     <span></span>
     <span class="example-spacer"></span>
     <span></span>

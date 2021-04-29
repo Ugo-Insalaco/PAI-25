@@ -3,7 +3,8 @@ import {EmailService} from '../services/email.service'
 import  jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {BackendService} from '../services/backend.service'
+import {BackendService} from '../services/backend.service';
+import { GlobalStorageService } from '../services/globalStorage.service';
 
 @Component({
   selector: 'app-project-resume',
@@ -17,13 +18,29 @@ export class ProjectResumeComponent implements OnInit {
   nom_sec3: string;
   nom_sec4: string;
 
-  constructor(@Inject(MAT_DIALOG_DATA) 
-    public data: any, 
-    private backend: BackendService, 
+  dictFR = {
+    'title': 'Votre projet IoT',
+    'download': 'Télécharger le PDF',
+    'submit': 'Soumettre le projet à Vinci Facilities',
+    'project': 'Projet'
+  }
+  dictEN = {
+    'title': 'Your IoT project',
+    'download': 'Download PDF',
+    'submit': 'Submit to Vinci Facilities',
+    'project': 'Project'
+  }
+  dictTexts = {};
+
+  constructor(@Inject(MAT_DIALOG_DATA)
+    public data: any,
+    private backend: BackendService,
     private email: EmailService,
+    private globalstorage: GlobalStorageService
   ){ }
 
   ngOnInit(): void {
+    this.dictTexts = this.globalstorage.get('langage')=='"FRA"'? this.dictFR : this.dictEN;
     //Récupération des noms des parties
     this.backend.GET(`/api/sections/1`, e=>{
       this.nom_sec1 = e.data[0].included.text[0].name
@@ -53,11 +70,11 @@ export class ProjectResumeComponent implements OnInit {
         let position = 0;
         PDF.addImage(FILEURI, 'PNG', 0, position,fileWidth, fileHeight)
 
-        PDF.save('Projet_IoT.pdf');                
+        PDF.save('Projet_IoT.pdf');
       })
   }
-  
-  
+
+
   sendEmail(){
     this.email.sendEmail(this.data,
       res=>{

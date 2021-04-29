@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { BackendService } from '../services/backend.service';
+import { GlobalStorageService } from '../services/globalStorage.service';
 
 @Component({
   selector: 'app-sidenav-menu',
@@ -11,11 +12,20 @@ export class SidenavMenuComponent implements OnInit {
   cadranList: any[] = [];
   offreList: any[] = [];
 
+  dictFR = {
+    'home': 'Accueil'
+  }
+  dictEN = {
+    'home': 'Home'
+  }
+  dictTexts = {};
+
   @Output() public sidenavClose = new EventEmitter();
 
-  constructor(private backend: BackendService) { }
+  constructor(private backend: BackendService, private globalstorage: GlobalStorageService) { }
 
   ngOnInit(): void {
+    this.dictTexts = this.globalstorage.get('langage')=='"FRA"'? this.dictFR : this.dictEN;
     // Récupération du nom, de l'url et des offres des cadrans
     this.backend.GET('/api/cadrans', e=>{
       for(var i=0; i<e.data.length; i++){

@@ -1,17 +1,17 @@
   <div id="container">
     <div class="row">
       <div id="titre">
-        <h1>Votre projet IoT</h1>
+        <h1>{{dictTexts['title']}}</h1>
       </div>
       <div id="conteneur-btn">
-        <button class="btn btn-success btn-block" (click)="openPDF()">Télécharger PDF</button>    
-        <button class="btn btn-success btn-block" (click)="sendEmail()">Soumettre le projet à Vinci Facilities</button>
+        <button class="btn btn-success btn-block" (click)="openPDF()">{{dictTexts['download']}}</button>
+        <button class="btn btn-success btn-block" (click)="sendEmail()">{{dictTexts['submit']}}</button>
         <br>
       </div>
 
       <div id="htmlData" #htmlData>
 
-        <h1>Projet : {{data[0].solution}}</h1>
+        <h1>{{dictTexts['project']}} : {{data[0].solution}}</h1>
 
         <h2>{{nom_sec1}}</h2>
         <table class="table table-bordered">
@@ -34,7 +34,7 @@
                         <td>{{d.reponse}}</td>
                     </tr>
                 </ng-container>
-              </ng-container>              
+              </ng-container>
         </table>
 
         <h2>{{nom_sec3}}</h2>
@@ -61,6 +61,6 @@
               </ng-container>
         </table>
         </div>
-  
+
     </div>
   </div>

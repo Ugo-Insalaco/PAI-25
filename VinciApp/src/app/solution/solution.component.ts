@@ -3,6 +3,7 @@ import {Title} from '@angular/platform-browser';
 import {Router} from '@angular/router';
 import { BackendService } from '../services/backend.service';
 import { AuthService } from '../services/auth.service';
+import { GlobalStorageService } from '../services/globalStorage.service';
 
 @Component({
   selector: 'app-solution',
@@ -37,17 +38,28 @@ export class SolutionComponent implements OnInit, AfterViewInit {
   contentEditableDesc: boolean = false;
   contentEditableText: boolean = false;
 
+  dictFR = {
+    'sim': 'Simulez votre projet'
+  }
+  dictEN = {
+    'sim': 'Simulate your project'
+  }
+  dictTexts = {};
+
   constructor(private titleService: Title,
               private auth: AuthService,
               private cd: ChangeDetectorRef,
               private router: Router,
-              private backend: BackendService) {
+              private backend: BackendService,
+              private globalstorage: GlobalStorageService) {
     this.auth.isLoggedIn(res => {
       this.admin = res;
     });
   }
 
   ngOnInit(): void {
+    this.dictTexts = this.globalstorage.get('langage')=='"FRA"'? this.dictFR : this.dictEN;
+
     this.nomcadran = this.getNomCadran();
     this.nomsolution = this.getNomSolution();
     this.idcadran = this.getIdCadran();

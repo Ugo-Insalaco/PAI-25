@@ -28,9 +28,12 @@
 }
 mat-select{
   color: #00438a;
+  font-weight: bold;
+  font-size: 16px;
 }
 mat-form-field{
-    background-color: white;
+  padding: 0;
+  margin-top: 10px;
 }
 button{
     color: #00438a;

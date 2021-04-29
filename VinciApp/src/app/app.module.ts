@@ -87,8 +87,6 @@ import { ProjectResumeComponent } from './project-resume/project-resume.componen
     DeleteQuestionComponent,
     ProjectResumeComponent
   ],
-  
-
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -119,7 +117,7 @@ import { ProjectResumeComponent } from './project-resume/project-resume.componen
   ],
   entryComponents: [
     NewSolutionFormComponent,
-    NewOfferFormComponent, 
+    NewOfferFormComponent,
     ContactResumeComponent,
     ProjectResumeComponent
   ],

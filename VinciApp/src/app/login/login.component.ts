@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import {Title} from '@angular/platform-browser';
 import {AuthService} from '../services/auth.service';
 import {BackendService} from '../services/backend.service';
+import { GlobalStorageService } from '../services/globalStorage.service';
 
 @Component({
   selector: 'app-login',
@@ -15,38 +16,45 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   returnUrl: string;
   error: {errorTitle: '', errorDesc: ''};
-  loginError: string;
+
+  dictFR = {
+    'login': 'Se connecter',
+    'id': 'Identifiant',
+    'pwd': 'Mot de passe',
+    'incorrectid': "Le nom d'utilisateur est incorrect",
+    'incorrectpwd': 'Le mot de passe est incorrect',
+    'incorrectsubmission': "L'identifiant ou le mot de passe est incorrect"
+  }
+  dictEN = {
+    'login': 'Login',
+    'id': 'Username',
+    'pwd': 'Password',
+    'incorrectid': "Incorrect username",
+    'incorrectpwd': 'Incorrect password',
+    'incorrectsubmission': "Username or password is incorrect"
+  }
+  dictTexts = {};
+  incorrectSubmission: boolean = false;
+
   constructor(private fb: FormBuilder,
     private router: Router,
     private titleService: Title,
     private authService: AuthService,
-    private back:BackendService
-    ) { }
+    private back: BackendService,
+    private globalstorage: GlobalStorageService) { }
 
-    ngOnInit() {
-      this.titleService.setTitle(`Login - Vinci Facilities`);
-      this.loginForm = this.fb.group({
-        username: ['', Validators.required],
-        password: ['', Validators.required]
-      });
+  ngOnInit() {
+    this.dictTexts = this.globalstorage.get('langage')=='"FRA"'? this.dictFR : this.dictEN;
+    this.titleService.setTitle(`${this.dictTexts['login']} - Vinci Facilities`);
+    this.loginForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
 
-    }
-  //this.authService.logout();
   get username() { return this.loginForm.get('username'); }
   get password() { return this.loginForm.get('password'); }
-  /*Submit() {
-    this.submitted = true;
-    this.authService.login(this.username.value, this.password.value).subscribe((data) => {
-       if (this.authService.isLoggedIn) {
-          const redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/admin';
-          this.router.navigate([redirect]);
-        } else {
-          this.loginError = 'Username or password is incorrect.';
-        }
-      },
-      error => this.error = error
-    );
-  }*/
+
   onSubmit(){
     this.authService.login(this.username.value, this.password.value,
     res=>{
@@ -56,5 +64,6 @@ export class LoginComponent implements OnInit {
     err=>{
       console.log(err)
     })
+    this.incorrectSubmission = true
   }
 }

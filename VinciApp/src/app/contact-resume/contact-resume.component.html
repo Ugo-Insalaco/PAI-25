@@ -1,97 +1,89 @@
+<div id="container">
+  <div class="row">
+    <div id="titre">
+      <h1>{{dictTexts['title']}}</h1>
+    </div>
 
+    <div id="htmlData" #htmlData>
+      <h2>{{dictTexts['title2']}}</h2>
+      <table class="table table-bordered">
+        <tr class="table-primary">
+         <th>{{dictTexts['titlecivility']}}</th>
+         <td>{{data.Civilite}}</td>
+        </tr>
 
-  <div id="container">
-    <div class="row">
-      <div id="titre">
-        <h1>Résumé de demande</h1>
-      </div>
+        <tr class="table-primary">
+          <th>{{dictTexts['name']}}</th>
+          <td>{{data.Name}}</td>
+        </tr>
 
-      <div id="htmlData" #htmlData>
-        <h2>Information personnelles</h2>
-        <table class="table table-bordered">
-          <tr class="table-primary">
-           <th>Civilité</th>
-           <td>{{data.Civilite}}</td>
-          </tr>  
+        <tr class="table-primary">
+          <th>{{dictTexts['firstname']}}</th>
+          <td>{{data.Surname}}</td>
+        </tr>
 
-          <tr class="table-primary">
-            <th>Nom</th>
-            <td>{{data.Name}}</td>
-          </tr>
+        <tr class="table-primary">
+          <th>{{dictTexts['company']}}</th>
+          <td>{{data.Entreprise}}</td>
+        </tr>
 
-          <tr class="table-primary">
-            <th>Prénom</th>
-            <td>{{data.Surname}}</td>
-          </tr>
-          
-          <tr class="table-primary">
-            <th>Entreprise</th>
-            <td>{{data.Entreprise}}</td>
-          </tr>
-              
-          <tr >
-            <th>Télephone</th> 
-            <td>{{data.Telephone}}</td>
-          </tr>
+        <tr >
+          <th>{{dictTexts['phone']}}</th>
+          <td>{{data.Telephone}}</td>
+        </tr>
 
-          <tr >
-            <th>Email</th> 
-            <td>{{data.Email}}</td>
-          </tr>
+        <tr >
+          <th>{{dictTexts['mail']}}</th>
+          <td>{{data.Email}}</td>
+        </tr>
 
-          <tr class="table-primary">
-           
-            <th>Entreprise</th>
-            <td>{{data.Entreprise}}</td>
-          </tr>
-            
-          <tr class="table-primary">
-            <th>Adresse</th>
-            <td>{{data.Street}}</td>
-          </tr>
-        
-          <tr class="table-primary">
-            <th>Ville</th>
-            <td>{{data.city}}</td>
-          </tr>
-            
-          <tr >
-            <th>Zip Code</th> 
-            <td>{{data.zip}}</td>
-          </tr>
-       
-        </table>
+        <tr class="table-primary">
+          <th>{{dictTexts['address']}}</th>
+          <td>{{data.Street}}</td>
+        </tr>
 
-        <h2>Sujet de demande </h2>
-        <table class="table table-bordered">
-          <tr class="table-primary">
-            <th>Objet de la demande</th>
-            <td>{{data.object}}</td>
-          </tr>
-      
-          <tr class="table-primary">
-            <th>Mon segment d’activité</th>
-            <td>{{data.activitySeg}}</td>
-          </tr>
-          
-          <tr >
-            <th>Je souhaite des informations sur :</th> 
-            <td>{{data.info}}</td>
-          </tr>
+        <tr class="table-primary">
+          <th>{{dictTexts['city']}}</th>
+          <td>{{data.city}}</td>
+        </tr>
 
-          <tr >
-            <th>Message :</th> 
-            <td>{{data.message}}</td>
-          </tr>
-     
-        </table>
-      </div>
-  
-      <div id="conteneur-btn">
-        <button class="btn btn-success btn-block" (click)="openPDF()">Download PDF</button>
-        <br>
-        <button class="btn btn-success btn-block" (click)="sendEmail()" >Confirmer la demande</button>
-      </div>
-  
+        <tr >
+          <th>{{dictTexts['postcode']}}</th>
+          <td>{{data.zip}}</td>
+        </tr>
+
+      </table>
+
+      <h2>{{dictTexts['title3']}}</h2>
+      <table class="table table-bordered">
+        <tr class="table-primary">
+          <th>{{dictTexts['object']}}</th>
+          <td>{{data.object}}</td>
+        </tr>
+
+        <tr class="table-primary">
+          <th>{{dictTexts['business']}}</th>
+          <td>{{data.activitySeg}}</td>
+        </tr>
+
+        <tr >
+          <th>{{dictTexts['info']}}</th>
+          <td>{{data.info}}</td>
+        </tr>
+
+        <tr >
+          <th>{{dictTexts['message']}}</th>
+          <td>{{data.message}}</td>
+        </tr>
+
+      </table>
+    </div>
+
+    <div id="conteneur-btn">
+      <button class="btn btn-success btn-block" (click)="openPDF()">{{dictTexts['download']}}</button>
+      <br>
+      <button class="btn btn-success btn-block" (click)="sendEmail()">{{dictTexts['confirm']}}</button>
+    </div>
+
     </div>
   </div>

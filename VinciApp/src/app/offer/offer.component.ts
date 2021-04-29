@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef, Input, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { BackendService } from '../services/backend.service';
+import { GlobalStorageService } from '../services/globalStorage.service';
 
 @Component({
   selector: 'app-offer',
@@ -30,14 +31,26 @@ export class OfferComponent implements OnInit, AfterViewInit{
     selectedOption!: string;
     selectedText: string = "";
 
+    dictFR = {
+      'solutions': 'Solutions associées à cette offre',
+      'btn': 'Découvrir cette solution'
+    }
+    dictEN = {
+      'solutions': 'Solutions associated with this offer',
+      'btn': 'Discover this solution'
+    }
+    dictTexts = {};
+
     constructor(private backend: BackendService,
                 private cd: ChangeDetectorRef,
-                private router: Router) {
+                private router: Router,
+                private globalstorage: GlobalStorageService) {
       this.admin = false;
     }
 
     ngOnInit(): void {
       this.num += 1;
+      this.dictTexts = this.globalstorage.get('langage')=='"FRA"'? this.dictFR : this.dictEN;
     }
 
     ngAfterViewInit(){

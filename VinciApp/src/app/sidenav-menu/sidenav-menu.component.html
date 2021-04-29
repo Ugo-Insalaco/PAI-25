@@ -1,6 +1,6 @@
 <mat-nav-list>
   <a mat-list-item routerLink="/" (click)="onCloseSidenav()">
-    <span class="nav-item">Accueil</span>
+    <span class="nav-item">{{dictTexts['home']}}</span>
   </a>
 
   <div menu-list-item *ngFor="let cadran of cadranList;">

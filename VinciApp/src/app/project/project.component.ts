@@ -38,9 +38,25 @@ export class ProjectComponent implements OnInit{
     nom_sec3: string;
     nom_sec4: string;
 
+    dictFR = {
+      'dim': 'Dimensionnement de votre projet',
+      'nextpage': 'Page suivante',
+      'previouspage': 'Page précédente',
+      'val': 'Valider',
+      'info': 'Les informations renseignées vont être envoyées à Vinci Facilities.'
+    }
+    dictEN = {
+      'dim': 'Sizing your project',
+      'nextpage': 'Next page',
+      'previouspage': 'Previous page',
+      'val': 'Validate',
+      'info': 'Provided information will be sent to Vinci Facilities.'
+    }
+    dictTexts = {};
+
     constructor(private router: Router,
-                private backend: BackendService, 
-                private config: ConfigService, 
+                private backend: BackendService,
+                private config: ConfigService,
                 public dialog: MatDialog,
                 private globalStorage: GlobalStorageService,
                 private email: EmailService,
@@ -52,6 +68,8 @@ export class ProjectComponent implements OnInit{
 
 
     ngOnInit(){
+        this.dictTexts = this.globalStorage.get('langage')=='"FRA"'? this.dictFR : this.dictEN;
+
         this.complete=true
         this.selectedTab=0
 
@@ -68,23 +86,23 @@ export class ProjectComponent implements OnInit{
                 this.backend.GET(`/api/sections/${id_section}`, e2=>{
                     if (e2.data[0].fields.position==0) {
                         this.id_question_0 = e.data[0].included["section_question"][i].id_question
-                        //console.log(this.id_question_0)                
+                        //console.log(this.id_question_0)
                     }
                     if (e2.data[0].fields.position==1) {
-                        this.id_question_1 = e.data[0].included["section_question"][i].id_question 
-                        //console.log(this.id_question_1)               
+                        this.id_question_1 = e.data[0].included["section_question"][i].id_question
+                        //console.log(this.id_question_1)
                     }
                     if (e2.data[0].fields.position==2) {
                         this.id_question_2 = e.data[0].included["section_question"][i].id_question
-                        //console.log(this.id_question_2)                
+                        //console.log(this.id_question_2)
                     }
                     if (e2.data[0].fields.position==3) {
-                        this.id_question_3 = e.data[0].included["section_question"][i].id_question  
-                        //console.log(this.id_question_3)              
+                        this.id_question_3 = e.data[0].included["section_question"][i].id_question
+                        //console.log(this.id_question_3)
                     }
                 })
             }
-            
+
         })
 
         //Récupération des noms des parties
@@ -129,7 +147,7 @@ export class ProjectComponent implements OnInit{
         id = id.split('$')[0];
         return Number(id);
       }
-    
+
     onModifier(){
         this.modif = true;
     }
@@ -158,7 +176,7 @@ export class ProjectComponent implements OnInit{
 
     // Juste envoi d'un mail lors de la validation :
     onSubmit_mail(){
-        var input = confirm("Les informations renseignées vont être envoyées à Vinci Facilities.")
+        var input = confirm(this.dictTexts['info'])
         if (input) {
             var data = JSON.parse(this.globalStorage.get("projet"))
             this.email.sendEmail(data,

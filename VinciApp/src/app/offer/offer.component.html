@@ -6,7 +6,7 @@
       </p>
     </div>
     <div id="choixsolution">
-      <p> Solutions associées à cette offre : </p>
+      <p> {{dictTexts['solutions']}} : </p>
       <select id="listesolutions" #listesolutions [(ngModel)]="selectedOption" (change)="getSelectedOptionText($event)">
         <option disabled selected> Solutions </option>
         <option *ngFor="let sol of solutions"
@@ -15,7 +15,7 @@
         </option>
       </select>
       <button id="buttonvalidersolution" (click)="onValiderSolution()">
-        Découvrir cette solution
+        {{dictTexts['btn']}}
       </button>
 
       <app-new-solution [idOffer]="dataoffer.idoffre" *ngIf="admin===true"></app-new-solution>
