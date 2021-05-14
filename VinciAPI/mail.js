@@ -48,7 +48,8 @@ const mail = function(app){
           //alors la demande provient de l'outil de dimensionnement de projet
           var mailOptions = {
             from: "vinciwebapp@gmail.com",
-            to: "karim.nanaa@vinci-facilities.com", 
+            //to: "karim.nanaa@vinci-facilities.com", 
+            to: "mylene.le-rodallec@vinci-facilities.com",
             subject: 'Nouveau projet IoT',
             text: 'Un utilisateur a soumis un projet IoT. Vous trouverez le récapitulatif PDF en pièces jointes.',
             attachments: [{

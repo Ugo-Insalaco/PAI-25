@@ -20,6 +20,7 @@ export class SolutionComponent implements OnInit, AfterViewInit {
   @ViewChild('text') textView: ElementRef;
 
   admin!: boolean;
+  outil_dim!: boolean;
 
   // Données récupérées dans l'url
   idcadran!: number;
@@ -59,6 +60,8 @@ export class SolutionComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.dictTexts = this.globalstorage.get('langage')=='"FRA"'? this.dictFR : this.dictEN;
+
+    this.outil_dim = true;
 
     this.nomcadran = this.getNomCadran();
     this.nomsolution = this.getNomSolution();
@@ -149,5 +152,13 @@ export class SolutionComponent implements OnInit, AfterViewInit {
     solution = solution.toLowerCase()
     var button = this.buttonprojectView.nativeElement;
     this.router.navigate(["project/",idsolution+"$"+solution]);
+  }
+
+  activerOutilDim(){
+    this.outil_dim = true;
+  }
+
+  desactiverOutilDim(){
+    this.outil_dim = false;
   }
 }

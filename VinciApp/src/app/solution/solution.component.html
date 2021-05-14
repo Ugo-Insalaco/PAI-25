@@ -48,8 +48,16 @@
   </div>
 </div>
 
-<div id="linkProject">
+<div *ngIf="outil_dim" id="linkProject">
   <button type="button" id="buttonProject" #buttonproject (click)="onSimulerProjet()">{{dictTexts['sim']}}</button>
+</div>
+
+<div *ngIf="admin && outil_dim">
+  <button type="button" (click)="desactiverOutilDim()">Désactiver l'outil l'outil de dimensionnement</button>
+</div>
+
+<div *ngIf="admin && !outil_dim">
+  <button type="button" (click)="activerOutilDim()">Activer l'outil l'outil de dimensionnement</button>
 </div>
 
 <app-btnlinkcadrans></app-btnlinkcadrans>
