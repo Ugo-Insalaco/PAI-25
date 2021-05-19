@@ -1,9 +1,9 @@
 {
-    "name": "data_config",
+    "name": "config",
     "table": "data_config",
     "fields":{
         "id":"",
-        "config_value": "mandatory",
+        "config_value": "mandatory updatable",
         "description":"optionnal"
     },
     "primaryField":"id",
@@ -18,13 +18,13 @@
 
     ],
     "get_response":{
-        "route": "/api/data_config",
+        "route": "/api/configs",
         "method": "GET",
         "data":{
-            "id": "{{0::data_config::id}}",
+            "id": "{{0::config::id}}",
             "fields":{
-                "config_value": "{{0::data_config::config_value}}",
-                "description":"{{0::data_config::description}}"
+                "config_value": "{{0::config::config_value}}",
+                "description":"{{0::config::description}}"
             },
             "included":{
                 

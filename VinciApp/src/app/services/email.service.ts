@@ -17,18 +17,28 @@ export class EmailService {
  /* httpPost(url, user) {
     return this.http.post(url,user);
   }*/
-  public sendEmail(data, success: Function, error: Function=null){
+  
+  // public sendEmail(data, success: Function, error: Function=null){
+  //   this.backend.POST(
+  //       '/sendEmail',
+  //       data,
+  //       res=>{
+  //           console.log("sucess")
+  //       },
+  //       err=>{
+           
+  //           error(err)
+  //       } )
+  // }
+
+    public sendEmail(data, success: Function, error: Function=null){
     this.backend.POST(
         '/sendEmail',
         data,
         res=>{
-            console.log("sucess")
-        },
-        err=>{
-           
-            error(err)
-        } )
-}
+          
+        })
+  }
 
   
 }

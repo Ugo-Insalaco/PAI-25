@@ -181,7 +181,7 @@ export class ProjectComponent implements OnInit{
             var data = JSON.parse(this.globalStorage.get("projet"))
             this.email.sendEmail(data,
                 res=>{
-                  console.log(res)}
+                  console.log("coucou")}
             )
         }
     }

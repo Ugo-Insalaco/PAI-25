@@ -20,7 +20,7 @@ export class SolutionComponent implements OnInit, AfterViewInit {
   @ViewChild('text') textView: ElementRef;
 
   admin!: boolean;
-  outil_dim!: boolean;
+  outil_dim!: number; //en fait booleen : 0=false, 1=true
 
   // Données récupérées dans l'url
   idcadran!: number;
@@ -68,8 +68,9 @@ export class SolutionComponent implements OnInit, AfterViewInit {
     this.titleService.setTitle(`${this.nomsolution} - Vinci Facilities`);
     this.databanner["idcadran"] = this.idcadran;
 
-    this.backend.GET('/api/data_config/1', e=>{
-      this.outil_dim = e
+    //this.outil_dim = true //à remplacer par la requête au serveur
+    this.backend.GET('/api/configs/1', e=>{
+      this.outil_dim = e.data[0].fields.config_value
     });
 
     // Récupération des données du cadran
@@ -158,19 +159,21 @@ export class SolutionComponent implements OnInit, AfterViewInit {
 
   activerOutilDim(){
     var body = {
-      "config_value": true
+      "config_value": 1
     };
-
-    this.backend.PATCH(`/api/data_config`, body, res=>{
+    this.backend.PATCH('/api/configs/1', body, res=>{
+      this.outil_dim = 1
     })
+    location.reload()
   }
 
   desactiverOutilDim(){
     var body = {
-      "config_value": false
+      "config_value": 0
     };
-
-    this.backend.PATCH(`/api/data_config`, body, res=>{
+    this.backend.PATCH(`/api/configs/1`, body, res=>{
+      this.outil_dim = 0
     })
+    location.reload()
   }
 }
