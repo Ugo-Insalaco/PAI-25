@@ -53,11 +53,15 @@
 </div>
 
 <div *ngIf="admin && outil_dim">
-  <button type="button" (click)="desactiverOutilDim()">Désactiver l'outil l'outil de dimensionnement</button>
+  <button type="button" (click)="desactiverOutilDim()">Désactiver l'outil de dimensionnement</button>
 </div>
 
 <div *ngIf="admin && !outil_dim">
-  <button type="button" (click)="activerOutilDim()">Activer l'outil l'outil de dimensionnement</button>
+  <button type="button" (click)="activerOutilDim()">Activer l'outil de dimensionnement</button>
+</div>
+
+<div>
+  Outil dim :  {{outil_dim}}
 </div>
 
 <app-btnlinkcadrans></app-btnlinkcadrans>

@@ -1,0 +1,41 @@
+{
+    "name": "data_config",
+    "table": "data_config",
+    "fields":{
+        "id":"",
+        "config_value": "mandatory",
+        "description":"optionnal"
+    },
+    "primaryField":"id",
+    "policies":{
+        "GET": "US",
+        "GET_ALL": "US",
+        "POST": "AD",
+        "PATCH": "AD",
+        "DELETE": "AD"
+    },
+    "include":[
+
+    ],
+    "get_response":{
+        "route": "/api/data_config",
+        "method": "GET",
+        "data":{
+            "id": "{{0::data_config::id}}",
+            "fields":{
+                "config_value": "{{0::data_config::config_value}}",
+                "description":"{{0::data_config::description}}"
+            },
+            "included":{
+                
+            }
+        }
+    },
+    "relationships":[
+        
+    ],
+    "delete_before":[
+        
+    ]
+    
+}

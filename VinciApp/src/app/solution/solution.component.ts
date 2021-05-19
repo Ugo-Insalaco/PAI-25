@@ -61,14 +61,16 @@ export class SolutionComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.dictTexts = this.globalstorage.get('langage')=='"FRA"'? this.dictFR : this.dictEN;
 
-    this.outil_dim = true;
-
     this.nomcadran = this.getNomCadran();
     this.nomsolution = this.getNomSolution();
     this.idcadran = this.getIdCadran();
     this.idsolution = this.getIdSolution();
     this.titleService.setTitle(`${this.nomsolution} - Vinci Facilities`);
     this.databanner["idcadran"] = this.idcadran;
+
+    this.backend.GET('/api/data_config/1', e=>{
+      this.outil_dim = e
+    });
 
     // Récupération des données du cadran
     this.backend.GET('/api/cadrans/'+this.idcadran, e=>{
@@ -155,10 +157,20 @@ export class SolutionComponent implements OnInit, AfterViewInit {
   }
 
   activerOutilDim(){
-    this.outil_dim = true;
+    var body = {
+      "config_value": true
+    };
+
+    this.backend.PATCH(`/api/data_config`, body, res=>{
+    })
   }
 
   desactiverOutilDim(){
-    this.outil_dim = false;
+    var body = {
+      "config_value": false
+    };
+
+    this.backend.PATCH(`/api/data_config`, body, res=>{
+    })
   }
 }
