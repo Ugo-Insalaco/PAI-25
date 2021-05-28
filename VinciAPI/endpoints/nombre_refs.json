@@ -1,0 +1,56 @@
+{
+    "name": "nombre_ref",
+    "table" : "question_nombre_ref",
+    "fields": {
+        "id": "auto-increment",
+        "id_nombre_ref_nb": "mandatory updatable",
+        "nb_iot":"mandatory updatable",
+        "product":"mandatory updatable"
+    },
+    "primaryField": "id",
+    "policies":{
+        "GET": "US",
+        "GET_ALL": "US",
+        "POST": "AD",
+        "PATCH": "AD",
+        "DELETE": "AD"
+    },
+    "include":[
+        {
+            "name": "product",
+            "default_inclusion": true,
+            "bind":[
+                {
+                    "id":9,
+                    "endpoint": "product",
+                    "local_key":"product",
+                    "foreign_key":"id"
+                }
+            ]
+        }
+    ],
+    "get_response":{
+        "route": "/api/nombre_refs",
+        "method" : "GET",
+        "data":{
+            "id":"{{0::nombre_ref::id}}",
+            "fields":{
+                "id_question_nb": "{{0::nombre_ref::id_question_nb}}",
+                "nb_iot": "{{0::nombre_ref::nb_iot}}",
+                "product": "{{0::nombre_ref::product}}"
+            },
+            "included":{
+                "product":{
+                    "id": ["{{9::product::id}}"],
+                    "ref": "{{9::product::ref_dataprint}}"
+                }
+            }
+        }
+        
+    },
+    "relationships":[
+    ],
+
+    "delete_before":[
+    ]
+}

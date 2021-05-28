@@ -43,7 +43,7 @@ export class QuestionComponent implements OnInit {
         this.reponses = this.reponses.concat([{"id": id_rep, "reponse": rep}])
       }
 
-      // this.info = e.data[0].fields.info;
+      this.info = e.data[0].fields.info
       // if (this.info) {
       //   this.backend.GET(`/api/texts/${this.info}`, e=>{
       //     this.info=e.data[0].fields.text
@@ -151,6 +151,15 @@ export class QuestionComponent implements OnInit {
     }
     this.globalStorage.set("projet", project) //mise à jour de la variable globale projet
   })
+
+  //si c'est une question nb_iot, on détermine les refs et nombres des iot correspondants
+  if (this.info=="nb_iot") {
+    console.log("on entre là")
+    this.backend.GET(`/api/nombre_refs`, e=>
+    console.log(e))
   }
+
+  }
+
 
 }
