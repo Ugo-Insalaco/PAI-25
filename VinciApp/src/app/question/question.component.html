@@ -2,7 +2,7 @@
 
   <!-- Affichage de la question -->
 
-  <div class="qt" *ngIf="type=='radio'">
+  <div class="qt" *ngIf="type=='radio' || (type=='reseau' && nb_iot<6)">
     {{question}}
     <div class="reponse">
     <ng-container *ngFor="let r of reponses">
@@ -40,7 +40,7 @@
     <br><small>(Utilisez CTRL pour sélectionner plusieurs)</small>
   </div>
 
-  <div class="qt" *ngIf="type=='select_all_iot'">
+  <!-- <div class="qt" *ngIf="type=='select_all_iot'">
     {{question}}
     <br>
     <select [(ngModel)]="answer" (change)="onAnswer()">
@@ -48,8 +48,28 @@
         {{iot.fields.brand}} - {{iot.fields.name}} (données mesurées : {{iot.included.data[0].name_data}})
       </option>
     </select>
+  </div> -->
+
+  <div class="qt" *ngIf="type=='select_all_iot'">
+    {{question}}
+    <br>
+    <select multiple [(ngModel)]="answer" (change)="onAnswer()">
+      <option *ngFor = "let iot of all_iot" value=" {{iot.fields.brand}} - {{iot.fields.name}} (ref {{iot.fields.ref_dataprint}})"> 
+        {{iot.fields.brand}} - {{iot.fields.name}} (données mesurées : {{iot.included.data[0].name_data}})
+      </option>
+    </select>
+    <br><small>(Utilisez CTRL pour sélectionner plusieurs)</small>
+    <br>
+
+    <div *ngFor="let iot of answer">
+      Nombre de {{iot}} :
+      <input type="number" min="0" [(ngModel)]="answer" (change)="onAnswer()">
+    </div>
   </div>
+
   <br>
+
+
 
   <!-- <ng-container class="qt" *ngIf="info">
     <small>{{info}}</small> <br>
@@ -63,7 +83,8 @@
       [id_question]=next
       [tab]=tab
       [niveau]=niveau+1
-      [solution]=nomsolution>
+      [solution]=nomsolution
+      [change_nb_iot]=change_nb_iot>
     </app-question>
   </div>
 

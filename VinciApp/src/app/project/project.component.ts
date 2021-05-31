@@ -74,7 +74,7 @@ export class ProjectComponent implements OnInit{
         this.selectedTab=0
 
         this.globalStorage.set("projet", []) //initialisation de la variable globale projet
-        this.globalStorage.set("iot", []) //initialisation de la variable globale iot (quantité et ref des iot)
+        this.globalStorage.set("products", []) //initialisation de la variable globale products (quantité et ref des iot)
 
         this.nomsolution = this.getNomSolution();
         this.id_solution = this.getIdSolution();
