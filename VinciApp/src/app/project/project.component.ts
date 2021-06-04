@@ -123,8 +123,7 @@ export class ProjectComponent implements OnInit{
     changeHandler(e){
         this.selectedTab=e.selectedIndex
         if (this.selectedTab == 3) {
-            var questions_string = this.globalStorage.get("projet")
-            this.questions = JSON.parse(questions_string)
+            this.questions = JSON.parse(this.globalStorage.get("projet"))
             console.log(this.questions)
         }
         this.modif=false

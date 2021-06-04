@@ -12,9 +12,9 @@
       <div id="htmlData" #htmlData>
 
         <h1>{{dictTexts['project']}} : {{data[0].solution}}</h1>
-
+ 
         <h2>{{nom_sec1}}</h2>
-        <table class="table table-bordered">
+        <!-- <table class="table table-bordered">
             <ng-container *ngFor="let d of data">
                 <ng-container *ngIf="d.partie==0">
                     <tr class="table-primary">
@@ -23,7 +23,24 @@
                     </tr>
                 </ng-container>
               </ng-container>
+        </table> -->
+
+        <table class="table table-bordered">
+          <ng-container *ngFor="let iot of iots">
+            <ng-container *ngIf="iot.nombre != 0">
+                <tr class="table-primary">
+                  <td>{{iot.produit}}</td>
+                  <td>{{iot.nombre}}</td>
+                </tr>
+            </ng-container>
+          </ng-container>
+          <tr class="table-primary">
+            <td>{{dictTexts['network']}}</td>
+            <td>{{reseau}}</td>
+          </tr>
         </table>
+
+        
 
         <h2>{{nom_sec2}}</h2>
         <table class="table table-bordered">
@@ -60,7 +77,8 @@
                 </ng-container>
               </ng-container>
         </table>
-        </div>
+
+      </div>
 
     </div>
   </div>

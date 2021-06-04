@@ -68,6 +68,9 @@ export class ModifQuestionComponent implements OnInit {
       if (this.type=='select_all_iot') {
         this.type_explicite = 'Sélection parmi tous les IoT disponibles'
       }
+      if (this.type=='reseau') {
+        this.type_explicite = "QCM avec une seule réponse possible (ne s'affiche  que si IoT>6, sinon réponse automatique)"
+      }
     });
   }
 

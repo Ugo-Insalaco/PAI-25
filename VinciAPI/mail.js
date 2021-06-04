@@ -48,7 +48,8 @@ const mail = function(app){
           //alors la demande provient de l'outil de dimensionnement de projet
           var mailOptions = {
             from: "vinciwebapp@gmail.com",
-            to: "karim.nanaa@vinci-facilities.com", 
+            //to: "karim.nanaa@vinci-facilities.com", 
+            to: "mylene.le-rodallec@vinci-facilities.com", 
             subject: 'Nouveau projet IoT',
             text: 'Un utilisateur a soumis un projet IoT. Vous trouverez le récapitulatif PDF en pièces jointes.',
             attachments: [{
@@ -174,6 +175,8 @@ generateHr(doc,480);
 
 
 function generateCustomerProject(doc, data) {
+
+
   
   doc
     .fillColor("#444444")
@@ -183,25 +186,27 @@ function generateCustomerProject(doc, data) {
 
   doc.moveDown()
   doc.fontSize(12)
-  doc.text(`Solution : ${data[0].solution}`)
+  doc.text(`Solution : ${data[1].solution}`)
 
   doc.moveDown()
   
   doc.fontSize(18)
   doc.text("Capteurs et connectivités")
 
-  for (let i = 0; i < data.length; i++) {
-    if (data[i].partie == 0) {
-      doc.fontSize(12)
-      doc.text(`${data[i].question} ${data[i].reponse}`)
-    }      
+  for (let i = 0; i < data[0].iots.length; i++) {
+      if (data[0].iots[i].nombre != 0) {
+        doc.fontSize(12)
+        doc.text(`${data[0].iots[i].nombre} x ${data[0].iots[i].produit}`)
+      }
   }
+  doc.fontSize(12)
+  doc.text(`Type de réseau : ${data[0].reseau}`)
 
   doc.moveDown()
   doc.fontSize(18)
   doc.text("Application et fonctionalités")
 
-  for (let i = 0; i < data.length; i++) {
+  for (let i = 1; i < data.length; i++) {
     if (data[i].partie == 1) {
       doc.fontSize(12)
       doc.text(`${data[i].question} ${data[i].reponse}`)
@@ -212,7 +217,7 @@ function generateCustomerProject(doc, data) {
   doc.fontSize(18)
   doc.text("Installation physique des IoT et création du dashboard")
 
-  for (let i = 0; i < data.length; i++) {
+  for (let i = 1; i < data.length; i++) {
     if (data[i].partie == 2) {
       doc.fontSize(12)
       doc.text(`${data[i].question} ${data[i].reponse}`)
@@ -223,7 +228,7 @@ function generateCustomerProject(doc, data) {
   doc.fontSize(18)
   doc.text("Récapitulatif et validation")
 
-  for (let i = 0; i < data.length; i++) {
+  for (let i = 1; i < data.length; i++) {
     if (data[i].partie == 3) {
       doc.fontSize(12)
       doc.text(`${data[i].question} ${data[i].reponse}`)

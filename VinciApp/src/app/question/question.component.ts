@@ -4,6 +4,8 @@ import { ConfigService } from '../services/config.service';
 import { GlobalStorageService } from '../services/globalStorage.service';
 import { BackendService } from '../services/backend.service';
 import { ProjectComponent } from '../project/project.component';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { stringify } from '@angular/compiler/src/util';
 
 
 @Component({
@@ -31,6 +33,7 @@ export class QuestionComponent implements OnInit {
   all_iot = [];
   sous_solution: any;
   nb_iot: number //nombre d'IoT (utile pour les questions de type réseau)
+  data: any;
 
   
   ngOnInit(): void {
@@ -71,25 +74,21 @@ export class QuestionComponent implements OnInit {
             var sous_solution = project[i].id_reponse
           }
           if (project[i].info == "nb_iot") {
-            this.backend.GET(`/api/nombre_refs/${project[i].id_question}`, e=>{
+            this.backend.GET(`/api/nombre_refs`, e=>{
               for (let j = 0; j < e.data.length; j++) {
-                if (e.data[j].fields.sous_solution == sous_solution) { //on récupère les données qui correspondent à la sous-solution sélectionnée
-                  this.nb_iot += e.data[j].fields.nombre_iot*project[i].reponse
+                if (e.data[j].fields.id_question == project[i].id_question) { //on récupère les données qui correspondent à la question
+                  if (e.data[j].fields.sous_solution ==null || e.data[j].fields.sous_solution == sous_solution) { //on récupère les données qui correspondent à la sous-solution sélectionnée
+                    this.nb_iot += e.data[j].fields.nombre_iot*project[i].reponse
+                  }                                 
                 }
               }
-
-              console.log("là: "+this.nb_iot)
-              //Réponse automatique si le nombre d'IoT est supérieur ou égal à 6
-              if (this.nb_iot>=6) {
-                this.question = "Type de réseau :" //pas pris en compte ?
-                this.id_answer = 124
-                this.answer = "Réponse automatique : réseau privé (nombre d'IoT supérieur ou égal à 6)"
-                console.log("réponse automatique")
-                this.onAnswer()
-              }
+            console.log("Nombre d'IoT : "+this.nb_iot)
+            //Réponse automatique si le nombre d'IoT est supérieur ou égal à 6
+            if (this.nb_iot>=6) {
+              console.log("réponse automatique")
+              this.updateProject("Réponse automatique : réseau privé (nombre d'IoT supérieur ou égal à 6)", "Type de réseau :", 124, "Privé")
+            } 
             })
-            
-
           }
         }
         
@@ -109,6 +108,7 @@ export class QuestionComponent implements OnInit {
       if (changes.id_question.currentValue != changes.id_question.previousValue) {
         this.answer = "";
         this.next="";
+        this.data="";
       }
     }
 
@@ -146,6 +146,24 @@ export class QuestionComponent implements OnInit {
       this.id_answer = this.reponses[0].id
     }
 
+    if (this.type == "select_all_iot") {
+      //this.answer = String(this.answer)
+      this.data = this.answer.split('/')[0]
+      var reponse = this.answer.split('/')[1]
+      this.updateProject(reponse)
+      this.backend.GET(`/api/reponses/${this.id_answer}`, e=>{
+        this.next = e.data[0].fields.question_suivante;
+        this.updateProject(reponse)
+      })
+    }
+    else {
+      this.backend.GET(`/api/reponses/${this.id_answer}`, e=>{
+        this.next = e.data[0].fields.question_suivante;
+        this.data = e.data[0].fields.data
+        this.updateProject()
+      })
+    }
+
 
     // //Pour les questions type select, on récupère l'id de la première réponse (plusieurs réponses possibles pour ce type de question)
     // if (this.type == "select") {
@@ -157,7 +175,7 @@ export class QuestionComponent implements OnInit {
     // }
 
 
-  this.backend.GET(`/api/reponses/${this.id_answer}`, e=>{
+  //this.backend.GET(`/api/reponses/${this.id_answer}`, e=>{
 
     // //on met à jour la sous-solution si besoin
     // if (e.data[0].fields.data=="sous_solution") {
@@ -165,62 +183,9 @@ export class QuestionComponent implements OnInit {
     // }
 
 
-    this.next = e.data[0].fields.question_suivante;
+    //this.next = e.data[0].fields.question_suivante;
+    //this.data = e.data[0].fields.data
 
-    var project = JSON.parse(this.globalStorage.get("projet"));
-    var exists = false //indique si la question a déjà été répondue (donc s'il s'agit d'une modification)
-
-    for(var i= 0; i < project.length; i++){
-      if (project[i].id_question == this.id_question && project[i].partie == this.tab && project[i].niveau == this.niveau) {
-        //si cette question existe déjà dans "projet" à ce niveau dans la section 
-        //Alors il s'agit d'une MODIFICATION de la part de l'utilisateur
-        exists = true
-        //Donc on met donc à jour les variables project et products
-        project[i].id_reponse = this.id_answer
-        project[i].reponse = this.answer        
-        for (let j = 0; j < project.length; j++) {
-          if (project[j].partie == this.tab && project[j].niveau == this.niveau+1 && project[j].id_question != this.next) {
-            //Si la question au niveau d'en dessous n'est pas la même que la nouvelle question suivante
-            //Alors la question suivante va changer
-            //Donc toutes les réponses déjà existantes qui suivaient la question modifiée (càd niveau en dessous) doivent être supprimées :
-            for (let k = 0; k < project.length; k++) {
-              if (project[k].partie == this.tab && project[k].niveau > this.niveau) {
-                project.splice(k)
-              }     
-            }            
-          }
-        }
-      } 
-    }
-    if (!exists) {
-      //s'il ne s'agit pas d'une modification, on ajoute la reponse dans "projet"
-      var reponse = {
-        "partie": this.tab,
-        "id_question": Number(this.id_question), 
-        "question": this.question,
-        "id_reponse": Number(this.id_answer), 
-        "reponse": this.answer,
-        "niveau": this.niveau,
-        "solution": this.solution,
-        "info": this.info
-      };
-      project.push(reponse);
-
-      //si c'est une question nb_iot, on incrémente le nombre d'IoT
-      if (this.info=="nb_iot") {
-        this.backend.GET(`/api/nombre_refs/${this.id_question}`, e=>{
-          for (let i = 0; i < e.data.length; i++) {
-            //on récupère la donnée qui correspond à la sous-solution sélectionnée
-            var sous_solution = project[0].id_reponse
-            if (e.data[i].fields.sous_solution == sous_solution) { 
-              this.nb_iot += e.data[0].fields.nombre_iot*this.answer 
-            }
-          }
-        })
-      }
-    }
-
-    this.globalStorage.set("projet", project) //mise à jour de la variable globale projet
 
     // //si c'est une question nb_iot, on détermine les refs et nombres des iot correspondants
     // if (this.info=="nb_iot") {
@@ -240,7 +205,7 @@ export class QuestionComponent implements OnInit {
     //   })
     // }
 
-  })
+  //})
 
   }
 
@@ -296,6 +261,67 @@ export class QuestionComponent implements OnInit {
 
 
   // }
+
+
+  updateProject(rep=this.answer, qu=this.question, id_rep = Number(this.id_answer), data=this.data) {
+
+    var project = JSON.parse(this.globalStorage.get("projet"));
+    var exists = false //indique si la question a déjà été répondue (donc s'il s'agit d'une modification)
+
+    for(var i= 0; i < project.length; i++){
+      if (project[i].id_question == this.id_question && project[i].partie == this.tab && project[i].niveau == this.niveau) {
+        //si cette question existe déjà dans "projet" à ce niveau dans la section 
+        //Alors il s'agit d'une MODIFICATION de la part de l'utilisateur
+        exists = true
+        //Donc on met donc à jour les variables project et products
+        project[i].id_reponse = id_rep
+        project[i].reponse = rep    
+        project[i].data = data 
+        for (let j = 0; j < project.length; j++) {
+          if (project[j].partie == this.tab && project[j].niveau == this.niveau+1 && project[j].id_question != this.next) {
+            //Si la question au niveau d'en dessous n'est pas la même que la nouvelle question suivante
+            //Alors la question suivante va changer
+            //Donc toutes les réponses déjà existantes qui suivaient la question modifiée (càd niveau en dessous) doivent être supprimées :
+            for (let k = 0; k < project.length; k++) {
+              if (project[k].partie == this.tab && project[k].niveau > this.niveau) {
+                project.splice(k)
+              }     
+            }            
+          }
+        }
+      } 
+    }
+    if (!exists) {
+      //s'il ne s'agit pas d'une modification, on ajoute la reponse dans "projet"
+      var reponse = {
+        "partie": this.tab,
+        "id_question": Number(this.id_question), 
+        "question": qu,
+        "id_reponse": id_rep, 
+        "reponse": rep,
+        "niveau": this.niveau,
+        "solution": this.solution,
+        "info": this.info,
+        "data": data
+      };
+      project.push(reponse);
+
+      //si c'est une question nb_iot, on incrémente le nombre d'IoT
+      // if (this.info=="nb_iot") {
+      //   this.backend.GET(`/api/nombre_refs/${this.id_question}`, e=>{
+      //     for (let i = 0; i < e.data.length; i++) {
+      //       //on récupère la donnée qui correspond à la sous-solution sélectionnée
+      //       var sous_solution = project[0].id_reponse
+      //       if (e.data[i].fields.sous_solution == sous_solution) { 
+      //         this.nb_iot += e.data[0].fields.nombre_iot*this.answer 
+      //       }
+      //     }
+      //   })
+      // }
+    }
+
+    this.globalStorage.set("projet", project) //mise à jour de la variable globale projet
+  }
 
 
 }

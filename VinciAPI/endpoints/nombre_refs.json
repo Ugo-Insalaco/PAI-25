@@ -3,6 +3,7 @@
     "table" : "question_nombre_ref",
     "fields": {
         "id": "auto-increment",
+        "id_question": "mandatory updatable",
         "sous_solution": "mandatory updatable",
         "nombre_iot":"mandatory updatable",
         "product":"mandatory updatable"
@@ -23,6 +24,7 @@
         "data":{
             "id":"{{0::nombre_ref::id}}",
             "fields":{
+                "id_question": "{{0::nombre_ref::id_question}}",
                 "sous_solution": "{{0::nombre_ref::sous_solution}}",
                 "nombre_iot": "{{0::nombre_ref::nombre_iot}}",
                 "product": "{{0::nombre_ref::product}}"
