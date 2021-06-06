@@ -72,8 +72,8 @@ export class ProjectResumeComponent implements OnInit {
             if (e.data[j].fields.id_question == project[i].id_question) { //on récupère les données qui correspondent à la question
               if (e.data[j].fields.sous_solution == sous_solution) { //on récupère les données qui correspondent à la sous-solution sélectionnée
                 var id_product = e.data[j].fields.product
-                var nombre = e.data[j].fields.nombre_iot*project[i].reponse
                 this.backend.GET(`/api/products/${id_product}`, e2=>{      
+                  var nombre = e.data[j].fields.nombre_iot*project[i].reponse
                   var produit = `${e2.data[0].fields.brand} - ${e2.data[0].fields.name} (ref: ${e2.data[0].fields.ref_dataprint})`
                   this.iots.push({"produit": produit, "nombre": nombre})
                 })
