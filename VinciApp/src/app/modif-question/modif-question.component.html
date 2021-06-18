@@ -3,13 +3,11 @@
 
     <br>Question: <input type="text" [(ngModel)]="question">
     <!-- <br> Commentaire (facultatif): <input type="text" [(ngModel)]="info"> -->
-    <!--Commentaire (attribut "info") laissé de côté pour le moment car contraignant et apporte pas grand chose-->
     <div *ngFor="let r of reponses;let index=index;trackBy:trackByIndex;">
         <br><ng-container *ngIf="type != 'number' && type != 'text' && type != 'select_all_iot'">
             Réponse (id {{id_reponses[index]}}) : <input type="text" name=a{{index}} [(ngModel)]="reponses[index]" placeholder="r">
             <br>
         </ng-container>
-        <!-- Identifiant de la question suivante : <input type="text" [(ngModel)]="next[index]"> -->
         Question suivante:
         <select [(ngModel)]="next[index]">
             <option value="null">Aucune</option>

@@ -98,28 +98,12 @@ export class ModifQuestionComponent implements OnInit {
       if (this.next[i]=="null") {
         this.next[i]="NULL"        
       }
-      //var data:any;
-      // if (this.next[i] != "null") {
-      //   console.log("question suivante != null")
-      //   data = {
-      //     "question_suivante": this.next[i]
-      //   }
-      // } else {
-      //   console.log("question suivante = null")
-      //   data = {
-      //     "question_suivante": "NULL"
-      //   }
-      // }
       var data = {
         "question_suivante": this.next[i]
       }
-      //this.backend.GET(`/api/reponses/${id_rep}`, e=>{
-        //id_rep = e.data[0].id;
-        
-        this.backend.PATCH(`/api/reponses/${id_rep}`, data, res=>{
-          console.log(res)
-        })
-      //})
+      this.backend.PATCH(`/api/reponses/${id_rep}`, data, res=>{
+        console.log(res)
+      })
     }
 
     //Modification du commentaire -> laissé de côté pour le moment

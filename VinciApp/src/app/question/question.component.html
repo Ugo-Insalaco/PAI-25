@@ -23,13 +23,6 @@
       <input type="number" min="0" [(ngModel)]="answer" (change)="onAnswer()">
     </div>
   </div>
-  
-  <!-- <div class="qt" *ngIf="type=='checkbox'">
-    {{question}}
-    <ng-container *ngFor = "let r of reponses">
-      <br><input type="checkbox" (change)="onAnswer2(r[0])"> {{r[1]}}
-    </ng-container>
-  </div> -->
 
   <div class="qt" *ngIf="type=='select'">
     {{question}}
@@ -39,16 +32,6 @@
     </select>
     <br><small>(Utilisez CTRL pour sélectionner plusieurs)</small>
   </div>
-
-  <!-- <div class="qt" *ngIf="type=='select_all_iot'">
-    {{question}}
-    <br>
-    <select [(ngModel)]="answer" (change)="onAnswer()">
-      <option *ngFor = "let iot of all_iot" value=" {{iot.fields.brand}} - {{iot.fields.name}} (ref {{iot.fields.ref_dataprint}})"> 
-        {{iot.fields.brand}} - {{iot.fields.name}} (données mesurées : {{iot.included.data[0].name_data}})
-      </option>
-    </select>
-  </div> -->
 
   <div class="qt" *ngIf="type=='select_all_iot'">
     {{question}}
@@ -64,13 +47,9 @@
 
   <br>
 
-
-
   <!-- <ng-container class="qt" *ngIf="info">
     <small>{{info}}</small> <br>
   </ng-container> -->
-
-  <!-- "Info" laissé de côté pour le moment car contraignant et apporte pas grand chose finalement -->
 
   <!-- Affichage de la question suivante -->
   <div *ngIf="(answer || id_answer)">

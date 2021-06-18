@@ -9,10 +9,6 @@
 
     <br>
 
-    <!-- <div>
-        Type de question : <input type="text" [(ngModel)]="type">
-    </div> -->
-
     <div class="item">
         Type :
         <select [(ngModel)]="type">
@@ -33,7 +29,6 @@
     <!-- <div>
         Commentaire à ajouter en dessous de la question (facultatif) : <input type="text" [(ngModel)]="info">
     </div> -->
-    <!--Attribut "info" laissé de côté pour le moment car contraignant et apporte pas grand chose-->
 
     <div class="item" *ngIf="type == 'radio' || type == 'select'">
         Nombre de réponses : <input type="number" min="1" [(ngModel)]="nb_reponses">
@@ -44,7 +39,6 @@
             <div *ngIf="type == 'radio' || type == 'select'">
                 Enoncé de la réponse n° {{index+1}} : <input class="saisie" type="text" [(ngModel)]="reponses[index]">
             </div>
-                <!-- <br>Identifiant de la question suivante : <input type="number" [(ngModel)]="questions_suivantes[index]"> -->
             <ng-container class="item" *ngIf="type">
                 Question suivante :
             <select [(ngModel)]="questions_suivantes[index]">

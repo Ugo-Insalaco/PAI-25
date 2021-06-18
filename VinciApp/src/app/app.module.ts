@@ -55,6 +55,7 @@ import { NewOfferFormComponent } from './new-offer-form/new-offer-form.component
 import { NewQuestionComponent } from './new-question/new-question.component';
 import { DeleteQuestionComponent } from './delete-question/delete-question.component';
 import { ProjectResumeComponent } from './project-resume/project-resume.component';
+import { ModifIotComponent } from './modif-iot/modif-iot.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,8 @@ import { ProjectResumeComponent } from './project-resume/project-resume.componen
     ContactResumeComponent,
 
     DeleteQuestionComponent,
-    ProjectResumeComponent
+    ProjectResumeComponent,
+    ModifIotComponent
   ],
   imports: [
     BrowserModule,

@@ -168,6 +168,10 @@ export class ProjectComponent implements OnInit{
         this.router.navigate(["delete-question"]);
     }
 
+    onModifIoT(){
+        this.router.navigate(["modif-iot/",this.id_question_0+"$"+this.nomsolution]);
+    }
+
     // Boîte de dialogue + téléchargement PDF comme pour le formulaire de contact :
     onSubmit_resume(){
         const dialogRef = this.dialog.open(ProjectResumeComponent,{data:JSON.parse(this.globalStorage.get("projet"))});

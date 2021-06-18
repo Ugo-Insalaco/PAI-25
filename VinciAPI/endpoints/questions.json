@@ -120,6 +120,11 @@
             "name": "reponse",
             "endpoint": "reponse",
             "key":"question_suivante"
+        },
+        {
+            "name": "nombre_ref_question",
+            "endpoint": "nombre_ref",
+            "key":"id_question"
         }
     ]
 }

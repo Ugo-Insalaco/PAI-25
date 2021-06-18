@@ -74,6 +74,11 @@
             "name":"question",
             "bindTable":"question_reponse",
             "key":"id_reponse"
+        },
+        {
+            "name": "nombre_ref_reponse",
+            "endpoint": "nombre_ref",
+            "key":"sous_solution"
         }
     ]
 }

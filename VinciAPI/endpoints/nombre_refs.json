@@ -17,6 +17,42 @@
         "DELETE": "AD"
     },
     "include":[
+        {
+            "name": "question",
+            "default_inclusion": true,
+            "bind":[
+                {
+                    "id":32,
+                    "endpoint": "question",
+                    "local_key": "id_question",
+                    "foreign_key":"id"
+                }
+            ]
+        },
+        {
+            "name": "reponse",
+            "default_inclusion": true,
+            "bind":[
+                {
+                    "id":33,
+                    "endpoint": "reponse",
+                    "local_key": "sous_solution",
+                    "foreign_key":"id"
+                }
+            ]
+        },
+        {
+            "name": "product",
+            "default_inclusion": true,
+            "bind":[
+                {
+                    "id":34,
+                    "endpoint": "product",
+                    "local_key": "product",
+                    "foreign_key":"id"
+                }
+            ]
+        }
     ],
     "get_response":{
         "route": "/api/nombre_refs",
@@ -28,6 +64,26 @@
                 "sous_solution": "{{0::nombre_ref::sous_solution}}",
                 "nombre_iot": "{{0::nombre_ref::nombre_iot}}",
                 "product": "{{0::nombre_ref::product}}"
+            },
+            "included":{
+                "question":{
+                    "id": "{{32::question::id}}",
+                    "subIncluded":{
+                        "content":"{{32:4::text::text}}"
+                    }
+                },
+                "reponse":{
+                    "id": "{{33::reponse::id}}",
+                    "subIncluded":{
+                        "content":"{{33:7::text::text}}"
+                    }
+                },
+                "product":{
+                    "id": "{{34::product::id}}",
+                    "brand": "{{34::product::brand}}",
+                    "name": "{{34::product::name}}",
+                    "ref": "{{34::product::ref_dataprint}}"
+                }
             }
         }
         

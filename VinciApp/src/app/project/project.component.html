@@ -20,6 +20,7 @@
                         <span class="qt-title">{{nom_sec1}}</span><br>
                         <button class="btnadmin" *ngIf="!modif && admin" (click)=onModifier()>Modifier les questions</button>
                         <button class="btnadmin" *ngIf="modif && admin" (click)=onQuit()>Quitter l'outil de modification</button>
+                        <br><br><button class="btnadmin" type="button" *ngIf="admin" (click)="onModifIoT()">Modifier les règles de quantification des IoT</button>
                     </div>
                     <br>
                     <app-question *ngIf="id_question_0 && !modif"

@@ -27,13 +27,8 @@ export class ModifProjectComponent implements OnInit {
   @Input() id_question;
   @Input() id_solution;
 
-  //type: string;
-  //question: string; //contenu de la question
-  //reponses = [] //id et contenu des réponses à afficher
-  //id_answer: number; //id de la réponse de l'utilisateur
-  //answer: string; //contenu de la réponse de l'utilisateur
   all_questions =[]; //id de toutes les questions de la section
-  seen = [] //liste des questions qu'on a déjà traité, pour éviter les boucles infines
+  seen = [] //liste des questions qu'on a déjà traitées, pour éviter les boucles infinies
   questions_existantes: any; //liste de toutes les questions possibles pour le choix de la 1ere question de chaque section
   id_question_0_init: number //1ere question de la première section, valeur initiale (à modifier)
   id_question_1_init: number
@@ -62,23 +57,19 @@ export class ModifProjectComponent implements OnInit {
         this.backend.GET(`/api/sections/${id_section}`, e2=>{
             if (e2.data[0].fields.position==0) {
               this.id_question_0 = e.data[0].included["section_question"][i].id_question
-              this.id_question_0_init = this.id_question_0
-              //console.log(this.id_question_0)                
+              this.id_question_0_init = this.id_question_0          
             }
             if (e2.data[0].fields.position==1) {
               this.id_question_1 = e.data[0].included["section_question"][i].id_question 
-              this.id_question_1_init = this.id_question_1
-              //console.log(this.id_question_1)               
+              this.id_question_1_init = this.id_question_1     
             }
             if (e2.data[0].fields.position==2) {
               this.id_question_2 = e.data[0].included["section_question"][i].id_question
-              this.id_question_2_init = this.id_question_2
-              //console.log(this.id_question_2)                
+              this.id_question_2_init = this.id_question_2      
             }
             if (e2.data[0].fields.position==3) {
               this.id_question_3 = e.data[0].included["section_question"][i].id_question  
-              this.id_question_3_init = this.id_question_3
-              //console.log(this.id_question_3)              
+              this.id_question_3_init = this.id_question_3  
             }
           })
       }
@@ -95,16 +86,12 @@ export class ModifProjectComponent implements OnInit {
     this.backend.GET(`/api/questions/${id}?include=reponse`, e=>{
       for (let i = 0; i < e.data[0].included["reponse"].length; i++) {
         var next = JSON.stringify(e.data[0].included["reponse"][i].question_suivante)
-        //const id_rep = e.data[0].included["reponse"][i].id_reponse;
-        //this.backend.GET(`/api/reponses/${id_rep}`, e2=>{
-          //const next = e2.data[0].fields.question_suivante;
         if (next != 'null' && this.all_questions.indexOf(next)==-1) {
           this.all_questions = this.all_questions.concat([next]);
           if (this.seen.indexOf(next) == -1) { //on traite la question uniquement si elle n'a pas déjà été traitée
             this.addQuestionsAfter(next)
           }
         }
-        //});
       }
     });
   }
@@ -163,60 +150,5 @@ export class ModifProjectComponent implements OnInit {
     }
 
   }
-
-  // onAnswer(){
-  //   if (this.type == "radio") {
-  //     // this.backend.GET(`/api/reponses/${this.id_answer}`, e=>{
-  //     //   this.answer = e.data[0].included["text"][0].content;
-  //     // })
-  //     for (let i = 0; i < this.reponses.length; i++) {
-  //       if (this.reponses[i].id == this.id_answer) {
-  //         this.answer = this.reponses[i].reponse
-  //       }        
-  //     }
-  //   }
-  //   if (this.type == "number" || this.type == "text" || this.type=="select_all_iot") {
-  //     for (let i = 0; i < this.reponses.length; i++) {
-  //       if (this.reponses[i].reponse == this.answer) {
-  //         this.id_answer = this.reponses[i].id
-  //       }
-  //     }
-  //   }
-  //   if (this.type == "select") { //gestion des cas où il peut y avoir plusieurs réponses -> on prend l'id de la première
-  //     for (let i = 0; i < this.reponses.length; i++) {
-  //       if (this.reponses[i].reponse == this.answer[0]) {
-  //         this.id_answer = this.reponses[i].id
-  //       }
-  //     }
-  //   }
-
-  //   var projectJSON = this.globalStorage.get("projet");
-  //   var project = JSON.parse(projectJSON);
-  //   var exists = false;
-  //   for(var i= 0; i < project.length; i++){
-  //     if (project[i].id_question == this.id_question) {
-  //       exists = true;
-  //       project[i].id_reponse = this.id_answer
-  //       project[i].reponse = this.answer
-  //     }
-  //   }
-  //   if (exists == false) {
-  //     var reponse = {
-  //       "partie": this.tab,
-  //       "id_question": this.id_question, 
-  //       "question": this.question,
-  //       "id_reponse": this.id_answer, 
-  //       "reponse": this.answer
-  //     };
-  //     project.push(reponse);
-  //   }
-  // this.globalStorage.set("projet", project) //mise à jour de la variable globale projet
-
-  // //renvoie une erreur si il y a pas de question suivante, mais c'est pas grave
-  // this.backend.GET(`/api/reponses/${this.id_answer}?include=question_suivante`, e=>{
-  //   this.next = e.data[0].fields.question_suivante;
-  //   console.log(this.next)
-  //   })
-  // }
 
  }

@@ -112,6 +112,11 @@
             "name":"solution",
             "bindTable":"solution_binding",
             "key":"id_product"
+        },
+        {
+            "name": "nombre_ref_product",
+            "endpoint": "nombre_ref",
+            "key":"product"
         }
     ]
     
