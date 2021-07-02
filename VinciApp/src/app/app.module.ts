@@ -56,6 +56,9 @@ import { NewQuestionComponent } from './new-question/new-question.component';
 import { DeleteQuestionComponent } from './delete-question/delete-question.component';
 import { ProjectResumeComponent } from './project-resume/project-resume.component';
 import { ModifIotComponent } from './modif-iot/modif-iot.component';
+import { CapteursComponent } from './capteurs/capteurs.component';
+import { CapteurComponent } from './capteur/capteur.component';
+import { Des2Component } from './des2/des2.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +90,10 @@ import { ModifIotComponent } from './modif-iot/modif-iot.component';
 
     DeleteQuestionComponent,
     ProjectResumeComponent,
-    ModifIotComponent
+    ModifIotComponent,
+    CapteursComponent,
+    CapteurComponent,
+    Des2Component
   ],
   imports: [
     BrowserModule,

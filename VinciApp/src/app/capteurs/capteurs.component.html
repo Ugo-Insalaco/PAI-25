@@ -1,0 +1,67 @@
+
+<div class="wrapper">
+    <div>
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>
+                    Rechercher
+                </mat-card-title>
+                <mat-card-subtitle>
+                    Marque, nom, référence
+                </mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <input type="text" [(ngModel)]="search">
+            </mat-card-content>
+        </mat-card>
+        <br>
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>
+                    Filtrer
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <strong>Marque :</strong>
+                <div *ngFor="let brand of brands">
+                    <input type="checkbox" (change)="onChangeBrand(brand)" checked> <label> {{brand}}</label>
+                </div>
+                <br>
+                <strong>Prix min :</strong> <input type="number" min="0" [(ngModel)]="min_price" class="number"> €
+                <br>
+                <strong>Prix max :</strong> <input type="number" min="0" [(ngModel)]="max_price" class="number"> €
+                <br>
+                <strong>Données mesurées :</strong>
+                <div *ngFor="let data of datas">
+                    <input type="checkbox" (change)="onChangeData(data)" checked> <label> {{data}}</label>
+                </div>
+
+            </mat-card-content>
+
+        </mat-card>
+    </div>
+    <div>
+        <mat-grid-list cols="4" rowHeight="5:7">
+            <div *ngFor='let iot of all_iot'>
+                <div *ngIf="selected_brands.indexOf(iot.fields.brand) != -1 
+                            && iot.fields.price > min_price-1
+                            && max_price+1 > iot.fields.price
+                            && (search == undefined 
+                                || iot.fields.brand.toLowerCase().includes(search.toLowerCase()) 
+                                || iot.fields.name.toLowerCase().includes(search.toLowerCase()) 
+                                || iot.fields.ref_dataprint.toLowerCase().includes(search.toLowerCase())
+                                )">
+                    <mat-grid-tile>
+                        <app-capteur [capteur]=iot></app-capteur> 
+                    </mat-grid-tile>
+                </div>
+            </div>
+        </mat-grid-list>
+    </div>
+</div>
+
+<!-- <div class="wrapper">
+    <div *ngFor='let iot of all_iot'>
+        <app-capteur [capteur]=iot></app-capteur>
+    </div>
+  </div> -->

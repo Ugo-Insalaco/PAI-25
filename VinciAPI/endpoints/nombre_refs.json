@@ -40,18 +40,6 @@
                     "foreign_key":"id"
                 }
             ]
-        },
-        {
-            "name": "product",
-            "default_inclusion": true,
-            "bind":[
-                {
-                    "id":34,
-                    "endpoint": "product",
-                    "local_key": "product",
-                    "foreign_key":"id"
-                }
-            ]
         }
     ],
     "get_response":{
@@ -77,12 +65,6 @@
                     "subIncluded":{
                         "content":"{{33:7::text::text}}"
                     }
-                },
-                "product":{
-                    "id": "{{34::product::id}}",
-                    "brand": "{{34::product::brand}}",
-                    "name": "{{34::product::name}}",
-                    "ref": "{{34::product::ref_dataprint}}"
                 }
             }
         }

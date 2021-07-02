@@ -1,0 +1,20 @@
+<mat-card class="card">
+  <mat-card-header>
+    <mat-card-title>{{capteur.fields.name}}</mat-card-title>
+    <mat-card-subtitle>{{capteur.fields.brand}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <img class="image" [src]="image">
+    <br>
+    <ng-container *ngFor="let data of capteur.included.data">
+      {{data.name_data}} ;
+    </ng-container>
+    <br>
+    <button mat-button class="button">En savoir plus</button>
+  </mat-card-content>
+    
+</mat-card>
+
+  
+  
+  

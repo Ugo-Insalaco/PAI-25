@@ -5,6 +5,7 @@ import html2canvas from 'html2canvas';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {BackendService} from '../services/backend.service';
 import { GlobalStorageService } from '../services/globalStorage.service';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-project-resume',
@@ -75,7 +76,7 @@ export class ProjectResumeComponent implements OnInit {
                 this.backend.GET(`/api/products/${id_product}`, e2=>{      
                   var nombre = e.data[j].fields.nombre_iot*project[i].reponse
                   var produit = `${e2.data[0].fields.brand} - ${e2.data[0].fields.name} (ref: ${e2.data[0].fields.ref_dataprint})`
-                  this.iots.push({"produit": produit, "nombre": nombre})
+                  this.iots.push({"produit": produit, "nombre": nombre})                  
                 })
               }
               if (e.data[j].fields.sous_solution == null) {

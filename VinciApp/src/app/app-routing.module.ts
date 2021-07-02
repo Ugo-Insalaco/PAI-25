@@ -11,6 +11,7 @@ import { NewProjectComponent } from './new-project/new-project.component';
 import { NewQuestionComponent } from './new-question/new-question.component'
 import { DeleteQuestionComponent } from './delete-question/delete-question.component'
 import { ModifIotComponent } from './modif-iot/modif-iot.component'
+import { CapteursComponent } from './capteurs/capteurs.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '', pathMatch: 'full'},
@@ -23,7 +24,8 @@ const routes: Routes = [
   {path: 'new-question', component: NewQuestionComponent},
   {path: 'new-project', component: NewProjectComponent},
   {path: 'delete-question', component: DeleteQuestionComponent},
-  {path: 'modif-iot/:project', component: ModifIotComponent}
+  {path: 'modif-iot/:project', component: ModifIotComponent},
+  {path: 'capteurs', component: CapteursComponent}
 ];
 
 @NgModule({

@@ -7,7 +7,8 @@
         "name":"mandatory",
         "ref_dataprint":"optionnal",
         "power_supply":"optionnal",
-        "price":"mandatory"
+        "price":"mandatory",
+        "picture": "mandatory updatable"
     },
     "primaryField":"id",
     "policies":{
@@ -67,11 +68,11 @@
             "fields":{
                 "brand": "{{0::product::brand}}",
                 "name":"{{0::product::name}}",
-                "ref":"{{0::product::ref}}",
                 "ref_dataprint":"{{0::product::ref_dataprint}}",
                 "power_supply":"{{0::product::power_supply}}",
                 "price":"{{0::product::price}}",
-                "solution":"{{0::product::solution}}"
+                "picture": "{{0::product::picture}}"
+
             },
             "included":{
                 "data":{
@@ -112,11 +113,6 @@
             "name":"solution",
             "bindTable":"solution_binding",
             "key":"id_product"
-        },
-        {
-            "name": "nombre_ref_product",
-            "endpoint": "nombre_ref",
-            "key":"product"
         }
     ]
     

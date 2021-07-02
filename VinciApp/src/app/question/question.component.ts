@@ -4,7 +4,6 @@ import { ConfigService } from '../services/config.service';
 import { GlobalStorageService } from '../services/globalStorage.service';
 import { BackendService } from '../services/backend.service';
 import { ProjectComponent } from '../project/project.component';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { stringify } from '@angular/compiler/src/util';
 
 
