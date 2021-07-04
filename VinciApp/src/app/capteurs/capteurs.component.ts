@@ -13,7 +13,8 @@ export class CapteursComponent implements OnInit {
     private backend: BackendService
   ) { }
 
-  all_iot=[];
+  all_iot=[]; //tous les produits
+  selected_iot =[] //produits qui passent le filtre et la recherche
   search: string;
   brands = []; //toutes les marques
   selected_brands = []; //les marques sélectionnées dans le filtre
@@ -27,19 +28,17 @@ export class CapteursComponent implements OnInit {
     this.backend.GET(`/api/products`, e=>{
       for (let i = 0; i < e.data.length; i++) {
         this.all_iot.push(e.data[i])
+        this.selected_iot.push(e.data[i]) //au début, on sélectionne tous les iot
         if (this.brands.indexOf(e.data[i].fields.brand)==-1) {
           this.brands.push(e.data[i].fields.brand)
-          this.selected_brands.push(e.data[i].fields.brand) //au début, on sélectionne toutes les marques
+          this.selected_brands.push(e.data[i].fields.brand)
         }
         e.data[i].fields.price = Number(e.data[i].fields.price.replace(",", "."))
-        console.log(Number(e.data[i].fields.price))
-        console.log(typeof(Number(e.data[i].fields.price)))
         if (e.data[i].fields.price>this.max_price) {
-          this.max_price = e.data[i].fields.price  
-          console.log("prix max : ")     
-          console.log(this.max_price) 
+          this.max_price = e.data[i].fields.price
         }
       }
+      this.brands = this.brands.sort()
     })
 
 
@@ -63,6 +62,7 @@ export class CapteursComponent implements OnInit {
       // La marque a été resélectionnée, il faut la rajouter dans la liste
       this.selected_brands.push(brand)
     }
+    this.updateSelectedIot()
   }
 
   onChangeData(data){
@@ -73,13 +73,41 @@ export class CapteursComponent implements OnInit {
     else {
       this.selected_datas.push(data)
     }
+    this.updateSelectedIot()
   }
 
-  hasSelectedDatas(iot){
-    //fonction qui vérifie si un iot mesure toutes les données de selected_datas
-    
-    //parcourir selected-datas puis iot.fields.machin et des qu'il y a un qui manque renvoyer false, à la fin renvoyer true
+  hasSelectedData(iot){
+    //fonction qui vérifie si un iot a au moins 1 donnée de selected_datas
+    for (let i = 0; i < this.selected_datas.length; i++) {
+      for (let j = 0; j < iot.included.data.length; j++) {
+        if(this.selected_datas[i] == iot.included.data[j].name_data) {
+          return true
+        }
+      }
+    }
+    return false
   }
+
+  updateSelectedIot(){
+    this.selected_iot=[]
+    for (let i = 0; i < this.all_iot.length; i++) {
+      if (this.selected_brands.indexOf(this.all_iot[i].fields.brand) != -1
+          && this.all_iot[i].fields.price > this.min_price-1
+          && this.max_price+1 > this.all_iot[i].fields.price
+          && (this.search == undefined 
+            || this.all_iot[i].fields.brand.toLowerCase().includes(this.search.toLowerCase()) 
+            || this.all_iot[i].fields.name.toLowerCase().includes(this.search.toLowerCase()) 
+            || this.all_iot[i].fields.ref_dataprint.toLowerCase().includes(this.search.toLowerCase()))
+          && this.hasSelectedData(this.all_iot[i])
+      ) {
+        this.selected_iot.push(this.all_iot[i])
+      }
+    }
+  }
+
+  // deselect() {
+  //   this.selected_datas = []
+  // }
 
 
 }

@@ -1,9 +1,17 @@
 .wrapper {
     display: grid;
     grid-template-columns: 1fr 6fr;
-    grid-gap: 30px;
+    grid-gap: 20px;
     grid-auto-rows: minmax(100px, auto);
-    padding: 2em
+    padding: 1em
+  }
+
+.wrapper2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-gap: 20px;
+    grid-auto-rows: minmax(100px, auto);
+    padding: 1em
   }
 
 input {

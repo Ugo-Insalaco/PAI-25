@@ -10,9 +10,20 @@
       {{data.name_data}} ;
     </ng-container>
     <br>
-    <button mat-button class="button">En savoir plus</button>
-  </mat-card-content>
+    <div *ngIf="more == false">
+      <br>
+      <button mat-button (click)=onMore() class="button">Voir plus</button>
+    </div>
+    <div *ngIf="more" class="detail">
+      <br>
+      Type d'alimentation : {{capteur.fields.power_supply}}
+      <br> Prix : {{capteur.fields.price}} €
+      <br> Référence : {{capteur.fields.ref_dataprint}}
+      <br>
+      <button mat-button (click)=onLess() class="button">Voir moins</button>
+    </div>
     
+  </mat-card-content>
 </mat-card>
 
   

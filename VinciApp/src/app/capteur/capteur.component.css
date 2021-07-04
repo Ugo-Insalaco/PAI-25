@@ -10,7 +10,12 @@
   display: flex;
 }
 
-.button{
+button{
   text-align: center;
   display: flex;
+  margin:auto;
 }
+
+/* .detail {
+  text-align: justify;
+} */

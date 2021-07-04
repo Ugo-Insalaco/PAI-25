@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { BackendService } from '../services/backend.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import {MatAccordion} from '@angular/material/expansion';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 
 @Component({
   selector: 'app-capteur',
@@ -16,6 +19,7 @@ export class CapteurComponent implements OnInit {
   @Input() capteur;
 
   image: string;
+  more = false // affiche ou masque le détail des informations sur le capteur
 
   imagetest = "/assets/images/capteurs/4.jpg"
   
@@ -24,6 +28,14 @@ export class CapteurComponent implements OnInit {
     this.image = this.capteur.fields.picture
 
     
+  }
+
+  onMore() {
+    this.more = true
+  }
+
+  onLess(){
+    this.more = false
   }
 
 }
