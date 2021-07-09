@@ -7,10 +7,9 @@ const bodyParser = require('body-parser')
 const mail = function(app){
     app.use(bodyParser.json())
     app.post('/sendEmail', function(req,res){
+      console.log("requête à POST /api/sendEmail")
        
         data=req.body
-        res.send( "req.body");
-        console.log(data)
 
         var doc = new PDFDocument;
         doc.pipe(fs.createWriteStream('demande.pdf'));
@@ -71,12 +70,20 @@ const mail = function(app){
         transporter.sendMail(mailOptions, function(error, info){
              if (error) {
                         console.log(error);
+                        var inf = {
+                          "status": "fail",
+                          "info": error
+                        }
+                        res.send(inf);
              } else {
                         console.log('Email sent: ' + info.response);
+                        var inf = {
+                          "status": "OK",
+                          "info": info.response
+                        };
+                        res.send(inf);
       }
     });
-    
-
 
 });
 

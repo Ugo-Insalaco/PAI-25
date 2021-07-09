@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, ElementRef } from '@angular/core';
 
 import { ConfigService } from '../services/config.service';
 import { GlobalStorageService } from '../services/globalStorage.service';
@@ -18,8 +18,17 @@ export class ModifIotComponent implements OnInit {
   nomsolution: string;
   id_question_0: number; //id de la question qui détermine la sous-solution
   sous_solutions=[] //liste des id des sous-solutions correspondantes à la solution
+  sous_solutions_names =[] //id + nom explicite des sous-solutions
   associations=[] //liste des associations nombre/ref/product correspondantes à la solution
   add_regle =0
+
+  // variables pour la création d'une nouvelle règle
+  all_iot = []
+  all_questions = []
+  new_sous_solution: number //id de la sous solution
+  new_number_iot : number //coeff multiplicatif
+  new_question: number //id de la question de type "nombre"
+  new_product: number //id de l'iot
 
 
   constructor(private router: Router,
@@ -36,11 +45,18 @@ export class ModifIotComponent implements OnInit {
     this.nomsolution = this.getNomSolution()
     this.id_question_0 = this.getQuestion0()
 
-    //Récupération des sous-solutions
+    this.backend.GET(`/api/products`, e=>{
+      for (let i = 0; i < e.data.length; i++) {
+        this.all_iot.push(e.data[i])
+      }
+    })
+
+    //Récupération des sous-solutions associées à la question 0
     this.backend.GET(`/api/questions/${this.id_question_0}?include=reponse`, e=>{
       this.sous_solutions=[]
       for (let i = 0; i < e.data[0].included.reponse.length; i++) {
         this.sous_solutions.push(e.data[0].included.reponse[i].id_reponse)
+        this.sous_solutions_names.push([e.data[0].included.reponse[i].id_reponse, e.data[0].included.reponse[i].subIncluded.text.content])
       }
       //Récupération des associations
       this.backend.GET(`/api/nombre_refs`, e2=>{
@@ -49,8 +65,12 @@ export class ModifIotComponent implements OnInit {
             this.associations.push(e2.data[j])
           }
         }
-        console.log(this.associations)
       })
+    })
+
+    //Récupération de toutes les question
+    this.backend.GET(`/api/questions`, e=>{
+      this.all_questions = e.data
     })
   }
 
@@ -77,7 +97,38 @@ AddRegle(){
 }
 
 onSubmit(){
+  var update_info={
+    "info": "nb_iot"
+  };
+  this.backend.PATCH(`/api/questions/${this.new_question}`, update_info, res=>{
+    console.log(res)
+  })
+
+  var body_nombre_ref = {
+    "id_question": this.new_question,
+    "sous_solution": this.new_sous_solution,
+    "nombre_iot": this.new_number_iot,
+    "product": this.new_product
+  }
+
+  this.backend.POST(`/api/nombre_refs`, body_nombre_ref, res=>{
+    console.log(res)
+    location.reload()
+    alert("Règle créée avec succès.")
+  })
   this.add_regle = 0
 }
+
+onDelete(id_association){
+  var input = confirm("Etes-vous sûr de vouloir supprimer cette règle ?")
+    if (input) {
+      this.backend.DELETE(`/api/nombre_refs/${id_association}`, e=>{
+        console.log("Règle supprimée")
+        location.reload()
+        alert("Règle supprimée avec succès.")
+      })  
+    }
+}
+
 
 }

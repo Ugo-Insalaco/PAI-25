@@ -5,12 +5,16 @@
   </div>
   
   <div>
-    <div *ngFor="let sous_solution of sous_solutions">
-      <br>Sous-solution :  {{sous_solution}}
+    <div *ngFor="let sous_solution of sous_solutions_names">
+      <br>Sous-solution :  {{sous_solution[1]}}
       <div *ngFor="let association of associations">
-        <div *ngIf="sous_solution == association.fields.sous_solution">
-          - IoT: {{association.fields.product}}, quantité : multiplier par {{association.fields.nombre_iot}} la réponse à la question "{{association.included.question[0].subIncluded.content}}"
-          <button>Supprimer</button>
+        <div *ngIf="sous_solution[0] == association.fields.sous_solution">
+          <div *ngFor="let iot of all_iot">
+            <div *ngIf="iot.id == association.fields.product">
+              - IoT: {{iot.fields.brand}} {{iot.fields.name}}, quantité : multiplier par {{association.fields.nombre_iot}} la réponse à la question "{{association.included.question[0].subIncluded.content}}"
+              <button (click)="onDelete(association.id)">Supprimer</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -23,8 +27,26 @@
 
   <div *ngIf=add_regle>
     Sous solution : 
+    <select [(ngModel)]="new_sous_solution">
+      <ng-container *ngFor="let sous_solution of sous_solutions_names">
+        <option value="{{sous_solution[0]}}">{{sous_solution[1]}}</option>
+      </ng-container>
+    </select>
+    
     <br> IoT :
-    <br> Quantité : multiplier par <input type="number"> la réponse à la question
+    <select [(ngModel)]="new_product">
+      <ng-container *ngFor="let iot of all_iot">
+        <option value="{{iot.id}}">{{iot.fields.brand}} - {{iot.fields.name}}</option>
+      </ng-container>
+    </select>
+    <br> Quantité : multiplier par <input class="number" type="number" [(ngModel)]="new_number_iot"> la réponse à la question
+    <select [(ngModel)]="new_question">
+      <ng-container *ngFor="let question of all_questions">
+        <ng-container *ngIf="question.fields.type == 'number'">
+          <option value="{{question.id}}">{{question.id}} - {{question.included.text[0].content}}</option>
+        </ng-container>
+      </ng-container>
+    </select>
     <br><button (click)=onSubmit()>Valider</button>
   </div>
   

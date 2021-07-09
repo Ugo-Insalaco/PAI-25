@@ -2,7 +2,7 @@
 
   <!-- Affichage de la question -->
 
-  <div class="qt" *ngIf="type=='radio' || (type=='reseau' && nb_iot<6)">
+  <div class="qt" *ngIf="type=='radio' || (type=='reseau' && 6>nb_iot)">
     {{question}}
     <div class="reponse">
     <ng-container *ngFor="let r of reponses">

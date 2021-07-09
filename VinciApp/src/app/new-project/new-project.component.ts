@@ -97,5 +97,12 @@ export class NewProjectComponent implements OnInit {
         alert("Un questionnaire existe déjà pour cette solution. Vous pouvez le modifier entièrement à partir de l'outil 'Modifier les questions' sur la page questionnaire correspondante.")
       }
     })
+
+    var update_info={
+      "info": "sous-solution"
+    };
+    this.backend.PATCH(`/api/questions/${this.id_question_sec1}`, update_info, res=>{
+      console.log(res)
+    })
   } 
 }

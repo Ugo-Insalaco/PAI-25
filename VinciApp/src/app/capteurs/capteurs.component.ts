@@ -105,9 +105,4 @@ export class CapteursComponent implements OnInit {
     }
   }
 
-  // deselect() {
-  //   this.selected_datas = []
-  // }
-
-
 }

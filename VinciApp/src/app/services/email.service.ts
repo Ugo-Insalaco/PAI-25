@@ -22,12 +22,13 @@ export class EmailService {
         '/sendEmail',
         data,
         res=>{
-            console.log("sucess")
-        },
-        err=>{
-           
-            error(err)
-        } )
+            if (res.status == "OK") {
+              alert("Votre message a été envoyé avec succès.")
+            }
+            else {
+              alert("Une erreur s'est produite lors de l'envoi de votre message.")
+            }
+        })
 }
 
   
